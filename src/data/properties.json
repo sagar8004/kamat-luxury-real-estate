@@ -1,0 +1,699 @@
+[
+  {
+    "id": "kamat-grandeur-assagao",
+    "slug": "kamat-grandeur-assagao",
+    "title": "Kamat Grandeur",
+    "tagline": "Private Forest-Edge Pool Estates in the Heart of Assagao",
+    "status": "ongoing",
+    "category": "villa",
+    "location": {
+      "area": "Assagao",
+      "region": "North Goa",
+      "city": "Assagao, Bardez",
+      "state": "Goa",
+      "coordinates": {
+        "lat": 15.5898,
+        "lng": 73.7845,
+        "xPercent": 38,
+        "yPercent": 24
+      },
+      "address": "Badem Road, Near Gunpowder, Assagao, Goa 403507"
+    },
+    "price": {
+      "displayPrice": "₹6.85 Cr Onwards",
+      "startingNumeric": 68500000,
+      "unitPrice": "₹16,200 / sq.ft"
+    },
+    "specs": {
+      "bhk": "4 & 5 BHK Private Pool Villas",
+      "bedrooms": [4, 5],
+      "sqftRange": "4,200 - 5,850 Sq.Ft",
+      "totalUnits": 12,
+      "unitsAvailable": 4,
+      "possessionDate": "Q1 2027",
+      "reraNumber": "PRGO08231940"
+    },
+    "heroImage": "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=1600&q=80",
+    "gallery": [
+      "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1200&q=80",
+      "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=1200&q=80",
+      "https://images.unsplash.com/photo-1613977257363-707ba9348227?auto=format&fit=crop&w=1200&q=80",
+      "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=1200&q=80"
+    ],
+    "architecturalStyle": "Portuguese-Contemporary Tropical Biophilic",
+    "description": "Nestled in the idyllic foliage of Assagao, Kamat Grandeur represents an exclusive enclave of 12 bespoke forest-edge pool villas. Designed with double-height ceiling verandas, laterite stone masonry, floor-to-ceiling glass pavilions, and private infinity plunge pools, it blends the romantic heritage of Goa with ultra-contemporary sustainable luxury.",
+    "highlights": [
+      "Private Heated Saltwater Plunge Pool for every villa",
+      "Double-height living lounge with Burmese teakwood ceilings",
+      "Private landscaped courtyard garden with native flora",
+      "100% DG backup, EV fast charging and solar water heating",
+      "Fully serviced gated community with 24/7 concierge & chef-on-call"
+    ],
+    "amenities": [
+      "Private Swimming Pool",
+      "Clubhouse & Cigar Lounge",
+      "Private Elevator Provision",
+      "24/7 Security with CCTV",
+      "Smart Home Automation",
+      "Organic Herb Garden",
+      "Concierge & Butler Service",
+      "EV Charging Bays"
+    ],
+    "constructionStatus": {
+      "overallPercent": 68,
+      "milestones": [
+        { "stage": "Land Acquisition & RERA Approvals", "progressPercent": 100, "status": "completed", "dateCompleted": "Nov 2024" },
+        { "stage": "Substructure & RCC Foundation", "progressPercent": 100, "status": "completed", "dateCompleted": "Apr 2025" },
+        { "stage": "RCC Superstructure & Slab Casting", "progressPercent": 85, "status": "in-progress", "targetDate": "Sep 2026" },
+        { "stage": "Brickwork, Plaster & MEP Piping", "progressPercent": 60, "status": "in-progress", "targetDate": "Nov 2026" },
+        { "stage": "Interior Finishes, Italian Marble & Façade", "progressPercent": 25, "status": "scheduled", "targetDate": "Feb 2027" },
+        { "stage": "Landscaping, Pool Commissioning & Handover", "progressPercent": 0, "status": "scheduled", "targetDate": "Apr 2027" }
+      ],
+      "lastUpdated": "August 2026"
+    },
+    "floorPlans": [
+      {
+        "name": "The Grand Villa (Type A)",
+        "type": "5 BHK Villa + Servant Quarter",
+        "carpetArea": "4,450 Sq.Ft",
+        "superBuiltUp": "5,850 Sq.Ft",
+        "image": "https://images.unsplash.com/photo-1600585154526-990dced4db0d?auto=format&fit=crop&w=800&q=80",
+        "priceEstimate": "₹8.40 Cr"
+      },
+      {
+        "name": "The Courtyard Villa (Type B)",
+        "type": "4 BHK Villa with Zen Courtyard",
+        "carpetArea": "3,280 Sq.Ft",
+        "superBuiltUp": "4,200 Sq.Ft",
+        "image": "https://images.unsplash.com/photo-1600566753376-12c8ab7fb75b?auto=format&fit=crop&w=800&q=80",
+        "priceEstimate": "₹6.85 Cr"
+      }
+    ],
+    "landmarks": [
+      { "name": "Mopa (Manohar) Int'l Airport", "distance": "32 mins", "type": "airport" },
+      { "name": "Vagator & Anjuna Beaches", "distance": "12 mins", "type": "beach" },
+      { "name": "Assagao Fine Dining Quarter", "distance": "3 mins", "type": "dining" },
+      { "name": "Panaji Capital Promenade", "distance": "22 mins", "type": "heritage" }
+    ],
+    "featured": true
+  },
+  {
+    "id": "kamat-ocean-crest-miramar",
+    "slug": "kamat-ocean-crest-miramar",
+    "title": "Kamat Ocean Crest",
+    "tagline": "Unrivalled Panoramic Arabian Sea & Mandovi Estuary Residences",
+    "status": "ongoing",
+    "category": "penthouse",
+    "location": {
+      "area": "Miramar",
+      "region": "Central Goa",
+      "city": "Panaji",
+      "state": "Goa",
+      "coordinates": {
+        "lat": 15.4824,
+        "lng": 73.8078,
+        "xPercent": 42,
+        "yPercent": 48
+      },
+      "address": "Miramar Beach Boulevard, Miramar, Panaji, Goa 403001"
+    },
+    "price": {
+      "displayPrice": "₹5.40 Cr Onwards",
+      "startingNumeric": 54000000,
+      "unitPrice": "₹18,500 / sq.ft"
+    },
+    "specs": {
+      "bhk": "3, 4 BHK & Sky Penthouses",
+      "bedrooms": [3, 4, 5],
+      "sqftRange": "2,900 - 6,100 Sq.Ft",
+      "totalUnits": 24,
+      "unitsAvailable": 7,
+      "possessionDate": "Q4 2026",
+      "reraNumber": "PRGO04221760"
+    },
+    "heroImage": "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?auto=format&fit=crop&w=1600&q=80",
+    "gallery": [
+      "https://images.unsplash.com/photo-1512918728675-ed5a9ecdebfd?auto=format&fit=crop&w=1200&q=80",
+      "https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&w=1200&q=80",
+      "https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&fit=crop&w=1200&q=80",
+      "https://images.unsplash.com/photo-1567496898669-ee935f5f647a?auto=format&fit=crop&w=1200&q=80"
+    ],
+    "architecturalStyle": "Ultra-Modern Coastal Deck Architecture",
+    "description": "Rising gracefully on Miramar's prestigious shoreline, Kamat Ocean Crest offers uninterrupted 180-degree vistas of the sparkling Arabian Sea and Aguada Bay. Every apartment is engineered with expansive wraparound viewing decks, German acoustic glazing, private plunge jacuzzis in penthouses, and signature five-star lifestyle amenities.",
+    "highlights": [
+      "Unobstructed sea and sunset views from every living room and master suite",
+      "Rooftop Infinity Sky Pool overlooking Mandovi River confluence",
+      "Floor-to-ceiling Schuco German soundproof and heat-reflective glass",
+      "Direct private access to Miramar shoreline promenade",
+      "Dedicated 3-car basement parking per unit with private EV chargers"
+    ],
+    "amenities": [
+      "Rooftop Sky Pool",
+      "Technogym Fitness Studio",
+      "Steam & Hydrotherapy Spa",
+      "Private Screening Room",
+      "Grand Double Height Lobby",
+      "Residents' Wine & Cigar Bar",
+      "24/7 Security & Concierge",
+      "Infinity Jacuzzi"
+    ],
+    "constructionStatus": {
+      "overallPercent": 84,
+      "milestones": [
+        { "stage": "Piling & Basement Retaining Walls", "progressPercent": 100, "status": "completed", "dateCompleted": "Jan 2024" },
+        { "stage": "RCC Tower Structural Superstructure", "progressPercent": 100, "status": "completed", "dateCompleted": "Dec 2025" },
+        { "stage": "Schuco Glazing & Exterior Façade", "progressPercent": 90, "status": "in-progress", "targetDate": "Sep 2026" },
+        { "stage": "Interior Marble Flooring & False Ceiling", "progressPercent": 75, "status": "in-progress", "targetDate": "Oct 2026" },
+        { "stage": "Sky Club, Rooftop Deck & Finishes", "progressPercent": 60, "status": "in-progress", "targetDate": "Nov 2026" },
+        { "stage": "Occupancy Certification & Handover", "progressPercent": 0, "status": "scheduled", "targetDate": "Dec 2026" }
+      ],
+      "lastUpdated": "August 2026"
+    },
+    "floorPlans": [
+      {
+        "name": "The Azure Sky Penthouse",
+        "type": "5 BHK Duplex Penthouse with Private Deck",
+        "carpetArea": "4,900 Sq.Ft",
+        "superBuiltUp": "6,100 Sq.Ft",
+        "image": "https://images.unsplash.com/photo-1600585154526-990dced4db0d?auto=format&fit=crop&w=800&q=80",
+        "priceEstimate": "₹9.90 Cr"
+      },
+      {
+        "name": "The Horizon Suite (Type A)",
+        "type": "4 BHK Sea-Facing Residence",
+        "carpetArea": "3,100 Sq.Ft",
+        "superBuiltUp": "3,950 Sq.Ft",
+        "image": "https://images.unsplash.com/photo-1600566753376-12c8ab7fb75b?auto=format&fit=crop&w=800&q=80",
+        "priceEstimate": "₹6.75 Cr"
+      }
+    ],
+    "landmarks": [
+      { "name": "Miramar Beach Promenade", "distance": "1 min", "type": "beach" },
+      { "name": "Panaji City Center & Fontainhas", "distance": "5 mins", "type": "heritage" },
+      { "name": "Manipal Hospital Goa", "distance": "6 mins", "type": "hospital" },
+      { "name": "Dabolim Airport", "distance": "35 mins", "type": "airport" }
+    ],
+    "featured": true
+  },
+  {
+    "id": "kamat-palm-greens-porvorim",
+    "slug": "kamat-palm-greens-porvorim",
+    "title": "Kamat Palm Greens",
+    "tagline": "Eco-Conscious Gated Sanctuary with Resort-Style Living",
+    "status": "ongoing",
+    "category": "apartment",
+    "location": {
+      "area": "Porvorim",
+      "region": "North Goa",
+      "city": "Porvorim",
+      "state": "Goa",
+      "coordinates": {
+        "lat": 15.5342,
+        "lng": 73.8291,
+        "xPercent": 48,
+        "yPercent": 36
+      },
+      "address": "Off NH 66, Near Mall De Goa, Porvorim, Goa 403521"
+    },
+    "price": {
+      "displayPrice": "₹2.95 Cr Onwards",
+      "startingNumeric": 29500000,
+      "unitPrice": "₹12,800 / sq.ft"
+    },
+    "specs": {
+      "bhk": "3 & 4 BHK Luxury Apartments",
+      "bedrooms": [3, 4],
+      "sqftRange": "2,200 - 3,450 Sq.Ft",
+      "totalUnits": 48,
+      "unitsAvailable": 14,
+      "possessionDate": "Q3 2027",
+      "reraNumber": "PRGO06242105"
+    },
+    "heroImage": "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=1600&q=80",
+    "gallery": [
+      "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?auto=format&fit=crop&w=1200&q=80",
+      "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1200&q=80",
+      "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=1200&q=80"
+    ],
+    "architecturalStyle": "Biophilic Contemporary Green Community",
+    "description": "Spread over 4.5 pristine landscaped acres in Porvorim, Kamat Palm Greens brings serenity to the urban hub of Goa. With IGBC Gold pre-certification, 75% open green spaces, rain mist gardens, solar micro-grid, and an Olympic-length lagoon pool.",
+    "highlights": [
+      "IGBC Gold Pre-Certified Eco Development with 70% open green space",
+      "Olympic-length temperature-controlled lagoon pool and kids pool",
+      "Central air-conditioned multi-level clubhouse with indoor squash & badminton",
+      "Strategic central location connecting North Goa beaches & Panaji in 10 mins",
+      "Zero-traffic vehicle-free podium with lush tropical jogging tracks"
+    ],
+    "amenities": [
+      "Olympic Lagoon Pool",
+      "Squash & Badminton Courts",
+      "Yoga & Meditation Deck",
+      "Children's Play Enclave",
+      "Solar Powered Common Areas",
+      "Banquet & Multi-Purpose Hall",
+      "Jogging & Cycling Track",
+      "Pet Park"
+    ],
+    "constructionStatus": {
+      "overallPercent": 45,
+      "milestones": [
+        { "stage": "RERA Approval & Soil Stabilization", "progressPercent": 100, "status": "completed", "dateCompleted": "Jan 2025" },
+        { "stage": "Podium & Basement Structural Works", "progressPercent": 100, "status": "completed", "dateCompleted": "Jun 2025" },
+        { "stage": "Tower A & B RCC Frame (up to 8th floor)", "progressPercent": 70, "status": "in-progress", "targetDate": "Nov 2026" },
+        { "stage": "Tower C & D RCC Superstructure", "progressPercent": 40, "status": "in-progress", "targetDate": "Jan 2027" },
+        { "stage": "Finishing, Club & Landscaping", "progressPercent": 0, "status": "scheduled", "targetDate": "May 2027" },
+        { "stage": "Possession & Community Handover", "progressPercent": 0, "status": "scheduled", "targetDate": "Sep 2027" }
+      ],
+      "lastUpdated": "August 2026"
+    },
+    "floorPlans": [
+      {
+        "name": "The Palm Suite 4 BHK",
+        "type": "4 BHK Luxury Apartment",
+        "carpetArea": "2,700 Sq.Ft",
+        "superBuiltUp": "3,450 Sq.Ft",
+        "image": "https://images.unsplash.com/photo-1600585154526-990dced4db0d?auto=format&fit=crop&w=800&q=80",
+        "priceEstimate": "₹4.40 Cr"
+      },
+      {
+        "name": "The Green Suite 3 BHK",
+        "type": "3 BHK Premium Residence",
+        "carpetArea": "1,750 Sq.Ft",
+        "superBuiltUp": "2,200 Sq.Ft",
+        "image": "https://images.unsplash.com/photo-1600566753376-12c8ab7fb75b?auto=format&fit=crop&w=800&q=80",
+        "priceEstimate": "₹2.95 Cr"
+      }
+    ],
+    "landmarks": [
+      { "name": "Mall De Goa Porvorim", "distance": "3 mins", "type": "dining" },
+      { "name": "Panaji Old Heritage Quarter", "distance": "8 mins", "type": "heritage" },
+      { "name": "Candolim & Calangute Coast", "distance": "14 mins", "type": "beach" },
+      { "name": "Mopa International Airport", "distance": "35 mins", "type": "airport" }
+    ],
+    "featured": true
+  },
+  {
+    "id": "kamat-horizon-business-plaza",
+    "slug": "kamat-horizon-business-plaza",
+    "title": "Kamat Horizon Plaza",
+    "tagline": "Grade-A Commercial Landmark & Retail Destination in Panaji",
+    "status": "ongoing",
+    "category": "commercial",
+    "location": {
+      "area": "Panaji CBD",
+      "region": "Central Goa",
+      "city": "Panaji",
+      "state": "Goa",
+      "coordinates": {
+        "lat": 15.4952,
+        "lng": 73.8358,
+        "xPercent": 50,
+        "yPercent": 45
+      },
+      "address": "EDC Patto Plaza, Commercial District, Panaji, Goa 403001"
+    },
+    "price": {
+      "displayPrice": "₹1.75 Cr Onwards",
+      "startingNumeric": 17500000,
+      "unitPrice": "₹19,000 / sq.ft"
+    },
+    "specs": {
+      "bhk": "Bespoke Corporate Suites & High-Street Retail",
+      "bedrooms": [0],
+      "sqftRange": "950 - 12,000 Sq.Ft",
+      "totalUnits": 36,
+      "unitsAvailable": 9,
+      "possessionDate": "Q2 2027",
+      "reraNumber": "PRGO11231998"
+    },
+    "heroImage": "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1600&q=80",
+    "gallery": [
+      "https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=1200&q=80",
+      "https://images.unsplash.com/photo-1497366811353-6870744d04b2?auto=format&fit=crop&w=1200&q=80",
+      "https://images.unsplash.com/photo-1497215728101-856f4ea42174?auto=format&fit=crop&w=1200&q=80"
+    ],
+    "architecturalStyle": "LEED Gold International Glass Curtain Façade",
+    "description": "Panaji's premier corporate address, Kamat Horizon Plaza sets a new benchmark for Grade-A workspace infrastructure in Goa. Featuring double-glazed heat-resistant curtain walls, central HVAC, high-speed destination elevators, and premium retail high-street showrooms on the ground and mezzanine levels.",
+    "highlights": [
+      "Prime EDC Patto commercial hub address next to Kadamba central terminus",
+      "LEED Gold certification with energy-efficient smart building management",
+      "100% full power back-up with dedicated dual transformers",
+      "Multi-tier automated basement parking for over 180 cars",
+      "Rooftop executive sky café and networking garden"
+    ],
+    "amenities": [
+      "High-Speed Destination Elevators",
+      "LEED Gold Certified Building",
+      "24/7 Security & Turnstiles",
+      "Multi-Tier Automated Parking",
+      "Central HVAC & Air Filtration",
+      "Rooftop Executive Lounge",
+      "Fiber-Optic Telecom Grid",
+      "Fire Safety & Sprinklers"
+    ],
+    "constructionStatus": {
+      "overallPercent": 55,
+      "milestones": [
+        { "stage": "Approvals & Diaphragm Walls", "progressPercent": 100, "status": "completed", "dateCompleted": "Feb 2025" },
+        { "stage": "Triple Basement RCC Car Park", "progressPercent": 100, "status": "completed", "dateCompleted": "Jul 2025" },
+        { "stage": "Core Structural Framework", "progressPercent": 75, "status": "in-progress", "targetDate": "Oct 2026" },
+        { "stage": "Curtain Wall Glazing & Facade", "progressPercent": 30, "status": "in-progress", "targetDate": "Jan 2027" },
+        { "stage": "MEP Commissioning & Retail Fitout", "progressPercent": 0, "status": "scheduled", "targetDate": "May 2027" }
+      ],
+      "lastUpdated": "August 2026"
+    },
+    "floorPlans": [
+      {
+        "name": "Corporate Office Floorplate",
+        "type": "Full Floor Corporate Headquarters",
+        "carpetArea": "6,800 Sq.Ft",
+        "superBuiltUp": "9,200 Sq.Ft",
+        "image": "https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=800&q=80",
+        "priceEstimate": "₹17.48 Cr"
+      },
+      {
+        "name": "Executive Business Suite",
+        "type": "Modular Office Unit",
+        "carpetArea": "1,050 Sq.Ft",
+        "superBuiltUp": "1,450 Sq.Ft",
+        "image": "https://images.unsplash.com/photo-1497366811353-6870744d04b2?auto=format&fit=crop&w=800&q=80",
+        "priceEstimate": "₹2.75 Cr"
+      }
+    ],
+    "landmarks": [
+      { "name": "Panaji Kadamba Bus Terminal", "distance": "2 mins", "type": "highway" },
+      { "name": "Panaji High Court & Secretariat", "distance": "5 mins", "type": "heritage" },
+      { "name": "Mandovi River Cruise Terminal", "distance": "4 mins", "type": "beach" },
+      { "name": "Dabolim International Airport", "distance": "28 mins", "type": "airport" }
+    ],
+    "featured": false
+  },
+  {
+    "id": "kamat-boulevard-candolim",
+    "slug": "kamat-boulevard-candolim",
+    "title": "Kamat Boulevard",
+    "tagline": "Mediterranean-Inspired Luxury Gated Villas by Candolim Beach",
+    "status": "completed",
+    "category": "villa",
+    "completionYear": 2024,
+    "location": {
+      "area": "Candolim",
+      "region": "North Goa",
+      "city": "Candolim, Bardez",
+      "state": "Goa",
+      "coordinates": {
+        "lat": 15.5186,
+        "lng": 73.7667,
+        "xPercent": 33,
+        "yPercent": 40
+      },
+      "address": "Aguada-Siolim Road, Candolim, Goa 403515"
+    },
+    "price": {
+      "displayPrice": "₹7.20 Cr (Resale / Select Units)",
+      "startingNumeric": 72000000,
+      "unitPrice": "₹17,000 / sq.ft"
+    },
+    "specs": {
+      "bhk": "4 BHK Mediterranean Private Villas",
+      "bedrooms": [4],
+      "sqftRange": "4,100 - 4,800 Sq.Ft",
+      "totalUnits": 16,
+      "unitsAvailable": 1,
+      "possessionDate": "Delivered & Inhabited (2024)",
+      "reraNumber": "PRGO02200981"
+    },
+    "heroImage": "https://images.unsplash.com/photo-1613490493576-7fde63acd811?auto=format&fit=crop&w=1600&q=80",
+    "gallery": [
+      "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1200&q=80",
+      "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=1200&q=80",
+      "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=1200&q=80"
+    ],
+    "architecturalStyle": "Mediterranean Goan Colonial Revival",
+    "description": "Successfully handed over on schedule in 2024, Kamat Boulevard represents one of North Goa's most celebrated completed communities. 16 bespoke Mediterranean villas featuring hand-cut Portuguese ceramic tiles, private heated pools, sunken garden seating, and 4-minute walk to Candolim's golden sand coast.",
+    "highlights": [
+      "100% Completed, Handed Over & OC Received (2024)",
+      "4-minute stroll to pristine Candolim Beach & Aguada Fort",
+      "Private saltwater swimming pool and rooftop sun deck on each villa",
+      "Comprehensive estate maintenance managed by Kamat Hospitality Desk",
+      "Consistently yields 12-14% annual luxury vacation rental returns"
+    ],
+    "amenities": [
+      "Delivered & Occupied",
+      "Private Saltwater Pool",
+      "Estate Concierge Desk",
+      "Clubhouse & Gym",
+      "Lush Landscaped Avenues",
+      "Solar Power Infrastructure",
+      "24/7 Security & CCTV",
+      "High-Yield Rental Desk"
+    ],
+    "floorPlans": [
+      {
+        "name": "Villa Royale",
+        "type": "4 BHK Independent Villa",
+        "carpetArea": "3,400 Sq.Ft",
+        "superBuiltUp": "4,400 Sq.Ft",
+        "image": "https://images.unsplash.com/photo-1600585154526-990dced4db0d?auto=format&fit=crop&w=800&q=80",
+        "priceEstimate": "₹7.20 Cr"
+      }
+    ],
+    "landmarks": [
+      { "name": "Candolim Beach Shoreline", "distance": "4 mins walk", "type": "beach" },
+      { "name": "Fort Aguada Heritage Lighthouse", "distance": "7 mins", "type": "heritage" },
+      { "name": "Panaji Capital Promenade", "distance": "18 mins", "type": "dining" },
+      { "name": "Mopa Airport", "distance": "40 mins", "type": "airport" }
+    ],
+    "featured": true
+  },
+  {
+    "id": "kamat-heritage-enclave-dona-paula",
+    "slug": "kamat-heritage-enclave-dona-paula",
+    "title": "Kamat Heritage Enclave",
+    "tagline": "Cliff-Top Sea-Facing Sanctuary in Prestigious Dona Paula",
+    "status": "completed",
+    "category": "penthouse",
+    "completionYear": 2023,
+    "location": {
+      "area": "Dona Paula",
+      "region": "Central Goa",
+      "city": "Dona Paula, Panaji",
+      "state": "Goa",
+      "coordinates": {
+        "lat": 15.4601,
+        "lng": 73.8041,
+        "xPercent": 40,
+        "yPercent": 54
+      },
+      "address": "Raj Bhavan Road, Dona Paula, Goa 403004"
+    },
+    "price": {
+      "displayPrice": "₹4.90 Cr (Sold Out / Resale Available)",
+      "startingNumeric": 49000000,
+      "unitPrice": "₹17,500 / sq.ft"
+    },
+    "specs": {
+      "bhk": "3 & 4 BHK Coastal Residences",
+      "bedrooms": [3, 4],
+      "sqftRange": "2,600 - 4,200 Sq.Ft",
+      "totalUnits": 18,
+      "unitsAvailable": 0,
+      "possessionDate": "Delivered (2023)",
+      "reraNumber": "PRGO09190742"
+    },
+    "heroImage": "https://images.unsplash.com/photo-1512918728675-ed5a9ecdebfd?auto=format&fit=crop&w=1600&q=80",
+    "gallery": [
+      "https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&fit=crop&w=1200&q=80",
+      "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?auto=format&fit=crop&w=1200&q=80",
+      "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1200&q=80"
+    ],
+    "architecturalStyle": "Colonial Coastal Cliff-side Luxury",
+    "description": "Perched on the prime cliffs of Dona Paula with sweeping vistas of Mormugao Harbour and Zuari Bay. Completed and delivered ahead of timeline in 2023, Kamat Heritage Enclave stands as an iconic landmark of precision engineering and ultra-exclusive residences.",
+    "highlights": [
+      "Award-winning Coastal Architecture & 100% on-time delivery in 2023",
+      "Private cliff-side cantilevered sunset observation lounge",
+      "Italian Bottochino marble flooring & Burma teak doors throughout",
+      "Home to esteemed industrialists, ambassadors and corporate leaders",
+      "Zero snag track record with lifetime Kamat warranty backing"
+    ],
+    "amenities": [
+      "Delivered & Inhabited",
+      "Infinity Edge Cliff Pool",
+      "Sea-View Gymnasium",
+      "Double Height Stately Lobby",
+      "24/7 Monitored Concierge",
+      "Private Elevators",
+      "Water Softening Plant",
+      "Covered Stilt Parking"
+    ],
+    "floorPlans": [
+      {
+        "name": "Cliff-side 4 BHK Master Plan",
+        "type": "4 BHK Sea-Facing Residence",
+        "carpetArea": "3,100 Sq.Ft",
+        "superBuiltUp": "3,950 Sq.Ft",
+        "image": "https://images.unsplash.com/photo-1600585154526-990dced4db0d?auto=format&fit=crop&w=800&q=80",
+        "priceEstimate": "₹5.95 Cr"
+      }
+    ],
+    "landmarks": [
+      { "name": "Dona Paula Viewpoint", "distance": "2 mins", "type": "beach" },
+      { "name": "Goa Governor's Palace (Raj Bhavan)", "distance": "3 mins", "type": "heritage" },
+      { "name": "Panaji Capital Promenade", "distance": "10 mins", "type": "dining" },
+      { "name": "Manipal Hospital", "distance": "5 mins", "type": "hospital" }
+    ],
+    "featured": true
+  },
+  {
+    "id": "kamat-serena-margao",
+    "slug": "kamat-serena-margao",
+    "title": "Kamat Serena",
+    "tagline": "South Goa's Crown Jewel of Serene Luxury Living",
+    "status": "completed",
+    "category": "apartment",
+    "completionYear": 2022,
+    "location": {
+      "area": "Margao",
+      "region": "South Goa",
+      "city": "Margao, Salcete",
+      "state": "Goa",
+      "coordinates": {
+        "lat": 15.2736,
+        "lng": 73.9582,
+        "xPercent": 65,
+        "yPercent": 82
+      },
+      "address": "Borda-Fatorda Road, Margao, South Goa 403602"
+    },
+    "price": {
+      "displayPrice": "₹1.95 Cr (Completed)",
+      "startingNumeric": 19500000,
+      "unitPrice": "₹9,800 / sq.ft"
+    },
+    "specs": {
+      "bhk": "2, 3 & 4 BHK Lifestyle Residences",
+      "bedrooms": [2, 3, 4],
+      "sqftRange": "1,450 - 2,800 Sq.Ft",
+      "totalUnits": 32,
+      "unitsAvailable": 2,
+      "possessionDate": "Delivered (2022)",
+      "reraNumber": "PRGO03180512"
+    },
+    "heroImage": "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?auto=format&fit=crop&w=1600&q=80",
+    "gallery": [
+      "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1200&q=80",
+      "https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&fit=crop&w=1200&q=80"
+    ],
+    "architecturalStyle": "Contemporary Indo-Portuguese Classical",
+    "description": "Kamat Serena redefines luxury residential living in Margao, South Goa's cultural capital. Set amidst serene coconut groves with quick connectivity to Colva and Benaulim beaches, this completed community features generous balconies, landscaped courtyards, and a vibrant residents' association.",
+    "highlights": [
+      "Delivered on time in 2022 with 100% occupancy",
+      "Located in the serene green enclave of Borda, Margao",
+      "10-minute drive to Colva & Benaulim white sand beaches",
+      "Solar powered common areas and rainwater harvesting",
+      "High appreciation value since project launch"
+    ],
+    "amenities": [
+      "Delivered & Occupied",
+      "Swimming Pool & Jacuzzi",
+      "Children's Play Area",
+      "Health Club & Gymnasium",
+      "Gated Community with CCTV",
+      "Landscaped Gardens",
+      "Power Backup for All Units"
+    ],
+    "floorPlans": [
+      {
+        "name": "Serena 3 BHK Residence",
+        "type": "3 BHK Apartment",
+        "carpetArea": "1,650 Sq.Ft",
+        "superBuiltUp": "2,150 Sq.Ft",
+        "image": "https://images.unsplash.com/photo-1600585154526-990dced4db0d?auto=format&fit=crop&w=800&q=80",
+        "priceEstimate": "₹2.25 Cr"
+      }
+    ],
+    "landmarks": [
+      { "name": "Colva & Benaulim Beach", "distance": "10 mins", "type": "beach" },
+      { "name": "Margao Railway Junction", "distance": "8 mins", "type": "highway" },
+      { "name": "Dabolim International Airport", "distance": "22 mins", "type": "airport" },
+      { "name": "Fatorda Stadium & Sports Complex", "distance": "4 mins", "type": "dining" }
+    ],
+    "featured": false
+  },
+  {
+    "id": "kamat-sanctuary-siolim",
+    "slug": "kamat-sanctuary-siolim",
+    "title": "Kamat Sanctuary",
+    "tagline": "Upcoming Chapora Riverfront Private Pool Mansions",
+    "status": "upcoming",
+    "category": "villa",
+    "location": {
+      "area": "Siolim",
+      "region": "North Goa",
+      "city": "Siolim, Bardez",
+      "state": "Goa",
+      "coordinates": {
+        "lat": 15.6268,
+        "lng": 73.7602,
+        "xPercent": 32,
+        "yPercent": 15
+      },
+      "address": "Chapora River Promenade, Siolim, Goa 403517"
+    },
+    "price": {
+      "displayPrice": "₹8.50 Cr (Pre-Launch Express of Interest)",
+      "startingNumeric": 85000000,
+      "unitPrice": "₹17,800 / sq.ft"
+    },
+    "specs": {
+      "bhk": "5 BHK Waterfront Mansions",
+      "bedrooms": [5],
+      "sqftRange": "5,200 - 7,100 Sq.Ft",
+      "totalUnits": 8,
+      "unitsAvailable": 8,
+      "possessionDate": "Launching Q1 2027",
+      "reraNumber": "RERA Registration in Progress"
+    },
+    "heroImage": "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=1600&q=80",
+    "gallery": [
+      "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=1200&q=80",
+      "https://images.unsplash.com/photo-1613977257363-707ba9348227?auto=format&fit=crop&w=1200&q=80"
+    ],
+    "architecturalStyle": "Riverfront Contemporary Biophilic",
+    "description": "An ultra-exclusive collection of just 8 riverfront estates directly overlooking the pristine Chapora estuary. Featuring private yacht jetty berths, infinity cantilever pools extending over the water, private wine cellars, and expansive timber decks.",
+    "highlights": [
+      "Direct private jetty and yacht mooring on Chapora River",
+      "Only 8 ultra-exclusive estates in a low-density 3-acre river reserve",
+      "Private helipad access and VIP luxury chauffeured transit",
+      "Floor-to-ceiling panoramic glass facing sunset over the estuary",
+      "Pre-launch expression of interest now open for priority allocations"
+    ],
+    "amenities": [
+      "Private Yacht Jetty",
+      "Cantilever River Pool",
+      "Private Wine Cellar",
+      "Spa & Hammam Pavilion",
+      "24/7 Estate Butler",
+      "Helipad Access",
+      "Solar & Rainwater Grid",
+      "High-Tech Security"
+    ],
+    "floorPlans": [
+      {
+        "name": "The River Estate (Type Alpha)",
+        "type": "5 BHK Riverfront Mansion with Jetty Access",
+        "carpetArea": "5,600 Sq.Ft",
+        "superBuiltUp": "7,100 Sq.Ft",
+        "image": "https://images.unsplash.com/photo-1600585154526-990dced4db0d?auto=format&fit=crop&w=800&q=80",
+        "priceEstimate": "₹11.20 Cr"
+      }
+    ],
+    "landmarks": [
+      { "name": "Chapora River Boardwalk", "distance": "Direct Access", "type": "beach" },
+      { "name": "Morjim & Ashwem Beaches", "distance": "8 mins", "type": "beach" },
+      { "name": "Mopa International Airport", "distance": "26 mins", "type": "airport" },
+      { "name": "Assagao Culinary Quarter", "distance": "9 mins", "type": "dining" }
+    ],
+    "featured": true
+  }
+]

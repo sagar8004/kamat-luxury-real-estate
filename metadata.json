@@ -1,0 +1,6 @@
+{
+  "name": "Kamat Realty - Luxury Real Estate",
+  "description": "Contemporary luxury real estate website for Kamat Realty featuring ongoing and completed architectural projects, interactive project map, advanced search filters, virtual galleries, and tour scheduling.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

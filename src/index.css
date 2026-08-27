@@ -1,0 +1,105 @@
+@import "tailwindcss";
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    font-family: 'Outfit', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background-color: #fdfcfb;
+    color: #1a1a1a;
+  }
+
+  /* Custom luxury architectural typography classes */
+  .font-display {
+    font-family: 'Italiana', 'Instrument Serif', Georgia, serif;
+  }
+
+  .font-structural {
+    font-family: 'Syne', 'Outfit', sans-serif;
+  }
+
+  .font-sans-luxury {
+    font-family: 'Outfit', system-ui, sans-serif;
+  }
+}
+
+/* Custom smooth scrollbar with brand color */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f4f1ee;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #c2d6e8;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #044F92;
+}
+
+/* Brand palette tokens */
+:root {
+  --brand-primary: #044F92;
+  --brand-dark: #03396c;
+  --brand-light: #eef5fb;
+  --brand-border: #cfe0ee;
+}
+
+/* 3D Perspective & Depth Utilities */
+.perspective-1000 {
+  perspective: 1000px;
+}
+
+.perspective-2000 {
+  perspective: 2000px;
+}
+
+.preserve-3d {
+  transform-style: preserve-3d;
+}
+
+.backface-hidden {
+  backface-visibility: hidden;
+}
+
+/* Subtle texture & grid */
+.editorial-grid {
+  background-image: linear-gradient(to right, #e5e1da 1px, transparent 1px), linear-gradient(to bottom, #e5e1da 1px, transparent 1px);
+  background-size: 4rem 4rem;
+}
+
+.editorial-dots {
+  background-image: radial-gradient(#d1cbbd 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+
+.brand-tint-bg {
+  background-color: #f2f7fc;
+}
+
+.brand-border {
+  border-color: #d1e3f3;
+}
+
+/* Cinematic text glowing & shadows */
+.text-shadow-cinematic {
+  text-shadow: 0 4px 24px rgba(0, 0, 0, 0.45), 0 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+.text-shadow-luxury {
+  text-shadow: 0 10px 30px rgba(4, 79, 146, 0.25);
+}
+
+/* Shimmer animation */
+@keyframes shimmer-slow {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+
+.animate-shimmer {
+  animation: shimmer-slow 3s infinite linear;
+}
+
