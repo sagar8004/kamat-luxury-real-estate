@@ -29,11 +29,11 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, onOpenTourModal }) =
         {/* Top Tier: Logo & Newsletter */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start border-b border-[#044F92]/60 pb-14">
           <div className="lg:col-span-6 space-y-4">
-            <div className="inline-block bg-white px-3.5 py-2 rounded shadow-md border border-white/20">
+            <div className="inline-block bg-white px-4 py-2 rounded-lg shadow-md border border-white/30">
               <img
                 src="/kamat-logo.png"
                 alt="Kamat Realty - Real Estate Developers"
-                className="h-9 sm:h-10 w-auto object-contain block"
+                className="h-11 sm:h-12 md:h-14 w-auto object-contain block"
               />
             </div>
 

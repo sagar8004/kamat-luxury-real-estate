@@ -70,14 +70,14 @@ export const Hero: React.FC<HeroProps> = ({ onSearch, onExploreProjects, onOpenT
             </div>
 
             {/* Editorial Display Heading */}
-            <h1 className="font-serif text-4xl sm:text-6xl lg:text-7xl font-light leading-[1.08] text-[#1a1a1a] tracking-tight">
+            <h1 className="font-secondary text-4xl sm:text-6xl lg:text-7xl font-normal leading-[1.08] text-[#1a1a1a] tracking-tight">
               Architectural <br />
-              <span className="font-serif italic font-normal text-[#1a1a1a]">
+              <span className="font-secondary italic font-light text-[#044F92]">
                 Masterpieces in Goa.
               </span>
             </h1>
 
-            <p className="text-[#4a4540] text-base sm:text-lg font-light leading-relaxed max-w-xl text-pretty">
+            <p className="font-primary text-[#4a4540] text-base sm:text-lg font-normal leading-relaxed max-w-xl text-pretty">
               For over three decades, Kamat Realty has sculpted timeless private pool villas, panoramic sea-facing penthouses, and bespoke coastal residences across Goa’s most prestigious enclaves.
             </p>
 
@@ -124,11 +124,11 @@ export const Hero: React.FC<HeroProps> = ({ onSearch, onExploreProjects, onOpenT
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent" />
                   <div className="absolute bottom-6 left-6 right-6 text-white space-y-1">
-                    <p className="text-[10px] uppercase tracking-[0.25em] text-[#e5e1da] font-mono">
+                    <p className="text-[10px] uppercase tracking-[0.25em] text-[#e5e1da] font-secondary">
                       Featured Development 0{idx + 1}
                     </p>
-                    <p className="font-serif text-2xl italic font-light">{slide.title}</p>
-                    <p className="text-xs text-stone-200 font-light">{slide.subtitle}</p>
+                    <p className="font-secondary text-2xl font-normal tracking-wide">{slide.title}</p>
+                    <p className="font-primary text-xs text-stone-200 font-light">{slide.subtitle}</p>
                   </div>
                 </div>
               ))}
@@ -157,14 +157,14 @@ export const Hero: React.FC<HeroProps> = ({ onSearch, onExploreProjects, onOpenT
           transition={{ duration: 0.8, delay: 0.3 }}
           className="mt-14 w-full bg-white border border-[#e5e1da] p-6 sm:p-8 shadow-sm"
         >
-          <div className="text-[10px] uppercase tracking-[0.2em] text-[#8c857d] font-bold mb-4">
+          <div className="font-secondary text-[10px] uppercase tracking-[0.2em] text-[#8c857d] font-bold mb-4">
             Curated Property Search
           </div>
 
           <form onSubmit={handleHeroSearchSubmit} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
             {/* Search Input */}
             <div>
-              <label className="block text-[10px] uppercase tracking-widest text-[#8c857d] font-medium mb-1.5">
+              <label className="block font-secondary text-[10px] uppercase tracking-widest text-[#8c857d] font-medium mb-1.5">
                 Keyword / Project
               </label>
               <div className="relative flex items-center">
@@ -174,14 +174,14 @@ export const Hero: React.FC<HeroProps> = ({ onSearch, onExploreProjects, onOpenT
                   value={keyword}
                   onChange={(e) => setKeyword(e.target.value)}
                   placeholder="Assagao, Ocean Crest, Villa..."
-                  className="w-full pl-9 pr-3 py-2.5 bg-[#fdfcfb] border border-[#e5e1da] text-xs text-[#1a1a1a] placeholder-[#8c857d] focus:outline-none focus:border-[#1a1a1a] transition-colors"
+                  className="font-primary w-full pl-9 pr-3 py-2.5 bg-[#fdfcfb] border border-[#e5e1da] text-xs text-[#1a1a1a] placeholder-[#8c857d] focus:outline-none focus:border-[#1a1a1a] transition-colors"
                 />
               </div>
             </div>
 
             {/* Location Select */}
             <div>
-              <label className="block text-[10px] uppercase tracking-widest text-[#8c857d] font-medium mb-1.5">
+              <label className="block font-secondary text-[10px] uppercase tracking-widest text-[#8c857d] font-medium mb-1.5">
                 Location Enclave
               </label>
               <div className="relative flex items-center">
@@ -189,7 +189,7 @@ export const Hero: React.FC<HeroProps> = ({ onSearch, onExploreProjects, onOpenT
                 <select
                   value={selectedArea}
                   onChange={(e) => setSelectedArea(e.target.value)}
-                  className="w-full pl-9 pr-8 py-2.5 bg-[#fdfcfb] border border-[#e5e1da] text-xs text-[#1a1a1a] focus:outline-none focus:border-[#1a1a1a] transition-colors appearance-none"
+                  className="font-primary w-full pl-9 pr-8 py-2.5 bg-[#fdfcfb] border border-[#e5e1da] text-xs text-[#1a1a1a] focus:outline-none focus:border-[#1a1a1a] transition-colors appearance-none"
                 >
                   {LOCATIONS_LIST.map((loc, i) => (
                     <option key={i} value={loc.area}>
@@ -203,7 +203,7 @@ export const Hero: React.FC<HeroProps> = ({ onSearch, onExploreProjects, onOpenT
 
             {/* Typology Select */}
             <div>
-              <label className="block text-[10px] uppercase tracking-widest text-[#8c857d] font-medium mb-1.5">
+              <label className="block font-secondary text-[10px] uppercase tracking-widest text-[#8c857d] font-medium mb-1.5">
                 Typology
               </label>
               <div className="relative flex items-center">
@@ -211,7 +211,7 @@ export const Hero: React.FC<HeroProps> = ({ onSearch, onExploreProjects, onOpenT
                 <select
                   value={selectedCategory}
                   onChange={(e) => setSelectedCategory(e.target.value as PropertyCategory)}
-                  className="w-full pl-9 pr-8 py-2.5 bg-[#fdfcfb] border border-[#e5e1da] text-xs text-[#1a1a1a] focus:outline-none focus:border-[#1a1a1a] transition-colors appearance-none"
+                  className="font-primary w-full pl-9 pr-8 py-2.5 bg-[#fdfcfb] border border-[#e5e1da] text-xs text-[#1a1a1a] focus:outline-none focus:border-[#1a1a1a] transition-colors appearance-none"
                 >
                   {CATEGORIES_LIST.map((cat) => (
                     <option key={cat.id} value={cat.id}>
@@ -228,7 +228,7 @@ export const Hero: React.FC<HeroProps> = ({ onSearch, onExploreProjects, onOpenT
               <button
                 type="submit"
                 id="hero-search-filter-btn"
-                className="w-full py-2.5 px-4 bg-[#1a1a1a] hover:bg-[#333] text-white font-medium text-xs tracking-widest uppercase transition-all flex items-center justify-center gap-2"
+                className="w-full py-2.5 px-4 bg-[#1a1a1a] hover:bg-[#044F92] text-white font-medium text-xs tracking-widest uppercase transition-all flex items-center justify-center gap-2 font-secondary"
               >
                 <Search className="w-3.5 h-3.5" />
                 <span>Search Portfolio</span>
@@ -242,22 +242,22 @@ export const Hero: React.FC<HeroProps> = ({ onSearch, onExploreProjects, onOpenT
       <div className="relative z-20 max-w-7xl mx-auto px-6 sm:px-8 lg:px-10 mt-14 w-full">
         <div className="grid grid-cols-2 md:grid-cols-4 gap-6 py-6 border-t border-b border-[#e5e1da]">
           <div className="border-r border-[#e5e1da] pr-4 last:border-0">
-            <p className="font-serif text-3xl font-light text-[#1a1a1a]">32+ Years</p>
-            <p className="text-[10px] uppercase tracking-widest text-[#8c857d] mt-1">Legacy in Goa</p>
+            <p className="font-secondary text-2xl sm:text-3xl font-medium text-[#1a1a1a]">32+ Years</p>
+            <p className="font-primary text-[10px] uppercase tracking-widest text-[#8c857d] mt-1">Legacy in Goa</p>
           </div>
           <div className="border-r border-[#e5e1da] pr-4 last:border-0">
-            <p className="font-serif text-3xl font-light text-[#1a1a1a]">40+ Landmarks</p>
-            <p className="text-[10px] uppercase tracking-widest text-[#8c857d] mt-1">Ongoing & Delivered</p>
+            <p className="font-secondary text-2xl sm:text-3xl font-medium text-[#1a1a1a]">40+ Landmarks</p>
+            <p className="font-primary text-[10px] uppercase tracking-widest text-[#8c857d] mt-1">Ongoing & Delivered</p>
           </div>
           <div className="border-r border-[#e5e1da] pr-4 last:border-0">
-            <p className="font-serif text-3xl font-light text-[#1a1a1a]">2.8M+ Sq.Ft</p>
-            <p className="text-[10px] uppercase tracking-widest text-[#8c857d] mt-1">Architectural Precision</p>
+            <p className="font-secondary text-2xl sm:text-3xl font-medium text-[#1a1a1a]">2.8M+ Sq.Ft</p>
+            <p className="font-primary text-[10px] uppercase tracking-widest text-[#8c857d] mt-1">Architectural Precision</p>
           </div>
           <div>
             <div className="flex items-center gap-1.5">
-              <p className="font-serif text-3xl font-light text-[#1a1a1a]">100%</p>
+              <p className="font-secondary text-2xl sm:text-3xl font-medium text-[#044F92]">100%</p>
             </div>
-            <p className="text-[10px] uppercase tracking-widest text-[#8c857d] mt-1">RERA Clear Titles</p>
+            <p className="font-primary text-[10px] uppercase tracking-widest text-[#8c857d] mt-1">RERA Clear Titles</p>
           </div>
         </div>
       </div>

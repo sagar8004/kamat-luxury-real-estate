@@ -20,7 +20,7 @@ interface ScrollRevealProps {
   threshold?: number;
 }
 
-const getVariants = (variant: AnimationVariant, distance: number): Variants => {
+const getVariants = (variant: string, distance: number): Variants => {
   switch (variant) {
     case 'from-left':
       return {

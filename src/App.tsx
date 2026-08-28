@@ -4,6 +4,7 @@ import { Navbar } from './components/Navbar';
 import { CustomCursor } from './components/CustomCursor';
 import { Footer } from './components/Footer';
 import { ScheduleTourModal } from './components/ScheduleTourModal';
+import { PagePreloader } from './components/PagePreloader';
 
 // Pages
 import { HomePage } from './pages/HomePage';
@@ -84,6 +85,9 @@ export default function App() {
 
   return (
     <div className="min-h-screen bg-[#fdfcfb] text-[#1a1a1a] selection:bg-[#044F92] selection:text-white font-sans flex flex-col justify-between">
+      {/* Full-Screen Global Initial Page Preloader */}
+      <PagePreloader minDuration={2000} />
+
       {/* Luxury Brand Cursor */}
       <CustomCursor />
 

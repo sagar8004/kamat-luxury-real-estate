@@ -36,8 +36,8 @@ export const AboutLegacySection: React.FC<AboutLegacySectionProps> = ({ onOpenTo
                     <Award className="w-5 h-5 text-white" />
                   </div>
                   <div>
-                    <p className="font-serif text-2xl italic font-normal text-[#1a1a1a]">32+ Years</p>
-                    <p className="text-[10px] uppercase tracking-widest text-[#8c857d] font-semibold">Upholding Goan Trust</p>
+                    <p className="font-secondary text-2xl font-medium text-[#1a1a1a]">32+ Years</p>
+                    <p className="font-primary text-[10px] uppercase tracking-widest text-[#8c857d] font-semibold">Upholding Goan Trust</p>
                   </div>
                 </div>
               </div>
@@ -47,20 +47,20 @@ export const AboutLegacySection: React.FC<AboutLegacySectionProps> = ({ onOpenTo
           {/* Right Column: Narrative & Pillars (Appearing with Cascading Reveals) */}
           <div className="lg:col-span-7 space-y-6">
             <ScrollReveal variant="from-left" distance={40}>
-              <span className="text-[10px] uppercase tracking-[0.25em] text-[#044F92] font-bold border-b border-[#044F92]/40 pb-1 inline-block">
+              <span className="font-secondary text-[10px] uppercase tracking-[0.25em] text-[#044F92] font-bold border-b border-[#044F92]/40 pb-1 inline-block">
                 Philosophy & Engineering Mastery
               </span>
             </ScrollReveal>
 
             <ScrollReveal variant="from-left" distance={50} delay={0.1}>
-              <h2 className="font-serif text-3xl sm:text-4xl md:text-5xl font-light italic text-[#1a1a1a] leading-tight">
+              <h2 className="font-secondary text-3xl sm:text-4xl md:text-5xl font-normal text-[#1a1a1a] leading-tight">
                 Shaping Goa’s Skyline with <br />
-                <span className="font-serif italic font-normal text-[#044F92]">Heritage & Future-Ready Precision</span>
+                <span className="font-secondary italic font-light text-[#044F92]">Heritage & Future-Ready Precision</span>
               </h2>
             </ScrollReveal>
 
             <ScrollReveal variant="from-left" distance={40} delay={0.2}>
-              <p className="text-[#4a4540] text-sm sm:text-base leading-relaxed font-light">
+              <p className="font-primary text-[#4a4540] text-sm sm:text-base leading-relaxed font-normal">
                 Founded in 1994, Kamat Realty was born from a singular passion: creating living spaces that honor the romantic coastal architecture of Goa while delivering world-class structural engineering, seismic resilience, and sustainable luxury.
               </p>
             </ScrollReveal>

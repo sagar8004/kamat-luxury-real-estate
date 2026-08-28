@@ -57,8 +57,8 @@ export const EmiCalculator: React.FC = () => {
             {/* Loan Amount */}
             <div className="space-y-2">
               <div className="flex justify-between items-center text-xs">
-                <label className="font-semibold text-[#1a1a1a] uppercase tracking-wider text-[10px]">Loan / Investment Amount</label>
-                <span className="font-serif italic font-normal text-[#1a1a1a] text-lg">{formatINR(loanAmount)}</span>
+                <label className="font-secondary font-semibold text-[#1a1a1a] uppercase tracking-wider text-[10px]">Loan / Investment Amount</label>
+                <span className="font-secondary font-medium text-[#044F92] text-lg">{formatINR(loanAmount)}</span>
               </div>
               <input
                 type="range"
@@ -67,9 +67,9 @@ export const EmiCalculator: React.FC = () => {
                 step={500000}
                 value={loanAmount}
                 onChange={(e) => setLoanAmount(Number(e.target.value))}
-                className="w-full h-1.5 bg-[#e5e1da] rounded-none appearance-none cursor-pointer accent-[#1a1a1a]"
+                className="w-full h-1.5 bg-[#e5e1da] rounded-none appearance-none cursor-pointer accent-[#044F92]"
               />
-              <div className="flex justify-between text-[10px] text-[#8c857d] font-mono">
+              <div className="flex justify-between text-[10px] text-[#8c857d] font-primary">
                 <span>₹50 L</span>
                 <span>₹7.5 Cr</span>
                 <span>₹15 Cr</span>
@@ -79,8 +79,8 @@ export const EmiCalculator: React.FC = () => {
             {/* Interest Rate */}
             <div className="space-y-2">
               <div className="flex justify-between items-center text-xs">
-                <label className="font-semibold text-[#1a1a1a] uppercase tracking-wider text-[10px]">Annual Interest Rate (%)</label>
-                <span className="font-serif italic font-normal text-[#1a1a1a] text-lg">{interestRate}%</span>
+                <label className="font-secondary font-semibold text-[#1a1a1a] uppercase tracking-wider text-[10px]">Annual Interest Rate (%)</label>
+                <span className="font-secondary font-medium text-[#044F92] text-lg">{interestRate}%</span>
               </div>
               <input
                 type="range"
@@ -89,9 +89,9 @@ export const EmiCalculator: React.FC = () => {
                 step={0.1}
                 value={interestRate}
                 onChange={(e) => setInterestRate(Number(e.target.value))}
-                className="w-full h-1.5 bg-[#e5e1da] rounded-none appearance-none cursor-pointer accent-[#1a1a1a]"
+                className="w-full h-1.5 bg-[#e5e1da] rounded-none appearance-none cursor-pointer accent-[#044F92]"
               />
-              <div className="flex justify-between text-[10px] text-[#8c857d] font-mono">
+              <div className="flex justify-between text-[10px] text-[#8c857d] font-primary">
                 <span>7.0%</span>
                 <span>8.5% (Prime Tier)</span>
                 <span>14.0%</span>
@@ -101,8 +101,8 @@ export const EmiCalculator: React.FC = () => {
             {/* Loan Tenure */}
             <div className="space-y-2">
               <div className="flex justify-between items-center text-xs">
-                <label className="font-semibold text-[#1a1a1a] uppercase tracking-wider text-[10px]">Tenure (Years)</label>
-                <span className="font-serif italic font-normal text-[#1a1a1a] text-lg">{tenureYears} Years</span>
+                <label className="font-secondary font-semibold text-[#1a1a1a] uppercase tracking-wider text-[10px]">Tenure (Years)</label>
+                <span className="font-secondary font-medium text-[#044F92] text-lg">{tenureYears} Years</span>
               </div>
               <input
                 type="range"
@@ -111,9 +111,9 @@ export const EmiCalculator: React.FC = () => {
                 step={1}
                 value={tenureYears}
                 onChange={(e) => setTenureYears(Number(e.target.value))}
-                className="w-full h-1.5 bg-[#e5e1da] rounded-none appearance-none cursor-pointer accent-[#1a1a1a]"
+                className="w-full h-1.5 bg-[#e5e1da] rounded-none appearance-none cursor-pointer accent-[#044F92]"
               />
-              <div className="flex justify-between text-[10px] text-[#8c857d] font-mono">
+              <div className="flex justify-between text-[10px] text-[#8c857d] font-primary">
                 <span>5 Yrs</span>
                 <span>15 Yrs</span>
                 <span>30 Yrs</span>
@@ -123,7 +123,7 @@ export const EmiCalculator: React.FC = () => {
             {/* Financial Institution Partners note */}
             <div className="p-4 bg-[#fdfcfb] border border-[#e5e1da] flex items-center gap-3 text-xs text-[#4a4540]">
               <ShieldCheck className="w-5 h-5 text-[#044F92] shrink-0" />
-              <span>
+              <span className="font-primary">
                 Preferred financing tie-ups with HDFC, ICICI, SBI & Kotak Private Banking for swift approvals.
               </span>
             </div>
@@ -134,35 +134,35 @@ export const EmiCalculator: React.FC = () => {
           <ScrollReveal variant="from-behind" delay={0.2} className="lg:col-span-5 flex flex-col justify-between">
             <div className="bg-[#f2f7fc] border border-[#cfe0ee] p-6 sm:p-8 flex flex-col justify-between space-y-6 h-full shadow-md">
               <div>
-                <p className="text-[10px] uppercase tracking-widest text-[#044F92] font-bold">Estimated Monthly Outflow</p>
-                <h3 className="font-display text-3xl sm:text-4xl font-normal text-[#1a1a1a] mt-1">
-                  {formatINR(emi)} <span className="text-xs font-sans font-normal text-[#8c857d]">/ month</span>
+                <p className="font-secondary text-[10px] uppercase tracking-widest text-[#044F92] font-bold">Estimated Monthly Outflow</p>
+                <h3 className="font-secondary text-3xl sm:text-4xl font-medium text-[#1a1a1a] mt-1">
+                  {formatINR(emi)} <span className="text-xs font-primary font-normal text-[#8c857d]">/ month</span>
                 </h3>
               </div>
 
               <div className="space-y-3 pt-4 border-t border-[#cfe0ee] text-xs">
                 <div className="flex justify-between">
-                  <span className="text-[#8c857d]">Principal Amount:</span>
-                  <span className="font-mono text-[#1a1a1a] font-bold">{formatINR(loanAmount)}</span>
+                  <span className="font-primary text-[#8c857d]">Principal Amount:</span>
+                  <span className="font-secondary text-[#1a1a1a] font-semibold">{formatINR(loanAmount)}</span>
                 </div>
                 <div className="flex justify-between">
-                  <span className="text-[#8c857d]">Total Interest Payable:</span>
-                  <span className="font-mono text-[#1a1a1a] font-bold">{formatINR(totalInterest)}</span>
+                  <span className="font-primary text-[#8c857d]">Total Interest Payable:</span>
+                  <span className="font-secondary text-[#1a1a1a] font-semibold">{formatINR(totalInterest)}</span>
                 </div>
                 <div className="flex justify-between font-semibold pt-2 border-t border-[#cfe0ee]">
-                  <span className="text-[#044F92]">Total Obligation:</span>
-                  <span className="font-mono text-[#044F92] font-bold text-sm">{formatINR(totalPayment)}</span>
+                  <span className="font-secondary text-[#044F92]">Total Obligation:</span>
+                  <span className="font-secondary text-[#044F92] font-bold text-sm">{formatINR(totalPayment)}</span>
                 </div>
               </div>
 
               {/* Goa Rental ROI Projection box */}
               <div className="bg-white p-4 border border-[#cfe0ee] space-y-1 text-xs shadow-sm">
-                <div className="flex items-center gap-1.5 text-[#044F92] font-semibold text-[11px] uppercase tracking-wider">
+                <div className="flex items-center gap-1.5 text-[#044F92] font-semibold text-[11px] uppercase tracking-wider font-secondary">
                   <TrendingUp className="w-4 h-4 text-[#044F92]" />
                   <span>Projected Vacation Rental Income</span>
                 </div>
-                <p className="text-[#044F92] font-mono text-sm font-bold">
-                  ~ {formatINR(estMonthlyRentalYield)} <span className="text-[10px] font-normal text-[#8c857d]">/ mo (~10-12% yield)</span>
+                <p className="text-[#044F92] font-secondary text-base font-bold">
+                  ~ {formatINR(estMonthlyRentalYield)} <span className="text-[10px] font-normal font-primary text-[#8c857d]">/ mo (~10-12% yield)</span>
                 </p>
               </div>
             </div>

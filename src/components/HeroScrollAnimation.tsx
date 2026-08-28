@@ -115,7 +115,7 @@ export const HeroScrollAnimation: React.FC<HeroScrollAnimationProps> = ({
     let count = 0;
 
     // Load first frame immediately
-    const firstImg = new Image();
+    const firstImg = typeof window !== 'undefined' ? new window.Image() : new (window as any).Image();
     firstImg.src = getFramePath(0);
     firstImg.onload = () => {
       images[0] = firstImg;
@@ -131,7 +131,7 @@ export const HeroScrollAnimation: React.FC<HeroScrollAnimationProps> = ({
 
     // Load remaining frames
     for (let i = 1; i < TOTAL_FRAMES; i++) {
-      const img = new Image();
+      const img = typeof window !== 'undefined' ? new window.Image() : new (window as any).Image();
       img.src = getFramePath(i);
       img.onload = () => {
         loadedFramesRef.current.add(i);
@@ -280,7 +280,7 @@ export const HeroScrollAnimation: React.FC<HeroScrollAnimationProps> = ({
     >
       {/* Sticky Canvas Viewport Container */}
       <div className="sticky top-0 h-screen w-full overflow-hidden flex flex-col justify-between perspective-1000">
-        
+
         {/* Background Canvas for Frame Sequence */}
         <canvas
           ref={canvasRef}
@@ -305,7 +305,7 @@ export const HeroScrollAnimation: React.FC<HeroScrollAnimationProps> = ({
         {/* ========================================================================= */}
 
         <div className="relative z-20 w-full max-w-7xl mx-auto px-6 sm:px-8 lg:px-10 h-full flex flex-col justify-center items-center pointer-events-none">
-          
+
           {/* ----------------------------------------------------------------------- */}
           {/* PHASE 1 (0% - 25%): Intro Architectural Masterpieces Reveal */}
           {/* ----------------------------------------------------------------------- */}
@@ -320,20 +320,20 @@ export const HeroScrollAnimation: React.FC<HeroScrollAnimationProps> = ({
             </div>
 
             {/* Main Grand Display Headline emerging from behind */}
-            <h1 className="font-display text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-normal leading-[1.05] tracking-tight text-white text-shadow-cinematic max-w-5xl drop-shadow-2xl">
-              Architectural <br />
-              <span className="font-serif italic font-normal text-transparent bg-clip-text bg-gradient-to-r from-white via-blue-100 to-[#93c5fd]">
-                Masterpieces in Goa
+            <h1 className="font-secondary text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-normal leading-[1.05] tracking-tight text-white text-shadow-cinematic max-w-5xl drop-shadow-2xl">
+              Built on Trust <br />
+              <span className="italic font-secondary text-[#93c5fd] font-light">
+                Most Trusted Partner
               </span>
             </h1>
 
-            <p className="text-sm sm:text-lg md:text-xl text-blue-100/95 font-light leading-relaxed max-w-2xl mt-6 text-shadow-cinematic drop-shadow-lg">
+            <p className="font-primary text-sm sm:text-lg md:text-xl text-blue-100/95 font-light leading-relaxed max-w-2xl mt-6 text-shadow-cinematic drop-shadow-lg">
               Sculpting private pool villas, cliffside ocean estates, and heritage residences across Goa’s most prestigious enclaves.
             </p>
 
             {/* Interactive Scroll Down Pulse prompt */}
             <div className="mt-10 flex flex-col items-center gap-3">
-              <span className="text-[10px] uppercase tracking-[0.3em] text-blue-200/90 font-mono drop-shadow">
+              <span className="font-secondary text-[10px] uppercase tracking-[0.3em] text-blue-200/90 drop-shadow">
                 Scroll Down to Experience
               </span>
               <div className="w-5 h-9 rounded-full border-2 border-white/50 flex items-start justify-center p-1 bg-black/30 backdrop-blur-sm shadow-lg">
@@ -353,16 +353,16 @@ export const HeroScrollAnimation: React.FC<HeroScrollAnimationProps> = ({
             style={phase2Style}
             className="absolute inset-0 flex flex-col justify-center items-center text-center max-w-5xl mx-auto px-6 will-change-transform"
           >
-            <div className="inline-flex items-center gap-2 px-3.5 py-1 bg-black/40 backdrop-blur-md border border-white/25 text-[10px] uppercase tracking-[0.25em] text-[#38bdf8] font-bold mb-4 shadow-lg">
+            <div className="inline-flex items-center gap-2 px-3.5 py-1 bg-black/40 backdrop-blur-md border border-white/25 text-[10px] uppercase tracking-[0.25em] text-[#38bdf8] font-bold mb-4 shadow-lg font-secondary">
               <span>Signature Postcodes</span>
             </div>
 
-            <h2 className="font-display text-4xl sm:text-5xl md:text-7xl font-normal leading-tight text-white text-shadow-cinematic max-w-4xl drop-shadow-2xl">
-              Sculpted for the <br />
-              <span className="italic font-serif text-[#93c5fd]">Discerning Connoisseur</span>
+            <h2 className="font-secondary text-4xl sm:text-5xl md:text-7xl font-normal leading-tight text-white text-shadow-cinematic max-w-4xl drop-shadow-2xl">
+              Proven Credibility <br />
+              <span className="italic font-secondary text-[#93c5fd] font-light">A Decades-Long Legacy</span>
             </h2>
 
-            <p className="text-sm sm:text-base md:text-lg text-blue-100/95 font-light max-w-2xl mt-4 text-shadow-cinematic drop-shadow-lg">
+            <p className="font-primary text-sm sm:text-base md:text-lg text-blue-100/95 font-light max-w-2xl mt-4 text-shadow-cinematic drop-shadow-lg">
               From the tranquil teak forests of Assagao to the panoramic Arabian sea horizons of Miramar and Candolim.
             </p>
 
@@ -371,7 +371,7 @@ export const HeroScrollAnimation: React.FC<HeroScrollAnimationProps> = ({
               {['Assagao Forest Edge', 'Miramar Sea Front', 'Candolim Coastal Enclave', 'Porvorim Heights'].map((loc, i) => (
                 <div
                   key={i}
-                  className="px-4 py-2.5 bg-black/50 backdrop-blur-md border border-white/25 text-xs uppercase tracking-wider text-white font-medium shadow-2xl flex items-center gap-2"
+                  className="font-secondary px-4 py-2.5 bg-black/50 backdrop-blur-md border border-white/25 text-xs uppercase tracking-wider text-white font-medium shadow-2xl flex items-center gap-2"
                 >
                   <MapPin className="w-3.5 h-3.5 text-[#38bdf8]" />
                   <span>{loc}</span>
@@ -387,13 +387,13 @@ export const HeroScrollAnimation: React.FC<HeroScrollAnimationProps> = ({
             style={phase3Style}
             className="absolute inset-0 flex flex-col justify-center items-center text-center max-w-5xl mx-auto px-6 will-change-transform"
           >
-            <div className="inline-flex items-center gap-2 px-3.5 py-1 bg-black/40 backdrop-blur-md border border-white/25 text-[10px] uppercase tracking-[0.25em] text-[#38bdf8] font-bold mb-4 shadow-lg">
+            <div className="inline-flex items-center gap-2 px-3.5 py-1 bg-black/40 backdrop-blur-md border border-white/25 text-[10px] uppercase tracking-[0.25em] text-[#38bdf8] font-bold mb-4 shadow-lg font-secondary">
               <span>Unrivaled Engineering</span>
             </div>
 
-            <h2 className="font-display text-4xl sm:text-5xl md:text-7xl font-normal leading-tight text-white text-shadow-cinematic max-w-4xl drop-shadow-2xl">
+            <h2 className="font-secondary text-4xl sm:text-5xl md:text-7xl font-normal leading-tight text-white text-shadow-cinematic max-w-4xl drop-shadow-2xl">
               Engineered to Endure <br />
-              <span className="italic font-serif text-[#93c5fd]">for Generations</span>
+              <span className="italic font-secondary text-[#93c5fd] font-light">for Generations</span>
             </h2>
 
             {/* 3 Trust Pillars */}
@@ -402,24 +402,24 @@ export const HeroScrollAnimation: React.FC<HeroScrollAnimationProps> = ({
                 <div className="w-9 h-9 bg-[#044F92] text-white flex items-center justify-center mb-3 shadow-md">
                   <Award className="w-4 h-4" />
                 </div>
-                <p className="font-display text-2xl text-white">32+ Years</p>
-                <p className="text-[11px] text-blue-200 uppercase tracking-widest mt-1 font-medium">Goan Heritage Trust</p>
+                <p className="font-secondary text-2xl font-medium text-white">32+ Years</p>
+                <p className="font-primary text-[11px] text-blue-200 uppercase tracking-widest mt-1 font-medium">Goan Heritage Trust</p>
               </div>
 
               <div className="p-6 bg-black/55 backdrop-blur-md border border-white/25 text-left shadow-2xl">
                 <div className="w-9 h-9 bg-[#044F92] text-white flex items-center justify-center mb-3 shadow-md">
                   <ShieldCheck className="w-4 h-4" />
                 </div>
-                <p className="font-display text-2xl text-white">100%</p>
-                <p className="text-[11px] text-blue-200 uppercase tracking-widest mt-1 font-medium">RERA Clear Titles</p>
+                <p className="font-secondary text-2xl font-medium text-white">100%</p>
+                <p className="font-primary text-[11px] text-blue-200 uppercase tracking-widest mt-1 font-medium">RERA Clear Titles</p>
               </div>
 
               <div className="p-6 bg-black/55 backdrop-blur-md border border-white/25 text-left shadow-2xl">
                 <div className="w-9 h-9 bg-[#044F92] text-white flex items-center justify-center mb-3 shadow-md">
                   <Building className="w-4 h-4" />
                 </div>
-                <p className="font-display text-2xl text-white">3.2M+ Sq.Ft</p>
-                <p className="text-[11px] text-blue-200 uppercase tracking-widest mt-1 font-medium">Delivered in Goa</p>
+                <p className="font-secondary text-2xl font-medium text-white">3.2M+ Sq.Ft</p>
+                <p className="font-primary text-[11px] text-blue-200 uppercase tracking-widest mt-1 font-medium">Delivered in Goa</p>
               </div>
             </div>
           </div>
@@ -431,16 +431,16 @@ export const HeroScrollAnimation: React.FC<HeroScrollAnimationProps> = ({
             style={phase4Style}
             className="absolute inset-0 flex flex-col justify-center items-center text-center max-w-5xl mx-auto px-6 will-change-transform"
           >
-            <div className="inline-flex items-center gap-2 px-3.5 py-1 bg-black/40 backdrop-blur-md border border-white/25 text-[10px] uppercase tracking-[0.25em] text-[#38bdf8] font-bold mb-4 shadow-lg">
+            <div className="inline-flex items-center gap-2 px-3.5 py-1 bg-black/40 backdrop-blur-md border border-white/25 text-[10px] uppercase tracking-[0.25em] text-[#38bdf8] font-bold mb-4 shadow-lg font-secondary">
               <span>Your Sanctuary Awaits</span>
             </div>
 
-            <h2 className="font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-normal leading-[1.1] text-white text-shadow-cinematic max-w-4xl drop-shadow-2xl">
+            <h2 className="font-secondary text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-normal leading-[1.1] text-white text-shadow-cinematic max-w-4xl drop-shadow-2xl">
               Discover Goa’s Most <br />
-              <span className="italic font-serif text-[#93c5fd]">Prestigious Estates</span>
+              <span className="italic font-secondary text-[#93c5fd] font-light">Prestigious Estates</span>
             </h2>
 
-            <p className="text-sm sm:text-base md:text-lg text-blue-100/95 font-light max-w-2xl mt-4 text-shadow-cinematic drop-shadow-lg">
+            <p className="font-primary text-sm sm:text-base md:text-lg text-blue-100/95 font-light max-w-2xl mt-4 text-shadow-cinematic drop-shadow-lg">
               Browse our curated portfolio of residential & commercial landmarks or schedule an exclusive chauffeured private site visit.
             </p>
 
@@ -557,11 +557,10 @@ export const HeroScrollAnimation: React.FC<HeroScrollAnimationProps> = ({
               className="group relative flex items-center justify-center p-1 cursor-pointer"
             >
               <div
-                className={`w-2.5 h-2.5 rounded-full transition-all duration-300 ${
-                  activePhase === idx
-                    ? 'w-3 h-3 bg-[#38bdf8] ring-4 ring-[#38bdf8]/40 scale-110'
-                    : 'bg-white/40 hover:bg-white/80'
-                }`}
+                className={`w-2.5 h-2.5 rounded-full transition-all duration-300 ${activePhase === idx
+                  ? 'w-3 h-3 bg-[#38bdf8] ring-4 ring-[#38bdf8]/40 scale-110'
+                  : 'bg-white/40 hover:bg-white/80'
+                  }`}
               />
               <span className="absolute right-8 px-2 py-1 bg-black/80 backdrop-blur-sm border border-white/20 text-[9px] uppercase tracking-widest text-white whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none rounded">
                 {item.label}
@@ -573,7 +572,7 @@ export const HeroScrollAnimation: React.FC<HeroScrollAnimationProps> = ({
         {/* ========================================================================= */}
         {/* BOTTOM PROGRESS BAR */}
         {/* ========================================================================= */}
-        <div className="relative z-30 w-full px-6 sm:px-10 pb-4 flex items-center justify-between text-[10px] uppercase tracking-widest text-blue-200/90 font-mono">
+        <div className="relative z-30 w-full px-6 sm:px-10 pb-4 flex items-center justify-between text-[10px] uppercase tracking-widest text-blue-200/90 font-secondary">
           <div className="flex items-center gap-2">
             <span className="w-2 h-2 rounded-full bg-[#38bdf8] animate-pulse" />
             <span>Interactive Scroll Journey</span>

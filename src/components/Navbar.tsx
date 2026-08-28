@@ -62,56 +62,52 @@ export const Navbar: React.FC<NavbarProps> = ({
     <>
       <header
         id="main-navbar"
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-          isTransparent
-            ? scrolled
-              ? 'py-3.5 bg-black/30 backdrop-blur-md border-b border-white/10'
-              : 'py-5 bg-transparent border-b border-transparent'
-            : scrolled
-              ? 'py-3.5 bg-[#fdfcfb]/95 backdrop-blur-md border-b border-[#e5e1da] shadow-sm'
-              : 'py-5 bg-[#fdfcfb]/95 backdrop-blur-md border-b border-[#e5e1da]'
-        }`}
+        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isTransparent
+          ? scrolled
+            ? 'py-3.5 bg-black/30 backdrop-blur-md border-b border-white/10'
+            : 'py-5 bg-transparent border-b border-transparent'
+          : scrolled
+            ? 'py-3.5 bg-[#fdfcfb]/95 backdrop-blur-md border-b border-[#e5e1da] shadow-sm'
+            : 'py-5 bg-[#fdfcfb]/95 backdrop-blur-md border-b border-[#e5e1da]'
+          }`}
       >
         <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-10 flex items-center justify-between">
           {/* Official Brand Logo */}
           <button
             id="brand-logo-btn"
             onClick={() => handlePageClick('home')}
-            className="flex items-center text-left group focus:outline-none transition-transform hover:scale-[1.02]"
+            className="flex items-center text-left group focus:outline-none transition-transform hover:scale-[1.02] py-1"
           >
             <div
-              className={`transition-all duration-300 rounded ${
-                isTransparent
-                  ? 'bg-white/95 px-3 py-1.5 shadow-xl border border-white/40'
-                  : 'bg-transparent py-0.5'
-              }`}
+              className={`transition-all duration-300 rounded-lg ${isTransparent
+                ? 'bg-white px-3.5 py-1.5 shadow-xl border border-white/40'
+                : 'bg-transparent py-0.5'
+                }`}
             >
               <img
                 src="/kamat-logo.png"
                 alt="Kamat Realty - Real Estate Developers"
-                className="h-8 sm:h-9 w-auto object-contain block"
+                className="h-10 sm:h-12 md:h-13 w-auto object-contain block drop-shadow-sm"
               />
             </div>
           </button>
 
           {/* Desktop Navigation Links */}
           <nav
-            className={`hidden lg:flex items-center space-x-7 text-xs uppercase tracking-[0.18em] font-medium transition-colors duration-300 ${
-              isTransparent ? 'text-white/90' : 'text-[#4a4540]'
-            }`}
+            className={`hidden lg:flex items-center space-x-7 text-xs uppercase tracking-[0.18em] font-medium transition-colors duration-300 ${isTransparent ? 'text-white/90' : 'text-[#4a4540]'
+              }`}
           >
             <button
               id="nav-link-home"
               onClick={() => handlePageClick('home')}
-              className={`pb-1 transition-all ${
-                isTransparent
-                  ? currentPage === 'home'
-                    ? 'text-[#38bdf8] border-b-2 border-[#38bdf8] font-semibold drop-shadow'
-                    : 'hover:text-[#38bdf8]'
-                  : currentPage === 'home'
-                    ? 'text-[#044F92] border-b-2 border-[#044F92] font-semibold'
-                    : 'hover:text-[#044F92]'
-              }`}
+              className={`pb-1 transition-all ${isTransparent
+                ? currentPage === 'home'
+                  ? 'text-[#38bdf8] border-b-2 border-[#38bdf8] font-semibold drop-shadow'
+                  : 'hover:text-[#38bdf8]'
+                : currentPage === 'home'
+                  ? 'text-[#044F92] border-b-2 border-[#044F92] font-semibold'
+                  : 'hover:text-[#044F92]'
+                }`}
             >
               Home
             </button>
@@ -125,42 +121,38 @@ export const Navbar: React.FC<NavbarProps> = ({
               <button
                 id="nav-link-projects"
                 onClick={() => handlePageClick('projects')}
-                className={`pb-1 transition-all flex items-center gap-1 ${
-                  isTransparent
-                    ? currentPage === 'projects'
-                      ? 'text-[#38bdf8] border-b-2 border-[#38bdf8] font-semibold'
-                      : 'hover:text-[#38bdf8]'
-                    : currentPage === 'projects'
-                      ? 'text-[#044F92] border-b-2 border-[#044F92] font-semibold'
-                      : 'hover:text-[#044F92]'
-                }`}
+                className={`pb-1 transition-all flex items-center gap-1 ${isTransparent
+                  ? currentPage === 'projects'
+                    ? 'text-[#38bdf8] border-b-2 border-[#38bdf8] font-semibold'
+                    : 'hover:text-[#38bdf8]'
+                  : currentPage === 'projects'
+                    ? 'text-[#044F92] border-b-2 border-[#044F92] font-semibold'
+                    : 'hover:text-[#044F92]'
+                  }`}
               >
                 <span>Developments</span>
                 <ChevronRight
-                  className={`w-3 h-3 transition-transform duration-200 ${
-                    projectsDropdown
-                      ? `rotate-90 ${isTransparent ? 'text-[#38bdf8]' : 'text-[#044F92]'}`
-                      : isTransparent ? 'text-white/70' : 'text-[#8c857d]'
-                  }`}
+                  className={`w-3 h-3 transition-transform duration-200 ${projectsDropdown
+                    ? `rotate-90 ${isTransparent ? 'text-[#38bdf8]' : 'text-[#044F92]'}`
+                    : isTransparent ? 'text-white/70' : 'text-[#8c857d]'
+                    }`}
                 />
               </button>
 
               {/* Dropdown Menu */}
               {projectsDropdown && (
                 <div
-                  className={`absolute top-full left-0 mt-2 w-64 shadow-2xl p-2 z-50 transition-all ${
-                    isTransparent
-                      ? 'bg-[#02182c]/95 backdrop-blur-xl border border-white/20 text-white'
-                      : 'bg-white border border-[#cfe0ee] text-[#1a1a1a]'
-                  }`}
+                  className={`absolute top-full left-0 mt-2 w-64 shadow-2xl p-2 z-50 transition-all ${isTransparent
+                    ? 'bg-[#02182c]/95 backdrop-blur-xl border border-white/20 text-white'
+                    : 'bg-white border border-[#cfe0ee] text-[#1a1a1a]'
+                    }`}
                 >
                   <button
                     onClick={() => handlePageClick('projects')}
-                    className={`w-full text-left px-3 py-2.5 text-xs flex items-center justify-between transition-colors tracking-normal normal-case font-medium ${
-                      isTransparent
-                        ? 'hover:bg-white/15 text-white hover:text-[#38bdf8]'
-                        : 'hover:bg-[#f2f7fc] text-[#1a1a1a] hover:text-[#044F92]'
-                    }`}
+                    className={`w-full text-left px-3 py-2.5 text-xs flex items-center justify-between transition-colors tracking-normal normal-case font-medium ${isTransparent
+                      ? 'hover:bg-white/15 text-white hover:text-[#38bdf8]'
+                      : 'hover:bg-[#f2f7fc] text-[#1a1a1a] hover:text-[#044F92]'
+                      }`}
                   >
                     <span>All Luxury Properties</span>
                     <span className={`text-[10px] uppercase tracking-widest ${isTransparent ? 'text-blue-200' : 'text-[#8c857d]'}`}>
@@ -169,29 +161,26 @@ export const Navbar: React.FC<NavbarProps> = ({
                   </button>
                   <button
                     onClick={() => handlePageClick('ongoing')}
-                    className={`w-full text-left px-3 py-2.5 text-xs flex items-center justify-between transition-colors tracking-normal normal-case font-medium ${
-                      isTransparent
-                        ? 'hover:bg-white/15 text-white hover:text-[#38bdf8]'
-                        : 'hover:bg-[#f2f7fc] text-[#1a1a1a] hover:text-[#044F92]'
-                    }`}
+                    className={`w-full text-left px-3 py-2.5 text-xs flex items-center justify-between transition-colors tracking-normal normal-case font-medium ${isTransparent
+                      ? 'hover:bg-white/15 text-white hover:text-[#38bdf8]'
+                      : 'hover:bg-[#f2f7fc] text-[#1a1a1a] hover:text-[#044F92]'
+                      }`}
                   >
                     <span className="flex items-center gap-2">
                       <span className={`w-2 h-2 rounded-full ${isTransparent ? 'bg-[#38bdf8]' : 'bg-[#044F92]'}`}></span>
                       Ongoing Projects
                     </span>
-                    <span className={`text-[9px] uppercase tracking-widest px-2 py-0.5 font-bold ${
-                      isTransparent ? 'text-[#38bdf8] bg-blue-900/50' : 'text-[#044F92] bg-[#eef5fb]'
-                    }`}>
+                    <span className={`text-[9px] uppercase tracking-widest px-2 py-0.5 font-bold ${isTransparent ? 'text-[#38bdf8] bg-blue-900/50' : 'text-[#044F92] bg-[#eef5fb]'
+                      }`}>
                       Active
                     </span>
                   </button>
                   <button
                     onClick={() => handlePageClick('completed')}
-                    className={`w-full text-left px-3 py-2.5 text-xs flex items-center justify-between transition-colors tracking-normal normal-case font-medium ${
-                      isTransparent
-                        ? 'hover:bg-white/15 text-white hover:text-[#38bdf8]'
-                        : 'hover:bg-[#f2f7fc] text-[#1a1a1a] hover:text-[#044F92]'
-                    }`}
+                    className={`w-full text-left px-3 py-2.5 text-xs flex items-center justify-between transition-colors tracking-normal normal-case font-medium ${isTransparent
+                      ? 'hover:bg-white/15 text-white hover:text-[#38bdf8]'
+                      : 'hover:bg-[#f2f7fc] text-[#1a1a1a] hover:text-[#044F92]'
+                      }`}
                   >
                     <span>Completed Landmarks</span>
                     <span className="text-[9px] uppercase tracking-widest text-white bg-[#044F92] px-2 py-0.5 font-bold">
@@ -205,15 +194,14 @@ export const Navbar: React.FC<NavbarProps> = ({
             <button
               id="nav-link-ongoing"
               onClick={() => handlePageClick('ongoing')}
-              className={`pb-1 transition-all ${
-                isTransparent
-                  ? currentPage === 'ongoing'
-                    ? 'text-[#38bdf8] border-b-2 border-[#38bdf8] font-semibold'
-                    : 'hover:text-[#38bdf8]'
-                  : currentPage === 'ongoing'
-                    ? 'text-[#044F92] border-b-2 border-[#044F92] font-semibold'
-                    : 'hover:text-[#044F92]'
-              }`}
+              className={`pb-1 transition-all ${isTransparent
+                ? currentPage === 'ongoing'
+                  ? 'text-[#38bdf8] border-b-2 border-[#38bdf8] font-semibold'
+                  : 'hover:text-[#38bdf8]'
+                : currentPage === 'ongoing'
+                  ? 'text-[#044F92] border-b-2 border-[#044F92] font-semibold'
+                  : 'hover:text-[#044F92]'
+                }`}
             >
               Ongoing
             </button>
@@ -221,15 +209,14 @@ export const Navbar: React.FC<NavbarProps> = ({
             <button
               id="nav-link-completed"
               onClick={() => handlePageClick('completed')}
-              className={`pb-1 transition-all ${
-                isTransparent
-                  ? currentPage === 'completed'
-                    ? 'text-[#38bdf8] border-b-2 border-[#38bdf8] font-semibold'
-                    : 'hover:text-[#38bdf8]'
-                  : currentPage === 'completed'
-                    ? 'text-[#044F92] border-b-2 border-[#044F92] font-semibold'
-                    : 'hover:text-[#044F92]'
-              }`}
+              className={`pb-1 transition-all ${isTransparent
+                ? currentPage === 'completed'
+                  ? 'text-[#38bdf8] border-b-2 border-[#38bdf8] font-semibold'
+                  : 'hover:text-[#38bdf8]'
+                : currentPage === 'completed'
+                  ? 'text-[#044F92] border-b-2 border-[#044F92] font-semibold'
+                  : 'hover:text-[#044F92]'
+                }`}
             >
               Completed
             </button>
@@ -237,15 +224,14 @@ export const Navbar: React.FC<NavbarProps> = ({
             <button
               id="nav-link-map"
               onClick={() => handlePageClick('locations')}
-              className={`pb-1 transition-all ${
-                isTransparent
-                  ? currentPage === 'locations'
-                    ? 'text-[#38bdf8] border-b-2 border-[#38bdf8] font-semibold'
-                    : 'hover:text-[#38bdf8]'
-                  : currentPage === 'locations'
-                    ? 'text-[#044F92] border-b-2 border-[#044F92] font-semibold'
-                    : 'hover:text-[#044F92]'
-              }`}
+              className={`pb-1 transition-all ${isTransparent
+                ? currentPage === 'locations'
+                  ? 'text-[#38bdf8] border-b-2 border-[#38bdf8] font-semibold'
+                  : 'hover:text-[#38bdf8]'
+                : currentPage === 'locations'
+                  ? 'text-[#044F92] border-b-2 border-[#044F92] font-semibold'
+                  : 'hover:text-[#044F92]'
+                }`}
             >
               Locations Map
             </button>
@@ -253,15 +239,14 @@ export const Navbar: React.FC<NavbarProps> = ({
             <button
               id="nav-link-legacy"
               onClick={() => handlePageClick('about')}
-              className={`pb-1 transition-all ${
-                isTransparent
-                  ? currentPage === 'about'
-                    ? 'text-[#38bdf8] border-b-2 border-[#38bdf8] font-semibold'
-                    : 'hover:text-[#38bdf8]'
-                  : currentPage === 'about'
-                    ? 'text-[#044F92] border-b-2 border-[#044F92] font-semibold'
-                    : 'hover:text-[#044F92]'
-              }`}
+              className={`pb-1 transition-all ${isTransparent
+                ? currentPage === 'about'
+                  ? 'text-[#38bdf8] border-b-2 border-[#38bdf8] font-semibold'
+                  : 'hover:text-[#38bdf8]'
+                : currentPage === 'about'
+                  ? 'text-[#044F92] border-b-2 border-[#044F92] font-semibold'
+                  : 'hover:text-[#044F92]'
+                }`}
             >
               About
             </button>
@@ -269,15 +254,14 @@ export const Navbar: React.FC<NavbarProps> = ({
             <button
               id="nav-link-calculator"
               onClick={() => handlePageClick('finance')}
-              className={`pb-1 transition-all ${
-                isTransparent
-                  ? currentPage === 'finance'
-                    ? 'text-[#38bdf8] border-b-2 border-[#38bdf8] font-semibold'
-                    : 'hover:text-[#38bdf8]'
-                  : currentPage === 'finance'
-                    ? 'text-[#044F92] border-b-2 border-[#044F92] font-semibold'
-                    : 'hover:text-[#044F92]'
-              }`}
+              className={`pb-1 transition-all ${isTransparent
+                ? currentPage === 'finance'
+                  ? 'text-[#38bdf8] border-b-2 border-[#38bdf8] font-semibold'
+                  : 'hover:text-[#38bdf8]'
+                : currentPage === 'finance'
+                  ? 'text-[#044F92] border-b-2 border-[#044F92] font-semibold'
+                  : 'hover:text-[#044F92]'
+                }`}
             >
               Mortgage & ROI
             </button>
@@ -285,15 +269,14 @@ export const Navbar: React.FC<NavbarProps> = ({
             <button
               id="nav-link-contact"
               onClick={() => handlePageClick('contact')}
-              className={`pb-1 transition-all ${
-                isTransparent
-                  ? currentPage === 'contact'
-                    ? 'text-[#38bdf8] border-b-2 border-[#38bdf8] font-semibold'
-                    : 'hover:text-[#38bdf8]'
-                  : currentPage === 'contact'
-                    ? 'text-[#044F92] border-b-2 border-[#044F92] font-semibold'
-                    : 'hover:text-[#044F92]'
-              }`}
+              className={`pb-1 transition-all ${isTransparent
+                ? currentPage === 'contact'
+                  ? 'text-[#38bdf8] border-b-2 border-[#38bdf8] font-semibold'
+                  : 'hover:text-[#38bdf8]'
+                : currentPage === 'contact'
+                  ? 'text-[#044F92] border-b-2 border-[#044F92] font-semibold'
+                  : 'hover:text-[#044F92]'
+                }`}
             >
               Contact
             </button>
@@ -303,9 +286,8 @@ export const Navbar: React.FC<NavbarProps> = ({
           <div className="hidden sm:flex items-center gap-5">
             <a
               href="tel:+918322223456"
-              className={`flex items-center gap-1.5 text-xs transition-colors ${
-                isTransparent ? 'text-blue-100 hover:text-white' : 'text-[#8c857d] hover:text-[#044F92]'
-              }`}
+              className={`flex items-center gap-1.5 text-xs transition-colors ${isTransparent ? 'text-blue-100 hover:text-white' : 'text-[#8c857d] hover:text-[#044F92]'
+                }`}
               title="Call VIP Concierge"
             >
               <Phone className={`w-3.5 h-3.5 ${isTransparent ? 'text-[#38bdf8]' : 'text-[#044F92]'}`} />
@@ -317,11 +299,10 @@ export const Navbar: React.FC<NavbarProps> = ({
             <button
               id="btn-book-site-visit-nav"
               onClick={onOpenTourModal}
-              className={`px-6 py-2.5 text-xs uppercase tracking-widest font-semibold transition-all shadow-md active:scale-95 cursor-pointer ${
-                isTransparent
-                  ? 'bg-[#044F92] hover:bg-[#03396c] text-white border border-[#38bdf8]/40 shadow-lg'
-                  : 'bg-[#044F92] text-white hover:bg-[#03396c]'
-              }`}
+              className={`px-6 py-2.5 text-xs uppercase tracking-widest font-semibold transition-all shadow-md active:scale-95 cursor-pointer ${isTransparent
+                ? 'bg-[#044F92] hover:bg-[#03396c] text-white border border-[#38bdf8]/40 shadow-lg'
+                : 'bg-[#044F92] text-white hover:bg-[#03396c]'
+                }`}
             >
               VIP Tour
             </button>
@@ -331,9 +312,8 @@ export const Navbar: React.FC<NavbarProps> = ({
           <button
             id="mobile-menu-toggle-btn"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className={`lg:hidden p-2 transition-colors focus:outline-none ${
-              isTransparent ? 'text-white hover:bg-white/10' : 'text-[#044F92] hover:bg-[#f2f7fc]'
-            }`}
+            className={`lg:hidden p-2 transition-colors focus:outline-none ${isTransparent ? 'text-white hover:bg-white/10' : 'text-[#044F92] hover:bg-[#f2f7fc]'
+              }`}
             aria-label="Toggle Navigation Menu"
           >
             {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
@@ -351,9 +331,8 @@ export const Navbar: React.FC<NavbarProps> = ({
 
             <button
               onClick={() => handlePageClick('home')}
-              className={`w-full text-left py-3 border-b border-[#e5e1da] font-display text-xl flex items-center justify-between ${
-                currentPage === 'home' ? 'text-[#044F92] font-bold' : 'text-[#1a1a1a]'
-              }`}
+              className={`w-full text-left py-3 border-b border-[#e5e1da] font-display text-xl flex items-center justify-between ${currentPage === 'home' ? 'text-[#044F92] font-bold' : 'text-[#1a1a1a]'
+                }`}
             >
               <span>Home Overview</span>
               <ChevronRight className="w-4 h-4 text-[#044F92]" />
@@ -361,9 +340,8 @@ export const Navbar: React.FC<NavbarProps> = ({
 
             <button
               onClick={() => handlePageClick('projects')}
-              className={`w-full text-left py-3 border-b border-[#e5e1da] font-display text-xl flex items-center justify-between ${
-                currentPage === 'projects' ? 'text-[#044F92] font-bold' : 'text-[#1a1a1a]'
-              }`}
+              className={`w-full text-left py-3 border-b border-[#e5e1da] font-display text-xl flex items-center justify-between ${currentPage === 'projects' ? 'text-[#044F92] font-bold' : 'text-[#1a1a1a]'
+                }`}
             >
               <span>All Developments</span>
               <span className="text-[10px] uppercase tracking-widest text-[#044F92] bg-[#f2f7fc] border border-[#cfe0ee] px-2 py-0.5 font-sans font-semibold">
@@ -373,9 +351,8 @@ export const Navbar: React.FC<NavbarProps> = ({
 
             <button
               onClick={() => handlePageClick('ongoing')}
-              className={`w-full text-left py-3 border-b border-[#e5e1da] font-display text-xl flex items-center justify-between ${
-                currentPage === 'ongoing' ? 'text-[#044F92] font-bold' : 'text-[#1a1a1a]'
-              }`}
+              className={`w-full text-left py-3 border-b border-[#e5e1da] font-display text-xl flex items-center justify-between ${currentPage === 'ongoing' ? 'text-[#044F92] font-bold' : 'text-[#1a1a1a]'
+                }`}
             >
               <span>Ongoing Projects</span>
               <ChevronRight className="w-4 h-4 text-[#044F92]" />
@@ -383,9 +360,8 @@ export const Navbar: React.FC<NavbarProps> = ({
 
             <button
               onClick={() => handlePageClick('completed')}
-              className={`w-full text-left py-3 border-b border-[#e5e1da] font-display text-xl flex items-center justify-between ${
-                currentPage === 'completed' ? 'text-[#044F92] font-bold' : 'text-[#1a1a1a]'
-              }`}
+              className={`w-full text-left py-3 border-b border-[#e5e1da] font-display text-xl flex items-center justify-between ${currentPage === 'completed' ? 'text-[#044F92] font-bold' : 'text-[#1a1a1a]'
+                }`}
             >
               <span>Completed Landmarks</span>
               <ChevronRight className="w-4 h-4 text-[#044F92]" />
@@ -393,9 +369,8 @@ export const Navbar: React.FC<NavbarProps> = ({
 
             <button
               onClick={() => handlePageClick('locations')}
-              className={`w-full text-left py-3 border-b border-[#e5e1da] font-display text-xl flex items-center justify-between ${
-                currentPage === 'locations' ? 'text-[#044F92] font-bold' : 'text-[#1a1a1a]'
-              }`}
+              className={`w-full text-left py-3 border-b border-[#e5e1da] font-display text-xl flex items-center justify-between ${currentPage === 'locations' ? 'text-[#044F92] font-bold' : 'text-[#1a1a1a]'
+                }`}
             >
               <span>Locations & Map</span>
               <ChevronRight className="w-4 h-4 text-[#044F92]" />
@@ -403,9 +378,8 @@ export const Navbar: React.FC<NavbarProps> = ({
 
             <button
               onClick={() => handlePageClick('about')}
-              className={`w-full text-left py-3 border-b border-[#e5e1da] font-display text-xl flex items-center justify-between ${
-                currentPage === 'about' ? 'text-[#044F92] font-bold' : 'text-[#1a1a1a]'
-              }`}
+              className={`w-full text-left py-3 border-b border-[#e5e1da] font-display text-xl flex items-center justify-between ${currentPage === 'about' ? 'text-[#044F92] font-bold' : 'text-[#1a1a1a]'
+                }`}
             >
               <span>About & Legacy</span>
               <ChevronRight className="w-4 h-4 text-[#044F92]" />
@@ -413,9 +387,8 @@ export const Navbar: React.FC<NavbarProps> = ({
 
             <button
               onClick={() => handlePageClick('finance')}
-              className={`w-full text-left py-3 border-b border-[#e5e1da] font-display text-xl flex items-center justify-between ${
-                currentPage === 'finance' ? 'text-[#044F92] font-bold' : 'text-[#1a1a1a]'
-              }`}
+              className={`w-full text-left py-3 border-b border-[#e5e1da] font-display text-xl flex items-center justify-between ${currentPage === 'finance' ? 'text-[#044F92] font-bold' : 'text-[#1a1a1a]'
+                }`}
             >
               <span>Mortgage & ROI Calculator</span>
               <ChevronRight className="w-4 h-4 text-[#044F92]" />
@@ -423,9 +396,8 @@ export const Navbar: React.FC<NavbarProps> = ({
 
             <button
               onClick={() => handlePageClick('contact')}
-              className={`w-full text-left py-3 border-b border-[#e5e1da] font-display text-xl flex items-center justify-between ${
-                currentPage === 'contact' ? 'text-[#044F92] font-bold' : 'text-[#1a1a1a]'
-              }`}
+              className={`w-full text-left py-3 border-b border-[#e5e1da] font-display text-xl flex items-center justify-between ${currentPage === 'contact' ? 'text-[#044F92] font-bold' : 'text-[#1a1a1a]'
+                }`}
             >
               <span>Contact & Headquarters</span>
               <ChevronRight className="w-4 h-4 text-[#044F92]" />
