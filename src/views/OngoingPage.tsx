@@ -1,14 +1,19 @@
+'use client';
+
 import React from 'react';
+import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import { motion } from 'motion/react';
 import { Building2, Calendar, ShieldCheck, CheckCircle2, ArrowRight, Clock, Award, Sparkles } from 'lucide-react';
 import { PropertyItem } from '../types/property';
 import { PROPERTIES } from '../data/propertyService';
 import { ScrollReveal } from '../components/ScrollReveal';
+import { useTourModal } from '../context/TourModalContext';
 
 interface OngoingPageProps {
-  onSelectProperty: (property: PropertyItem) => void;
-  onNavigate: (page: string, params?: { propertyId?: string }) => void;
-  onOpenTourModal: (property?: PropertyItem) => void;
+  onSelectProperty?: (property: PropertyItem) => void;
+  onNavigate?: (page: string, params?: { propertyId?: string }) => void;
+  onOpenTourModal?: (property?: PropertyItem) => void;
 }
 
 export const OngoingPage: React.FC<OngoingPageProps> = ({
@@ -16,6 +21,25 @@ export const OngoingPage: React.FC<OngoingPageProps> = ({
   onNavigate,
   onOpenTourModal
 }) => {
+  const router = useRouter();
+  const tourModalContext = useTourModal();
+
+  const handleSelect = (property: PropertyItem) => {
+    if (onSelectProperty) {
+      onSelectProperty(property);
+    } else {
+      router.push(`/property/${property.id}`);
+    }
+  };
+
+  const handleTour = (property?: PropertyItem) => {
+    if (onOpenTourModal) {
+      onOpenTourModal(property);
+    } else {
+      tourModalContext.openTourModal(property);
+    }
+  };
+
   const ongoingProjects = PROPERTIES.filter((p) => p.status === 'ongoing');
 
   return (
@@ -61,7 +85,7 @@ export const OngoingPage: React.FC<OngoingPageProps> = ({
               </div>
             </div>
             <button
-              onClick={() => onOpenTourModal()}
+              onClick={() => handleTour()}
               className="px-6 py-3 bg-[#044F92] hover:bg-[#03396c] text-white text-xs font-semibold uppercase tracking-widest transition-colors shrink-0 shadow-sm cursor-pointer"
             >
               Request Site Inspection
@@ -113,10 +137,7 @@ export const OngoingPage: React.FC<OngoingPageProps> = ({
                       </div>
 
                       <h2
-                        onClick={() => {
-                          onSelectProperty(property);
-                          onNavigate('property-detail', { propertyId: property.id });
-                        }}
+                        onClick={() => handleSelect(property)}
                         className="font-display text-3xl text-[#1a1a1a] hover:text-[#044F92] transition-colors cursor-pointer"
                       >
                         {property.title}
@@ -149,19 +170,16 @@ export const OngoingPage: React.FC<OngoingPageProps> = ({
                     {/* Action Buttons */}
                     <div className="flex flex-wrap gap-4 pt-2">
                       <button
-                        onClick={() => {
-                          onSelectProperty(property);
-                          onNavigate('property-detail', { propertyId: property.id });
-                        }}
-                        className="px-6 py-2.5 bg-[#044F92] text-white hover:bg-[#03396c] text-xs font-semibold uppercase tracking-widest transition-colors flex items-center gap-2"
+                        onClick={() => handleSelect(property)}
+                        className="px-6 py-2.5 bg-[#044F92] text-white hover:bg-[#03396c] text-xs font-semibold uppercase tracking-widest transition-colors flex items-center gap-2 cursor-pointer"
                       >
                         <span>Explore Estate & Floor Plans</span>
                         <ArrowRight className="w-3.5 h-3.5" />
                       </button>
 
                       <button
-                        onClick={() => onOpenTourModal(property)}
-                        className="px-6 py-2.5 bg-white border border-[#044F92] text-[#044F92] hover:bg-[#f2f7fc] text-xs font-semibold uppercase tracking-widest transition-colors"
+                        onClick={() => handleTour(property)}
+                        className="px-6 py-2.5 bg-white border border-[#044F92] text-[#044F92] hover:bg-[#f2f7fc] text-xs font-semibold uppercase tracking-widest transition-colors cursor-pointer"
                       >
                         Schedule Site Tour
                       </button>

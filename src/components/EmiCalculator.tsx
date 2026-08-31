@@ -1,3 +1,5 @@
+'use client';
+
 import React, { useState } from 'react';
 import { Calculator, TrendingUp, ShieldCheck } from 'lucide-react';
 import { ScrollReveal } from './ScrollReveal';

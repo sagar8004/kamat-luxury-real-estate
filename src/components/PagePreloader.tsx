@@ -1,3 +1,5 @@
+'use client';
+
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { Image } from './Image';
@@ -13,18 +15,24 @@ export const PagePreloader: React.FC<PagePreloaderProps> = ({
   minDuration = 2000,
   onComplete,
 }) => {
-  const [isVisible, setIsVisible] = useState<boolean>(() => {
-    // Only run on fresh page load/hydration, avoid blocking every manual text edit in HMR
-    if (typeof window !== 'undefined') {
+  const [mounted, setMounted] = useState(false);
+  const [isVisible, setIsVisible] = useState(false);
+  const [progress, setProgress] = useState<number>(0);
+
+  useEffect(() => {
+    setMounted(true);
+    try {
       const hasLoaded = window.sessionStorage.getItem('kamat_preloader_shown');
       if (hasLoaded === 'true') {
-        return false;
+        setIsVisible(false);
+        if (onComplete) onComplete();
+      } else {
+        setIsVisible(true);
       }
+    } catch {
+      setIsVisible(true);
     }
-    return true;
-  });
-
-  const [progress, setProgress] = useState<number>(0);
+  }, [onComplete]);
 
   useEffect(() => {
     if (!isVisible) {
@@ -69,7 +77,7 @@ export const PagePreloader: React.FC<PagePreloaderProps> = ({
     };
   }, [minDuration, isVisible]);
 
-  if (!isVisible) return null;
+  if (!mounted || !isVisible) return null;
 
   return (
     <AnimatePresence

@@ -1,13 +1,17 @@
+'use client';
+
 import React, { useEffect, useState } from 'react';
 import { motion } from 'motion/react';
 
 export const CustomCursor: React.FC = () => {
+  const [mounted, setMounted] = useState(false);
   const [mousePosition, setMousePosition] = useState({ x: -100, y: -100 });
   const [isHovered, setIsHovered] = useState(false);
   const [isClicking, setIsClicking] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
+    setMounted(true);
     // Only enable on fine pointer devices (desktop/mouse)
     const isTouch = window.matchMedia('(pointer: coarse)').matches;
     if (isTouch) return;
@@ -53,7 +57,7 @@ export const CustomCursor: React.FC = () => {
     };
   }, [isVisible]);
 
-  if (!isVisible) return null;
+  if (!mounted || !isVisible) return null;
 
   return (
     <>

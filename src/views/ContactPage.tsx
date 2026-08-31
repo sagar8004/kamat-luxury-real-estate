@@ -1,14 +1,26 @@
+'use client';
+
 import React from 'react';
 import { motion } from 'motion/react';
 import { Mail, Phone, MapPin, Building2, Clock, MessageSquare, ShieldCheck } from 'lucide-react';
 import { ContactSection } from '../components/ContactSection';
 import { ScrollReveal } from '../components/ScrollReveal';
+import { useTourModal } from '../context/TourModalContext';
 
 interface ContactPageProps {
-  onOpenTourModal: () => void;
+  onOpenTourModal?: () => void;
 }
 
 export const ContactPage: React.FC<ContactPageProps> = ({ onOpenTourModal }) => {
+  const tourModalContext = useTourModal();
+
+  const handleTour = () => {
+    if (onOpenTourModal) {
+      onOpenTourModal();
+    } else {
+      tourModalContext.openTourModal();
+    }
+  };
   return (
     <div className="pt-24 pb-28 bg-[#fdfcfb]">
       {/* Header */}
@@ -37,7 +49,7 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onOpenTourModal }) => 
 
       {/* Main Content */}
       <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-10 mt-14 space-y-16">
-        <ContactSection onOpenTourModal={onOpenTourModal} />
+        <ContactSection onOpenTourModal={handleTour} />
       </div>
     </div>
   );

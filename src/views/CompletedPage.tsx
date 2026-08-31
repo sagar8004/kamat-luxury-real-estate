@@ -1,14 +1,19 @@
+'use client';
+
 import React from 'react';
+import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import { motion } from 'motion/react';
 import { Award, CheckCircle2, Star, Quote, ArrowRight, ShieldCheck, MapPin } from 'lucide-react';
 import { PropertyItem } from '../types/property';
 import { PROPERTIES } from '../data/propertyService';
 import { ScrollReveal, StaggerContainer, StaggerItem } from '../components/ScrollReveal';
+import { useTourModal } from '../context/TourModalContext';
 
 interface CompletedPageProps {
-  onSelectProperty: (property: PropertyItem) => void;
-  onNavigate: (page: string, params?: { propertyId?: string }) => void;
-  onOpenTourModal: (property?: PropertyItem) => void;
+  onSelectProperty?: (property: PropertyItem) => void;
+  onNavigate?: (page: string, params?: { propertyId?: string }) => void;
+  onOpenTourModal?: (property?: PropertyItem) => void;
 }
 
 export const CompletedPage: React.FC<CompletedPageProps> = ({
@@ -16,6 +21,16 @@ export const CompletedPage: React.FC<CompletedPageProps> = ({
   onNavigate,
   onOpenTourModal
 }) => {
+  const router = useRouter();
+  const tourModalContext = useTourModal();
+
+  const handleSelect = (property: PropertyItem) => {
+    if (onSelectProperty) {
+      onSelectProperty(property);
+    } else {
+      router.push(`/property/${property.id}`);
+    }
+  };
   const completedProjects = PROPERTIES.filter((p) => p.status === 'completed');
 
   const testimonials = [
@@ -72,10 +87,7 @@ export const CompletedPage: React.FC<CompletedPageProps> = ({
           {completedProjects.map((property) => (
             <StaggerItem key={property.id} variant="from-behind">
               <div
-                onClick={() => {
-                  onSelectProperty(property);
-                  onNavigate('property-detail', { propertyId: property.id });
-                }}
+                onClick={() => handleSelect(property)}
                 className="group bg-white border border-[#e5e1da] hover:border-[#044F92] overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 cursor-pointer flex flex-col justify-between h-full"
               >
                 <div>

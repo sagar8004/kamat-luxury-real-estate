@@ -1,8 +1,9 @@
+'use client';
+
 import React, { useEffect, useRef, useState, useCallback } from 'react';
 import { motion } from 'motion/react';
-import { ArrowRight, Compass, Sparkles, MapPin, Building, Search, ChevronDown, Award, ShieldCheck } from 'lucide-react';
+import { ArrowRight, Compass, ChevronDown } from 'lucide-react';
 import { PropertyCategory } from '../types/property';
-import { LOCATIONS_LIST, CATEGORIES_LIST } from '../data/propertyService';
 
 const TOTAL_FRAMES = 240;
 
@@ -29,11 +30,6 @@ export const HeroScrollAnimation: React.FC<HeroScrollAnimationProps> = ({
   const currentFrameRef = useRef<number>(-1);
   const [loadedCount, setLoadedCount] = useState<number>(0);
   const [scrollProgress, setScrollProgress] = useState<number>(0);
-
-  // Search Bar Local State
-  const [keyword, setKeyword] = useState('');
-  const [selectedArea, setSelectedArea] = useState('All Locations');
-  const [selectedCategory, setSelectedCategory] = useState<PropertyCategory>('all');
 
   // Draw frame to canvas with optimal aspect-ratio cover math
   const drawFrame = useCallback((targetFrameIndex: number) => {
@@ -195,16 +191,6 @@ export const HeroScrollAnimation: React.FC<HeroScrollAnimationProps> = ({
     return () => clearTimeout(timer);
   }, [drawFrame]);
 
-  // Quick search submission
-  const handleHeroSearch = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (onSearch) {
-      onSearch(keyword, selectedArea, selectedCategory);
-    } else {
-      onNavigate('projects');
-    }
-  };
-
   const scrollToPhase = (targetProgress: number) => {
     if (!containerRef.current) return;
     const rect = containerRef.current.getBoundingClientRect();
@@ -314,10 +300,10 @@ export const HeroScrollAnimation: React.FC<HeroScrollAnimationProps> = ({
             className="absolute inset-0 flex flex-col justify-center items-center text-center max-w-5xl mx-auto px-6 will-change-transform"
           >
             {/* Top Brand Crest Badge */}
-            <div className="inline-flex items-center gap-2.5 px-4 py-1.5 bg-black/40 backdrop-blur-md border border-white/25 rounded-full text-white text-[10px] sm:text-xs uppercase tracking-[0.3em] font-medium shadow-xl mb-6">
+            {/* <div className="inline-flex items-center gap-2.5 px-4 py-1.5 bg-black/40 backdrop-blur-md border border-white/25 rounded-full text-white text-[10px] sm:text-xs uppercase tracking-[0.3em] font-medium shadow-xl mb-6">
               <Sparkles className="w-3.5 h-3.5 text-[#38bdf8] animate-pulse" />
               <span>Goa’s Premier Luxury Architecture • Est. 1994</span>
-            </div>
+            </div> */}
 
             {/* Main Grand Display Headline emerging from behind */}
             <h1 className="font-secondary text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-normal leading-[1.05] tracking-tight text-white text-shadow-cinematic max-w-5xl drop-shadow-2xl">
@@ -351,33 +337,20 @@ export const HeroScrollAnimation: React.FC<HeroScrollAnimationProps> = ({
           {/* ----------------------------------------------------------------------- */}
           <div
             style={phase2Style}
-            className="absolute inset-0 flex flex-col justify-center items-center text-center max-w-5xl mx-auto px-6 will-change-transform"
+            className="absolute inset-0 flex flex-col justify-center items-center text-center max-w-4xl mx-auto px-6 will-change-transform"
           >
-            <div className="inline-flex items-center gap-2 px-3.5 py-1 bg-black/40 backdrop-blur-md border border-white/25 text-[10px] uppercase tracking-[0.25em] text-[#38bdf8] font-bold mb-4 shadow-lg font-secondary">
-              <span>Signature Postcodes</span>
-            </div>
+            {/* <div className="inline-flex items-center gap-2 px-3.5 py-1 bg-black/40 backdrop-blur-md border border-white/25 text-[10px] uppercase tracking-[0.25em] text-[#38bdf8] font-bold mb-4 shadow-lg font-secondary">
+              <span>Signature Coastal Enclaves</span>
+            </div> */}
 
             <h2 className="font-secondary text-4xl sm:text-5xl md:text-7xl font-normal leading-tight text-white text-shadow-cinematic max-w-4xl drop-shadow-2xl">
               Proven Credibility <br />
               <span className="italic font-secondary text-[#93c5fd] font-light">A Decades-Long Legacy</span>
             </h2>
 
-            <p className="font-primary text-sm sm:text-base md:text-lg text-blue-100/95 font-light max-w-2xl mt-4 text-shadow-cinematic drop-shadow-lg">
-              From the tranquil teak forests of Assagao to the panoramic Arabian sea horizons of Miramar and Candolim.
+            <p className="font-primary text-sm sm:text-base md:text-lg text-blue-100/95 font-light max-w-2xl mt-5 text-shadow-cinematic drop-shadow-lg leading-relaxed">
+              From the tranquil teak canopies of Assagao to the panoramic Arabian Sea horizons of Miramar and Candolim.
             </p>
-
-            {/* Enclave Floating Chips */}
-            <div className="flex flex-wrap justify-center gap-3 sm:gap-4 mt-8">
-              {['Assagao Forest Edge', 'Miramar Sea Front', 'Candolim Coastal Enclave', 'Porvorim Heights'].map((loc, i) => (
-                <div
-                  key={i}
-                  className="font-secondary px-4 py-2.5 bg-black/50 backdrop-blur-md border border-white/25 text-xs uppercase tracking-wider text-white font-medium shadow-2xl flex items-center gap-2"
-                >
-                  <MapPin className="w-3.5 h-3.5 text-[#38bdf8]" />
-                  <span>{loc}</span>
-                </div>
-              ))}
-            </div>
           </div>
 
           {/* ----------------------------------------------------------------------- */}
@@ -385,62 +358,39 @@ export const HeroScrollAnimation: React.FC<HeroScrollAnimationProps> = ({
           {/* ----------------------------------------------------------------------- */}
           <div
             style={phase3Style}
-            className="absolute inset-0 flex flex-col justify-center items-center text-center max-w-5xl mx-auto px-6 will-change-transform"
+            className="absolute inset-0 flex flex-col justify-center items-center text-center max-w-4xl mx-auto px-6 will-change-transform"
           >
-            <div className="inline-flex items-center gap-2 px-3.5 py-1 bg-black/40 backdrop-blur-md border border-white/25 text-[10px] uppercase tracking-[0.25em] text-[#38bdf8] font-bold mb-4 shadow-lg font-secondary">
-              <span>Unrivaled Engineering</span>
-            </div>
+            {/* <div className="inline-flex items-center gap-2 px-3.5 py-1 bg-black/40 backdrop-blur-md border border-white/25 text-[10px] uppercase tracking-[0.25em] text-[#38bdf8] font-bold mb-4 shadow-lg font-secondary">
+              <span>Master Builders of Goa</span>
+            </div> */}
 
             <h2 className="font-secondary text-4xl sm:text-5xl md:text-7xl font-normal leading-tight text-white text-shadow-cinematic max-w-4xl drop-shadow-2xl">
               Engineered to Endure <br />
               <span className="italic font-secondary text-[#93c5fd] font-light">for Generations</span>
             </h2>
 
-            {/* 3 Trust Pillars */}
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6 mt-8 w-full max-w-3xl">
-              <div className="p-6 bg-black/55 backdrop-blur-md border border-white/25 text-left shadow-2xl">
-                <div className="w-9 h-9 bg-[#044F92] text-white flex items-center justify-center mb-3 shadow-md">
-                  <Award className="w-4 h-4" />
-                </div>
-                <p className="font-secondary text-2xl font-medium text-white">32+ Years</p>
-                <p className="font-primary text-[11px] text-blue-200 uppercase tracking-widest mt-1 font-medium">Goan Heritage Trust</p>
-              </div>
-
-              <div className="p-6 bg-black/55 backdrop-blur-md border border-white/25 text-left shadow-2xl">
-                <div className="w-9 h-9 bg-[#044F92] text-white flex items-center justify-center mb-3 shadow-md">
-                  <ShieldCheck className="w-4 h-4" />
-                </div>
-                <p className="font-secondary text-2xl font-medium text-white">100%</p>
-                <p className="font-primary text-[11px] text-blue-200 uppercase tracking-widest mt-1 font-medium">RERA Clear Titles</p>
-              </div>
-
-              <div className="p-6 bg-black/55 backdrop-blur-md border border-white/25 text-left shadow-2xl">
-                <div className="w-9 h-9 bg-[#044F92] text-white flex items-center justify-center mb-3 shadow-md">
-                  <Building className="w-4 h-4" />
-                </div>
-                <p className="font-secondary text-2xl font-medium text-white">3.2M+ Sq.Ft</p>
-                <p className="font-primary text-[11px] text-blue-200 uppercase tracking-widest mt-1 font-medium">Delivered in Goa</p>
-              </div>
-            </div>
+            <p className="font-primary text-sm sm:text-base md:text-lg text-blue-100/95 font-light max-w-2xl mt-5 text-shadow-cinematic drop-shadow-lg leading-relaxed">
+              Seismic-proof RCC engineering, marine-grade corrosion-resistant framing, and hand-chiseled laterite thermal masonry.
+            </p>
           </div>
 
           {/* ----------------------------------------------------------------------- */}
-          {/* PHASE 4 (78% - 100%): Grand Final Call to Action & Filter Deck */}
+          {/* PHASE 4 (78% - 100%): Grand Final Call to Action */}
           {/* ----------------------------------------------------------------------- */}
           <div
             style={phase4Style}
-            className="absolute inset-0 flex flex-col justify-center items-center text-center max-w-5xl mx-auto px-6 will-change-transform"
+            className="absolute inset-0 flex flex-col justify-center items-center text-center max-w-4xl mx-auto px-6 will-change-transform"
           >
-            <div className="inline-flex items-center gap-2 px-3.5 py-1 bg-black/40 backdrop-blur-md border border-white/25 text-[10px] uppercase tracking-[0.25em] text-[#38bdf8] font-bold mb-4 shadow-lg font-secondary">
+            {/* <div className="inline-flex items-center gap-2 px-3.5 py-1 bg-black/40 backdrop-blur-md border border-white/25 text-[10px] uppercase tracking-[0.25em] text-[#38bdf8] font-bold mb-4 shadow-lg font-secondary">
               <span>Your Sanctuary Awaits</span>
-            </div>
+            </div> */}
 
             <h2 className="font-secondary text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-normal leading-[1.1] text-white text-shadow-cinematic max-w-4xl drop-shadow-2xl">
               Discover Goa’s Most <br />
               <span className="italic font-secondary text-[#93c5fd] font-light">Prestigious Estates</span>
             </h2>
 
-            <p className="font-primary text-sm sm:text-base md:text-lg text-blue-100/95 font-light max-w-2xl mt-4 text-shadow-cinematic drop-shadow-lg">
+            <p className="font-primary text-sm sm:text-base md:text-lg text-blue-100/95 font-light max-w-2xl mt-4 text-shadow-cinematic drop-shadow-lg leading-relaxed">
               Browse our curated portfolio of residential & commercial landmarks or schedule an exclusive chauffeured private site visit.
             </p>
 
@@ -465,77 +415,10 @@ export const HeroScrollAnimation: React.FC<HeroScrollAnimationProps> = ({
               </button>
             </div>
 
-            {/* Embedded Curated Search Bar */}
-            <div className="mt-8 w-full max-w-4xl bg-black/70 backdrop-blur-xl border border-white/25 p-4 sm:p-5 text-left shadow-2xl pointer-events-auto">
-              <form onSubmit={handleHeroSearch} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
-                <div>
-                  <label className="block text-[9px] uppercase tracking-widest text-blue-200 mb-1">
-                    Keyword / Project
-                  </label>
-                  <div className="relative flex items-center">
-                    <Search className="w-3.5 h-3.5 text-blue-300 absolute left-3 pointer-events-none" />
-                    <input
-                      type="text"
-                      value={keyword}
-                      onChange={(e) => setKeyword(e.target.value)}
-                      placeholder="Assagao, Ocean Crest..."
-                      className="w-full pl-9 pr-3 py-2 bg-white/10 border border-white/20 text-xs text-white placeholder-blue-200/60 focus:outline-none focus:border-[#38bdf8] transition-colors"
-                    />
-                  </div>
-                </div>
-
-                <div>
-                  <label className="block text-[9px] uppercase tracking-widest text-blue-200 mb-1">
-                    Location Enclave
-                  </label>
-                  <div className="relative flex items-center">
-                    <MapPin className="w-3.5 h-3.5 text-blue-300 absolute left-3 pointer-events-none" />
-                    <select
-                      value={selectedArea}
-                      onChange={(e) => setSelectedArea(e.target.value)}
-                      className="w-full pl-9 pr-8 py-2 bg-white/10 border border-white/20 text-xs text-white focus:outline-none focus:border-[#38bdf8] transition-colors appearance-none cursor-pointer"
-                    >
-                      {LOCATIONS_LIST.map((loc, i) => (
-                        <option key={i} value={loc.area} className="bg-[#044F92] text-white">
-                          {loc.area}
-                        </option>
-                      ))}
-                    </select>
-                    <ChevronDown className="w-3.5 h-3.5 text-blue-300 absolute right-3 pointer-events-none" />
-                  </div>
-                </div>
-
-                <div>
-                  <label className="block text-[9px] uppercase tracking-widest text-blue-200 mb-1">
-                    Typology
-                  </label>
-                  <div className="relative flex items-center">
-                    <Building className="w-3.5 h-3.5 text-blue-300 absolute left-3 pointer-events-none" />
-                    <select
-                      value={selectedCategory}
-                      onChange={(e) => setSelectedCategory(e.target.value as PropertyCategory)}
-                      className="w-full pl-9 pr-8 py-2 bg-white/10 border border-white/20 text-xs text-white focus:outline-none focus:border-[#38bdf8] transition-colors appearance-none cursor-pointer"
-                    >
-                      {CATEGORIES_LIST.map((cat) => (
-                        <option key={cat.id} value={cat.id} className="bg-[#044F92] text-white">
-                          {cat.label}
-                        </option>
-                      ))}
-                    </select>
-                    <ChevronDown className="w-3.5 h-3.5 text-blue-300 absolute right-3 pointer-events-none" />
-                  </div>
-                </div>
-
-                <div className="flex items-end">
-                  <button
-                    type="submit"
-                    className="w-full py-2 px-4 bg-[#044F92] hover:bg-[#03396c] text-white font-bold text-xs tracking-widest uppercase transition-all flex items-center justify-center gap-2 border border-blue-400/40 shadow-lg cursor-pointer"
-                  >
-                    <Search className="w-3.5 h-3.5" />
-                    <span>Search Estates</span>
-                  </button>
-                </div>
-              </form>
+            {/* Clean subtle scroll prompt down to filter search & trust */}
+            <div className="mt-8 flex items-center gap-2 text-blue-200/80 text-[11px] uppercase tracking-[0.2em]">
+              <span>Scroll Down to Filter Estates & View Trust Pillars</span>
+              <ChevronDown className="w-3.5 h-3.5 animate-bounce text-[#38bdf8]" />
             </div>
           </div>
         </div>

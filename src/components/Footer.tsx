@@ -1,15 +1,19 @@
+'use client';
+
 import React, { useState } from 'react';
+import Link from 'next/link';
 import { ShieldCheck, ArrowUp } from 'lucide-react';
-import { ProjectStatus } from '../types/property';
+import { useTourModal } from '../context/TourModalContext';
 
 interface FooterProps {
-  onNavigate: (page: string, params?: { filterStatus?: string }) => void;
-  onOpenTourModal: () => void;
+  onNavigate?: (page: string, params?: { filterStatus?: string }) => void;
+  onOpenTourModal?: () => void;
 }
 
 export const Footer: React.FC<FooterProps> = ({ onNavigate, onOpenTourModal }) => {
   const [emailSub, setEmailSub] = useState('');
   const [subMessage, setSubMessage] = useState('');
+  const tourModalContext = useTourModal();
 
   const handleSubscribe = (e: React.FormEvent) => {
     e.preventDefault();
@@ -21,6 +25,14 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, onOpenTourModal }) =
 
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  const handleOpenTour = () => {
+    if (onOpenTourModal) {
+      onOpenTourModal();
+    } else {
+      tourModalContext.openTourModal();
+    }
   };
 
   return (
@@ -59,7 +71,7 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, onOpenTourModal }) =
               />
               <button
                 type="submit"
-                className="px-5 py-2.5 bg-white hover:bg-blue-50 text-[#044F92] font-semibold text-xs uppercase tracking-widest transition-colors shrink-0 shadow-sm"
+                className="px-5 py-2.5 bg-white hover:bg-blue-50 text-[#044F92] font-semibold text-xs uppercase tracking-widest transition-colors shrink-0 shadow-sm cursor-pointer"
               >
                 Join Register
               </button>
@@ -74,24 +86,30 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, onOpenTourModal }) =
             <h5 className="font-semibold text-white uppercase tracking-widest text-[10px] mb-4">Pages & Estates</h5>
             <ul className="space-y-2.5 text-blue-100/80">
               <li>
-                <button onClick={() => onNavigate('home')} className="hover:text-white transition-colors">
+                <Link href="/" className="hover:text-white transition-colors">
                   Home Overview
-                </button>
+                </Link>
               </li>
               <li>
-                <button onClick={() => onNavigate('projects')} className="hover:text-white transition-colors">
+                <Link href="/projects" className="hover:text-white transition-colors">
                   All 12 Developments
-                </button>
+                </Link>
               </li>
               <li>
-                <button onClick={() => onNavigate('ongoing')} className="hover:text-white transition-colors">
+                <Link href="/ongoing" className="hover:text-white transition-colors">
                   Ongoing Projects Tracker
-                </button>
+                </Link>
               </li>
               <li>
-                <button onClick={() => onNavigate('completed')} className="hover:text-white transition-colors">
+                <Link href="/completed" className="hover:text-white transition-colors">
                   Completed Landmarks
-                </button>
+                </Link>
+              </li>
+              <li>
+                <Link href="/explore-goa" className="hover:text-white transition-colors text-[#38bdf8] font-semibold flex items-center gap-1.5">
+                  <span>Explore Goa Experience</span>
+                  <span className="text-[9px] bg-[#044F92] text-white px-1.5 py-0.2 rounded border border-[#38bdf8]/40">3D</span>
+                </Link>
               </li>
             </ul>
           </div>
@@ -99,11 +117,11 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, onOpenTourModal }) =
           <div>
             <h5 className="font-semibold text-white uppercase tracking-widest text-[10px] mb-4">Prime Locations</h5>
             <ul className="space-y-2.5 text-blue-100/80">
-              <li><button onClick={() => onNavigate('locations')} className="hover:text-white">Assagao & Vagator</button></li>
-              <li><button onClick={() => onNavigate('locations')} className="hover:text-white">Miramar & Caranzalem</button></li>
-              <li><button onClick={() => onNavigate('locations')} className="hover:text-white">Candolim Beach Strip</button></li>
-              <li><button onClick={() => onNavigate('locations')} className="hover:text-white">Porvorim Gated Avenues</button></li>
-              <li><button onClick={() => onNavigate('locations')} className="hover:text-white">Dona Paula Sea Cliffs</button></li>
+              <li><Link href="/locations" className="hover:text-white">Assagao & Vagator</Link></li>
+              <li><Link href="/locations" className="hover:text-white">Miramar & Caranzalem</Link></li>
+              <li><Link href="/locations" className="hover:text-white">Candolim Beach Strip</Link></li>
+              <li><Link href="/locations" className="hover:text-white">Porvorim Gated Avenues</Link></li>
+              <li><Link href="/locations" className="hover:text-white">Dona Paula Sea Cliffs</Link></li>
             </ul>
           </div>
 
@@ -111,13 +129,13 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, onOpenTourModal }) =
             <h5 className="font-semibold text-white uppercase tracking-widest text-[10px] mb-4">Services & Portals</h5>
             <ul className="space-y-2.5 text-blue-100/80">
               <li>
-                <button onClick={onOpenTourModal} className="hover:text-white transition-colors">
+                <button onClick={handleOpenTour} className="hover:text-white transition-colors cursor-pointer text-left">
                   Book Private Site Visit
                 </button>
               </li>
-              <li><button onClick={() => onNavigate('finance')} className="hover:text-white">Mortgage & ROI Yields</button></li>
-              <li><button onClick={() => onNavigate('about')} className="hover:text-white">Heritage & 32-Yr Legacy</button></li>
-              <li><button onClick={() => onNavigate('contact')} className="hover:text-white">Panaji Concierge Desk</button></li>
+              <li><Link href="/finance" className="hover:text-white">Mortgage & ROI Yields</Link></li>
+              <li><Link href="/about" className="hover:text-white">Heritage & 32-Yr Legacy</Link></li>
+              <li><Link href="/contact" className="hover:text-white">Panaji Concierge Desk</Link></li>
             </ul>
           </div>
 
@@ -153,7 +171,7 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, onOpenTourModal }) =
 
             <button
               onClick={scrollToTop}
-              className="p-2.5 bg-white text-[#044F92] hover:bg-blue-100 transition-colors shadow-md"
+              className="p-2.5 bg-white text-[#044F92] hover:bg-blue-100 transition-colors shadow-md cursor-pointer"
               title="Back to top"
             >
               <ArrowUp className="w-4 h-4" />
@@ -164,4 +182,3 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, onOpenTourModal }) =
     </footer>
   );
 };
-

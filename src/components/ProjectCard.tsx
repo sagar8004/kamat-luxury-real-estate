@@ -1,11 +1,15 @@
+'use client';
+
 import React, { useState } from 'react';
+import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import { motion } from 'motion/react';
 import { MapPin, ArrowUpRight } from 'lucide-react';
 import { PropertyItem } from '../types/property';
 
 interface ProjectCardProps {
   property: PropertyItem;
-  onSelectProperty: (property: PropertyItem) => void;
+  onSelectProperty?: (property: PropertyItem) => void;
   onQuickBookTour: (property: PropertyItem) => void;
 }
 
@@ -14,6 +18,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
   onSelectProperty,
   onQuickBookTour
 }) => {
+  const router = useRouter();
   const [activeImageIndex, setActiveImageIndex] = useState(0);
   const images = [property.heroImage, ...(property.gallery || [])].slice(0, 4);
 
@@ -51,7 +56,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
     >
       <div>
         {/* Image Container with Hover zoom & Carousel dots */}
-        <div className="relative aspect-[16/11] overflow-hidden bg-[#f2f7fc] cursor-pointer" onClick={() => onSelectProperty(property)}>
+        <div className="relative aspect-[16/11] overflow-hidden bg-[#f2f7fc] cursor-pointer" onClick={() => onSelectProperty ? onSelectProperty(property) : router.push(`/property/${property.id}`)}>
           <img
             src={images[activeImageIndex] || property.heroImage}
             alt={property.title}
@@ -87,36 +92,29 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
           )}
         </div>
 
-        {/* Card Body */}
+        {/* Card Content Area */}
         <div className="p-6">
-          {/* Location & RERA */}
-          <div className="flex items-center justify-between text-xs text-[#8c857d] mb-2">
-            <div className="flex items-center gap-1 text-[#044F92]">
-              <MapPin className="w-3.5 h-3.5 shrink-0 text-[#044F92]" />
-              <span className="font-semibold text-xs text-[#1a1a1a]">{property.location.area}, {property.location.region}</span>
-            </div>
-            <span className="text-[10px] font-mono text-[#8c857d]">{property.specs.reraNumber}</span>
+          <div className="flex items-center gap-1.5 text-[#044F92] text-xs font-semibold mb-2">
+            <MapPin className="w-3.5 h-3.5" />
+            <span className="uppercase tracking-wider">{property.location.area}, {property.location.region}</span>
           </div>
 
-          {/* Project Title & Tagline */}
-          <h3
-            onClick={() => onSelectProperty(property)}
-            className="font-display text-2xl font-normal text-[#1a1a1a] group-hover:text-[#044F92] transition-colors cursor-pointer line-clamp-1"
-          >
+          <h3 className="font-display text-2xl text-[#1a1a1a] mb-2 leading-tight group-hover:text-[#044F92] transition-colors">
             {property.title}
           </h3>
-          <p className="text-xs text-[#4a4540] line-clamp-2 mt-1 font-light leading-relaxed">
+
+          <p className="text-[#5a554e] text-xs line-clamp-2 mb-4 font-light leading-relaxed">
             {property.tagline}
           </p>
 
-          {/* Key Specifications Grid */}
-          <div className="grid grid-cols-2 gap-2 my-4 py-3 border-y border-[#e5e1da] text-xs">
+          {/* Specs Mini-Grid */}
+          <div className="grid grid-cols-2 gap-2 py-3 border-y border-[#e5e1da] text-xs mb-4">
             <div>
-              <p className="text-[9px] text-[#8c857d] uppercase tracking-widest font-semibold">Configuration</p>
+              <span className="text-[9px] text-[#8c857d] uppercase tracking-widest block font-medium">Typology</span>
               <p className="text-[#1a1a1a] font-medium truncate mt-0.5">{property.specs.bhk}</p>
             </div>
             <div>
-              <p className="text-[9px] text-[#8c857d] uppercase tracking-widest font-semibold">Area / Size</p>
+              <span className="text-[9px] text-[#8c857d] uppercase tracking-widest block font-medium">Built-Up</span>
               <p className="text-[#1a1a1a] font-medium truncate mt-0.5">{property.specs.sqftRange}</p>
             </div>
           </div>
@@ -149,14 +147,20 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
 
       {/* Card Actions Footer */}
       <div className="p-6 pt-0 grid grid-cols-2 gap-2">
-        <button
-          onClick={() => onSelectProperty(property)}
+        <Link
+          href={`/property/${property.id}`}
+          onClick={(e) => {
+            if (onSelectProperty) {
+              e.preventDefault();
+              onSelectProperty(property);
+            }
+          }}
           id={`view-details-${property.id}`}
           className="w-full py-2.5 px-3 bg-white text-[#044F92] border border-[#044F92] hover:bg-[#f2f7fc] text-xs font-semibold uppercase tracking-widest transition-all flex items-center justify-center gap-1.5"
         >
           <span>Blueprint</span>
           <ArrowUpRight className="w-3.5 h-3.5 text-[#044F92]" />
-        </button>
+        </Link>
 
         <button
           onClick={() => onQuickBookTour(property)}

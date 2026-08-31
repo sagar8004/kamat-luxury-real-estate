@@ -1,15 +1,20 @@
+'use client';
+
 import React, { useState } from 'react';
+import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import { motion } from 'motion/react';
 import { MapPin, Navigation, Compass, Plane, Sun, Clock, Sparkles, Building, ArrowRight } from 'lucide-react';
 import { PropertyItem } from '../types/property';
 import { PROPERTIES } from '../data/propertyService';
 import { InteractiveProjectMap } from '../components/InteractiveProjectMap';
 import { ScrollReveal, StaggerContainer, StaggerItem } from '../components/ScrollReveal';
+import { useTourModal } from '../context/TourModalContext';
 
 interface LocationsPageProps {
-  onSelectProperty: (property: PropertyItem) => void;
-  onNavigate: (page: string, params?: { propertyId?: string }) => void;
-  onOpenTourModal: () => void;
+  onSelectProperty?: (property: PropertyItem) => void;
+  onNavigate?: (page: string, params?: { propertyId?: string }) => void;
+  onOpenTourModal?: () => void;
 }
 
 export const LocationsPage: React.FC<LocationsPageProps> = ({
@@ -17,6 +22,24 @@ export const LocationsPage: React.FC<LocationsPageProps> = ({
   onNavigate,
   onOpenTourModal
 }) => {
+  const router = useRouter();
+  const tourModalContext = useTourModal();
+
+  const handleSelect = (property: PropertyItem) => {
+    if (onSelectProperty) {
+      onSelectProperty(property);
+    } else {
+      router.push(`/property/${property.id}`);
+    }
+  };
+
+  const handleTour = () => {
+    if (onOpenTourModal) {
+      onOpenTourModal();
+    } else {
+      tourModalContext.openTourModal();
+    }
+  };
   const enclaves = [
     {
       name: 'Assagao & Vagator',
@@ -96,11 +119,8 @@ export const LocationsPage: React.FC<LocationsPageProps> = ({
 
             <InteractiveProjectMap
               properties={PROPERTIES}
-              onSelectProperty={(p) => {
-                onSelectProperty(p);
-                onNavigate('property-detail', { propertyId: p.id });
-              }}
-              onBookTour={() => onOpenTourModal()}
+              onSelectProperty={handleSelect}
+              onBookTour={handleTour}
             />
           </div>
         </ScrollReveal>

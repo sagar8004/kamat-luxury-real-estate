@@ -1,21 +1,39 @@
+'use client';
+
 import React, { useState, useEffect } from 'react';
+import Link from 'next/link';
+import { usePathname, useRouter } from 'next/navigation';
 import { Phone, Menu, X, ChevronRight } from 'lucide-react';
+import { useTourModal } from '../context/TourModalContext';
 
 interface NavbarProps {
-  currentPage: string;
-  onNavigate: (page: string, params?: { filterStatus?: string }) => void;
-  onOpenTourModal: () => void;
+  currentPage?: string;
+  onNavigate?: (page: string, params?: { filterStatus?: string }) => void;
+  onOpenTourModal?: () => void;
 }
 
 export const Navbar: React.FC<NavbarProps> = ({
-  currentPage,
+  currentPage: propCurrentPage,
   onNavigate,
   onOpenTourModal
 }) => {
+  const pathname = usePathname() || '/';
+  const router = useRouter();
+  const tourModalContext = useTourModal();
+
   const [scrolled, setScrolled] = useState(false);
-  const [isPastHero, setIsPastHero] = useState(currentPage !== 'home');
+  const [isPastHero, setIsPastHero] = useState(pathname !== '/');
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [projectsDropdown, setProjectsDropdown] = useState(false);
+
+  // Derive active page from pathname if not explicitly passed
+  const getActivePage = (): string => {
+    if (propCurrentPage) return propCurrentPage;
+    if (pathname === '/') return 'home';
+    return pathname.replace('/', '').split('/')[0] || 'home';
+  };
+
+  const currentPage: string = getActivePage();
 
   // Monitor scroll position and check whether user has completed the Home Page scroll animation section
   useEffect(() => {
@@ -27,14 +45,12 @@ export const Navbar: React.FC<NavbarProps> = ({
         const heroEl = document.getElementById('hero-scroll-section');
         if (heroEl) {
           const rect = heroEl.getBoundingClientRect();
-          // The hero scroll animation section is completed once its bottom reaches near the navbar height (approx 80px)
           const past = rect.bottom <= 80;
           setIsPastHero(past);
         } else {
           setIsPastHero(window.scrollY > (window.innerHeight * 3));
         }
       } else {
-        // Non-home pages always use the standard white navbar
         setIsPastHero(true);
       }
     };
@@ -48,15 +64,28 @@ export const Navbar: React.FC<NavbarProps> = ({
     };
   }, [currentPage]);
 
-  const handlePageClick = (page: string, params?: { filterStatus?: string }) => {
-    onNavigate(page, params);
-    setMobileMenuOpen(false);
-    setProjectsDropdown(false);
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+  const handleOpenTour = () => {
+    if (onOpenTourModal) {
+      onOpenTourModal();
+    } else {
+      tourModalContext.openTourModal();
+    }
   };
 
-  // The header is transparent ONLY on the Home Page while inside the scroll animation section
   const isTransparent = currentPage === 'home' && !isPastHero;
+
+  const getLinkClasses = (pageName: string, extra = '') => {
+    const isActive = currentPage === pageName;
+    const base = `pb-1 transition-all ${extra}`;
+    if (isTransparent) {
+      return isActive
+        ? `${base} text-[#38bdf8] border-b-2 border-[#38bdf8] font-semibold drop-shadow`
+        : `${base} hover:text-[#38bdf8]`;
+    }
+    return isActive
+      ? `${base} text-[#044F92] border-b-2 border-[#044F92] font-semibold`
+      : `${base} hover:text-[#044F92]`;
+  };
 
   return (
     <>
@@ -73,14 +102,14 @@ export const Navbar: React.FC<NavbarProps> = ({
       >
         <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-10 flex items-center justify-between">
           {/* Official Brand Logo */}
-          <button
+          <Link
             id="brand-logo-btn"
-            onClick={() => handlePageClick('home')}
+            href="/"
             className="flex items-center text-left group focus:outline-none transition-transform hover:scale-[1.02] py-1"
           >
             <div
               className={`transition-all duration-300 rounded-lg ${isTransparent
-                ? 'bg-white px-3.5 py-1.5 shadow-xl border border-white/40'
+                ? 'bg-transparent px-3.5 py-1.5'
                 : 'bg-transparent py-0.5'
                 }`}
             >
@@ -90,27 +119,20 @@ export const Navbar: React.FC<NavbarProps> = ({
                 className="h-10 sm:h-12 md:h-13 w-auto object-contain block drop-shadow-sm"
               />
             </div>
-          </button>
+          </Link>
 
           {/* Desktop Navigation Links */}
           <nav
             className={`hidden lg:flex items-center space-x-7 text-xs uppercase tracking-[0.18em] font-medium transition-colors duration-300 ${isTransparent ? 'text-white/90' : 'text-[#4a4540]'
               }`}
           >
-            <button
+            <Link
               id="nav-link-home"
-              onClick={() => handlePageClick('home')}
-              className={`pb-1 transition-all ${isTransparent
-                ? currentPage === 'home'
-                  ? 'text-[#38bdf8] border-b-2 border-[#38bdf8] font-semibold drop-shadow'
-                  : 'hover:text-[#38bdf8]'
-                : currentPage === 'home'
-                  ? 'text-[#044F92] border-b-2 border-[#044F92] font-semibold'
-                  : 'hover:text-[#044F92]'
-                }`}
+              href="/"
+              className={getLinkClasses('home')}
             >
               Home
-            </button>
+            </Link>
 
             {/* Projects with Dropdown */}
             <div
@@ -118,17 +140,10 @@ export const Navbar: React.FC<NavbarProps> = ({
               onMouseEnter={() => setProjectsDropdown(true)}
               onMouseLeave={() => setProjectsDropdown(false)}
             >
-              <button
+              <Link
                 id="nav-link-projects"
-                onClick={() => handlePageClick('projects')}
-                className={`pb-1 transition-all flex items-center gap-1 ${isTransparent
-                  ? currentPage === 'projects'
-                    ? 'text-[#38bdf8] border-b-2 border-[#38bdf8] font-semibold'
-                    : 'hover:text-[#38bdf8]'
-                  : currentPage === 'projects'
-                    ? 'text-[#044F92] border-b-2 border-[#044F92] font-semibold'
-                    : 'hover:text-[#044F92]'
-                  }`}
+                href="/projects"
+                className={getLinkClasses('projects', 'flex items-center gap-1')}
               >
                 <span>Developments</span>
                 <ChevronRight
@@ -137,7 +152,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                     : isTransparent ? 'text-white/70' : 'text-[#8c857d]'
                     }`}
                 />
-              </button>
+              </Link>
 
               {/* Dropdown Menu */}
               {projectsDropdown && (
@@ -147,8 +162,9 @@ export const Navbar: React.FC<NavbarProps> = ({
                     : 'bg-white border border-[#cfe0ee] text-[#1a1a1a]'
                     }`}
                 >
-                  <button
-                    onClick={() => handlePageClick('projects')}
+                  <Link
+                    href="/projects"
+                    onClick={() => setProjectsDropdown(false)}
                     className={`w-full text-left px-3 py-2.5 text-xs flex items-center justify-between transition-colors tracking-normal normal-case font-medium ${isTransparent
                       ? 'hover:bg-white/15 text-white hover:text-[#38bdf8]'
                       : 'hover:bg-[#f2f7fc] text-[#1a1a1a] hover:text-[#044F92]'
@@ -158,128 +174,96 @@ export const Navbar: React.FC<NavbarProps> = ({
                     <span className={`text-[10px] uppercase tracking-widest ${isTransparent ? 'text-blue-200' : 'text-[#8c857d]'}`}>
                       12 Estates
                     </span>
-                  </button>
-                  <button
-                    onClick={() => handlePageClick('ongoing')}
+                  </Link>
+                  <Link
+                    href="/ongoing"
+                    onClick={() => setProjectsDropdown(false)}
                     className={`w-full text-left px-3 py-2.5 text-xs flex items-center justify-between transition-colors tracking-normal normal-case font-medium ${isTransparent
                       ? 'hover:bg-white/15 text-white hover:text-[#38bdf8]'
                       : 'hover:bg-[#f2f7fc] text-[#1a1a1a] hover:text-[#044F92]'
                       }`}
                   >
-                    <span className="flex items-center gap-2">
-                      <span className={`w-2 h-2 rounded-full ${isTransparent ? 'bg-[#38bdf8]' : 'bg-[#044F92]'}`}></span>
-                      Ongoing Projects
+                    <span>Ongoing Construction</span>
+                    <span className="text-[10px] uppercase tracking-widest text-[#044F92] font-semibold">
+                      Live
                     </span>
-                    <span className={`text-[9px] uppercase tracking-widest px-2 py-0.5 font-bold ${isTransparent ? 'text-[#38bdf8] bg-blue-900/50' : 'text-[#044F92] bg-[#eef5fb]'
-                      }`}>
-                      Active
-                    </span>
-                  </button>
-                  <button
-                    onClick={() => handlePageClick('completed')}
+                  </Link>
+                  <Link
+                    href="/completed"
+                    onClick={() => setProjectsDropdown(false)}
                     className={`w-full text-left px-3 py-2.5 text-xs flex items-center justify-between transition-colors tracking-normal normal-case font-medium ${isTransparent
                       ? 'hover:bg-white/15 text-white hover:text-[#38bdf8]'
                       : 'hover:bg-[#f2f7fc] text-[#1a1a1a] hover:text-[#044F92]'
                       }`}
                   >
                     <span>Completed Landmarks</span>
-                    <span className="text-[9px] uppercase tracking-widest text-white bg-[#044F92] px-2 py-0.5 font-bold">
+                    <span className={`text-[10px] uppercase tracking-widest ${isTransparent ? 'text-blue-200' : 'text-[#8c857d]'}`}>
                       Delivered
                     </span>
-                  </button>
+                  </Link>
                 </div>
               )}
             </div>
 
-            <button
+            <Link
               id="nav-link-ongoing"
-              onClick={() => handlePageClick('ongoing')}
-              className={`pb-1 transition-all ${isTransparent
-                ? currentPage === 'ongoing'
-                  ? 'text-[#38bdf8] border-b-2 border-[#38bdf8] font-semibold'
-                  : 'hover:text-[#38bdf8]'
-                : currentPage === 'ongoing'
-                  ? 'text-[#044F92] border-b-2 border-[#044F92] font-semibold'
-                  : 'hover:text-[#044F92]'
-                }`}
+              href="/ongoing"
+              className={getLinkClasses('ongoing')}
             >
               Ongoing
-            </button>
+            </Link>
 
-            <button
+            <Link
               id="nav-link-completed"
-              onClick={() => handlePageClick('completed')}
-              className={`pb-1 transition-all ${isTransparent
-                ? currentPage === 'completed'
-                  ? 'text-[#38bdf8] border-b-2 border-[#38bdf8] font-semibold'
-                  : 'hover:text-[#38bdf8]'
-                : currentPage === 'completed'
-                  ? 'text-[#044F92] border-b-2 border-[#044F92] font-semibold'
-                  : 'hover:text-[#044F92]'
-                }`}
+              href="/completed"
+              className={getLinkClasses('completed')}
             >
               Completed
-            </button>
+            </Link>
 
-            <button
+            <Link
               id="nav-link-map"
-              onClick={() => handlePageClick('locations')}
-              className={`pb-1 transition-all ${isTransparent
-                ? currentPage === 'locations'
-                  ? 'text-[#38bdf8] border-b-2 border-[#38bdf8] font-semibold'
-                  : 'hover:text-[#38bdf8]'
-                : currentPage === 'locations'
-                  ? 'text-[#044F92] border-b-2 border-[#044F92] font-semibold'
-                  : 'hover:text-[#044F92]'
-                }`}
+              href="/locations"
+              className={getLinkClasses('locations')}
             >
               Locations Map
-            </button>
+            </Link>
 
-            <button
+            <Link
+              id="nav-link-explore-goa"
+              href="/explore-goa"
+              className={getLinkClasses('explore-goa', 'relative flex items-center gap-1.5')}
+            >
+              <span>Explore Goa</span>
+              <span className={`text-[9px] px-1.5 py-0.2 rounded-full uppercase tracking-widest font-bold ${isTransparent ? 'bg-[#38bdf8]/30 text-[#38bdf8]' : 'bg-[#eef5fb] text-[#044F92] border border-[#cfe0ee]'
+                }`}>
+                3D
+              </span>
+            </Link>
+
+            <Link
               id="nav-link-legacy"
-              onClick={() => handlePageClick('about')}
-              className={`pb-1 transition-all ${isTransparent
-                ? currentPage === 'about'
-                  ? 'text-[#38bdf8] border-b-2 border-[#38bdf8] font-semibold'
-                  : 'hover:text-[#38bdf8]'
-                : currentPage === 'about'
-                  ? 'text-[#044F92] border-b-2 border-[#044F92] font-semibold'
-                  : 'hover:text-[#044F92]'
-                }`}
+              href="/about"
+              className={getLinkClasses('about')}
             >
               About
-            </button>
+            </Link>
 
-            <button
+            <Link
               id="nav-link-calculator"
-              onClick={() => handlePageClick('finance')}
-              className={`pb-1 transition-all ${isTransparent
-                ? currentPage === 'finance'
-                  ? 'text-[#38bdf8] border-b-2 border-[#38bdf8] font-semibold'
-                  : 'hover:text-[#38bdf8]'
-                : currentPage === 'finance'
-                  ? 'text-[#044F92] border-b-2 border-[#044F92] font-semibold'
-                  : 'hover:text-[#044F92]'
-                }`}
+              href="/finance"
+              className={getLinkClasses('finance')}
             >
               Mortgage & ROI
-            </button>
+            </Link>
 
-            <button
+            <Link
               id="nav-link-contact"
-              onClick={() => handlePageClick('contact')}
-              className={`pb-1 transition-all ${isTransparent
-                ? currentPage === 'contact'
-                  ? 'text-[#38bdf8] border-b-2 border-[#38bdf8] font-semibold'
-                  : 'hover:text-[#38bdf8]'
-                : currentPage === 'contact'
-                  ? 'text-[#044F92] border-b-2 border-[#044F92] font-semibold'
-                  : 'hover:text-[#044F92]'
-                }`}
+              href="/contact"
+              className={getLinkClasses('contact')}
             >
               Contact
-            </button>
+            </Link>
           </nav>
 
           {/* Right Action CTA & Concierge Hotline */}
@@ -298,7 +282,7 @@ export const Navbar: React.FC<NavbarProps> = ({
 
             <button
               id="btn-book-site-visit-nav"
-              onClick={onOpenTourModal}
+              onClick={handleOpenTour}
               className={`px-6 py-2.5 text-xs uppercase tracking-widest font-semibold transition-all shadow-md active:scale-95 cursor-pointer ${isTransparent
                 ? 'bg-[#044F92] hover:bg-[#03396c] text-white border border-[#38bdf8]/40 shadow-lg'
                 : 'bg-[#044F92] text-white hover:bg-[#03396c]'
@@ -329,17 +313,19 @@ export const Navbar: React.FC<NavbarProps> = ({
               Pages Directory
             </p>
 
-            <button
-              onClick={() => handlePageClick('home')}
+            <Link
+              href="/"
+              onClick={() => setMobileMenuOpen(false)}
               className={`w-full text-left py-3 border-b border-[#e5e1da] font-display text-xl flex items-center justify-between ${currentPage === 'home' ? 'text-[#044F92] font-bold' : 'text-[#1a1a1a]'
                 }`}
             >
               <span>Home Overview</span>
               <ChevronRight className="w-4 h-4 text-[#044F92]" />
-            </button>
+            </Link>
 
-            <button
-              onClick={() => handlePageClick('projects')}
+            <Link
+              href="/projects"
+              onClick={() => setMobileMenuOpen(false)}
               className={`w-full text-left py-3 border-b border-[#e5e1da] font-display text-xl flex items-center justify-between ${currentPage === 'projects' ? 'text-[#044F92] font-bold' : 'text-[#1a1a1a]'
                 }`}
             >
@@ -347,70 +333,91 @@ export const Navbar: React.FC<NavbarProps> = ({
               <span className="text-[10px] uppercase tracking-widest text-[#044F92] bg-[#f2f7fc] border border-[#cfe0ee] px-2 py-0.5 font-sans font-semibold">
                 12 Estates
               </span>
-            </button>
+            </Link>
 
-            <button
-              onClick={() => handlePageClick('ongoing')}
+            <Link
+              href="/ongoing"
+              onClick={() => setMobileMenuOpen(false)}
               className={`w-full text-left py-3 border-b border-[#e5e1da] font-display text-xl flex items-center justify-between ${currentPage === 'ongoing' ? 'text-[#044F92] font-bold' : 'text-[#1a1a1a]'
                 }`}
             >
               <span>Ongoing Projects</span>
               <ChevronRight className="w-4 h-4 text-[#044F92]" />
-            </button>
+            </Link>
 
-            <button
-              onClick={() => handlePageClick('completed')}
+            <Link
+              href="/completed"
+              onClick={() => setMobileMenuOpen(false)}
               className={`w-full text-left py-3 border-b border-[#e5e1da] font-display text-xl flex items-center justify-between ${currentPage === 'completed' ? 'text-[#044F92] font-bold' : 'text-[#1a1a1a]'
                 }`}
             >
               <span>Completed Landmarks</span>
               <ChevronRight className="w-4 h-4 text-[#044F92]" />
-            </button>
+            </Link>
 
-            <button
-              onClick={() => handlePageClick('locations')}
+            <Link
+              href="/locations"
+              onClick={() => setMobileMenuOpen(false)}
               className={`w-full text-left py-3 border-b border-[#e5e1da] font-display text-xl flex items-center justify-between ${currentPage === 'locations' ? 'text-[#044F92] font-bold' : 'text-[#1a1a1a]'
                 }`}
             >
               <span>Locations & Map</span>
               <ChevronRight className="w-4 h-4 text-[#044F92]" />
-            </button>
+            </Link>
 
-            <button
-              onClick={() => handlePageClick('about')}
+            <Link
+              href="/explore-goa"
+              onClick={() => setMobileMenuOpen(false)}
+              className={`w-full text-left py-3 border-b border-[#e5e1da] font-display text-xl flex items-center justify-between ${currentPage === 'explore-goa' ? 'text-[#044F92] font-bold' : 'text-[#1a1a1a]'
+                }`}
+            >
+              <span className="flex items-center gap-2">
+                <span>Explore Goa Experience</span>
+                <span className="text-[9px] uppercase tracking-widest text-[#044F92] bg-[#f2f7fc] border border-[#cfe0ee] px-2 py-0.5 font-sans font-semibold">
+                  3D Story
+                </span>
+              </span>
+              <ChevronRight className="w-4 h-4 text-[#044F92]" />
+            </Link>
+
+            <Link
+              href="/about"
+              onClick={() => setMobileMenuOpen(false)}
               className={`w-full text-left py-3 border-b border-[#e5e1da] font-display text-xl flex items-center justify-between ${currentPage === 'about' ? 'text-[#044F92] font-bold' : 'text-[#1a1a1a]'
                 }`}
             >
               <span>About & Legacy</span>
               <ChevronRight className="w-4 h-4 text-[#044F92]" />
-            </button>
+            </Link>
 
-            <button
-              onClick={() => handlePageClick('finance')}
+            <Link
+              href="/finance"
+              onClick={() => setMobileMenuOpen(false)}
               className={`w-full text-left py-3 border-b border-[#e5e1da] font-display text-xl flex items-center justify-between ${currentPage === 'finance' ? 'text-[#044F92] font-bold' : 'text-[#1a1a1a]'
                 }`}
             >
               <span>Mortgage & ROI Calculator</span>
               <ChevronRight className="w-4 h-4 text-[#044F92]" />
-            </button>
+            </Link>
 
-            <button
-              onClick={() => handlePageClick('contact')}
+            <Link
+              href="/contact"
+              onClick={() => setMobileMenuOpen(false)}
               className={`w-full text-left py-3 border-b border-[#e5e1da] font-display text-xl flex items-center justify-between ${currentPage === 'contact' ? 'text-[#044F92] font-bold' : 'text-[#1a1a1a]'
                 }`}
             >
               <span>Contact & Headquarters</span>
               <ChevronRight className="w-4 h-4 text-[#044F92]" />
-            </button>
+            </Link>
           </div>
 
           <div className="pt-6 border-t border-[#e5e1da] space-y-4">
             <button
               onClick={() => {
                 setMobileMenuOpen(false);
-                onOpenTourModal();
+                handleOpenTour();
               }}
-              className="w-full py-3.5 bg-[#044F92] text-white font-semibold text-xs uppercase tracking-widest hover:bg-[#03396c] transition-colors shadow-md"
+              className="w-full py-3.5 bg-[#044F92] text-white font-semibold text-xs uppercase tracking-widest hover:bg-[#03396c] transition-colors shadow-md cursor-pointer"
             >
               Book Chauffeured Site Visit
             </button>
@@ -427,4 +434,3 @@ export const Navbar: React.FC<NavbarProps> = ({
     </>
   );
 };
-

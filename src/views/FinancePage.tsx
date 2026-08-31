@@ -1,18 +1,33 @@
+'use client';
+
 import React from 'react';
+import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import { motion } from 'motion/react';
 import { Calculator, TrendingUp, ShieldCheck, DollarSign, Percent, Calendar, CheckCircle2, ArrowRight } from 'lucide-react';
 import { EmiCalculator } from '../components/EmiCalculator';
 import { ScrollReveal, StaggerContainer, StaggerItem } from '../components/ScrollReveal';
+import { useTourModal } from '../context/TourModalContext';
 
 interface FinancePageProps {
-  onOpenTourModal: () => void;
-  onNavigate: (page: string) => void;
+  onOpenTourModal?: () => void;
+  onNavigate?: (page: string) => void;
 }
 
 export const FinancePage: React.FC<FinancePageProps> = ({
   onOpenTourModal,
   onNavigate
 }) => {
+  const router = useRouter();
+  const tourModalContext = useTourModal();
+
+  const handleTour = () => {
+    if (onOpenTourModal) {
+      onOpenTourModal();
+    } else {
+      tourModalContext.openTourModal();
+    }
+  };
   return (
     <div className="pt-24 pb-28 bg-[#fdfcfb]">
       {/* Header */}
@@ -91,7 +106,7 @@ export const FinancePage: React.FC<FinancePageProps> = ({
               <p className="text-xs text-[#4a4540]">Our financial directors can prepare custom cash flow and tax depreciation schedules.</p>
             </div>
             <button
-              onClick={onOpenTourModal}
+              onClick={handleTour}
               className="px-8 py-3.5 bg-[#044F92] hover:bg-[#03396c] text-white text-xs font-semibold uppercase tracking-widest transition-colors shrink-0 shadow-sm cursor-pointer"
             >
               Consult Wealth Director

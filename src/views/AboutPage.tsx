@@ -1,17 +1,40 @@
+'use client';
+
 import React from 'react';
+import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import { motion } from 'motion/react';
 import { Award, ShieldCheck, Compass, Users, CheckCircle2, Building2, Sparkles, ArrowRight } from 'lucide-react';
 import { ScrollReveal, StaggerContainer, StaggerItem } from '../components/ScrollReveal';
+import { useTourModal } from '../context/TourModalContext';
 
 interface AboutPageProps {
-  onNavigate: (page: string) => void;
-  onOpenTourModal: () => void;
+  onNavigate?: (page: string) => void;
+  onOpenTourModal?: () => void;
 }
 
 export const AboutPage: React.FC<AboutPageProps> = ({
   onNavigate,
   onOpenTourModal
 }) => {
+  const router = useRouter();
+  const tourModalContext = useTourModal();
+
+  const handleTour = () => {
+    if (onOpenTourModal) {
+      onOpenTourModal();
+    } else {
+      tourModalContext.openTourModal();
+    }
+  };
+
+  const navigate = (page: string) => {
+    if (onNavigate) {
+      onNavigate(page);
+    } else {
+      router.push(page === 'home' ? '/' : `/${page}`);
+    }
+  };
   const milestones = [
     {
       year: '1994',
@@ -91,14 +114,14 @@ export const AboutPage: React.FC<AboutPageProps> = ({
 
             <ScrollReveal variant="from-left" delay={0.3} className="pt-4 flex flex-wrap gap-4">
               <button
-                onClick={() => onNavigate('projects')}
+                onClick={() => navigate('projects')}
                 className="px-6 py-3 bg-[#044F92] text-white hover:bg-[#03396c] text-xs font-semibold uppercase tracking-widest transition-colors flex items-center gap-2 cursor-pointer"
               >
                 <span>View Portfolio</span>
                 <ArrowRight className="w-4 h-4" />
               </button>
               <button
-                onClick={onOpenTourModal}
+                onClick={handleTour}
                 className="px-6 py-3 bg-white border border-[#044F92] text-[#044F92] hover:bg-[#f2f7fc] text-xs font-semibold uppercase tracking-widest transition-colors cursor-pointer"
               >
                 Schedule Private Consultation

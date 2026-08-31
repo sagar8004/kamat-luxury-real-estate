@@ -1,3 +1,5 @@
+'use client';
+
 import React from 'react';
 import { motion, Variants } from 'motion/react';
 
@@ -5,6 +7,7 @@ export type AnimationVariant =
   | 'from-left'
   | 'from-right'
   | 'from-behind'
+  | 'from-bottom'
   | 'fade-up'
   | 'scale-up'
   | 'blur-in';
@@ -22,6 +25,24 @@ interface ScrollRevealProps {
 
 const getVariants = (variant: string, distance: number): Variants => {
   switch (variant) {
+    case 'from-bottom':
+    case 'fade-up':
+      return {
+        hidden: {
+          opacity: 0,
+          y: distance,
+          filter: 'blur(4px)',
+        },
+        visible: {
+          opacity: 1,
+          y: 0,
+          filter: 'blur(0px)',
+          transition: {
+            duration: 0.85,
+            ease: [0.16, 1, 0.3, 1],
+          },
+        },
+      };
     case 'from-left':
       return {
         hidden: {

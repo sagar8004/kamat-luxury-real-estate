@@ -1,4 +1,8 @@
+'use client';
+
 import React, { useState } from 'react';
+import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import { motion, AnimatePresence } from 'motion/react';
 import { 
   ArrowLeft, MapPin, Building, Calendar, ShieldCheck, CheckCircle2, 
@@ -8,12 +12,13 @@ import {
 import confetti from 'canvas-confetti';
 import { PropertyItem } from '../types/property';
 import { PROPERTIES } from '../data/propertyService';
+import { useTourModal } from '../context/TourModalContext';
 
 interface PropertyDetailPageProps {
   property: PropertyItem;
-  onBack: () => void;
-  onOpenTourModal: (property?: PropertyItem) => void;
-  onNavigate: (page: string, params?: { propertyId?: string }) => void;
+  onBack?: () => void;
+  onOpenTourModal?: (property?: PropertyItem) => void;
+  onNavigate?: (page: string, params?: { propertyId?: string }) => void;
 }
 
 export const PropertyDetailPage: React.FC<PropertyDetailPageProps> = ({
@@ -22,6 +27,34 @@ export const PropertyDetailPage: React.FC<PropertyDetailPageProps> = ({
   onOpenTourModal,
   onNavigate
 }) => {
+  const router = useRouter();
+  const tourModalContext = useTourModal();
+
+  const handleBack = () => {
+    if (onBack) {
+      onBack();
+    } else {
+      router.push('/projects');
+    }
+  };
+
+  const handleTour = (prop?: PropertyItem) => {
+    if (onOpenTourModal) {
+      onOpenTourModal(prop || property);
+    } else {
+      tourModalContext.openTourModal(prop || property);
+    }
+  };
+
+  const navigate = (page: string, params?: { propertyId?: string }) => {
+    if (onNavigate) {
+      onNavigate(page, params);
+    } else if (params?.propertyId) {
+      router.push(`/property/${params.propertyId}`);
+    } else {
+      router.push(page === 'home' ? '/' : `/${page}`);
+    }
+  };
   const [activeImageIndex, setActiveImageIndex] = useState(0);
   const [activeTab, setActiveTab] = useState<'overview' | 'floorplans' | 'amenities' | 'specifications' | 'pricing'>('overview');
   const [brochureSent, setBrochureSent] = useState(false);
@@ -51,59 +84,45 @@ export const PropertyDetailPage: React.FC<PropertyDetailPageProps> = ({
       <div className="bg-[#f2f7fc] border-b border-[#cfe0ee] py-4 px-6 sm:px-8 lg:px-10">
         <div className="max-w-7xl mx-auto flex items-center justify-between">
           <button
-            onClick={onBack}
-            className="inline-flex items-center gap-2 text-xs uppercase tracking-widest text-[#044F92] font-semibold hover:text-[#033463] transition-colors"
+            onClick={handleBack}
+            className="inline-flex items-center gap-2 text-xs uppercase tracking-widest text-[#044F92] font-semibold hover:text-[#033463] transition-colors cursor-pointer"
           >
             <ArrowLeft className="w-4 h-4" />
-            <span>Back to All Developments</span>
+            <span>Back to Developments</span>
           </button>
-
-          <div className="flex items-center gap-2 text-xs text-[#8c857d]">
-            <span className="hidden sm:inline cursor-pointer hover:text-[#044F92]" onClick={() => onNavigate('projects')}>Goa Luxury Portfolio</span>
-            <ChevronRight className="w-3 h-3 hidden sm:inline" />
-            <span className="text-[#044F92] font-semibold">{property.title}</span>
+          <div className="flex items-center gap-3">
+            <span className="text-[10px] uppercase font-mono tracking-widest text-[#8c857d]">Goa RERA Regulated</span>
+            <div className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
           </div>
         </div>
       </div>
 
-      <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-10 mt-8 space-y-12">
-        {/* Title Header */}
-        <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6 border-b border-[#e5e1da] pb-8">
+      {/* Hero Showcase */}
+      <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-10 mt-8 space-y-10">
+        {/* Header Titles */}
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 pb-6 border-b border-[#e5e1da]">
           <div className="space-y-2">
-            <div className="flex flex-wrap items-center gap-3">
-              <span className="px-3 py-1 bg-[#044F92] text-white text-[10px] uppercase tracking-widest font-semibold">
-                {property.status.toUpperCase()}
-              </span>
-              <span className="text-xs uppercase tracking-widest text-[#044F92] font-semibold flex items-center gap-1">
-                <MapPin className="w-3.5 h-3.5" />
-                {property.location.area}, {property.location.region}
-              </span>
-              <span className="text-xs text-[#8c857d] border-l border-[#e5e1da] pl-3">
-                RERA: {property.specs.reraNumber}
-              </span>
+            <div className="flex items-center gap-2 text-xs text-[#044F92] font-semibold uppercase tracking-widest">
+              <MapPin className="w-4 h-4" />
+              <span>{property.location.area}, {property.location.region}, Goa</span>
             </div>
-
-            <h1 className="font-display text-4xl sm:text-5xl lg:text-6xl font-normal text-[#1a1a1a]">
+            <h1 className="font-display text-3xl sm:text-4xl lg:text-5xl text-[#1a1a1a]">
               {property.title}
             </h1>
-            <p className="text-[#4a4540] text-sm sm:text-base font-light max-w-3xl">
-              {property.tagline}
-            </p>
+            <p className="text-xs sm:text-sm text-[#8c857d] font-light max-w-2xl">{property.tagline}</p>
           </div>
 
-          <div className="lg:text-right space-y-2 shrink-0">
-            <p className="text-[10px] uppercase tracking-widest text-[#8c857d] font-bold">Price Guidance</p>
-            <p className="font-display text-3xl sm:text-4xl text-[#044F92]">
-              {property.price.displayPrice}
-            </p>
-            <p className="text-[11px] text-[#8c857d]">Possession: {property.specs.possessionDate}</p>
+          <div className="flex flex-col items-start md:items-end space-y-2">
+            <p className="text-[10px] uppercase tracking-widest text-[#8c857d] font-semibold">Starting Price</p>
+            <p className="font-mono text-3xl sm:text-4xl font-bold text-[#044F92]">{property.price.displayPrice}</p>
+            <p className="text-[11px] text-emerald-700 font-medium">Clear Title • 100% Freehold</p>
           </div>
         </div>
 
-        {/* Hero Gallery Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-4">
+        {/* Image Showcase Grid */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
           {/* Main Large Image */}
-          <div className="lg:col-span-8 relative aspect-[16/10] overflow-hidden bg-[#f4f1ee] border border-[#e5e1da]">
+          <div className="lg:col-span-8 relative aspect-[16/10] overflow-hidden bg-[#f4f1ee] shadow-sm">
             <img
               src={allImages[activeImageIndex] || property.heroImage}
               alt={property.title}
@@ -140,8 +159,8 @@ export const PropertyDetailPage: React.FC<PropertyDetailPageProps> = ({
               </p>
               <div className="space-y-2">
                 <button
-                  onClick={() => onOpenTourModal(property)}
-                  className="w-full py-3.5 bg-[#044F92] hover:bg-[#03396c] text-white text-xs font-semibold uppercase tracking-widest transition-colors shadow-sm"
+                  onClick={() => handleTour(property)}
+                  className="w-full py-3.5 bg-[#044F92] hover:bg-[#03396c] text-white text-xs font-semibold uppercase tracking-widest transition-colors shadow-sm cursor-pointer"
                 >
                   Book Chauffeured Tour
                 </button>

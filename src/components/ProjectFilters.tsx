@@ -1,3 +1,5 @@
+'use client';
+
 import React from 'react';
 import { Search, MapPin, Grid, Map as MapIcon, X, Layers } from 'lucide-react';
 import { PropertyFilterState, ProjectStatus, PropertyCategory } from '../types/property';

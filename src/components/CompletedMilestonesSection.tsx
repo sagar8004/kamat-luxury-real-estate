@@ -1,3 +1,5 @@
+'use client';
+
 import React from 'react';
 import { Award, CheckCircle2, ArrowRight, Quote, Star } from 'lucide-react';
 import { PropertyItem } from '../types/property';

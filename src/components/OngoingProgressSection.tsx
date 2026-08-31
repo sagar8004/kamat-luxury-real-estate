@@ -1,3 +1,5 @@
+'use client';
+
 import React from 'react';
 import { HardHat, CheckCircle2, ArrowRight, ShieldCheck } from 'lucide-react';
 import { PropertyItem } from '../types/property';

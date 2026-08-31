@@ -1,15 +1,19 @@
+'use client';
+
 import React, { useState, useMemo } from 'react';
+import { useRouter } from 'next/navigation';
 import { motion } from 'motion/react';
 import { Search, Filter, Grid, List, MapPin, Building, Sparkles, CheckCircle2, ArrowRight } from 'lucide-react';
 import { PropertyItem, PropertyFilterState, ProjectStatus, PropertyCategory } from '../types/property';
 import { PROPERTIES, filterProperties, LOCATIONS_LIST, CATEGORIES_LIST, STATUS_LIST } from '../data/propertyService';
 import { ProjectCard } from '../components/ProjectCard';
 import { ScrollReveal, StaggerContainer, StaggerItem } from '../components/ScrollReveal';
+import { useTourModal } from '../context/TourModalContext';
 
 interface ProjectsPageProps {
-  onSelectProperty: (property: PropertyItem) => void;
-  onNavigate: (page: string, params?: { propertyId?: string }) => void;
-  onOpenTourModal: (property?: PropertyItem) => void;
+  onSelectProperty?: (property: PropertyItem) => void;
+  onNavigate?: (page: string, params?: { propertyId?: string }) => void;
+  onOpenTourModal?: (property?: PropertyItem) => void;
   initialStatus?: ProjectStatus;
 }
 
@@ -19,6 +23,24 @@ export const ProjectsPage: React.FC<ProjectsPageProps> = ({
   onOpenTourModal,
   initialStatus = 'all'
 }) => {
+  const router = useRouter();
+  const tourModalContext = useTourModal();
+
+  const handleSelect = (property: PropertyItem) => {
+    if (onSelectProperty) {
+      onSelectProperty(property);
+    } else {
+      router.push(`/property/${property.id}`);
+    }
+  };
+
+  const handleTour = (property?: PropertyItem) => {
+    if (onOpenTourModal) {
+      onOpenTourModal(property);
+    } else {
+      tourModalContext.openTourModal(property);
+    }
+  };
   const [filters, setFilters] = useState<PropertyFilterState>({
     status: initialStatus,
     category: 'all',
@@ -224,11 +246,8 @@ export const ProjectsPage: React.FC<ProjectsPageProps> = ({
               <StaggerItem key={property.id} variant="from-behind">
                 <ProjectCard
                   property={property}
-                  onSelectProperty={(p) => {
-                    onSelectProperty(p);
-                    onNavigate('property-detail', { propertyId: p.id });
-                  }}
-                  onQuickBookTour={(p) => onOpenTourModal(p)}
+                  onSelectProperty={handleSelect}
+                  onQuickBookTour={(p) => handleTour(p)}
                 />
               </StaggerItem>
             ))}

@@ -7,15 +7,16 @@ import { ScheduleTourModal } from './components/ScheduleTourModal';
 import { PagePreloader } from './components/PagePreloader';
 
 // Pages
-import { HomePage } from './pages/HomePage';
-import { ProjectsPage } from './pages/ProjectsPage';
-import { OngoingPage } from './pages/OngoingPage';
-import { CompletedPage } from './pages/CompletedPage';
-import { LocationsPage } from './pages/LocationsPage';
-import { AboutPage } from './pages/AboutPage';
-import { FinancePage } from './pages/FinancePage';
-import { ContactPage } from './pages/ContactPage';
-import { PropertyDetailPage } from './pages/PropertyDetailPage';
+import { HomePage } from './views/HomePage';
+import { ProjectsPage } from './views/ProjectsPage';
+import { OngoingPage } from './views/OngoingPage';
+import { CompletedPage } from './views/CompletedPage';
+import { LocationsPage } from './views/LocationsPage';
+import { AboutPage } from './views/AboutPage';
+import { FinancePage } from './views/FinancePage';
+import { ContactPage } from './views/ContactPage';
+import { PropertyDetailPage } from './views/PropertyDetailPage';
+import { ExploreGoaPage } from './views/ExploreGoaPage';
 
 // Data & Types
 import { PROPERTIES } from './data/propertyService';
@@ -42,7 +43,7 @@ export default function App() {
         }
       }
 
-      if (['projects', 'ongoing', 'completed', 'locations', 'about', 'finance', 'contact'].includes(hash)) {
+      if (['projects', 'ongoing', 'completed', 'locations', 'about', 'finance', 'contact', 'explore-goa'].includes(hash)) {
         setCurrentPage(hash);
       } else {
         setCurrentPage('home');
@@ -165,6 +166,13 @@ export default function App() {
 
             {currentPage === 'contact' && (
               <ContactPage
+                onOpenTourModal={() => handleOpenTourModal()}
+              />
+            )}
+
+            {currentPage === 'explore-goa' && (
+              <ExploreGoaPage
+                onNavigate={handleNavigate}
                 onOpenTourModal={() => handleOpenTourModal()}
               />
             )}

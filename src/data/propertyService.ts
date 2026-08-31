@@ -101,3 +101,8 @@ export function getStats() {
     happyFamilies: '1,450+'
   };
 }
+
+export function getPropertyById(id: string): PropertyItem | undefined {
+  return PROPERTIES.find(p => p.id === id);
+}
+
