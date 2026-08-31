@@ -612,110 +612,142 @@ export const ExploreGoaPage: React.FC<ExploreGoaPageProps> = ({
                   />
                 </div>
 
-                {/* THE 3D BRASS THALI PLATTER (Rich Graphic SVG with Food Bowls) */}
-                <svg viewBox="0 0 500 500" className="w-full h-full filter drop-shadow-2xl">
-                  <defs>
-                    <radialGradient id="brassPlatter" cx="50%" cy="50%" r="50%">
-                      <stop offset="0%" stopColor="#ffefbd" />
-                      <stop offset="55%" stopColor="#dcb35c" />
-                      <stop offset="85%" stopColor="#9c7224" />
-                      <stop offset="100%" stopColor="#63440e" />
-                    </radialGradient>
-                    <radialGradient id="curryGrad" cx="40%" cy="40%" r="60%">
-                      <stop offset="0%" stopColor="#ff7a38" />
-                      <stop offset="60%" stopColor="#c74914" />
-                      <stop offset="100%" stopColor="#7a2404" />
-                    </radialGradient>
-                    <radialGradient id="solkadhiGrad" cx="35%" cy="35%" r="65%">
-                      <stop offset="0%" stopColor="#fca5a5" />
-                      <stop offset="60%" stopColor="#e11d48" />
-                      <stop offset="100%" stopColor="#881337" />
-                    </radialGradient>
-                    <radialGradient id="riceGrad" cx="50%" cy="50%" r="50%">
-                      <stop offset="0%" stopColor="#fffbf5" />
-                      <stop offset="70%" stopColor="#f0e5d5" />
-                      <stop offset="100%" stopColor="#d6c3aa" />
-                    </radialGradient>
-                    <linearGradient id="friedFish" x1="0%" y1="0%" x2="100%" y2="100%">
-                      <stop offset="0%" stopColor="#d97706" />
-                      <stop offset="40%" stopColor="#b45309" />
-                      <stop offset="100%" stopColor="#78350f" />
-                    </linearGradient>
-                    <radialGradient id="bananaLeaf" cx="50%" cy="50%" r="50%">
-                      <stop offset="0%" stopColor="#34d399" />
-                      <stop offset="70%" stopColor="#059669" />
-                      <stop offset="100%" stopColor="#065f46" />
-                    </radialGradient>
-                  </defs>
+                {/* REAL HIGH-RESOLUTION PHOTOGRAPHY: Authentic Goan Fish Curry Thali on Brass Platter */}
+                <div className="relative w-full h-full rounded-full overflow-hidden border-[6px] border-[#d4af37] shadow-[0_30px_70px_rgba(0,0,0,0.45),inset_0_2px_12px_rgba(255,255,255,0.4)] bg-[#1a1208]">
+                  <img
+                    src="/goan-fish-thali.jpg"
+                    alt="Authentic Luxury Goan Fish Curry Thali with Pomfret Fry, Kokum Solkadhi, Red Rice, and Poee"
+                    className="w-full h-full object-cover select-none transform hover:scale-105 transition-transform duration-700"
+                  />
 
-                  {/* Main Circular Brass Thali Plate */}
-                  <circle cx="250" cy="250" r="230" fill="url(#brassPlatter)" stroke="#452e06" strokeWidth="6" />
-                  <circle cx="250" cy="250" r="215" fill="none" stroke="#ffeaa7" strokeWidth="2" opacity="0.6" />
+                  {/* Subtle Vignette & Specular Rim */}
+                  <div className="absolute inset-0 rounded-full pointer-events-none shadow-[inset_0_0_40px_rgba(0,0,0,0.5)]" />
 
-                  {/* Banana Leaf Base Layer */}
-                  <circle cx="250" cy="250" r="200" fill="url(#bananaLeaf)" opacity="0.9" />
+                  {/* Hotspot 0: Steamed Goan Red Rice */}
+                  <button
+                    type="button"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      setActiveDish(0);
+                    }}
+                    className="absolute left-[26%] top-[64%] -translate-x-1/2 -translate-y-1/2 z-40 group cursor-pointer"
+                    title="Click to inspect Goan Red Rice"
+                  >
+                    <span
+                      className={`flex h-8 w-8 items-center justify-center rounded-full font-bold text-xs shadow-2xl transition-all duration-300 ${
+                        activeDish === 0
+                          ? 'bg-[#044F92] text-white ring-4 ring-[#38bdf8]/80 scale-125'
+                          : 'bg-white/95 text-[#044F92] hover:bg-white hover:scale-110'
+                      }`}
+                    >
+                      1
+                    </span>
+                    <span className="absolute -bottom-7 left-1/2 -translate-x-1/2 px-2.5 py-0.5 bg-black/85 backdrop-blur-md text-white text-[9px] uppercase tracking-wider rounded font-medium whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none shadow-lg">
+                      Goan Red Rice
+                    </span>
+                  </button>
 
-                  {/* Leaf veins */}
-                  <path d="M 50 250 L 450 250" stroke="#047857" strokeWidth="3" opacity="0.7" />
-                  <path d="M 120 180 L 250 250 L 120 320" stroke="#047857" strokeWidth="1.5" opacity="0.5" fill="none" />
-                  <path d="M 380 180 L 250 250 L 380 320" stroke="#047857" strokeWidth="1.5" opacity="0.5" fill="none" />
+                  {/* Hotspot 1: Goan Coconut Fish Curry */}
+                  <button
+                    type="button"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      setActiveDish(1);
+                    }}
+                    className="absolute left-[32%] top-[27%] -translate-x-1/2 -translate-y-1/2 z-40 group cursor-pointer"
+                    title="Click to inspect Coconut Fish Curry"
+                  >
+                    <span
+                      className={`flex h-8 w-8 items-center justify-center rounded-full font-bold text-xs shadow-2xl transition-all duration-300 ${
+                        activeDish === 1
+                          ? 'bg-[#044F92] text-white ring-4 ring-[#38bdf8]/80 scale-125'
+                          : 'bg-white/95 text-[#044F92] hover:bg-white hover:scale-110'
+                      }`}
+                    >
+                      2
+                    </span>
+                    <span className="absolute -bottom-7 left-1/2 -translate-x-1/2 px-2.5 py-0.5 bg-black/85 backdrop-blur-md text-white text-[9px] uppercase tracking-wider rounded font-medium whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none shadow-lg">
+                      Kokum Fish Curry
+                    </span>
+                  </button>
 
-                  {/* Central Steaming Goan Red Rice Dome */}
-                  <g onClick={() => setActiveDish(0)} className="cursor-pointer group">
-                    <circle cx="250" cy="250" r="80" fill="url(#riceGrad)" stroke="#b59a7a" strokeWidth="3" />
-                    {/* Rice Grain Texture */}
-                    <circle cx="230" cy="235" r="3" fill="#9c7e5a" opacity="0.6" />
-                    <circle cx="260" cy="230" r="2.5" fill="#9c7e5a" opacity="0.6" />
-                    <circle cx="245" cy="265" r="3" fill="#9c7e5a" opacity="0.6" />
-                    <circle cx="270" cy="255" r="2.5" fill="#9c7e5a" opacity="0.6" />
-                    {/* Coriander Garnish on Rice */}
-                    <path d="M 248 245 C 242 240, 240 248, 245 250 C 248 252, 255 248, 252 242 Z" fill="#16a34a" />
-                  </g>
+                  {/* Hotspot 2: Golden Crispy Pomfret Fish Fry */}
+                  <button
+                    type="button"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      setActiveDish(2);
+                    }}
+                    className="absolute left-[64%] top-[48%] -translate-x-1/2 -translate-y-1/2 z-40 group cursor-pointer"
+                    title="Click to inspect Pomfret Fish Fry"
+                  >
+                    <span
+                      className={`flex h-8 w-8 items-center justify-center rounded-full font-bold text-xs shadow-2xl transition-all duration-300 ${
+                        activeDish === 2
+                          ? 'bg-[#044F92] text-white ring-4 ring-[#38bdf8]/80 scale-125'
+                          : 'bg-white/95 text-[#044F92] hover:bg-white hover:scale-110'
+                      }`}
+                    >
+                      3
+                    </span>
+                    <span className="absolute -bottom-7 left-1/2 -translate-x-1/2 px-2.5 py-0.5 bg-black/85 backdrop-blur-md text-white text-[9px] uppercase tracking-wider rounded font-medium whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none shadow-lg">
+                      Pomfret (Pomplate) Fry
+                    </span>
+                  </button>
 
-                  {/* Dish 1: Authentic Goan Kingfish Curry (Kodi) Bowl (Top Right) */}
-                  <g onClick={() => setActiveDish(1)} className="cursor-pointer">
-                    <circle cx="340" cy="150" r="54" fill="url(#brassPlatter)" stroke="#452e06" strokeWidth="3" />
-                    <circle cx="340" cy="150" r="48" fill="url(#curryGrad)" />
-                    {/* Floating Coconut Cream & Green Chilly in Curry */}
-                    <path d="M 330 140 Q 345 145 342 160" stroke="#fef3c7" strokeWidth="4" fill="none" opacity="0.8" />
-                    <path d="M 345 135 L 355 148" stroke="#15803d" strokeWidth="3.5" strokeLinecap="round" />
-                  </g>
+                  {/* Hotspot 3: Pink Kokum Solkadhi */}
+                  <button
+                    type="button"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      setActiveDish(3);
+                    }}
+                    className="absolute left-[48%] top-[78%] -translate-x-1/2 -translate-y-1/2 z-40 group cursor-pointer"
+                    title="Click to inspect Kokum Solkadhi"
+                  >
+                    <span
+                      className={`flex h-8 w-8 items-center justify-center rounded-full font-bold text-xs shadow-2xl transition-all duration-300 ${
+                        activeDish === 3
+                          ? 'bg-[#044F92] text-white ring-4 ring-[#38bdf8]/80 scale-125'
+                          : 'bg-white/95 text-[#044F92] hover:bg-white hover:scale-110'
+                      }`}
+                    >
+                      4
+                    </span>
+                    <span className="absolute -bottom-7 left-1/2 -translate-x-1/2 px-2.5 py-0.5 bg-black/85 backdrop-blur-md text-white text-[9px] uppercase tracking-wider rounded font-medium whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none shadow-lg">
+                      Kokum Solkadhi
+                    </span>
+                  </button>
 
-                  {/* Dish 2: Surmai (Kingfish) Rawa Fry (Bottom Right) */}
-                  <g onClick={() => setActiveDish(2)} className="cursor-pointer">
-                    <circle cx="350" cy="320" r="52" fill="url(#brassPlatter)" stroke="#452e06" strokeWidth="3" />
-                    {/* Rawa Crust Fish Darne Steak */}
-                    <ellipse cx="350" cy="320" rx="38" ry="26" fill="url(#friedFish)" transform="rotate(-15 350 320)" />
-                    <line x1="330" y1="312" x2="370" y2="312" stroke="#451a03" strokeWidth="2" opacity="0.6" />
-                    <line x1="335" y1="324" x2="368" y2="324" stroke="#451a03" strokeWidth="2" opacity="0.6" />
-                    {/* Fresh Lemon Wedge */}
-                    <path d="M 320 338 A 12 12 0 0 1 336 348 Z" fill="#facc15" stroke="#ca8a04" strokeWidth="1.5" />
-                  </g>
-
-                  {/* Dish 3: Pink Kokum Solkadhi (Bottom Left) */}
-                  <g onClick={() => setActiveDish(3)} className="cursor-pointer">
-                    <circle cx="150" cy="330" r="48" fill="url(#brassPlatter)" stroke="#452e06" strokeWidth="3" />
-                    <circle cx="150" cy="330" r="42" fill="url(#solkadhiGrad)" />
-                    {/* Coriander & Fresh Garlic Flecks */}
-                    <circle cx="145" cy="325" r="2" fill="#15803d" />
-                    <circle cx="158" cy="335" r="2.5" fill="#fef08a" />
-                  </g>
-
-                  {/* Dish 4: Authentic Freshly Baked Poee / Crusty Bread (Top Left) */}
-                  <g onClick={() => setActiveDish(4)} className="cursor-pointer">
-                    <circle cx="155" cy="165" r="50" fill="url(#brassPlatter)" stroke="#452e06" strokeWidth="3" />
-                    {/* Round Puffed Poee */}
-                    <ellipse cx="155" cy="165" rx="42" ry="34" fill="#f5d0a9" stroke="#b45309" strokeWidth="2" />
-                    {/* Wheat Bran Specs */}
-                    <circle cx="145" cy="160" r="2" fill="#78350f" opacity="0.7" />
-                    <circle cx="168" cy="170" r="2" fill="#78350f" opacity="0.7" />
-                    <circle cx="160" cy="155" r="1.5" fill="#78350f" opacity="0.7" />
-                  </g>
-                </svg>
+                  {/* Hotspot 4: Wood-Fired Goan Poee */}
+                  <button
+                    type="button"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      setActiveDish(4);
+                    }}
+                    className="absolute left-[58%] top-[19%] -translate-x-1/2 -translate-y-1/2 z-40 group cursor-pointer"
+                    title="Click to inspect Poee Bread"
+                  >
+                    <span
+                      className={`flex h-8 w-8 items-center justify-center rounded-full font-bold text-xs shadow-2xl transition-all duration-300 ${
+                        activeDish === 4
+                          ? 'bg-[#044F92] text-white ring-4 ring-[#38bdf8]/80 scale-125'
+                          : 'bg-white/95 text-[#044F92] hover:bg-white hover:scale-110'
+                      }`}
+                    >
+                      5
+                    </span>
+                    <span className="absolute -bottom-7 left-1/2 -translate-x-1/2 px-2.5 py-0.5 bg-black/85 backdrop-blur-md text-white text-[9px] uppercase tracking-wider rounded font-medium whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none shadow-lg">
+                      Artisanal Poee
+                    </span>
+                  </button>
+                </div>
 
                 {/* Floating Hint Tag */}
-                <div className="absolute top-4 left-6 bg-[#044F92] text-white text-[10px] font-bold uppercase tracking-widest px-3 py-1 rounded-full shadow-lg">
-                  Interactive 3D Thali (Click to Inspect)
+                <div className="absolute top-4 left-6 bg-[#044F92] text-white text-[10px] font-bold uppercase tracking-widest px-3.5 py-1.5 rounded-full shadow-xl border border-blue-300/30 flex items-center gap-1.5">
+                  <span className="w-2 h-2 rounded-full bg-[#38bdf8] animate-ping" />
+                  <span>Real Goan Thali • Click Hotspot 1-5</span>
                 </div>
               </motion.div>
             </div>
@@ -734,77 +766,89 @@ export const ExploreGoaPage: React.FC<ExploreGoaPageProps> = ({
 
                 {[
                   {
-                    title: 'Goan Red Rice (Ukda Tandool)',
-                    type: 'Foundation Staple',
-                    origin: 'Tiswadi & Bardez Paddy Valleys',
-                    desc: 'Nutrient-rich, unpolished indigenous grains boiled in clay vessels, yielding an earthy, nutty aroma that pairs seamlessly with spiced curries.'
+                    title: 'Steamed Goan Red Rice (Ukda Tandool)',
+                    type: 'Indigenous Grain Staple',
+                    origin: 'Bardez & Tiswadi River Valley Fields',
+                    desc: 'Nutrient-dense, unpolished red rice grains gently steamed in coastal clay pots. Delivers an earthy, nutty flavor profile that absorbs rich coconut gravies perfectly.'
                   },
                   {
-                    title: 'Kingfish Kokum Curry (Xitt Kodi)',
-                    type: 'Signature Gravy',
+                    title: 'Kokum Coconut Fish Curry (Xitt Kodi)',
+                    type: 'Signature Aromatic Gravy',
                     origin: 'Authentic Konkani Fisher Family Kitchens',
-                    desc: 'Freshly extracted coconut milk infused with tart red kokum (wild mangosteen), Kashmiri byadgi chillies, coriander seeds, and tender slices of freshly caught Surmai.'
+                    desc: 'Simmered with fresh coconut milk, dried red kokum (wild mangosteen) for tart balance, stone-ground byadgi chillies, coriander, and fresh catch of the morning.'
                   },
                   {
-                    title: 'Surmai Rawa Crispy Pan Fry',
-                    type: 'Crispy Delicacy',
-                    origin: 'Malvan & Goan Coastal Strips',
-                    desc: 'Coated in stone-ground recheado masala, dusted in semolina (rawa) and shallow-fried in coconut oil to golden perfection with crisp charred edges.'
+                    title: 'Crispy Silver Pomfret Fry (Pomplate Rawa Fry)',
+                    type: 'Crispy Coastal Masterpiece',
+                    origin: 'Fresh Mandovi Estuary & Malvan Catches',
+                    desc: 'Fresh whole silver pomfret (pomplate) deeply marinated in spicy recheado paste, crusted in coarse semolina (rawa), and pan-fried golden crisp with lemon wedges and red onions.'
                   },
                   {
                     title: 'Digestive Kokum Solkadhi',
-                    type: 'Cooling Elixir',
-                    origin: 'Ancestral Konkan Ayurveda',
-                    desc: 'An exquisite pink nectar crafted from sun-dried kokum rinds, pressed coconut milk, crushed green chillies, garlic, and fresh sea salt to soothe the palate.'
+                    type: 'Ayurvedic Cooling Nectar',
+                    origin: 'Ancestral Konkan Coastal Heritage',
+                    desc: 'A soothing, bright-pink digestive nectar crafted from fresh coconut milk, sun-dried kokum extract, crushed green chillies, aromatic garlic, and fresh sea salt.'
                   },
                   {
-                    title: 'Warm Clay-Oven Baked Poee',
-                    type: 'Artisanal Portuguese Heritage Bread',
-                    origin: 'Poder Bakeries of Fontainhas & Moira',
-                    desc: 'Fermented whole wheat pocket bread with a hollow center, baked in wood-fired earthen ovens at daybreak by whistling village bakers.'
+                    title: 'Wood-Fired Crusty Poee Bread',
+                    type: 'Portuguese Heritage Baker Staple',
+                    origin: 'Village Poders of Fontainhas & Moira',
+                    desc: 'Traditional wood-fired whole-wheat pocket bread with a hollow, pillow-soft crumb and crisp bran crust, baked at 5 AM daily by ancestral village bakers.'
                   }
                 ][activeDish] && (
                   <div className="space-y-3">
                     <div className="flex items-center justify-between">
                       <h4 className="font-display text-2xl text-[#1a1a1a]">
                         {[
-                          'Goan Red Rice (Ukda Tandool)',
-                          'Kingfish Kokum Curry (Xitt Kodi)',
-                          'Surmai Rawa Crispy Pan Fry',
+                          'Steamed Goan Red Rice (Ukda Tandool)',
+                          'Kokum Coconut Fish Curry (Xitt Kodi)',
+                          'Crispy Silver Pomfret Fry (Pomplate Rawa Fry)',
                           'Digestive Kokum Solkadhi',
-                          'Warm Clay-Oven Baked Poee'
+                          'Wood-Fired Crusty Poee Bread'
                         ][activeDish]}
                       </h4>
                       <span className="text-[10px] uppercase tracking-wider font-semibold px-2.5 py-1 bg-[#f2f7fc] text-[#044F92] border border-[#cfe0ee]">
                         {[
-                          'Foundation Staple',
+                          'Indigenous Rice',
                           'Signature Gravy',
-                          'Crispy Delicacy',
-                          'Cooling Elixir',
-                          'Artisanal Bread'
+                          'Pomfret Fry',
+                          'Kokum Elixir',
+                          'Heritage Poee'
                         ][activeDish]}
                       </span>
                     </div>
 
                     <p className="text-sm text-[#5a554e] leading-relaxed">
                       {[
-                        'Nutrient-rich, unpolished indigenous grains boiled in clay vessels, yielding an earthy, nutty aroma that pairs seamlessly with spiced coastal curries.',
-                        'Freshly extracted coconut milk infused with tart red kokum (wild mangosteen), Kashmiri byadgi chillies, coriander seeds, and tender slices of freshly caught Surmai.',
-                        'Coated in stone-ground recheado masala, dusted in semolina (rawa) and shallow-fried in coconut oil to golden perfection with crisp charred edges.',
-                        'An exquisite pink nectar crafted from sun-dried kokum rinds, pressed coconut milk, crushed green chillies, garlic, and fresh sea salt to soothe the palate.',
-                        'Fermented whole wheat pocket bread with a hollow center, baked in wood-fired earthen ovens at daybreak by whistling village bakers (Poders).'
+                        'Nutrient-dense, unpolished red rice grains gently steamed in coastal clay pots. Delivers an earthy, nutty flavor profile that absorbs rich coconut gravies perfectly.',
+                        'Simmered with fresh coconut milk, dried red kokum (wild mangosteen) for tart balance, stone-ground byadgi chillies, coriander, and fresh catch of the morning.',
+                        'Fresh whole silver pomfret (pomplate) deeply marinated in spicy recheado paste, crusted in coarse semolina (rawa), and pan-fried golden crisp with lemon wedges and red onions.',
+                        'A soothing, bright-pink digestive nectar crafted from fresh coconut milk, sun-dried kokum extract, crushed green chillies, aromatic garlic, and fresh sea salt.',
+                        'Traditional wood-fired whole-wheat pocket bread with a hollow, pillow-soft crumb and crisp bran crust, baked at 5 AM daily by ancestral village bakers.'
                       ][activeDish]}
                     </p>
 
-                    <div className="flex gap-2 pt-2">
-                      {[0, 1, 2, 3, 4].map((idx) => (
+                    {/* Quick Selection Buttons */}
+                    <div className="flex flex-wrap gap-2 pt-2 border-t border-[#f0ece5]">
+                      {[
+                        '1. Red Rice',
+                        '2. Fish Curry',
+                        '3. Pomfret Fry',
+                        '4. Kokum Solkadhi',
+                        '5. Poee Bread'
+                      ].map((label, idx) => (
                         <button
                           key={idx}
+                          type="button"
                           onClick={() => setActiveDish(idx)}
-                          className={`h-2 rounded-full transition-all cursor-pointer ${
-                            activeDish === idx ? 'w-8 bg-[#044F92]' : 'w-2 bg-[#cfe0ee] hover:bg-[#8cb7de]'
+                          className={`px-2.5 py-1 text-[11px] font-medium transition-all cursor-pointer rounded ${
+                            activeDish === idx
+                              ? 'bg-[#044F92] text-white shadow-sm font-semibold'
+                              : 'bg-[#f4f1ee] hover:bg-[#eef5fb] text-[#4a4540] hover:text-[#044F92]'
                           }`}
-                        />
+                        >
+                          {label}
+                        </button>
                       ))}
                     </div>
                   </div>
