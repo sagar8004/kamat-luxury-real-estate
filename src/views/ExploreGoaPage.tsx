@@ -3,7 +3,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import { motion, useScroll, useSpring, useTransform, useMotionValue } from 'motion/react';
+import { motion, AnimatePresence, useScroll, useSpring, useTransform, useMotionValue } from 'motion/react';
 import {
   Compass,
   Palmtree,
@@ -14,6 +14,7 @@ import {
   TrendingUp,
   Plane,
   ChevronRight,
+  ChevronLeft,
   Sparkles,
   MapPin,
   Clock,
@@ -26,7 +27,16 @@ import {
   DollarSign,
   Maximize2,
   Calendar,
-  Flame
+  Flame,
+  Landmark,
+  Church,
+  Info,
+  X,
+  Heart,
+  Wind,
+  Droplets,
+  Activity,
+  Smile
 } from 'lucide-react';
 import { ScrollReveal } from '../components/ScrollReveal';
 import { useTourModal } from '../context/TourModalContext';
@@ -35,6 +45,200 @@ interface ExploreGoaPageProps {
   onNavigate?: (page: string, params?: { propertyId?: string; filterStatus?: string }) => void;
   onOpenTourModal?: () => void;
 }
+
+// ==========================================
+// BEACHES DATA COLLECTION
+// ==========================================
+interface BeachItem {
+  id: string;
+  name: string;
+  region: 'North Goa' | 'South Goa' | 'Central Goa';
+  tagline: string;
+  image: string;
+  vibe: string;
+  highlights: string[];
+  distanceFromAirport: string;
+  bestFor: string;
+  accentColor: string;
+}
+
+const GOA_BEACHES: BeachItem[] = [
+  {
+    id: 'vagator',
+    name: 'Vagator & Ozran Beach',
+    region: 'North Goa',
+    tagline: 'Dramatic Red Laterite Cliffs & Legendary Arabian Sunsets',
+    image: 'https://images.unsplash.com/photo-1512343879784-a960bf40e7f2?auto=format&fit=crop&w=1200&q=80',
+    vibe: 'Cosmopolitan, Cliffside Sunset Bars & Music',
+    highlights: ['Chapora Fort panoramic view', 'Cliff-top fine dining (Thalassa, Antares)', 'Secluded Little Vagator cove'],
+    distanceFromAirport: '32 mins from MOPA',
+    bestFor: 'Sunset sessions, cliffside cocktails & gourmet dinners',
+    accentColor: '#f97316'
+  },
+  {
+    id: 'palolem',
+    name: 'Palolem Beach',
+    region: 'South Goa',
+    tagline: 'Perfect Crescent Bay with Calm Emerald Swimming Waters',
+    image: 'https://images.unsplash.com/photo-1544644181-1484b3fdfc62?auto=format&fit=crop&w=1200&q=80',
+    vibe: 'Serene, Idyllic & Laidback Tropical Luxury',
+    highlights: ['Gentle crescent bay safe for swimming', 'Sunset kayak tours to Butterfly Beach', 'Canacona island walkway'],
+    distanceFromAirport: '55 mins from Dabolim',
+    bestFor: 'Paddle boarding, dolphin cruises & peaceful yoga mornings',
+    accentColor: '#0ea5e9'
+  },
+  {
+    id: 'ashwem',
+    name: 'Ashwem & Mandrem Beach',
+    region: 'North Goa',
+    tagline: 'Expansive White Sands & Chic Bohemian Beachfront Cabanas',
+    image: 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1200&q=80',
+    vibe: 'Upscale Bohemian, Designer Boutiques & Surf',
+    highlights: ['Wide shallow tide pools', 'Exclusive wellness clubs & beach lounges', 'Protected Olive Ridley sanctuary nearby'],
+    distanceFromAirport: '28 mins from MOPA',
+    bestFor: 'Barefoot luxury, surf lessons & tranquil seaside brunches',
+    accentColor: '#10b981'
+  },
+  {
+    id: 'morjim',
+    name: 'Morjim & Chapora Estuary',
+    region: 'North Goa',
+    tagline: 'Where the Chapora River Meets the Golden Ocean Sands',
+    image: 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1200&q=80',
+    vibe: 'Eco-Chic & Riverfront Serenity',
+    highlights: ['River-meets-ocean sandbar', 'Kite surfing academies', 'Endangered sea turtle nesting zones'],
+    distanceFromAirport: '26 mins from MOPA',
+    bestFor: 'Birdwatching, private catamaran sailing & river sunsets',
+    accentColor: '#6366f1'
+  },
+  {
+    id: 'cola',
+    name: 'Cola Beach & Blue Lagoon',
+    region: 'South Goa',
+    tagline: 'A Secret Emerald Freshwater Lagoon Merging into the Sea',
+    image: 'https://images.unsplash.com/photo-1520454974749-611b7248ffdb?auto=format&fit=crop&w=1200&q=80',
+    vibe: 'Untamed Natural Wonder & Secluded Retreat',
+    highlights: ['Natural freshwater lagoon for kayaking', 'Towering volcanic rock headlands', 'Zero commercial crowds'],
+    distanceFromAirport: '60 mins from Dabolim',
+    bestFor: 'Adventure kayaking, privacy & pure pristine nature',
+    accentColor: '#14b8a6'
+  },
+  {
+    id: 'miramar',
+    name: 'Miramar & Dona Paula',
+    region: 'Central Goa',
+    tagline: 'Panaji Capital Promenade with Spectacular Mandovi Vistas',
+    image: 'https://images.unsplash.com/photo-1519046904884-53103b34b271?auto=format&fit=crop&w=1200&q=80',
+    vibe: 'Urban Elite Coastal Living & Marine Promenade',
+    highlights: ['Lighthouse views of Fort Aguada', 'Proximity to Panaji High-Street & Fontainhas', 'Manicured walking promenade'],
+    distanceFromAirport: '30 mins from Dabolim',
+    bestFor: 'Evening sunset strolls, luxury city life & river yachting',
+    accentColor: '#3b82f6'
+  },
+  {
+    id: 'candolim',
+    name: 'Candolim & Sinquerim',
+    region: 'North Goa',
+    tagline: 'Historic Fort Aguada Shoreline & High-Energy Watersports',
+    image: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1200&q=80',
+    vibe: 'Lively Coastal Boulevard & Heritage Lighthouse',
+    highlights: ['17th Century Fort Aguada ramparts', 'Jet skiing, parasailing & speedboats', 'Gourmet beachfront dining strip'],
+    distanceFromAirport: '38 mins from MOPA',
+    bestFor: 'Active water sports, sea-facing villas & evening entertainment',
+    accentColor: '#e11d48'
+  }
+];
+
+// ==========================================
+// CULTURE & SACRED HERITAGE DATA COLLECTION
+// ==========================================
+interface SacredHeritageItem {
+  id: string;
+  name: string;
+  category: 'church' | 'temple';
+  location: string;
+  era: string;
+  image: string;
+  architecture: string;
+  intro: string;
+  keyFeature: string;
+  significance: string;
+}
+
+const SACRED_HERITAGE_LIST: SacredHeritageItem[] = [
+  {
+    id: 'bom-jesus',
+    name: 'Basilica of Bom Jesus',
+    category: 'church',
+    location: 'Old Goa (Velha Goa)',
+    era: 'Built 1594 - 1605 AD',
+    image: '/explore-goa/Basilica of Bom Jesus.webp',
+    architecture: 'Classical Baroque & Laterite Masonry',
+    intro: 'A UNESCO World Heritage Monument and one of the finest examples of Jesuit Baroque architecture in India. It holds the sacred mortal remains of St. Francis Xavier in an intricately carved Italian silver casket.',
+    keyFeature: 'Unplastered black laterite stone facade with ornate Corinthian columns & gilded 30-foot altarpiece.',
+    significance: 'UNESCO World Heritage Site & Global Pilgrimage Center'
+  },
+  {
+    id: 'panaji-church',
+    name: 'Our Lady of the Immaculate Conception',
+    category: 'church',
+    location: 'Panaji City Promenade',
+    era: 'Originally built 1541 AD',
+    image: '/explore-goa/Immaculate Conception.webp',
+    architecture: 'Portuguese-Manueline & Baroque Staircase',
+    intro: 'Perched high above the city of Panaji, this iconic gleaming white church is famed for its grand zigzag double-flight stairway and houses the second largest church bell in Goa, salvaged from the Augustinian Monastery.',
+    keyFeature: 'Iconic symmetrical multi-tiered white zigzag stairway overlooking Church Square.',
+    significance: 'Architectural symbol of Goa’s capital and prime cultural landmark'
+  },
+  {
+    id: 'se-cathedral',
+    name: 'Sé Cathedral de Santa Catarina',
+    category: 'church',
+    location: 'Old Goa',
+    era: 'Completed 1619 AD',
+    image: '/explore-goa/Sé Cathedral de Santa Catarina.webp',
+    architecture: 'Portuguese-Manueline & Tuscan Interior',
+    intro: 'One of the largest church structures in Asia. Famous for its majestic Golden Bell (Sino de Ouro) celebrated worldwide for its rich acoustic resonance that can be heard across surrounding villages.',
+    keyFeature: 'Grand vaulted Tuscan nave with 14 elaborate gold-leaf altars and the legendary Golden Bell.',
+    significance: 'Seat of the Archdiocese of Goa and Daman'
+  },
+  {
+    id: 'mangeshi-temple',
+    name: 'Shri Mangueshi Temple',
+    category: 'temple',
+    location: 'Priol, Ponda',
+    era: 'Established 1560 AD',
+    image: '/explore-goa/Mangueshi Temple.webp',
+    architecture: 'Indo-Goan with 7-Tier Deepastambha',
+    intro: 'Dedicated to Lord Manguesh (an incarnation of Shiva), this revered temple is framed by coconut groves and boasts a majestic 7-storey octagonal Deepastambha (lamp tower) that is illuminated with oil lamps during festivals.',
+    keyFeature: 'Seven-storey octagonal lamp tower, ancient holy water tank, and teakwood Sabha Griha.',
+    significance: 'Most visited and spiritually prominent Hindu temple in Goa'
+  },
+  {
+    id: 'shanta-durga',
+    name: 'Shri Shanta Durga Temple',
+    category: 'temple',
+    location: 'Kavlem, Ponda',
+    era: 'Constructed 1738 AD',
+    image: '/explore-goa/Shantadurga Temple.webp',
+    architecture: 'Indo-Portuguese & Konkani Fusion',
+    intro: 'Dedicated to the goddess of peace who reconciled Lord Vishnu and Lord Shiva during a cosmic conflict. Its architecture uniquely incorporates European arched windows, Roman roofs, and traditional Konkani sanctum layouts.',
+    keyFeature: 'Unique crimson terracotta shikharas with Italianate balustrades and deep red stone courtyards.',
+    significance: 'Sacred deity of peace worshipped by diverse Goan communities'
+  },
+  {
+    id: 'tambdi-surla',
+    name: 'Mahadev Temple, Tambdi Surla',
+    category: 'temple',
+    location: 'Bhagwan Mahaveer Sanctuary, Sanguem',
+    era: '12th Century AD (Kadamba Dynasty)',
+    image: '/explore-goa/Mahadev Temple.webp',
+    architecture: 'Kadamba-Yadava Weather-Proof Basalt Rock',
+    intro: 'Goa’s oldest surviving stone temple, nestled deep within pristine jungle hills. Hand-carved entirely out of weather-resistant dark basalt stone with intricate relief sculptures of Shiva, Vishnu, and Brahma.',
+    keyFeature: 'Exquisite 900-year-old basalt stone roof carvings that withstood centuries of tropical monsoons.',
+    significance: 'Ancient archaeological marvel and Kadamba heritage gem'
+  }
+];
 
 export const ExploreGoaPage: React.FC<ExploreGoaPageProps> = ({
   onNavigate,
@@ -58,21 +262,27 @@ export const ExploreGoaPage: React.FC<ExploreGoaPageProps> = ({
       tourModalContext.openTourModal();
     }
   };
+
   const [activeSection, setActiveSection] = useState<number>(0);
   const [soundPlaying, setSoundPlaying] = useState<boolean>(false);
   const audioCtxRef = useRef<AudioContext | null>(null);
   const noiseNodeRef = useRef<AudioNode | null>(null);
 
-  // Section 1 State: City vs Susegad Lifestyle Toggle
+  // Section 1 State: City vs Susegad Lifestyle Toggle & Philosophy Pillar
   const [lifestyleMode, setLifestyleMode] = useState<'susegad' | 'city'>('susegad');
+  const [activePillar, setActivePillar] = useState<number>(0);
 
   // Section 2 State: Food Thali Hotspot Active Item
   const [activeDish, setActiveDish] = useState<number>(0);
 
-  // Section 3 State: North vs South Goa Coastline
-  const [activeCoast, setActiveCoast] = useState<'north' | 'south'>('north');
+  // Section 3 State: Beaches Carousel & Region Filter
+  const [beachRegionFilter, setBeachRegionFilter] = useState<'All' | 'North Goa' | 'South Goa'>('All');
+  const [activeBeachIndex, setActiveBeachIndex] = useState<number>(0);
+  const beachScrollRef = useRef<HTMLDivElement>(null);
 
-  // Section 4 State: Heritage Architectural Feature Hotspot
+  // Section 4 State: Culture & Sacred Heritage Category Filter
+  const [heritageCategory, setHeritageCategory] = useState<'all' | 'church' | 'temple'>('all');
+  const [selectedHeritageItem, setSelectedHeritageItem] = useState<SacredHeritageItem | null>(null);
   const [activeArchFeature, setActiveArchFeature] = useState<number>(0);
 
   // Section 5 State: ROI Calculator Investment Value (in Crores)
@@ -82,20 +292,197 @@ export const ExploreGoaPage: React.FC<ExploreGoaPageProps> = ({
   // 3D Parallax Mouse Tracking on Floating Assets
   const mouseX = useMotionValue(0);
   const mouseY = useMotionValue(0);
-  const smoothMouseX = useSpring(mouseX, { stiffness: 120, damping: 20 });
-  const smoothMouseY = useSpring(mouseY, { stiffness: 120, damping: 20 });
+  const smoothMouseX = useSpring(mouseX, { stiffness: 90, damping: 20 });
+  const smoothMouseY = useSpring(mouseY, { stiffness: 90, damping: 20 });
 
-  const rotateX = useTransform(smoothMouseY, [-300, 300], [15, -15]);
-  const rotateY = useTransform(smoothMouseX, [-300, 300], [-15, 15]);
+  const rotateX = useTransform(smoothMouseY, [-300, 300], [12, -12]);
+  const rotateY = useTransform(smoothMouseX, [-300, 300], [-12, 12]);
+  const oceanShiftX = useTransform(smoothMouseX, [-300, 300], [-25, 25]);
+  const oceanShiftY = useTransform(smoothMouseY, [-300, 300], [-15, 15]);
 
-  const handleMouseMove = (e: React.MouseEvent) => {
-    const { clientX, clientY } = e;
+  // Canvas ref for Interactive Sea Waves
+  const canvasRef = useRef<HTMLCanvasElement | null>(null);
+  const mousePosRef = useRef<{ x: number; y: number; active: boolean }>({ x: 0, y: 0, active: false });
+
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    const { clientX, clientY, currentTarget } = e;
     const { innerWidth, innerHeight } = window;
     mouseX.set(clientX - innerWidth / 2);
     mouseY.set(clientY - innerHeight / 2);
+
+    const rect = currentTarget.getBoundingClientRect();
+    mousePosRef.current = {
+      x: clientX - rect.left,
+      y: clientY - rect.top,
+      active: true
+    };
   };
 
-  // Ambient Coastal Audio Synth (zero external dependency, soothing ocean white-noise waves)
+  const handleMouseLeave = () => {
+    mousePosRef.current.active = false;
+  };
+
+  // Interactive Canvas Sea Waves Animation Loop
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+
+    const ctx = canvas.getContext('2d');
+    if (!ctx) return;
+
+    let animationFrameId: number;
+    let step = 0;
+
+    const resize = () => {
+      if (!canvas) return;
+      canvas.width = canvas.parentElement?.clientWidth || window.innerWidth;
+      canvas.height = canvas.parentElement?.clientHeight || 900;
+    };
+
+    resize();
+    window.addEventListener('resize', resize);
+
+    // Particle foam nodes
+    interface Particle {
+      x: number;
+      y: number;
+      size: number;
+      speedY: number;
+      speedX: number;
+      opacity: number;
+    }
+    const particles: Particle[] = Array.from({ length: 45 }, () => ({
+      x: Math.random() * (canvas.width || 1200),
+      y: Math.random() * (canvas.height || 800),
+      size: Math.random() * 2.5 + 1,
+      speedY: -(Math.random() * 0.4 + 0.2),
+      speedX: (Math.random() - 0.5) * 0.3,
+      opacity: Math.random() * 0.5 + 0.2
+    }));
+
+    const render = () => {
+      step += 0.015;
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      const w = canvas.width;
+      const h = canvas.height;
+      const mouse = mousePosRef.current;
+
+      // Draw 3 Interactive Wave Layers at base
+      const waveConfigs = [
+        {
+          baseY: h * 0.72,
+          amplitude: 28,
+          frequency: 0.004,
+          speed: 1.2,
+          color: 'rgba(4, 79, 146, 0.22)'
+        },
+        {
+          baseY: h * 0.78,
+          amplitude: 22,
+          frequency: 0.006,
+          speed: -1.5,
+          color: 'rgba(2, 132, 199, 0.18)'
+        },
+        {
+          baseY: h * 0.84,
+          amplitude: 18,
+          frequency: 0.008,
+          speed: 2.0,
+          color: 'rgba(56, 189, 248, 0.14)'
+        }
+      ];
+
+      waveConfigs.forEach((cfg) => {
+        ctx.beginPath();
+        ctx.moveTo(0, h);
+
+        for (let x = 0; x <= w; x += 8) {
+          // Base sinusoidal wave
+          let y =
+            cfg.baseY +
+            Math.sin(x * cfg.frequency + step * cfg.speed) * cfg.amplitude +
+            Math.cos(x * cfg.frequency * 0.5 + step * 0.8) * (cfg.amplitude * 0.4);
+
+          // Mouse wake water displacement
+          if (mouse.active) {
+            const dx = x - mouse.x;
+            const dist = Math.abs(dx);
+            if (dist < 260) {
+              const influence = (1 - dist / 260) * 35 * Math.sin(step * 4);
+              y += influence;
+            }
+          }
+
+          ctx.lineTo(x, y);
+        }
+
+        ctx.lineTo(w, h);
+        ctx.closePath();
+        ctx.fillStyle = cfg.color;
+        ctx.fill();
+      });
+
+      // Floating bio-luminescent foam sparkles
+      particles.forEach((p) => {
+        p.y += p.speedY;
+        p.x += p.speedX;
+
+        if (mouse.active) {
+          const dx = mouse.x - p.x;
+          const dy = mouse.y - p.y;
+          const dist = Math.sqrt(dx * dx + dy * dy);
+          if (dist < 200) {
+            p.x += (dx / dist) * 0.8;
+            p.y += (dy / dist) * 0.8;
+          }
+        }
+
+        if (p.y < 0) p.y = h;
+        if (p.x < 0) p.x = w;
+        if (p.x > w) p.x = 0;
+
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(56, 189, 248, ${p.opacity})`;
+        ctx.shadowBlur = 8;
+        ctx.shadowColor = '#38bdf8';
+        ctx.fill();
+        ctx.shadowBlur = 0;
+      });
+
+      animationFrameId = requestAnimationFrame(render);
+    };
+
+    render();
+
+    return () => {
+      window.removeEventListener('resize', resize);
+      cancelAnimationFrame(animationFrameId);
+    };
+  }, []);
+
+  // Filtered lists
+  const filteredBeaches = GOA_BEACHES.filter(
+    (b) => beachRegionFilter === 'All' || b.region === beachRegionFilter
+  );
+
+  const filteredHeritage = SACRED_HERITAGE_LIST.filter(
+    (h) => heritageCategory === 'all' || h.category === heritageCategory
+  );
+
+  // Scroll Beach Carousel Left/Right
+  const scrollBeach = (direction: 'left' | 'right') => {
+    if (beachScrollRef.current) {
+      const scrollAmount = 360;
+      beachScrollRef.current.scrollBy({
+        left: direction === 'left' ? -scrollAmount : scrollAmount,
+        behavior: 'smooth'
+      });
+    }
+  };
+
+  // Ambient Coastal Audio Synth
   const toggleAmbientSound = () => {
     if (soundPlaying) {
       if (audioCtxRef.current && audioCtxRef.current.state !== 'closed') {
@@ -105,11 +492,12 @@ export const ExploreGoaPage: React.FC<ExploreGoaPageProps> = ({
     } else {
       try {
         if (!audioCtxRef.current) {
-          const AudioContextClass = window.AudioContext || (window as unknown as { webkitAudioContext: typeof AudioContext }).webkitAudioContext;
+          const AudioContextClass =
+            window.AudioContext ||
+            (window as unknown as { webkitAudioContext: typeof AudioContext }).webkitAudioContext;
           const ctx = new AudioContextClass();
           audioCtxRef.current = ctx;
 
-          // Pink/Ocean noise buffer
           const bufferSize = ctx.sampleRate * 2;
           const noiseBuffer = ctx.createBuffer(1, bufferSize, ctx.sampleRate);
           const output = noiseBuffer.getChannelData(0);
@@ -118,12 +506,12 @@ export const ExploreGoaPage: React.FC<ExploreGoaPageProps> = ({
             const white = Math.random() * 2 - 1;
             b0 = 0.99886 * b0 + white * 0.0555179;
             b1 = 0.99332 * b1 + white * 0.0750759;
-            b2 = 0.96900 * b2 + white * 0.1538520;
-            b3 = 0.86650 * b3 + white * 0.3104856;
-            b4 = 0.55000 * b4 + white * 0.5329522;
-            b5 = -0.7616 * b5 - white * 0.0168980;
+            b2 = 0.969 * b2 + white * 0.153852;
+            b3 = 0.8665 * b3 + white * 0.3104856;
+            b4 = 0.55 * b4 + white * 0.5329522;
+            b5 = -0.7616 * b5 - white * 0.016898;
             output[i] = b0 + b1 + b2 + b3 + b4 + b5 + b6 + white * 0.5362;
-            output[i] *= 0.04; // Gentle volume
+            output[i] *= 0.04;
             b6 = white * 0.115926;
           }
 
@@ -131,14 +519,12 @@ export const ExploreGoaPage: React.FC<ExploreGoaPageProps> = ({
           whiteNoise.buffer = noiseBuffer;
           whiteNoise.loop = true;
 
-          // Lowpass filter for ocean wave warmth
           const filter = ctx.createBiquadFilter();
           filter.type = 'lowpass';
           filter.frequency.setValueAtTime(450, ctx.currentTime);
 
-          // LFO for wave swells
           const lfo = ctx.createOscillator();
-          lfo.frequency.setValueAtTime(0.12, ctx.currentTime); // Wave swell every 8 seconds
+          lfo.frequency.setValueAtTime(0.12, ctx.currentTime);
           const lfoGain = ctx.createGain();
           lfoGain.gain.setValueAtTime(250, ctx.currentTime);
           lfo.connect(lfoGain);
@@ -164,7 +550,7 @@ export const ExploreGoaPage: React.FC<ExploreGoaPageProps> = ({
     }
   };
 
-  // Observe active section on scroll
+  // Section Observer on Scroll
   useEffect(() => {
     const handleScroll = () => {
       const sections = ['section-hero', 'section-food', 'section-beaches', 'section-heritage', 'section-investment'];
@@ -201,35 +587,36 @@ export const ExploreGoaPage: React.FC<ExploreGoaPageProps> = ({
     }
   };
 
-  // Calculation for Rental ROI
-  const calculatedRentalYield = (13.4).toFixed(1); // 12-15% range
-  const annualRentalIncome = ((investmentAmount * 10000000 * 0.134)).toLocaleString('en-IN', {
+  // Rental ROI calculations
+  const calculatedRentalYield = (13.4).toFixed(1);
+  const annualRentalIncome = (investmentAmount * 10000000 * 0.134).toLocaleString('en-IN', {
     maximumFractionDigits: 0
   });
-  const estimatedNightlyTariff = Math.round((investmentAmount * 10000000 * 0.134) / (365 * (projectedOccupancy / 100)));
+  const estimatedNightlyTariff = Math.round(
+    (investmentAmount * 10000000 * 0.134) / (365 * (projectedOccupancy / 100))
+  );
 
   return (
     <div
       className="min-h-screen bg-[#fdfcfb] text-[#1a1a1a] selection:bg-[#044F92] selection:text-white relative overflow-hidden"
       onMouseMove={handleMouseMove}
     >
-      {/* Dynamic Background Noise Texture */}
+      {/* Background Noise Texture */}
       <div className="fixed inset-0 pointer-events-none opacity-[0.03] z-10 bg-[radial-gradient(#044F92_1px,transparent_1px)] [background-size:20px_20px]" />
 
-      {/* Sticky Chapter Scroller & Coastal Ambient Audio Controller */}
+      {/* Sticky Chapter Bar */}
       <div className="fixed bottom-6 left-1/2 -translate-x-1/2 z-40 bg-[#02182c]/90 backdrop-blur-xl border border-white/20 text-white px-4 py-2.5 rounded-full shadow-2xl flex items-center gap-3 sm:gap-6 text-xs transition-all max-w-[95vw] overflow-x-auto scrollbar-none">
         <div className="flex items-center gap-1.5 shrink-0 border-r border-white/20 pr-3 sm:pr-4">
           <span className="w-2 h-2 rounded-full bg-[#38bdf8] animate-pulse" />
           <span className="font-mono text-[10px] tracking-widest uppercase text-blue-200 hidden sm:inline">Goa Odyssey</span>
         </div>
 
-        {/* 5 Chapters Navigation Buttons */}
         <div className="flex items-center gap-1 sm:gap-2">
           {[
             { label: '01 Susegad', id: 'section-hero' },
             { label: '02 Culinary', id: 'section-food' },
-            { label: '03 Coastline', id: 'section-beaches' },
-            { label: '04 Heritage', id: 'section-heritage' },
+            { label: '03 Beaches', id: 'section-beaches' },
+            { label: '04 Culture & Temples', id: 'section-heritage' },
             { label: '05 Yield & ROI', id: 'section-investment' }
           ].map((chap, idx) => (
             <button
@@ -246,7 +633,6 @@ export const ExploreGoaPage: React.FC<ExploreGoaPageProps> = ({
           ))}
         </div>
 
-        {/* Ambient Ocean Audio Button */}
         <button
           onClick={toggleAmbientSound}
           title={soundPlaying ? 'Mute Coastal Ambient Sound' : 'Play Soothing Coastal Ambient Sound'}
@@ -267,53 +653,112 @@ export const ExploreGoaPage: React.FC<ExploreGoaPageProps> = ({
       </div>
 
       {/* =========================================================================
-          CHAPTER 1: HERO INTRO - THE GOAN LIFESTYLE & SUSEGAD HOOK
+          CHAPTER 1: FULL HERO - THE ART OF GOAN SUSEGAD (INTERACTIVE SEA WAVES)
           ========================================================================= */}
       <section
         id="section-hero"
-        className="relative min-h-[92vh] pt-32 pb-24 px-6 sm:px-8 lg:px-12 flex items-center border-b border-[#e5e1da] overflow-hidden"
+        onMouseLeave={handleMouseLeave}
+        className="relative min-h-screen pt-32 pb-24 px-6 sm:px-8 lg:px-12 flex flex-col justify-between border-b border-[#cfe0ee] overflow-hidden bg-gradient-to-b from-[#f2f8fc] via-[#fdfcfb] to-[#f0f6fa]"
       >
-        {/* Soft Ambient Light Gradient */}
-        <div className="absolute top-0 right-0 w-3/5 h-4/5 bg-gradient-to-bl from-[#eef5fb] via-[#f7fafc] to-transparent -z-10 blur-3xl pointer-events-none" />
-        <div className="absolute bottom-10 left-10 w-96 h-96 bg-[#fff7ed] rounded-full filter blur-3xl -z-10 opacity-70" />
+        {/* INTERACTIVE SEA WAVES CANVAS BACKGROUND */}
+        <canvas
+          ref={canvasRef}
+          className="absolute inset-0 pointer-events-none z-0 opacity-80"
+        />
 
-        <div className="max-w-7xl mx-auto w-full grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
-          {/* Left Column: Hero Narrative */}
-          <div className="lg:col-span-7 space-y-7 z-20">
+        {/* Ambient Glowing Sun & Parallax Glow */}
+        <motion.div
+          style={{ x: oceanShiftX, y: oceanShiftY }}
+          className="absolute -top-16 right-1/4 w-[550px] h-[550px] bg-gradient-to-br from-[#ffd97d]/35 via-[#38bdf8]/20 to-transparent rounded-full blur-[100px] pointer-events-none -z-0"
+        />
+        <div className="absolute top-1/3 -left-20 w-96 h-96 bg-[#044F92]/10 rounded-full blur-3xl pointer-events-none" />
+
+        <div className="max-w-7xl mx-auto w-full grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-14 items-center relative z-10 my-auto">
+          {/* Left Column: Cinematic Typography & Narrative */}
+          <div className="lg:col-span-7 space-y-7">
             <ScrollReveal variant="from-left" distance={30}>
-              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 bg-[#f2f7fc] border border-[#cfe0ee] rounded-full text-[#044F92] text-xs font-semibold uppercase tracking-[0.2em]">
+              <div className="inline-flex items-center gap-2.5 px-4 py-1.5 bg-white/90 backdrop-blur-md border border-[#044F92]/20 rounded-full text-[#044F92] text-xs font-semibold uppercase tracking-[0.22em] shadow-sm">
+                <span className="w-2 h-2 rounded-full bg-[#044F92] animate-ping" />
                 <Sparkles className="w-3.5 h-3.5 text-[#044F92]" />
-                <span>Where Heritage Meets High Returns</span>
+                <span>The Art of Goan Susegad • Chapter 01</span>
               </div>
             </ScrollReveal>
 
             <ScrollReveal variant="from-left" distance={40} delay={0.1}>
-              <h1 className="font-display text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-normal text-[#1a1a1a] tracking-tight leading-[1.08]">
-                Experience the <br />
-                <span className="text-[#044F92] italic font-serif">Susegad Philosophy</span>
+              <h1 className="font-display text-4xl sm:text-6xl lg:text-7xl font-normal text-[#1a1a1a] tracking-tight leading-[1.05]">
+                Where Time Dissolves <br />
+                Into The <span className="text-[#044F92] italic font-serif">Arabian Sea</span>
               </h1>
             </ScrollReveal>
 
             <ScrollReveal variant="from-left" distance={40} delay={0.2}>
               <p className="text-base sm:text-lg text-[#5a554e] font-light leading-relaxed max-w-xl">
-                Shift from chaotic city life to serene coastal living, private sundecks, and scenic emerald paddy fields. In Goa, time slows down not because life is lazy, but because life is savoured.
+                <span className="font-semibold text-[#044F92]">Susegad</span> is not indolence — it is the conscious surrender to unhurried contentment. Awaken to warm sea mist, birdsong in emerald paddy fields, and sunsets that belong entirely to you.
               </p>
             </ScrollReveal>
 
-            {/* Interactive Lifestyle Switcher: Urban Chaos vs Susegad Living */}
-            <ScrollReveal variant="from-bottom" distance={30} delay={0.3}>
-              <div className="p-5 sm:p-6 bg-white border border-[#cfe0ee] rounded-2xl shadow-xl space-y-4 max-w-xl">
+            {/* THREE INTERACTIVE SUSEGAD PILLARS (Hoverable with Ripple Preview) */}
+            <ScrollReveal variant="from-bottom" distance={30} delay={0.25}>
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-1 max-w-xl">
+                {[
+                  {
+                    title: 'Biophilic Silence',
+                    icon: Wind,
+                    desc: 'Private plunge pools & forest edge verandas.',
+                    stat: '0 Commute'
+                  },
+                  {
+                    title: 'Oceanic Cadence',
+                    icon: Waves,
+                    desc: '300+ golden sunny days by gentle tides.',
+                    stat: '300+ Sun'
+                  },
+                  {
+                    title: 'The Balcão Twilight',
+                    icon: Sun,
+                    desc: 'Verandah conversations over Konkan wine.',
+                    stat: '100% Peace'
+                  }
+                ].map((pillar, pIdx) => {
+                  const Icon = pillar.icon;
+                  return (
+                    <div
+                      key={pIdx}
+                      onMouseEnter={() => setActivePillar(pIdx)}
+                      className={`p-4 rounded-xl border transition-all cursor-pointer ${
+                        activePillar === pIdx
+                          ? 'bg-white border-[#044F92] shadow-xl -translate-y-1'
+                          : 'bg-white/60 backdrop-blur-md border-[#cfe0ee] hover:bg-white'
+                      }`}
+                    >
+                      <div className="flex items-center justify-between">
+                        <div className={`w-7 h-7 rounded-lg flex items-center justify-center ${activePillar === pIdx ? 'bg-[#044F92] text-white' : 'bg-[#eef5fb] text-[#044F92]'}`}>
+                          <Icon className="w-3.5 h-3.5" />
+                        </div>
+                        <span className="text-[10px] font-mono font-bold text-[#044F92]">{pillar.stat}</span>
+                      </div>
+                      <h4 className="font-display text-sm font-semibold mt-2.5 text-[#1a1a1a]">{pillar.title}</h4>
+                      <p className="text-[11px] text-[#5a554e] mt-1 leading-snug">{pillar.desc}</p>
+                    </div>
+                  );
+                })}
+              </div>
+            </ScrollReveal>
+
+            {/* INTERACTIVE CONTRAST CONTROLLER: Susegad vs City Matrix */}
+            <ScrollReveal variant="from-bottom" distance={30} delay={0.35}>
+              <div className="p-5 sm:p-6 bg-white/95 backdrop-blur-xl border border-[#cfe0ee] rounded-2xl shadow-xl space-y-4 max-w-xl">
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-2">
-                    <Sliders className="w-4 h-4 text-[#044F92]" />
-                    <span className="text-xs uppercase tracking-wider font-bold text-[#1a1a1a]">Lifestyle Contrast Mode</span>
+                    <Activity className="w-4 h-4 text-[#044F92]" />
+                    <span className="text-xs uppercase tracking-wider font-bold text-[#1a1a1a]">Lifestyle Contrast Engine</span>
                   </div>
                   <div className="inline-flex p-1 bg-[#f4f1ee] rounded-full text-xs">
                     <button
                       onClick={() => setLifestyleMode('susegad')}
-                      className={`px-3 py-1 rounded-full font-medium transition-all ${
+                      className={`px-3 py-1 rounded-full font-medium transition-all cursor-pointer ${
                         lifestyleMode === 'susegad'
-                          ? 'bg-[#044F92] text-white shadow-sm font-semibold'
+                          ? 'bg-[#044F92] text-white shadow-md font-semibold'
                           : 'text-[#5a554e] hover:text-[#1a1a1a]'
                       }`}
                     >
@@ -321,9 +766,9 @@ export const ExploreGoaPage: React.FC<ExploreGoaPageProps> = ({
                     </button>
                     <button
                       onClick={() => setLifestyleMode('city')}
-                      className={`px-3 py-1 rounded-full font-medium transition-all ${
+                      className={`px-3 py-1 rounded-full font-medium transition-all cursor-pointer ${
                         lifestyleMode === 'city'
-                          ? 'bg-[#8c3520] text-white shadow-sm font-semibold'
+                          ? 'bg-[#8c3520] text-white shadow-md font-semibold'
                           : 'text-[#5a554e] hover:text-[#1a1a1a]'
                       }`}
                     >
@@ -335,93 +780,98 @@ export const ExploreGoaPage: React.FC<ExploreGoaPageProps> = ({
                 {lifestyleMode === 'susegad' ? (
                   <div className="grid grid-cols-3 gap-3 pt-2 text-center">
                     <div className="p-3 bg-[#eef5fb] rounded-xl border border-blue-100">
-                      <p className="font-mono text-xl font-bold text-[#044F92]">0 Min</p>
-                      <p className="text-[11px] text-[#5a554e] mt-0.5">Commute Stress</p>
+                      <p className="font-mono text-xl font-bold text-[#044F92]">18 AQI</p>
+                      <p className="text-[11px] text-[#5a554e] mt-0.5 font-medium">Pure Sea Breeze</p>
                     </div>
                     <div className="p-3 bg-[#fef9ee] rounded-xl border border-amber-100">
-                      <p className="font-mono text-xl font-bold text-amber-700">300+</p>
-                      <p className="text-[11px] text-[#5a554e] mt-0.5">Sunny Horizons</p>
+                      <p className="font-mono text-xl font-bold text-amber-700">32 dB</p>
+                      <p className="text-[11px] text-[#5a554e] mt-0.5 font-medium">Ocean Waves Sound</p>
                     </div>
                     <div className="p-3 bg-[#f2fcf5] rounded-xl border border-emerald-100">
-                      <p className="font-mono text-xl font-bold text-emerald-700">100%</p>
-                      <p className="text-[11px] text-[#5a554e] mt-0.5">Mental Clarity</p>
+                      <p className="font-mono text-xl font-bold text-emerald-700">-40%</p>
+                      <p className="text-[11px] text-[#5a554e] mt-0.5 font-medium">Stress & Fatigue</p>
                     </div>
                   </div>
                 ) : (
-                  <div className="grid grid-cols-3 gap-3 pt-2 text-center opacity-80">
+                  <div className="grid grid-cols-3 gap-3 pt-2 text-center opacity-85">
                     <div className="p-3 bg-red-50 rounded-xl border border-red-100">
-                      <p className="font-mono text-xl font-bold text-red-700">2.5 Hrs</p>
-                      <p className="text-[11px] text-red-900/80 mt-0.5">Daily Traffic Jam</p>
+                      <p className="font-mono text-xl font-bold text-red-700">380 AQI</p>
+                      <p className="text-[11px] text-red-900/80 mt-0.5 font-medium">Dense Smog</p>
                     </div>
                     <div className="p-3 bg-gray-100 rounded-xl border border-gray-200">
-                      <p className="font-mono text-xl font-bold text-gray-700">380 AQI</p>
-                      <p className="text-[11px] text-gray-600 mt-0.5">Smog & Concrete</p>
+                      <p className="font-mono text-xl font-bold text-gray-700">88 dB</p>
+                      <p className="text-[11px] text-gray-600 mt-0.5 font-medium">Traffic Horns</p>
                     </div>
                     <div className="p-3 bg-amber-50 rounded-xl border border-amber-100">
-                      <p className="font-mono text-xl font-bold text-amber-800">High</p>
-                      <p className="text-[11px] text-amber-900/80 mt-0.5">Corporate Fatigue</p>
+                      <p className="font-mono text-xl font-bold text-amber-800">150 Min</p>
+                      <p className="text-[11px] text-amber-900/80 mt-0.5 font-medium">Daily Gridlock</p>
                     </div>
                   </div>
                 )}
 
                 <p className="text-xs text-[#8c857d] italic">
                   {lifestyleMode === 'susegad'
-                    ? '“Susegad isn’t indolence; it is the fine art of living contentment in the presence of sea breeze and old trees.”'
-                    : 'Break free from the concrete grind. Kamat Realty crafts sanctuaries that restore work-life harmony.'}
+                    ? '“Step out onto your sunlit deck in Assagao or Siolim. Breathe freely in an environment engineered for timeless longevity.”'
+                    : 'Break free from the rush. Kamat Realty crafts sanctuaries that restore health, joy, and peace of mind.'}
                 </p>
               </div>
             </ScrollReveal>
 
             {/* CTAs */}
-            <ScrollReveal variant="from-bottom" distance={30} delay={0.4}>
+            <ScrollReveal variant="from-bottom" distance={30} delay={0.45}>
               <div className="flex flex-wrap items-center gap-4 pt-2">
                 <button
                   onClick={handleTour}
-                  className="px-7 py-3.5 bg-[#044F92] hover:bg-[#03396c] text-white text-xs font-semibold uppercase tracking-widest transition-all shadow-lg hover:shadow-xl hover:-translate-y-0.5 flex items-center gap-2 cursor-pointer rounded-none"
+                  className="px-7 py-3.5 bg-[#044F92] hover:bg-[#03396c] text-white text-xs font-semibold uppercase tracking-widest transition-all shadow-xl hover:shadow-2xl hover:-translate-y-0.5 flex items-center gap-2 cursor-pointer"
                 >
                   <span>Book Susegad Discovery Tour</span>
                   <ChevronRight className="w-4 h-4" />
                 </button>
                 <button
                   onClick={() => scrollToSection('section-food')}
-                  className="px-6 py-3.5 bg-transparent border border-[#044F92] text-[#044F92] hover:bg-[#eef5fb] text-xs font-semibold uppercase tracking-widest transition-all cursor-pointer"
+                  className="px-6 py-3.5 bg-white/80 backdrop-blur-md border border-[#044F92] text-[#044F92] hover:bg-[#eef5fb] text-xs font-semibold uppercase tracking-widest transition-all cursor-pointer shadow-sm"
                 >
-                  Explore The Journey ↓
+                  Experience Culinary Journey ↓
                 </button>
               </div>
             </ScrollReveal>
           </div>
 
-          {/* Right Column: 3D Floating Asset - Ceramic Shell & Luxury Villa Key */}
+          {/* Right Column: 3D Mouse Parallax Floating Estate Preview */}
           <div className="lg:col-span-5 flex justify-center items-center perspective-1000">
             <motion.div
               style={{ rotateX, rotateY }}
               className="relative w-full max-w-md aspect-[4/5] flex items-center justify-center preserve-3d"
             >
-              {/* Glassmorphic 3D Card Platform */}
-              <div className="absolute inset-0 bg-gradient-to-tr from-[#044F92]/10 via-white/80 to-[#cfe0ee]/40 rounded-3xl border border-white/80 shadow-[0_25px_60px_-15px_rgba(4,79,146,0.18)] backdrop-blur-xl -rotate-2 transform transition-transform" />
+              {/* Glassmorphic 3D Card Platform with Sea Gradient */}
+              <div className="absolute inset-0 bg-gradient-to-tr from-[#044F92]/15 via-white/85 to-[#38bdf8]/20 rounded-3xl border border-white/90 shadow-[0_30px_70px_-15px_rgba(4,79,146,0.22)] backdrop-blur-xl -rotate-1 transform transition-transform" />
 
               {/* Background Paddy Field & Pool Terrace Imagery */}
-              <div className="absolute inset-4 rounded-2xl overflow-hidden border border-white/60 shadow-inner">
+              <div className="absolute inset-4 rounded-2xl overflow-hidden border border-white/80 shadow-inner group">
                 <img
                   src="https://images.unsplash.com/photo-1582610116397-edb318620f90?auto=format&fit=crop&w=1000&q=80"
                   alt="Goan Coastal Villa & Private Sundeck"
-                  className="w-full h-full object-cover brightness-95 transform hover:scale-105 transition-transform duration-700"
+                  className="w-full h-full object-cover brightness-95 transform group-hover:scale-108 transition-transform duration-700"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#02182c]/80 via-transparent to-black/20" />
-                <div className="absolute bottom-4 left-4 right-4 text-white space-y-1">
-                  <div className="inline-block px-2 py-0.5 bg-[#044F92] text-[9px] uppercase tracking-widest font-bold">
-                    Assagao Valley Villa
+                <div className="absolute inset-0 bg-gradient-to-t from-[#02182c]/85 via-transparent to-black/20" />
+                <div className="absolute bottom-4 left-4 right-4 text-white space-y-1.5">
+                  <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 bg-[#044F92] text-[9px] uppercase tracking-widest font-bold rounded">
+                    <Sparkles className="w-2.5 h-2.5 text-[#38bdf8]" />
+                    <span>Assagao Valley Villa</span>
                   </div>
-                  <p className="font-display text-lg">Private Sundecks Overlooking Emerald Paddy Fields</p>
+                  <p className="font-display text-lg">Private Plunge Pools Overlooking Emerald Paddy Fields</p>
+                  <p className="text-[11px] text-blue-200 font-light flex items-center gap-1">
+                    <MapPin className="w-3 h-3 text-[#38bdf8]" />
+                    <span>North Goa • 28 Mins from MOPA Airport</span>
+                  </p>
                 </div>
               </div>
 
-              {/* FLOATING 3D ASSET 1: Floating Goan Ceramic Shell */}
+              {/* FLOATING 3D ASSET 1: Floating Ceramic Conch Shell */}
               <motion.div
                 animate={{
                   y: [-12, 14, -12],
-                  rotateZ: [-2, 3, -2]
+                  rotateZ: [-3, 4, -3]
                 }}
                 transition={{
                   repeat: Infinity,
@@ -431,7 +881,6 @@ export const ExploreGoaPage: React.FC<ExploreGoaPageProps> = ({
                 className="absolute -top-6 -right-6 z-30 w-36 h-36 drop-shadow-[0_20px_30px_rgba(4,79,146,0.35)] cursor-pointer"
                 title="Goan Handcrafted Ceramic Shell"
               >
-                {/* 3D Ceramic Conch / Shell SVG with Specular Glaze */}
                 <svg viewBox="0 0 120 120" className="w-full h-full filter drop-shadow-xl">
                   <defs>
                     <radialGradient id="shellGlaze" cx="35%" cy="30%" r="70%">
@@ -445,15 +894,7 @@ export const ExploreGoaPage: React.FC<ExploreGoaPageProps> = ({
                       <stop offset="50%" stopColor="#d4af37" />
                       <stop offset="100%" stopColor="#997a15" />
                     </linearGradient>
-                    <filter id="glow">
-                      <feGaussianBlur stdDeviation="3" result="coloredBlur" />
-                      <feMerge>
-                        <feMergeNode in="coloredBlur" />
-                        <feMergeNode in="SourceGraphic" />
-                      </feMerge>
-                    </filter>
                   </defs>
-                  {/* Outer Spiral Shell */}
                   <path
                     d="M 60 15 C 85 15, 105 35, 105 60 C 105 85, 85 105, 55 105 C 30 105, 15 90, 18 68 C 20 48, 38 35, 55 35 C 72 35, 82 48, 80 62 C 78 74, 68 82, 58 80 C 50 78, 46 72, 48 65 C 50 60, 56 58, 60 62"
                     fill="url(#shellGlaze)"
@@ -461,24 +902,8 @@ export const ExploreGoaPage: React.FC<ExploreGoaPageProps> = ({
                     strokeWidth="3.5"
                     strokeLinecap="round"
                   />
-                  {/* Internal Ridge Spirals */}
-                  <path
-                    d="M 60 18 Q 80 40 85 62"
-                    stroke="#ffffff"
-                    strokeWidth="2"
-                    fill="none"
-                    opacity="0.8"
-                  />
-                  <path
-                    d="M 45 28 Q 65 50 70 75"
-                    stroke="#ffffff"
-                    strokeWidth="1.5"
-                    fill="none"
-                    opacity="0.6"
-                  />
-                  {/* Lustre Sparkle */}
-                  <circle cx="48" cy="38" r="4" fill="#ffffff" filter="url(#glow)" />
-                  <circle cx="82" cy="48" r="2.5" fill="#ffffff" />
+                  <path d="M 60 18 Q 80 40 85 62" stroke="#ffffff" strokeWidth="2" fill="none" opacity="0.8" />
+                  <path d="M 45 28 Q 65 50 70 75" stroke="#ffffff" strokeWidth="1.5" fill="none" opacity="0.6" />
                 </svg>
               </motion.div>
 
@@ -507,21 +932,13 @@ export const ExploreGoaPage: React.FC<ExploreGoaPageProps> = ({
                       <stop offset="100%" stopColor="#664d12" />
                     </linearGradient>
                   </defs>
-                  {/* Ornate Key Bow / Head */}
                   <circle cx="35" cy="45" r="22" fill="none" stroke="url(#brassKey)" strokeWidth="6" />
                   <circle cx="35" cy="45" r="11" fill="none" stroke="url(#brassKey)" strokeWidth="3" />
-                  {/* Portuguese Trefoil Flourish */}
                   <circle cx="35" cy="23" r="5" fill="url(#brassKey)" />
                   <circle cx="16" cy="45" r="5" fill="url(#brassKey)" />
                   <circle cx="35" cy="67" r="5" fill="url(#brassKey)" />
-                  {/* Key Shaft */}
                   <rect x="54" y="42" width="65" height="6" rx="2" fill="url(#brassKey)" />
-                  {/* Key Teeth (Bitting) */}
-                  <path
-                    d="M 100 48 L 100 66 L 106 66 L 106 48 L 112 48 L 112 60 L 118 60 L 118 48 Z"
-                    fill="url(#brassKey)"
-                  />
-                  {/* Kamat Signature Crest engraving */}
+                  <path d="M 100 48 L 100 66 L 106 66 L 106 48 L 112 48 L 112 60 L 118 60 L 118 48 Z" fill="url(#brassKey)" />
                   <text x="35" y="48" fontSize="8" fontWeight="bold" fill="#664d12" textAnchor="middle" fontFamily="sans-serif">
                     KRW
                   </text>
@@ -530,17 +947,33 @@ export const ExploreGoaPage: React.FC<ExploreGoaPageProps> = ({
             </motion.div>
           </div>
         </div>
+
+        {/* BOTTOM WAVE SCROLL DOWN CUE */}
+        <div className="w-full flex justify-center pb-2 relative z-10">
+          <button
+            onClick={() => scrollToSection('section-food')}
+            className="flex flex-col items-center gap-1.5 text-xs font-mono uppercase tracking-widest text-[#044F92] hover:text-[#03396c] transition-colors cursor-pointer group"
+          >
+            <span className="text-[10px] text-[#8c857d] group-hover:text-[#044F92]">Chapter 02 • Culinary Heritage</span>
+            <div className="w-5 h-8 border-2 border-[#044F92]/40 rounded-full flex justify-center pt-1.5 group-hover:border-[#044F92]">
+              <motion.div
+                animate={{ y: [0, 8, 0] }}
+                transition={{ repeat: Infinity, duration: 1.5 }}
+                className="w-1.5 h-1.5 rounded-full bg-[#044F92]"
+              />
+            </div>
+          </button>
+        </div>
       </section>
 
       {/* =========================================================================
-          CHAPTER 2: FOOD & CULINARY CULTURE
+          CHAPTER 2: FOOD & CULINARY CULTURE (PRESERVED UNCHANGED)
           ========================================================================= */}
       <section
         id="section-food"
         className="relative py-28 px-6 sm:px-8 lg:px-12 bg-[#faf7f2] border-b border-[#e5e1da] overflow-hidden"
       >
         <div className="max-w-7xl mx-auto space-y-16">
-          {/* Header */}
           <div className="max-w-3xl space-y-4">
             <ScrollReveal variant="from-left" distance={30}>
               <div className="inline-flex items-center gap-2 px-3.5 py-1.5 bg-[#eef5fb] border border-[#cfe0ee] rounded-full text-[#044F92] text-xs font-semibold uppercase tracking-[0.2em]">
@@ -563,9 +996,7 @@ export const ExploreGoaPage: React.FC<ExploreGoaPageProps> = ({
             </ScrollReveal>
           </div>
 
-          {/* Interactive Thali Experience */}
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-            {/* FLOATING 3D ASSET: Detailed Goan Fish Curry Thali */}
             <div className="lg:col-span-6 flex justify-center perspective-1000">
               <motion.div
                 initial={{ opacity: 0, y: -60, x: 50, rotateZ: 45 }}
@@ -575,10 +1006,8 @@ export const ExploreGoaPage: React.FC<ExploreGoaPageProps> = ({
                 whileHover={{ rotateZ: 0, scale: 1.04, transition: { duration: 0.4 } }}
                 className="relative w-full max-w-lg aspect-square p-6 flex items-center justify-center cursor-pointer preserve-3d"
               >
-                {/* 3D Drop Shadow on Floor */}
                 <div className="absolute inset-x-8 bottom-4 h-16 bg-black/25 rounded-full filter blur-2xl transform scale-90" />
 
-                {/* STEAM EFFECT OVERLAY: Rising steam wisps */}
                 <div className="absolute -top-12 inset-x-0 h-44 pointer-events-none z-30 flex justify-center gap-6 overflow-hidden">
                   <motion.div
                     animate={{
@@ -612,7 +1041,6 @@ export const ExploreGoaPage: React.FC<ExploreGoaPageProps> = ({
                   />
                 </div>
 
-                {/* REAL HIGH-RESOLUTION PHOTOGRAPHY: Authentic Goan Fish Curry Thali on Brass Platter */}
                 <div className="relative w-full h-full rounded-full overflow-hidden border-[6px] border-[#d4af37] shadow-[0_30px_70px_rgba(0,0,0,0.45),inset_0_2px_12px_rgba(255,255,255,0.4)] bg-[#1a1208]">
                   <img
                     src="/goan-fish-thali.jpg"
@@ -620,7 +1048,6 @@ export const ExploreGoaPage: React.FC<ExploreGoaPageProps> = ({
                     className="w-full h-full object-cover select-none transform hover:scale-105 transition-transform duration-700"
                   />
 
-                  {/* Subtle Vignette & Specular Rim */}
                   <div className="absolute inset-0 rounded-full pointer-events-none shadow-[inset_0_0_40px_rgba(0,0,0,0.5)]" />
 
                   {/* Hotspot 0: Steamed Goan Red Rice */}
@@ -744,7 +1171,6 @@ export const ExploreGoaPage: React.FC<ExploreGoaPageProps> = ({
                   </button>
                 </div>
 
-                {/* Floating Hint Tag */}
                 <div className="absolute top-4 left-6 bg-[#044F92] text-white text-[10px] font-bold uppercase tracking-widest px-3.5 py-1.5 rounded-full shadow-xl border border-blue-300/30 flex items-center gap-1.5">
                   <span className="w-2 h-2 rounded-full bg-[#38bdf8] animate-ping" />
                   <span>Real Goan Thali • Click Hotspot 1-5</span>
@@ -752,9 +1178,7 @@ export const ExploreGoaPage: React.FC<ExploreGoaPageProps> = ({
               </motion.div>
             </div>
 
-            {/* Right Column: Culinary Hotspot Breakdown */}
             <div className="lg:col-span-6 space-y-6">
-              {/* Dish Inspector Card */}
               <div className="p-6 bg-white border border-[#cfe0ee] rounded-2xl shadow-lg space-y-4">
                 <div className="flex items-center justify-between border-b border-[#e5e1da] pb-3">
                   <span className="text-xs uppercase tracking-widest font-bold text-[#044F92] flex items-center gap-1.5">
@@ -764,98 +1188,63 @@ export const ExploreGoaPage: React.FC<ExploreGoaPageProps> = ({
                   <span className="text-[11px] font-mono text-[#8c857d]">Item {activeDish + 1} of 5</span>
                 </div>
 
-                {[
-                  {
-                    title: 'Steamed Goan Red Rice (Ukda Tandool)',
-                    type: 'Indigenous Grain Staple',
-                    origin: 'Bardez & Tiswadi River Valley Fields',
-                    desc: 'Nutrient-dense, unpolished red rice grains gently steamed in coastal clay pots. Delivers an earthy, nutty flavor profile that absorbs rich coconut gravies perfectly.'
-                  },
-                  {
-                    title: 'Kokum Coconut Fish Curry (Xitt Kodi)',
-                    type: 'Signature Aromatic Gravy',
-                    origin: 'Authentic Konkani Fisher Family Kitchens',
-                    desc: 'Simmered with fresh coconut milk, dried red kokum (wild mangosteen) for tart balance, stone-ground byadgi chillies, coriander, and fresh catch of the morning.'
-                  },
-                  {
-                    title: 'Crispy Silver Pomfret Fry (Pomplate Rawa Fry)',
-                    type: 'Crispy Coastal Masterpiece',
-                    origin: 'Fresh Mandovi Estuary & Malvan Catches',
-                    desc: 'Fresh whole silver pomfret (pomplate) deeply marinated in spicy recheado paste, crusted in coarse semolina (rawa), and pan-fried golden crisp with lemon wedges and red onions.'
-                  },
-                  {
-                    title: 'Digestive Kokum Solkadhi',
-                    type: 'Ayurvedic Cooling Nectar',
-                    origin: 'Ancestral Konkan Coastal Heritage',
-                    desc: 'A soothing, bright-pink digestive nectar crafted from fresh coconut milk, sun-dried kokum extract, crushed green chillies, aromatic garlic, and fresh sea salt.'
-                  },
-                  {
-                    title: 'Wood-Fired Crusty Poee Bread',
-                    type: 'Portuguese Heritage Baker Staple',
-                    origin: 'Village Poders of Fontainhas & Moira',
-                    desc: 'Traditional wood-fired whole-wheat pocket bread with a hollow, pillow-soft crumb and crisp bran crust, baked at 5 AM daily by ancestral village bakers.'
-                  }
-                ][activeDish] && (
-                  <div className="space-y-3">
-                    <div className="flex items-center justify-between">
-                      <h4 className="font-display text-2xl text-[#1a1a1a]">
-                        {[
-                          'Steamed Goan Red Rice (Ukda Tandool)',
-                          'Kokum Coconut Fish Curry (Xitt Kodi)',
-                          'Crispy Silver Pomfret Fry (Pomplate Rawa Fry)',
-                          'Digestive Kokum Solkadhi',
-                          'Wood-Fired Crusty Poee Bread'
-                        ][activeDish]}
-                      </h4>
-                      <span className="text-[10px] uppercase tracking-wider font-semibold px-2.5 py-1 bg-[#f2f7fc] text-[#044F92] border border-[#cfe0ee]">
-                        {[
-                          'Indigenous Rice',
-                          'Signature Gravy',
-                          'Pomfret Fry',
-                          'Kokum Elixir',
-                          'Heritage Poee'
-                        ][activeDish]}
-                      </span>
-                    </div>
-
-                    <p className="text-sm text-[#5a554e] leading-relaxed">
+                <div className="space-y-3">
+                  <div className="flex items-center justify-between">
+                    <h4 className="font-display text-2xl text-[#1a1a1a]">
                       {[
-                        'Nutrient-dense, unpolished red rice grains gently steamed in coastal clay pots. Delivers an earthy, nutty flavor profile that absorbs rich coconut gravies perfectly.',
-                        'Simmered with fresh coconut milk, dried red kokum (wild mangosteen) for tart balance, stone-ground byadgi chillies, coriander, and fresh catch of the morning.',
-                        'Fresh whole silver pomfret (pomplate) deeply marinated in spicy recheado paste, crusted in coarse semolina (rawa), and pan-fried golden crisp with lemon wedges and red onions.',
-                        'A soothing, bright-pink digestive nectar crafted from fresh coconut milk, sun-dried kokum extract, crushed green chillies, aromatic garlic, and fresh sea salt.',
-                        'Traditional wood-fired whole-wheat pocket bread with a hollow, pillow-soft crumb and crisp bran crust, baked at 5 AM daily by ancestral village bakers.'
+                        'Steamed Goan Red Rice (Ukda Tandool)',
+                        'Kokum Coconut Fish Curry (Xitt Kodi)',
+                        'Crispy Silver Pomfret Fry (Pomplate Rawa Fry)',
+                        'Digestive Kokum Solkadhi',
+                        'Wood-Fired Crusty Poee Bread'
                       ][activeDish]}
-                    </p>
-
-                    {/* Quick Selection Buttons */}
-                    <div className="flex flex-wrap gap-2 pt-2 border-t border-[#f0ece5]">
+                    </h4>
+                    <span className="text-[10px] uppercase tracking-wider font-semibold px-2.5 py-1 bg-[#f2f7fc] text-[#044F92] border border-[#cfe0ee]">
                       {[
-                        '1. Red Rice',
-                        '2. Fish Curry',
-                        '3. Pomfret Fry',
-                        '4. Kokum Solkadhi',
-                        '5. Poee Bread'
-                      ].map((label, idx) => (
-                        <button
-                          key={idx}
-                          type="button"
-                          onClick={() => setActiveDish(idx)}
-                          className={`px-2.5 py-1 text-[11px] font-medium transition-all cursor-pointer rounded ${
-                            activeDish === idx
-                              ? 'bg-[#044F92] text-white shadow-sm font-semibold'
-                              : 'bg-[#f4f1ee] hover:bg-[#eef5fb] text-[#4a4540] hover:text-[#044F92]'
-                          }`}
-                        >
-                          {label}
-                        </button>
-                      ))}
-                    </div>
+                        'Indigenous Rice',
+                        'Signature Gravy',
+                        'Pomfret Fry',
+                        'Kokum Elixir',
+                        'Heritage Poee'
+                      ][activeDish]}
+                    </span>
                   </div>
-                )}
+
+                  <p className="text-sm text-[#5a554e] leading-relaxed">
+                    {[
+                      'Nutrient-dense, unpolished red rice grains gently steamed in coastal clay pots. Delivers an earthy, nutty flavor profile that absorbs rich coconut gravies perfectly.',
+                      'Simmered with fresh coconut milk, dried red kokum (wild mangosteen) for tart balance, stone-ground byadgi chillies, coriander, and fresh catch of the morning.',
+                      'Fresh whole silver pomfret (pomplate) deeply marinated in spicy recheado paste, crusted in coarse semolina (rawa), and pan-fried golden crisp with lemon wedges and red onions.',
+                      'A soothing, bright-pink digestive nectar crafted from fresh coconut milk, sun-dried kokum extract, crushed green chillies, aromatic garlic, and fresh sea salt.',
+                      'Traditional wood-fired whole-wheat pocket bread with a hollow, pillow-soft crumb and crisp bran crust, baked at 5 AM daily by ancestral village bakers.'
+                    ][activeDish]}
+                  </p>
+
+                  <div className="flex flex-wrap gap-2 pt-2 border-t border-[#f0ece5]">
+                    {[
+                      '1. Red Rice',
+                      '2. Fish Curry',
+                      '3. Pomfret Fry',
+                      '4. Kokum Solkadhi',
+                      '5. Poee Bread'
+                    ].map((label, idx) => (
+                      <button
+                        key={idx}
+                        type="button"
+                        onClick={() => setActiveDish(idx)}
+                        className={`px-2.5 py-1 text-[11px] font-medium transition-all cursor-pointer rounded ${
+                          activeDish === idx
+                            ? 'bg-[#044F92] text-white shadow-sm font-semibold'
+                            : 'bg-[#f4f1ee] hover:bg-[#eef5fb] text-[#4a4540] hover:text-[#044F92]'
+                        }`}
+                      >
+                        {label}
+                      </button>
+                    ))}
+                  </div>
+                </div>
               </div>
 
-              {/* Assagao Michelin-Standard Hotspots Grid */}
               <div className="grid grid-cols-2 gap-4">
                 <div className="p-4 bg-white border border-[#cfe0ee] rounded-xl">
                   <p className="text-[10px] uppercase tracking-widest text-[#044F92] font-bold">Assagao Gourmet Corridor</p>
@@ -878,472 +1267,317 @@ export const ExploreGoaPage: React.FC<ExploreGoaPageProps> = ({
       </section>
 
       {/* =========================================================================
-          CHAPTER 3: BEACHES & COASTAL LIVING
+          CHAPTER 3: BEACHES & COASTLINE - INTERACTIVE SCROLLING SHOWCASE
           ========================================================================= */}
       <section
         id="section-beaches"
         className="relative py-28 px-6 sm:px-8 lg:px-12 bg-[#02182c] text-white border-b border-[#044F92] overflow-hidden"
       >
-        {/* Deep Ocean Glow Effects */}
         <div className="absolute top-1/2 left-1/4 w-[500px] h-[500px] bg-[#044F92]/40 rounded-full blur-[120px] pointer-events-none -z-0" />
         <div className="absolute bottom-0 right-10 w-96 h-96 bg-[#38bdf8]/10 rounded-full blur-3xl pointer-events-none -z-0" />
 
-        <div className="max-w-7xl mx-auto space-y-16 relative z-10">
-          {/* Header */}
-          <div className="max-w-3xl space-y-4">
-            <ScrollReveal variant="from-left" distance={30}>
-              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 bg-white/10 border border-white/20 rounded-full text-blue-200 text-xs font-semibold uppercase tracking-[0.2em]">
-                <Palmtree className="w-3.5 h-3.5 text-[#38bdf8]" />
-                <span>Pristine Coastline</span>
+        <div className="max-w-7xl mx-auto space-y-12 relative z-10">
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
+            <div className="max-w-3xl space-y-4">
+              <ScrollReveal variant="from-left" distance={30}>
+                <div className="inline-flex items-center gap-2 px-3.5 py-1.5 bg-white/10 border border-white/20 rounded-full text-blue-200 text-xs font-semibold uppercase tracking-[0.2em]">
+                  <Palmtree className="w-3.5 h-3.5 text-[#38bdf8]" />
+                  <span>Interactive Coastline Showcase</span>
+                </div>
+              </ScrollReveal>
+
+              <ScrollReveal variant="from-left" distance={40} delay={0.1}>
+                <h2 className="font-display text-4xl sm:text-5xl lg:text-6xl font-normal text-white tracking-tight">
+                  Golden Sands & <br />
+                  <span className="text-[#38bdf8] font-serif italic">Iconic Goa Coastline</span>
+                </h2>
+              </ScrollReveal>
+
+              <ScrollReveal variant="from-left" distance={40} delay={0.2}>
+                <p className="text-base text-blue-100/80 font-light leading-relaxed">
+                  Swipe through the spectrum of Goan beaches — from cliff-top sunset enclaves and buzzing water sport hubs to tranquil turquoise coves and freshwater lagoons.
+                </p>
+              </ScrollReveal>
+            </div>
+
+            <div className="flex flex-wrap items-center gap-3">
+              <div className="flex p-1 bg-white/10 backdrop-blur-md rounded-full border border-white/20 text-xs">
+                {(['All', 'North Goa', 'South Goa'] as const).map((reg) => (
+                  <button
+                    key={reg}
+                    onClick={() => setBeachRegionFilter(reg)}
+                    className={`px-3.5 py-1.5 rounded-full font-medium transition-all cursor-pointer ${
+                      beachRegionFilter === reg
+                        ? 'bg-[#044F92] text-white shadow font-semibold border border-[#38bdf8]/50'
+                        : 'text-blue-100/70 hover:text-white'
+                    }`}
+                  >
+                    {reg}
+                  </button>
+                ))}
               </div>
-            </ScrollReveal>
 
-            <ScrollReveal variant="from-left" distance={40} delay={0.1}>
-              <h2 className="font-display text-4xl sm:text-5xl lg:text-6xl font-normal text-white tracking-tight">
-                Golden Sands & <br />
-                <span className="text-[#38bdf8] font-serif italic">Endless Sunsets</span>
-              </h2>
-            </ScrollReveal>
-
-            <ScrollReveal variant="from-left" distance={40} delay={0.2}>
-              <p className="text-base sm:text-lg text-blue-100/80 font-light leading-relaxed">
-                Explore the dual coasts: vibrant beach clubs and high-energy surf breaks in North Goa versus secluded, tranquil turquoise waters and dolphin sanctuaries in South Goa.
-              </p>
-            </ScrollReveal>
+              <div className="flex items-center gap-2">
+                <button
+                  onClick={() => scrollBeach('left')}
+                  className="w-10 h-10 rounded-full bg-white/10 hover:bg-[#044F92] text-white flex items-center justify-center border border-white/20 transition-all cursor-pointer"
+                  title="Scroll Left"
+                >
+                  <ChevronLeft className="w-5 h-5" />
+                </button>
+                <button
+                  onClick={() => scrollBeach('right')}
+                  className="w-10 h-10 rounded-full bg-white/10 hover:bg-[#044F92] text-white flex items-center justify-center border border-white/20 transition-all cursor-pointer"
+                  title="Scroll Right"
+                >
+                  <ChevronRight className="w-5 h-5" />
+                </button>
+              </div>
+            </div>
           </div>
 
-          {/* Interactive Dual Coast Switcher */}
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-            {/* Left: Interactive North vs South Toggle */}
-            <div className="lg:col-span-6 space-y-6">
-              <div className="flex p-1.5 bg-[#032b50] rounded-xl border border-white/20 max-w-md">
-                <button
-                  onClick={() => setActiveCoast('north')}
-                  className={`flex-1 py-3 px-4 rounded-lg text-xs uppercase tracking-widest font-bold transition-all cursor-pointer flex items-center justify-center gap-2 ${
-                    activeCoast === 'north'
-                      ? 'bg-[#044F92] text-white shadow-lg border border-[#38bdf8]/40'
-                      : 'text-blue-200 hover:text-white'
-                  }`}
-                >
-                  <Sun className="w-4 h-4 text-[#38bdf8]" />
-                  <span>North Goa Coast</span>
-                </button>
-                <button
-                  onClick={() => setActiveCoast('south')}
-                  className={`flex-1 py-3 px-4 rounded-lg text-xs uppercase tracking-widest font-bold transition-all cursor-pointer flex items-center justify-center gap-2 ${
-                    activeCoast === 'south'
-                      ? 'bg-[#044F92] text-white shadow-lg border border-[#38bdf8]/40'
-                      : 'text-blue-200 hover:text-white'
-                  }`}
-                >
-                  <Waves className="w-4 h-4 text-[#38bdf8]" />
-                  <span>South Goa Coast</span>
-                </button>
-              </div>
-
-              {activeCoast === 'north' ? (
-                <motion.div
-                  key="north"
-                  initial={{ opacity: 0, y: 15 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.4 }}
-                  className="space-y-4 bg-white/5 border border-white/10 p-6 sm:p-8 rounded-2xl backdrop-blur-md"
-                >
-                  <div className="flex items-center justify-between">
-                    <h3 className="font-display text-2xl text-white">Vibrant Beach Clubs & Sunset Lounges</h3>
-                    <span className="text-[10px] uppercase font-bold tracking-widest px-2.5 py-1 bg-[#38bdf8]/20 text-[#38bdf8] border border-[#38bdf8]/30">
-                      High Energy
-                    </span>
-                  </div>
-
-                  <p className="text-sm text-blue-100/80 leading-relaxed font-light">
-                    North Goa pulses with cosmopolitan coastal energy. From cliff-top sunset sessions at Thalassa and Antares in Vagator to bohemian beach lounges along Ashvem and Morjim.
-                  </p>
-
-                  <div className="grid grid-cols-2 gap-3 pt-2">
-                    <div className="p-3 bg-white/5 rounded-lg border border-white/10">
-                      <p className="text-[10px] text-[#38bdf8] uppercase tracking-wider font-semibold">Iconic Enclaves</p>
-                      <p className="text-xs text-white font-medium mt-0.5">Vagator, Anjuna, Ashvem & Mandrem</p>
-                    </div>
-                    <div className="p-3 bg-white/5 rounded-lg border border-white/10">
-                      <p className="text-[10px] text-[#38bdf8] uppercase tracking-wider font-semibold">Water Culture</p>
-                      <p className="text-xs text-white font-medium mt-0.5">Surf Academies & Catamaran Sailing</p>
-                    </div>
-                  </div>
-
-                  <div className="pt-2">
-                    <button
-                      onClick={() => navigate('projects', { filterStatus: 'all' })}
-                      className="text-xs text-[#38bdf8] hover:text-white flex items-center gap-1 font-semibold uppercase tracking-wider transition-colors cursor-pointer"
-                    >
-                      <span>Explore Kamat Villas in North Goa</span>
-                      <ArrowRight className="w-3.5 h-3.5" />
-                    </button>
-                  </div>
-                </motion.div>
-              ) : (
-                <motion.div
-                  key="south"
-                  initial={{ opacity: 0, y: 15 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.4 }}
-                  className="space-y-4 bg-white/5 border border-white/10 p-6 sm:p-8 rounded-2xl backdrop-blur-md"
-                >
-                  <div className="flex items-center justify-between">
-                    <h3 className="font-display text-2xl text-white">Secluded Coves & Crystal Waters</h3>
-                    <span className="text-[10px] uppercase font-bold tracking-widest px-2.5 py-1 bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">
-                      Untouched Serenity
-                    </span>
-                  </div>
-
-                  <p className="text-sm text-blue-100/80 leading-relaxed font-light">
-                    South Goa represents the pure, untamed essence of the Arabian Sea. Crescent bays framed by swaying coconut plantations, calm turquoise swimming waters, and private catamaran anchorages.
-                  </p>
-
-                  <div className="grid grid-cols-2 gap-3 pt-2">
-                    <div className="p-3 bg-white/5 rounded-lg border border-white/10">
-                      <p className="text-[10px] text-emerald-300 uppercase tracking-wider font-semibold">Iconic Enclaves</p>
-                      <p className="text-xs text-white font-medium mt-0.5">Palolem, Agonda, Cola & Benaulim</p>
-                    </div>
-                    <div className="p-3 bg-white/5 rounded-lg border border-white/10">
-                      <p className="text-[10px] text-emerald-300 uppercase tracking-wider font-semibold">Marine Sanctuary</p>
-                      <p className="text-xs text-white font-medium mt-0.5">Dolphin Sightings & Sea Turtle Nesting</p>
-                    </div>
-                  </div>
-
-                  <div className="pt-2">
-                    <button
-                      onClick={() => navigate('locations')}
-                      className="text-xs text-[#38bdf8] hover:text-white flex items-center gap-1 font-semibold uppercase tracking-wider transition-colors cursor-pointer"
-                    >
-                      <span>View South Goa Geolocation Map</span>
-                      <ArrowRight className="w-3.5 h-3.5" />
-                    </button>
-                  </div>
-                </motion.div>
-              )}
-            </div>
-
-            {/* Right: FLOATING 3D ASSET: 3D Coconut Palm & Teak Surfboard */}
-            <div className="lg:col-span-6 flex justify-center perspective-1000">
+          <div
+            ref={beachScrollRef}
+            className="flex gap-6 overflow-x-auto pb-6 pt-2 scroll-smooth no-scrollbar snap-x snap-mandatory"
+          >
+            {filteredBeaches.map((beach, index) => (
               <motion.div
-                initial={{ opacity: 0, x: 60, scale: 0.9 }}
-                whileInView={{ opacity: 1, x: 0, scale: 1 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.8, ease: 'easeOut' }}
-                className="relative w-full max-w-md aspect-[4/5] flex items-center justify-center preserve-3d"
+                key={beach.id}
+                whileHover={{ y: -8 }}
+                onClick={() => setActiveBeachIndex(index)}
+                className="w-[300px] sm:w-[350px] lg:w-[380px] shrink-0 bg-white/5 border border-white/15 rounded-2xl overflow-hidden shadow-2xl backdrop-blur-md flex flex-col group cursor-pointer snap-start transition-all"
               >
-                {/* Coastal Sunset Backdrop Image with Wave Glass Frame */}
-                <div className="absolute inset-0 rounded-3xl overflow-hidden border border-white/20 shadow-2xl">
+                <div className="relative aspect-[16/11] overflow-hidden">
                   <img
-                    src={
-                      activeCoast === 'north'
-                        ? 'https://images.unsplash.com/photo-1512343879784-a960bf40e7f2?auto=format&fit=crop&w=1000&q=80'
-                        : 'https://images.unsplash.com/photo-1544644181-1484b3fdfc62?auto=format&fit=crop&w=1000&q=80'
-                    }
-                    alt="Goa Coastal Sunset"
-                    className="w-full h-full object-cover filter brightness-90 transition-all duration-700 hover:scale-105"
+                    src={beach.image}
+                    alt={beach.name}
+                    className="w-full h-full object-cover group-hover:scale-108 transition-transform duration-700 brightness-90 group-hover:brightness-100"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#02182c] via-transparent to-black/30" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#02182c] via-transparent to-black/20" />
+
+                  <div className="absolute top-3 left-3 flex gap-2">
+                    <span className="px-2.5 py-1 bg-[#044F92]/90 backdrop-blur-md text-white text-[10px] uppercase tracking-widest font-bold rounded-md border border-[#38bdf8]/40">
+                      {beach.region}
+                    </span>
+                  </div>
+
+                  <div className="absolute bottom-3 left-3 right-3 text-white">
+                    <h3 className="font-display text-2xl drop-shadow-md">{beach.name}</h3>
+                    <p className="text-xs text-blue-200 line-clamp-1 font-light">{beach.tagline}</p>
+                  </div>
                 </div>
 
-                {/* 3D FLOATING SURFBOARD (Custom Teak & Azure Inlay Graphic) */}
-                <motion.div
-                  animate={{
-                    y: [-15, 12, -15],
-                    rotateZ: [-6, -2, -6],
-                    rotateX: [6, -6, 6]
-                  }}
-                  transition={{ repeat: Infinity, duration: 5.5, ease: 'easeInOut' }}
-                  className="absolute z-20 w-36 sm:w-44 h-80 sm:h-96 filter drop-shadow-[0_25px_35px_rgba(0,0,0,0.6)] cursor-pointer"
-                  title="3D Teak & Blue Resin Inlay Surfboard"
-                >
-                  <svg viewBox="0 0 160 400" className="w-full h-full">
-                    <defs>
-                      <linearGradient id="surfWood" x1="0%" y1="0%" x2="100%" y2="100%">
-                        <stop offset="0%" stopColor="#d2996e" />
-                        <stop offset="50%" stopColor="#9a5a32" />
-                        <stop offset="100%" stopColor="#673618" />
-                      </linearGradient>
-                      <linearGradient id="surfResin" x1="0%" y1="0%" x2="100%" y2="0%">
-                        <stop offset="0%" stopColor="#38bdf8" />
-                        <stop offset="50%" stopColor="#044F92" />
-                        <stop offset="100%" stopColor="#02182c" />
-                      </linearGradient>
-                    </defs>
+                <div className="p-5 flex-1 flex flex-col justify-between space-y-4">
+                  <div className="space-y-3">
+                    <div className="flex items-center gap-1.5 text-xs text-[#38bdf8]">
+                      <Sparkles className="w-3.5 h-3.5 shrink-0" />
+                      <span className="font-medium">{beach.vibe}</span>
+                    </div>
 
-                    {/* Streamlined Surfboard Body */}
-                    <path
-                      d="M 80 15 C 130 90, 145 280, 100 375 C 90 395, 70 395, 60 375 C 15 280, 30 90, 80 15 Z"
-                      fill="url(#surfWood)"
-                      stroke="#451e06"
-                      strokeWidth="3"
-                    />
+                    <div className="space-y-1.5 pt-1">
+                      {beach.highlights.map((point, pIdx) => (
+                        <div key={pIdx} className="flex items-start gap-2 text-xs text-blue-100/80">
+                          <span className="w-1.5 h-1.5 rounded-full bg-[#38bdf8] mt-1.5 shrink-0" />
+                          <span>{point}</span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
 
-                    {/* Central Resin Ocean Wave Stripe */}
-                    <path
-                      d="M 80 15 C 95 90, 98 280, 85 375 C 80 390, 75 390, 75 375 C 62 280, 65 90, 80 15 Z"
-                      fill="url(#surfResin)"
-                    />
-
-                    {/* Gold Inlay Pin Lines */}
-                    <path
-                      d="M 75 25 C 70 95, 70 270, 75 365"
-                      stroke="#fde047"
-                      strokeWidth="1.5"
-                      fill="none"
-                    />
-                    <path
-                      d="M 85 25 C 90 95, 90 270, 85 365"
-                      stroke="#fde047"
-                      strokeWidth="1.5"
-                      fill="none"
-                    />
-
-                    {/* Specular Top Glare */}
-                    <ellipse cx="78" cy="110" rx="15" ry="50" fill="#ffffff" opacity="0.3" transform="rotate(-5 78 110)" />
-
-                    {/* Kamat Realty Insignia on Board */}
-                    <text x="80" y="220" fill="#ffffff" fontSize="9" fontWeight="bold" textAnchor="middle" letterSpacing="3" fontFamily="sans-serif">
-                      KAMAT
-                    </text>
-                  </svg>
-                </motion.div>
-
-                {/* 3D FLOATING COCONUT PALM BRANCH */}
-                <motion.div
-                  animate={{
-                    rotateZ: [8, 14, 8],
-                    y: [-8, 8, -8]
-                  }}
-                  transition={{ repeat: Infinity, duration: 6.2, ease: 'easeInOut' }}
-                  className="absolute -top-10 -right-8 z-30 w-44 h-44 pointer-events-none filter drop-shadow-xl"
-                >
-                  <svg viewBox="0 0 180 180" className="w-full h-full">
-                    <defs>
-                      <linearGradient id="palmFrond" x1="0%" y1="0%" x2="100%" y2="100%">
-                        <stop offset="0%" stopColor="#4ade80" />
-                        <stop offset="60%" stopColor="#16a34a" />
-                        <stop offset="100%" stopColor="#14532d" />
-                      </linearGradient>
-                    </defs>
-                    {/* Stem */}
-                    <path d="M 170 10 Q 110 70 20 160" stroke="#713f12" strokeWidth="4.5" fill="none" strokeLinecap="round" />
-                    {/* Frond Leaves */}
-                    <path d="M 150 25 Q 120 15 110 40" stroke="url(#palmFrond)" strokeWidth="3" fill="none" strokeLinecap="round" />
-                    <path d="M 135 40 Q 90 25 85 60" stroke="url(#palmFrond)" strokeWidth="3.5" fill="none" strokeLinecap="round" />
-                    <path d="M 115 55 Q 70 45 65 85" stroke="url(#palmFrond)" strokeWidth="4" fill="none" strokeLinecap="round" />
-                    <path d="M 95 75 Q 40 70 45 115" stroke="url(#palmFrond)" strokeWidth="4" fill="none" strokeLinecap="round" />
-                    <path d="M 70 100 Q 20 105 25 145" stroke="url(#palmFrond)" strokeWidth="3.5" fill="none" strokeLinecap="round" />
-                  </svg>
-                </motion.div>
+                  <div className="pt-3 border-t border-white/10 flex items-center justify-between text-[11px] text-blue-200/80">
+                    <div className="flex items-center gap-1">
+                      <Clock className="w-3.5 h-3.5 text-[#38bdf8]" />
+                      <span>{beach.distanceFromAirport}</span>
+                    </div>
+                    <button
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        navigate('locations');
+                      }}
+                      className="text-[#38bdf8] hover:text-white font-semibold uppercase tracking-wider flex items-center gap-1 group-hover:translate-x-0.5 transition-all cursor-pointer"
+                    >
+                      <span>Explore</span>
+                      <ArrowRight className="w-3 h-3" />
+                    </button>
+                  </div>
+                </div>
               </motion.div>
+            ))}
+          </div>
+
+          <div className="p-6 bg-gradient-to-r from-white/10 via-white/5 to-transparent border border-white/15 rounded-2xl flex flex-col sm:flex-row items-center justify-between gap-4">
+            <div className="flex items-center gap-3">
+              <div className="w-10 h-10 rounded-full bg-[#044F92] flex items-center justify-center text-[#38bdf8] shrink-0 border border-[#38bdf8]/40">
+                <Sun className="w-5 h-5" />
+              </div>
+              <div>
+                <p className="font-display text-lg text-white">Looking for Beach-Facing Luxury Villas?</p>
+                <p className="text-xs text-blue-200 font-light">Explore Kamat Realty’s private estates in Assagao, Candolim, Siolim & Miramar.</p>
+              </div>
             </div>
+            <button
+              onClick={() => navigate('projects', { filterStatus: 'ongoing' })}
+              className="px-6 py-3 bg-[#044F92] hover:bg-[#03396c] text-white text-xs font-semibold uppercase tracking-widest transition-all whitespace-nowrap cursor-pointer border border-[#38bdf8]/40"
+            >
+              View Coastal Estates
+            </button>
           </div>
         </div>
       </section>
 
       {/* =========================================================================
-          CHAPTER 4: CULTURAL HERITAGE & PORTUGUESE ARCHITECTURE
+          CHAPTER 4: CULTURE & SACRED HERITAGE (FAMOUS TEMPLES & CHURCHES)
           ========================================================================= */}
       <section
         id="section-heritage"
         className="relative py-28 px-6 sm:px-8 lg:px-12 bg-[#fffdfa] border-b border-[#e5e1da] overflow-hidden"
       >
         <div className="max-w-7xl mx-auto space-y-16">
-          {/* Header */}
-          <div className="max-w-3xl space-y-4">
-            <ScrollReveal variant="from-left" distance={30}>
-              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 bg-[#fef3c7] border border-[#fde68a] rounded-full text-[#92400e] text-xs font-semibold uppercase tracking-[0.2em]">
-                <Building2 className="w-3.5 h-3.5 text-[#b45309]" />
-                <span>Timeless Charm</span>
-              </div>
-            </ScrollReveal>
-
-            <ScrollReveal variant="from-left" distance={40} delay={0.1}>
-              <h2 className="font-display text-4xl sm:text-5xl lg:text-6xl font-normal text-[#1a1a1a] tracking-tight">
-                Indo-Portuguese <br />
-                <span className="text-[#044F92] font-serif italic">Architecture & History</span>
-              </h2>
-            </ScrollReveal>
-
-            <ScrollReveal variant="from-left" distance={40} delay={0.2}>
-              <p className="text-base sm:text-lg text-[#5a554e] font-light leading-relaxed">
-                Vibrant ochre-yellow estates, terracotta tiled roofs, and ornate balconies of Fontainhas and Moira. Kamat Realty pays homage to this 450-year heritage with modern structural durability.
-              </p>
-            </ScrollReveal>
-          </div>
-
-          {/* Heritage Architectural Anatomy & 3D Azulejo Window Facade */}
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-            {/* FLOATING 3D ASSET: Vintage Azulejo Tile & Portuguese Window Facade */}
-            <div className="lg:col-span-6 flex justify-center perspective-1000">
-              <motion.div
-                initial={{ opacity: 0, rotateY: 60 }}
-                whileInView={{ opacity: 1, rotateY: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 1.1, ease: 'easeOut' }}
-                whileHover={{ rotateY: -15, scale: 1.03, transition: { duration: 0.4 } }}
-                className="relative w-full max-w-md aspect-[4/5] p-6 bg-gradient-to-br from-[#fefbf6] to-[#eef5fb] rounded-3xl border border-[#cfe0ee] shadow-2xl flex items-center justify-center cursor-pointer preserve-3d"
-              >
-                {/* 3D Portuguese Window Facade & Hand-Painted Azulejo Ceramic Tiles */}
-                <svg viewBox="0 0 400 480" className="w-full h-full filter drop-shadow-xl">
-                  <defs>
-                    <linearGradient id="stuccoOchre" x1="0%" y1="0%" x2="0%" y2="100%">
-                      <stop offset="0%" stopColor="#fef08a" />
-                      <stop offset="60%" stopColor="#eab308" />
-                      <stop offset="100%" stopColor="#ca8a04" />
-                    </linearGradient>
-                    <linearGradient id="shutterWood" x1="0%" y1="0%" x2="100%" y2="0%">
-                      <stop offset="0%" stopColor="#1e3a8a" />
-                      <stop offset="50%" stopColor="#044F92" />
-                      <stop offset="100%" stopColor="#1e40af" />
-                    </linearGradient>
-                    <pattern id="azulejoPattern" x="0" y="0" width="80" height="80" patternUnits="userSpaceOnUse">
-                      {/* White Ceramic Tile Base */}
-                      <rect width="80" height="80" fill="#f8fafc" stroke="#94a3b8" strokeWidth="1" />
-                      {/* Cobalt Blue Portuguese Filigree */}
-                      <circle cx="40" cy="40" r="28" fill="none" stroke="#044F92" strokeWidth="2.5" />
-                      <path d="M 40 12 C 30 25, 30 35, 40 40 C 50 35, 50 25, 40 12 Z" fill="#044F92" />
-                      <path d="M 40 68 C 30 55, 30 45, 40 40 C 50 45, 50 55, 40 68 Z" fill="#044F92" />
-                      <path d="M 12 40 C 25 30, 35 30, 40 40 C 35 50, 25 50, 12 40 Z" fill="#044F92" />
-                      <path d="M 68 40 C 55 30, 45 30, 40 40 C 45 50, 55 50, 68 40 Z" fill="#044F92" />
-                      {/* Corner Accents */}
-                      <circle cx="0" cy="0" r="10" fill="#044F92" />
-                      <circle cx="80" cy="0" r="10" fill="#044F92" />
-                      <circle cx="0" cy="80" r="10" fill="#044F92" />
-                      <circle cx="80" cy="80" r="10" fill="#044F92" />
-                    </pattern>
-                  </defs>
-
-                  {/* Wall Framing with Azulejo Border */}
-                  <rect x="20" y="20" width="360" height="440" rx="16" fill="url(#azulejoPattern)" stroke="#044F92" strokeWidth="4" />
-
-                  {/* Arched Portuguese Window Stucco Surround (Ochre Yellow) */}
-                  <path
-                    d="M 80 430 L 80 180 A 120 120 0 0 1 320 180 L 320 430 Z"
-                    fill="url(#stuccoOchre)"
-                    stroke="#92400e"
-                    strokeWidth="6"
-                  />
-
-                  {/* Molded Plaster Trim / Arch Rib */}
-                  <path
-                    d="M 100 430 L 100 185 A 100 100 0 0 1 300 185 L 300 430 Z"
-                    fill="#1a1a1a"
-                    stroke="#fef08a"
-                    strokeWidth="3"
-                  />
-
-                  {/* Translucent Oyster Shell Window Panes (Carepas) */}
-                  <g opacity="0.85">
-                    <rect x="110" y="195" width="85" height="110" fill="#f1f5f9" stroke="#cbd5e1" strokeWidth="2" />
-                    <rect x="205" y="195" width="85" height="110" fill="#f1f5f9" stroke="#cbd5e1" strokeWidth="2" />
-                    <line x1="110" y1="230" x2="195" y2="230" stroke="#94a3b8" strokeWidth="1.5" />
-                    <line x1="110" y1="265" x2="195" y2="265" stroke="#94a3b8" strokeWidth="1.5" />
-                    <line x1="205" y1="230" x2="290" y2="230" stroke="#94a3b8" strokeWidth="1.5" />
-                    <line x1="205" y1="265" x2="290" y2="265" stroke="#94a3b8" strokeWidth="1.5" />
-                  </g>
-
-                  {/* Wrought Iron Ornate Balcony Railing (Balcão) */}
-                  <g>
-                    <rect x="90" y="320" width="220" height="110" fill="#02182c" opacity="0.2" />
-                    <rect x="90" y="320" width="220" height="12" fill="#032b50" />
-                    <rect x="90" y="420" width="220" height="10" fill="#032b50" />
-                    {/* Railing Bars & Spirals */}
-                    {[105, 125, 145, 165, 185, 205, 225, 245, 265, 285].map((xVal, i) => (
-                      <line key={i} x1={xVal} y1="332" x2={xVal} y2="420" stroke="#03396c" strokeWidth="4" />
-                    ))}
-                    <circle cx="200" cy="370" r="22" fill="none" stroke="#38bdf8" strokeWidth="3" />
-                  </g>
-
-                  {/* Bougainvillea Flower Foliage Cascading over Arch */}
-                  <g>
-                    <circle cx="85" cy="150" r="10" fill="#ec4899" />
-                    <circle cx="95" cy="140" r="8" fill="#db2777" />
-                    <circle cx="78" cy="165" r="9" fill="#f43f5e" />
-                    <circle cx="108" cy="130" r="11" fill="#e11d48" />
-                    <circle cx="130" cy="115" r="9" fill="#be123c" />
-                    {/* Green Leaves */}
-                    <ellipse cx="80" cy="138" rx="6" ry="3" fill="#15803d" />
-                    <ellipse cx="115" cy="142" rx="7" ry="4" fill="#16a34a" />
-                  </g>
-                </svg>
-
-                {/* Badge Tag */}
-                <div className="absolute -bottom-4 bg-white border border-[#044F92] text-[#044F92] text-[10px] font-bold uppercase tracking-widest px-4 py-1.5 shadow-xl">
-                  Original Azulejo Glaze & Balcão Balcony
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
+            <div className="max-w-3xl space-y-4">
+              <ScrollReveal variant="from-left" distance={30}>
+                <div className="inline-flex items-center gap-2 px-3.5 py-1.5 bg-[#fef3c7] border border-[#fde68a] rounded-full text-[#92400e] text-xs font-semibold uppercase tracking-[0.2em]">
+                  <Landmark className="w-3.5 h-3.5 text-[#b45309]" />
+                  <span>Spiritual & Architectural Heritage</span>
                 </div>
-              </motion.div>
+              </ScrollReveal>
+
+              <ScrollReveal variant="from-left" distance={40} delay={0.1}>
+                <h2 className="font-display text-4xl sm:text-5xl lg:text-6xl font-normal text-[#1a1a1a] tracking-tight">
+                  Sacred Landmarks, <br />
+                  <span className="text-[#044F92] font-serif italic">Historic Temples & Churches</span>
+                </h2>
+              </ScrollReveal>
+
+              <ScrollReveal variant="from-left" distance={40} delay={0.2}>
+                <p className="text-base sm:text-lg text-[#5a554e] font-light leading-relaxed">
+                  Goa's culture is an enchanting harmony of centuries-old Kadamba basalt temples and Portuguese Baroque cathedrals. Discover the timeless spiritual architecture of the sunshine state.
+                </p>
+              </ScrollReveal>
             </div>
 
-            {/* Right: Architectural Anatomy Hotspots */}
-            <div className="lg:col-span-6 space-y-6">
-              <div className="space-y-3">
-                <p className="text-xs uppercase tracking-widest font-bold text-[#044F92]">Architectural Anatomy</p>
-                <h3 className="font-display text-3xl text-[#1a1a1a]">Elements of Classical Goan Estates</h3>
-                <p className="text-sm text-[#5a554e] font-light leading-relaxed">
-                  Every Kamat home blends the passive cooling ingenuity of 18th-century Goan master builders with seismic-proof RCC framing and smart home automation.
+            <div className="inline-flex p-1.5 bg-[#f4f1ee] rounded-xl border border-[#e5e1da] text-xs">
+              {[
+                { id: 'all', label: 'All Sacred Landmarks' },
+                { id: 'church', label: 'Famous Churches' },
+                { id: 'temple', label: 'Historic Temples' }
+              ].map((tab) => (
+                <button
+                  key={tab.id}
+                  onClick={() => setHeritageCategory(tab.id as 'all' | 'church' | 'temple')}
+                  className={`px-4 py-2 rounded-lg font-medium transition-all cursor-pointer ${
+                    heritageCategory === tab.id
+                      ? 'bg-[#044F92] text-white shadow font-semibold'
+                      : 'text-[#5a554e] hover:text-[#1a1a1a]'
+                  }`}
+                >
+                  {tab.label}
+                </button>
+              ))}
+            </div>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {filteredHeritage.map((item) => (
+              <motion.div
+                key={item.id}
+                whileHover={{ y: -6 }}
+                onClick={() => setSelectedHeritageItem(item)}
+                className="bg-white border border-[#cfe0ee] rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all cursor-pointer flex flex-col group"
+              >
+                <div className="relative aspect-[16/10] overflow-hidden">
+                  <img
+                    src={item.image}
+                    alt={item.name}
+                    className="w-full h-full object-cover group-hover:scale-108 transition-transform duration-700"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
+
+                  <div className="absolute top-3 left-3">
+                    <span
+                      className={`px-3 py-1 text-[10px] font-bold uppercase tracking-wider rounded-md text-white shadow ${
+                        item.category === 'church' ? 'bg-[#044F92]' : 'bg-[#c25e38]'
+                      }`}
+                    >
+                      {item.category === 'church' ? 'Cathedral & Church' : 'Historic Temple'}
+                    </span>
+                  </div>
+
+                  <div className="absolute bottom-3 left-3 right-3 text-white">
+                    <p className="text-[10px] text-blue-200 uppercase tracking-widest font-mono">{item.era}</p>
+                    <h3 className="font-display text-xl leading-snug">{item.name}</h3>
+                  </div>
+                </div>
+
+                <div className="p-6 flex-1 flex flex-col justify-between space-y-4">
+                  <div className="space-y-3">
+                    <div className="flex items-center gap-1.5 text-xs text-[#044F92] font-semibold">
+                      <MapPin className="w-3.5 h-3.5 text-[#044F92]" />
+                      <span>{item.location}</span>
+                    </div>
+
+                    <p className="text-xs text-[#5a554e] line-clamp-3 leading-relaxed">
+                      {item.intro}
+                    </p>
+
+                    <div className="p-3 bg-[#f8fafc] border border-[#e2e8f0] rounded-xl text-xs space-y-1">
+                      <p className="text-[10px] text-[#8c857d] uppercase font-bold tracking-wider">Architecture Style</p>
+                      <p className="text-[#1a1a1a] font-medium">{item.architecture}</p>
+                    </div>
+                  </div>
+
+                  <div className="pt-2 border-t border-[#f0ece5] flex items-center justify-between text-xs">
+                    <span className="text-[11px] text-[#8c857d] italic line-clamp-1">{item.significance}</span>
+                    <span className="text-[#044F92] font-semibold flex items-center gap-1 group-hover:translate-x-1 transition-transform shrink-0">
+                      <span>Explore</span>
+                      <ChevronRight className="w-3.5 h-3.5" />
+                    </span>
+                  </div>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+
+          <div className="mt-16 p-8 lg:p-12 bg-gradient-to-br from-[#f8fafc] to-[#eef5fb] rounded-3xl border border-[#cfe0ee] shadow-xl">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+              <div className="lg:col-span-5 space-y-4">
+                <div className="inline-flex items-center gap-2 px-3 py-1 bg-[#eef5fb] border border-[#cfe0ee] rounded-full text-[#044F92] text-xs font-semibold uppercase tracking-widest">
+                  <Building2 className="w-3.5 h-3.5 text-[#044F92]" />
+                  <span>Goan Architectural Anatomy</span>
+                </div>
+                <h3 className="font-display text-3xl sm:text-4xl text-[#1a1a1a]">Elements of Classical Goan Estates</h3>
+                <p className="text-sm text-[#5a554e] leading-relaxed font-light">
+                  Every Kamat luxury villa integrates the climate-smart wisdom of Goan master builders — naturally ventilated high roofs, oyster shell window diffusers, and warm masonry balcãos.
                 </p>
               </div>
 
-              {/* 4 Feature Accordion Cards */}
-              <div className="space-y-3">
+              <div className="lg:col-span-7 grid grid-cols-1 sm:grid-cols-2 gap-4">
                 {[
                   {
-                    title: 'Vibrant Ochre & Indigo Mineral Stucco',
-                    detail: 'Historically derived from local laterite stone earth and natural plant dyes to repel tropical humidity and monsoon downpours.'
+                    title: 'Oyster Shell Carepas Windows',
+                    desc: 'Hand-cut windowpane oyster shells (Placuna placenta) that soften tropical glare into soothing pearlescent ambient light.'
                   },
                   {
-                    title: 'Translucent Oyster Shell Carepas Windows',
-                    detail: 'Before glass arrived in Goa, artisans hand-cut windowpane oyster shells (Placuna placenta) to diffuse harsh tropical glare into warm, pearlescent ambient light.'
+                    title: 'The Balcão Verandah',
+                    desc: 'Communal masonry seats outside the front door where families gather at sunset to converse and enjoy the sea breeze.'
                   },
                   {
-                    title: 'The Balcão (Covered Porch Verandah)',
-                    detail: 'The communal heart of Goan homes with built-in masonry benches (assentos) where neighbours gather to converse and watch the twilight.'
+                    title: 'Vibrant Ochre Mineral Stucco',
+                    desc: 'Natural laterite earth pigments that resist monsoon rain and maintain comfortable interior ambient coolness.'
                   },
                   {
-                    title: 'High-Pitch Mangalore Terracotta Roofs',
-                    detail: 'Steeply angled baked clay tiles that channel monsoon deluge away instantly, creating naturally insulated airy 14-foot interior ceilings.'
+                    title: 'Mangalore Terracotta Tiles',
+                    desc: 'Steeply pitched clay tile roofs channeling heavy monsoons away while insulating double-height ceiling pavilions.'
                   }
-                ].map((item, idx) => (
-                  <div
-                    key={idx}
-                    onClick={() => setActiveArchFeature(idx)}
-                    className={`p-4 rounded-xl border transition-all cursor-pointer ${
-                      activeArchFeature === idx
-                        ? 'bg-[#eef5fb] border-[#044F92] shadow-sm'
-                        : 'bg-white border-[#e5e1da] hover:border-[#cfe0ee]'
-                    }`}
-                  >
-                    <div className="flex items-center justify-between">
-                      <span className="font-display text-lg text-[#1a1a1a] flex items-center gap-2">
-                        <span className={`w-2 h-2 rounded-full ${activeArchFeature === idx ? 'bg-[#044F92]' : 'bg-[#c2d6e8]'}`} />
-                        {item.title}
-                      </span>
-                      <ChevronRight
-                        className={`w-4 h-4 transition-transform ${
-                          activeArchFeature === idx ? 'rotate-90 text-[#044F92]' : 'text-[#8c857d]'
-                        }`}
-                      />
+                ].map((feature, fIdx) => (
+                  <div key={fIdx} className="p-5 bg-white border border-[#cfe0ee] rounded-2xl shadow-sm space-y-2">
+                    <div className="flex items-center gap-2">
+                      <span className="w-2 h-2 rounded-full bg-[#044F92]" />
+                      <h4 className="font-display text-base text-[#1a1a1a]">{feature.title}</h4>
                     </div>
-                    {activeArchFeature === idx && (
-                      <p className="text-xs text-[#5a554e] mt-2 pl-4 border-l-2 border-[#044F92] leading-relaxed">
-                        {item.detail}
-                      </p>
-                    )}
+                    <p className="text-xs text-[#5a554e] leading-relaxed">{feature.desc}</p>
                   </div>
                 ))}
-              </div>
-
-              <div className="pt-2">
-                <button
-                  onClick={() => navigate('about')}
-                  className="px-6 py-3 bg-[#044F92] text-white text-xs font-semibold uppercase tracking-widest hover:bg-[#03396c] transition-colors inline-flex items-center gap-2 cursor-pointer"
-                >
-                  <span>Discover Kamat’s 32-Yr Heritage</span>
-                  <ChevronRight className="w-4 h-4" />
-                </button>
               </div>
             </div>
           </div>
@@ -1358,7 +1592,6 @@ export const ExploreGoaPage: React.FC<ExploreGoaPageProps> = ({
         className="relative py-28 px-6 sm:px-8 lg:px-12 bg-gradient-to-b from-[#faf7f2] to-[#f2f7fc] border-b border-[#cfe0ee] overflow-hidden"
       >
         <div className="max-w-7xl mx-auto space-y-16">
-          {/* Header */}
           <div className="max-w-3xl space-y-4">
             <ScrollReveal variant="from-left" distance={30}>
               <div className="inline-flex items-center gap-2 px-3.5 py-1.5 bg-[#eef5fb] border border-[#cfe0ee] rounded-full text-[#044F92] text-xs font-semibold uppercase tracking-[0.2em]">
@@ -1381,9 +1614,7 @@ export const ExploreGoaPage: React.FC<ExploreGoaPageProps> = ({
             </ScrollReveal>
           </div>
 
-          {/* 3D Highway Ribbon & MOPA Aircraft Landing Mockup + ROI Calculator */}
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-            {/* FLOATING 3D ASSET: Winding 3D Highway Ribbon & Airplane Landing Mockup */}
             <div className="lg:col-span-6 flex justify-center perspective-1000">
               <motion.div
                 initial={{ opacity: 0, scale: 0.88 }}
@@ -1392,10 +1623,8 @@ export const ExploreGoaPage: React.FC<ExploreGoaPageProps> = ({
                 transition={{ duration: 1, ease: 'easeOut' }}
                 className="relative w-full max-w-lg aspect-square p-6 bg-white rounded-3xl border border-[#cfe0ee] shadow-2xl flex items-center justify-center preserve-3d overflow-hidden"
               >
-                {/* Background Radar & Route Grid */}
                 <div className="absolute inset-0 editorial-grid opacity-30 pointer-events-none" />
 
-                {/* THE 3D WINDING HIGHWAY RIBBON & LANDING JET (SVG) */}
                 <svg viewBox="0 0 500 500" className="w-full h-full filter drop-shadow-xl">
                   <defs>
                     <linearGradient id="highwayGrad" x1="0%" y1="100%" x2="100%" y2="0%">
@@ -1411,10 +1640,8 @@ export const ExploreGoaPage: React.FC<ExploreGoaPageProps> = ({
                     </linearGradient>
                   </defs>
 
-                  {/* Isometric Ground Elevation Plate */}
                   <polygon points="50,380 250,470 450,380 250,290" fill="#f1f5f9" stroke="#cbd5e1" strokeWidth="2" />
 
-                  {/* 3D Winding Highway Ribbon (MOPA Expressway) */}
                   <path
                     d="M 60 420 C 180 320, 100 220, 240 180 C 340 150, 360 80, 420 40"
                     fill="none"
@@ -1422,7 +1649,6 @@ export const ExploreGoaPage: React.FC<ExploreGoaPageProps> = ({
                     strokeWidth="38"
                     strokeLinecap="round"
                   />
-                  {/* Road Center Dashed Line */}
                   <path
                     d="M 60 420 C 180 320, 100 220, 240 180 C 340 150, 360 80, 420 40"
                     fill="none"
@@ -1433,49 +1659,37 @@ export const ExploreGoaPage: React.FC<ExploreGoaPageProps> = ({
                     className="animate-shimmer"
                   />
 
-                  {/* Destination Nodes */}
-                  {/* Node 1: MOPA Airport */}
                   <circle cx="420" cy="40" r="18" fill="#044F92" stroke="#ffffff" strokeWidth="3" />
                   <text x="420" y="44" fill="#ffffff" fontSize="9" fontWeight="bold" textAnchor="middle" fontFamily="sans-serif">
                     MOPA
                   </text>
 
-                  {/* Node 2: Assagao / Vagator */}
                   <circle cx="240" cy="180" r="14" fill="#0284c7" stroke="#ffffff" strokeWidth="2.5" />
                   <text x="240" y="210" fill="#044F92" fontSize="11" fontWeight="bold" textAnchor="middle" fontFamily="sans-serif">
                     Assagao (28 Min)
                   </text>
 
-                  {/* Node 3: Panaji CBD */}
                   <circle cx="60" cy="420" r="16" fill="#044F92" stroke="#ffffff" strokeWidth="3" />
                   <text x="70" y="450" fill="#044F92" fontSize="11" fontWeight="bold" textAnchor="start" fontFamily="sans-serif">
                     Panaji Capital
                   </text>
 
-                  {/* 3D COMMERCIAL AIRPLANE LANDING MOCKUP */}
                   <g transform="translate(320, 90) rotate(22)">
-                    {/* Airplane Fuselage */}
                     <path
                       d="M 0 -35 C 10 -35, 12 35, 0 45 C -12 35, -10 -35, 0 -35 Z"
                       fill="url(#jetChrome)"
                       stroke="#475569"
                       strokeWidth="2"
                     />
-                    {/* Main Swept Wings */}
                     <polygon points="0,-5 85,25 75,32 0,10 -75,32 -85,25" fill="#cbd5e1" stroke="#475569" strokeWidth="2" />
-                    {/* Tailplane (Stabilizers) */}
                     <polygon points="0,32 30,48 24,52 0,42 -24,52 -30,48" fill="#cbd5e1" stroke="#475569" strokeWidth="1.5" />
-                    {/* Vertical Fin */}
                     <polygon points="0,25 0,46 -4,44 -2,25" fill="#044F92" />
-                    {/* Jet Engines */}
                     <ellipse cx="28" cy="14" rx="4" ry="10" fill="#334155" />
                     <ellipse cx="-28" cy="14" rx="4" ry="10" fill="#334155" />
-                    {/* Cockpit Windshield */}
                     <path d="M -5 -25 Q 0 -30 5 -25 Z" fill="#0284c7" />
                   </g>
                 </svg>
 
-                {/* Infrastructure Metric Pills */}
                 <div className="absolute top-4 left-4 bg-[#044F92] text-white px-3 py-1.5 rounded-lg text-[10px] uppercase font-bold tracking-wider shadow-md">
                   Manohar Int'l Airport (MOPA) Active
                 </div>
@@ -1486,7 +1700,6 @@ export const ExploreGoaPage: React.FC<ExploreGoaPageProps> = ({
               </motion.div>
             </div>
 
-            {/* Right: Interactive Goa Vacation Rental Yield Calculator */}
             <div className="lg:col-span-6 space-y-6">
               <div className="p-6 sm:p-8 bg-white border border-[#cfe0ee] rounded-2xl shadow-xl space-y-6">
                 <div className="flex items-center justify-between border-b border-[#e5e1da] pb-4">
@@ -1499,7 +1712,6 @@ export const ExploreGoaPage: React.FC<ExploreGoaPageProps> = ({
                   </div>
                 </div>
 
-                {/* Slider 1: Capital Investment */}
                 <div className="space-y-2">
                   <div className="flex items-center justify-between text-xs">
                     <span className="font-semibold text-[#5a554e]">Villa Capital Value</span>
@@ -1520,7 +1732,6 @@ export const ExploreGoaPage: React.FC<ExploreGoaPageProps> = ({
                   </div>
                 </div>
 
-                {/* Slider 2: Annual Occupancy */}
                 <div className="space-y-2">
                   <div className="flex items-center justify-between text-xs">
                     <span className="font-semibold text-[#5a554e]">Peak & Mid-Season Occupancy</span>
@@ -1541,7 +1752,6 @@ export const ExploreGoaPage: React.FC<ExploreGoaPageProps> = ({
                   </div>
                 </div>
 
-                {/* Results Metrics Dashboard */}
                 <div className="grid grid-cols-2 gap-4 p-4 bg-[#f2f7fc] border border-[#cfe0ee] rounded-xl">
                   <div>
                     <p className="text-[10px] uppercase font-bold text-[#8c857d]">Est. Annual Rental Payout</p>
@@ -1555,7 +1765,6 @@ export const ExploreGoaPage: React.FC<ExploreGoaPageProps> = ({
                   </div>
                 </div>
 
-                {/* Key Drivers Comparison */}
                 <div className="grid grid-cols-3 gap-2 text-center text-xs">
                   <div className="p-2.5 bg-white border border-[#e5e1da] rounded-lg">
                     <p className="font-mono font-bold text-[#044F92]">3.2x</p>
@@ -1571,7 +1780,6 @@ export const ExploreGoaPage: React.FC<ExploreGoaPageProps> = ({
                   </div>
                 </div>
 
-                {/* Final Booking CTAs */}
                 <div className="flex flex-col sm:flex-row gap-3 pt-2">
                   <button
                     onClick={handleTour}
@@ -1591,6 +1799,73 @@ export const ExploreGoaPage: React.FC<ExploreGoaPageProps> = ({
           </div>
         </div>
       </section>
+
+      {/* DETAIL MODAL FOR SACRED HERITAGE SITE */}
+      <AnimatePresence>
+        {selectedHeritageItem && (
+          <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 bg-black/75 backdrop-blur-sm">
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95, y: 20 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.95, y: 20 }}
+              className="relative w-full max-w-2xl bg-white rounded-3xl overflow-hidden shadow-2xl border border-[#cfe0ee] max-h-[90vh] flex flex-col"
+            >
+              <div className="relative aspect-[16/9] w-full shrink-0">
+                <img
+                  src={selectedHeritageItem.image}
+                  alt={selectedHeritageItem.name}
+                  className="w-full h-full object-cover"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
+                <button
+                  onClick={() => setSelectedHeritageItem(null)}
+                  className="absolute top-4 right-4 w-9 h-9 rounded-full bg-black/60 hover:bg-black text-white flex items-center justify-center cursor-pointer transition-colors"
+                >
+                  <X className="w-5 h-5" />
+                </button>
+                <div className="absolute bottom-4 left-6 right-6 text-white">
+                  <span
+                    className={`inline-block px-3 py-1 text-[10px] font-bold uppercase tracking-wider rounded-md text-white shadow mb-1 ${
+                      selectedHeritageItem.category === 'church' ? 'bg-[#044F92]' : 'bg-[#c25e38]'
+                    }`}
+                  >
+                    {selectedHeritageItem.category === 'church' ? 'Cathedral / Church' : 'Revered Temple'}
+                  </span>
+                  <h3 className="font-display text-2xl sm:text-3xl text-white">{selectedHeritageItem.name}</h3>
+                  <p className="text-xs text-blue-200">{selectedHeritageItem.location} • {selectedHeritageItem.era}</p>
+                </div>
+              </div>
+
+              <div className="p-6 sm:p-8 space-y-5 overflow-y-auto">
+                <div className="space-y-2">
+                  <h4 className="text-xs font-bold uppercase tracking-widest text-[#044F92]">Historical Overview</h4>
+                  <p className="text-sm text-[#4a4540] leading-relaxed font-light">{selectedHeritageItem.intro}</p>
+                </div>
+
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div className="p-4 bg-[#f8fafc] border border-[#e2e8f0] rounded-xl space-y-1">
+                    <p className="text-[10px] font-bold uppercase tracking-wider text-[#8c857d]">Architectural Highlight</p>
+                    <p className="text-xs text-[#1a1a1a] font-medium leading-relaxed">{selectedHeritageItem.keyFeature}</p>
+                  </div>
+                  <div className="p-4 bg-[#fef9ee] border border-[#fef3c7] rounded-xl space-y-1">
+                    <p className="text-[10px] font-bold uppercase tracking-wider text-amber-800">Cultural Significance</p>
+                    <p className="text-xs text-amber-950 font-medium leading-relaxed">{selectedHeritageItem.significance}</p>
+                  </div>
+                </div>
+
+                <div className="pt-2 flex justify-end">
+                  <button
+                    onClick={() => setSelectedHeritageItem(null)}
+                    className="px-6 py-2.5 bg-[#044F92] text-white text-xs font-semibold uppercase tracking-widest hover:bg-[#03396c] transition-colors cursor-pointer"
+                  >
+                    Close Landmark
+                  </button>
+                </div>
+              </div>
+            </motion.div>
+          </div>
+        )}
+      </AnimatePresence>
 
       {/* VIP Discovery Finale Banner */}
       <section className="py-20 px-6 sm:px-8 bg-[#044F92] text-white text-center relative overflow-hidden">
@@ -1623,4 +1898,3 @@ export const ExploreGoaPage: React.FC<ExploreGoaPageProps> = ({
     </div>
   );
 };
-
