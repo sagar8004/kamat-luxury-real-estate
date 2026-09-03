@@ -1,13 +1,13 @@
 [
   {
-    "id": "kamat-grandeur-assagao",
-    "slug": "kamat-grandeur-assagao",
-    "title": "Kamat Grandeur",
+    "id": "kamat-crest-porvorim",
+    "slug": "kamat-crest-porvorim",
+    "title": "Kamat Crest",
     "tagline": "Private Forest-Edge Pool Estates in the Heart of Assagao",
     "status": "ongoing",
     "category": "villa",
     "location": {
-      "area": "Assagao",
+      "area": "Porvorim",
       "region": "North Goa",
       "city": "Assagao, Bardez",
       "state": "Goa",
@@ -26,19 +26,22 @@
     },
     "specs": {
       "bhk": "4 & 5 BHK Private Pool Villas",
-      "bedrooms": [4, 5],
+      "bedrooms": [
+        4,
+        5
+      ],
       "sqftRange": "4,200 - 5,850 Sq.Ft",
       "totalUnits": 12,
       "unitsAvailable": 4,
       "possessionDate": "Q1 2027",
       "reraNumber": "PRGO08231940"
     },
-    "heroImage": "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=1600&q=80",
+    "heroImage": "/properties/kamat-crest/hero.webp",
     "gallery": [
-      "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1200&q=80",
-      "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=1200&q=80",
-      "https://images.unsplash.com/photo-1613977257363-707ba9348227?auto=format&fit=crop&w=1200&q=80",
-      "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=1200&q=80"
+      "/properties/kamat-crest/gallery-1.webp",
+      "/properties/kamat-crest/gallery-2.webp",
+      "/properties/kamat-crest/gallery-3.webp",
+      "/properties/kamat-crest/gallery-4.webp"
     ],
     "architecturalStyle": "Portuguese-Contemporary Tropical Biophilic",
     "description": "Nestled in the idyllic foliage of Assagao, Kamat Grandeur represents an exclusive enclave of 12 bespoke forest-edge pool villas. Designed with double-height ceiling verandas, laterite stone masonry, floor-to-ceiling glass pavilions, and private infinity plunge pools, it blends the romantic heritage of Goa with ultra-contemporary sustainable luxury.",
@@ -62,12 +65,42 @@
     "constructionStatus": {
       "overallPercent": 68,
       "milestones": [
-        { "stage": "Land Acquisition & RERA Approvals", "progressPercent": 100, "status": "completed", "dateCompleted": "Nov 2024" },
-        { "stage": "Substructure & RCC Foundation", "progressPercent": 100, "status": "completed", "dateCompleted": "Apr 2025" },
-        { "stage": "RCC Superstructure & Slab Casting", "progressPercent": 85, "status": "in-progress", "targetDate": "Sep 2026" },
-        { "stage": "Brickwork, Plaster & MEP Piping", "progressPercent": 60, "status": "in-progress", "targetDate": "Nov 2026" },
-        { "stage": "Interior Finishes, Italian Marble & Façade", "progressPercent": 25, "status": "scheduled", "targetDate": "Feb 2027" },
-        { "stage": "Landscaping, Pool Commissioning & Handover", "progressPercent": 0, "status": "scheduled", "targetDate": "Apr 2027" }
+        {
+          "stage": "Land Acquisition & RERA Approvals",
+          "progressPercent": 100,
+          "status": "completed",
+          "dateCompleted": "Nov 2024"
+        },
+        {
+          "stage": "Substructure & RCC Foundation",
+          "progressPercent": 100,
+          "status": "completed",
+          "dateCompleted": "Apr 2025"
+        },
+        {
+          "stage": "RCC Superstructure & Slab Casting",
+          "progressPercent": 85,
+          "status": "in-progress",
+          "targetDate": "Sep 2026"
+        },
+        {
+          "stage": "Brickwork, Plaster & MEP Piping",
+          "progressPercent": 60,
+          "status": "in-progress",
+          "targetDate": "Nov 2026"
+        },
+        {
+          "stage": "Interior Finishes, Italian Marble & Façade",
+          "progressPercent": 25,
+          "status": "scheduled",
+          "targetDate": "Feb 2027"
+        },
+        {
+          "stage": "Landscaping, Pool Commissioning & Handover",
+          "progressPercent": 0,
+          "status": "scheduled",
+          "targetDate": "Apr 2027"
+        }
       ],
       "lastUpdated": "August 2026"
     },
@@ -90,10 +123,26 @@
       }
     ],
     "landmarks": [
-      { "name": "Mopa (Manohar) Int'l Airport", "distance": "32 mins", "type": "airport" },
-      { "name": "Vagator & Anjuna Beaches", "distance": "12 mins", "type": "beach" },
-      { "name": "Assagao Fine Dining Quarter", "distance": "3 mins", "type": "dining" },
-      { "name": "Panaji Capital Promenade", "distance": "22 mins", "type": "heritage" }
+      {
+        "name": "Mopa (Manohar) Int'l Airport",
+        "distance": "32 mins",
+        "type": "airport"
+      },
+      {
+        "name": "Vagator & Anjuna Beaches",
+        "distance": "12 mins",
+        "type": "beach"
+      },
+      {
+        "name": "Assagao Fine Dining Quarter",
+        "distance": "3 mins",
+        "type": "dining"
+      },
+      {
+        "name": "Panaji Capital Promenade",
+        "distance": "22 mins",
+        "type": "heritage"
+      }
     ],
     "featured": true
   },
@@ -124,7 +173,11 @@
     },
     "specs": {
       "bhk": "3, 4 BHK & Sky Penthouses",
-      "bedrooms": [3, 4, 5],
+      "bedrooms": [
+        3,
+        4,
+        5
+      ],
       "sqftRange": "2,900 - 6,100 Sq.Ft",
       "totalUnits": 24,
       "unitsAvailable": 7,
@@ -160,12 +213,42 @@
     "constructionStatus": {
       "overallPercent": 84,
       "milestones": [
-        { "stage": "Piling & Basement Retaining Walls", "progressPercent": 100, "status": "completed", "dateCompleted": "Jan 2024" },
-        { "stage": "RCC Tower Structural Superstructure", "progressPercent": 100, "status": "completed", "dateCompleted": "Dec 2025" },
-        { "stage": "Schuco Glazing & Exterior Façade", "progressPercent": 90, "status": "in-progress", "targetDate": "Sep 2026" },
-        { "stage": "Interior Marble Flooring & False Ceiling", "progressPercent": 75, "status": "in-progress", "targetDate": "Oct 2026" },
-        { "stage": "Sky Club, Rooftop Deck & Finishes", "progressPercent": 60, "status": "in-progress", "targetDate": "Nov 2026" },
-        { "stage": "Occupancy Certification & Handover", "progressPercent": 0, "status": "scheduled", "targetDate": "Dec 2026" }
+        {
+          "stage": "Piling & Basement Retaining Walls",
+          "progressPercent": 100,
+          "status": "completed",
+          "dateCompleted": "Jan 2024"
+        },
+        {
+          "stage": "RCC Tower Structural Superstructure",
+          "progressPercent": 100,
+          "status": "completed",
+          "dateCompleted": "Dec 2025"
+        },
+        {
+          "stage": "Schuco Glazing & Exterior Façade",
+          "progressPercent": 90,
+          "status": "in-progress",
+          "targetDate": "Sep 2026"
+        },
+        {
+          "stage": "Interior Marble Flooring & False Ceiling",
+          "progressPercent": 75,
+          "status": "in-progress",
+          "targetDate": "Oct 2026"
+        },
+        {
+          "stage": "Sky Club, Rooftop Deck & Finishes",
+          "progressPercent": 60,
+          "status": "in-progress",
+          "targetDate": "Nov 2026"
+        },
+        {
+          "stage": "Occupancy Certification & Handover",
+          "progressPercent": 0,
+          "status": "scheduled",
+          "targetDate": "Dec 2026"
+        }
       ],
       "lastUpdated": "August 2026"
     },
@@ -188,10 +271,26 @@
       }
     ],
     "landmarks": [
-      { "name": "Miramar Beach Promenade", "distance": "1 min", "type": "beach" },
-      { "name": "Panaji City Center & Fontainhas", "distance": "5 mins", "type": "heritage" },
-      { "name": "Manipal Hospital Goa", "distance": "6 mins", "type": "hospital" },
-      { "name": "Dabolim Airport", "distance": "35 mins", "type": "airport" }
+      {
+        "name": "Miramar Beach Promenade",
+        "distance": "1 min",
+        "type": "beach"
+      },
+      {
+        "name": "Panaji City Center & Fontainhas",
+        "distance": "5 mins",
+        "type": "heritage"
+      },
+      {
+        "name": "Manipal Hospital Goa",
+        "distance": "6 mins",
+        "type": "hospital"
+      },
+      {
+        "name": "Dabolim Airport",
+        "distance": "35 mins",
+        "type": "airport"
+      }
     ],
     "featured": true
   },
@@ -222,7 +321,10 @@
     },
     "specs": {
       "bhk": "3 & 4 BHK Luxury Apartments",
-      "bedrooms": [3, 4],
+      "bedrooms": [
+        3,
+        4
+      ],
       "sqftRange": "2,200 - 3,450 Sq.Ft",
       "totalUnits": 48,
       "unitsAvailable": 14,
@@ -257,12 +359,42 @@
     "constructionStatus": {
       "overallPercent": 45,
       "milestones": [
-        { "stage": "RERA Approval & Soil Stabilization", "progressPercent": 100, "status": "completed", "dateCompleted": "Jan 2025" },
-        { "stage": "Podium & Basement Structural Works", "progressPercent": 100, "status": "completed", "dateCompleted": "Jun 2025" },
-        { "stage": "Tower A & B RCC Frame (up to 8th floor)", "progressPercent": 70, "status": "in-progress", "targetDate": "Nov 2026" },
-        { "stage": "Tower C & D RCC Superstructure", "progressPercent": 40, "status": "in-progress", "targetDate": "Jan 2027" },
-        { "stage": "Finishing, Club & Landscaping", "progressPercent": 0, "status": "scheduled", "targetDate": "May 2027" },
-        { "stage": "Possession & Community Handover", "progressPercent": 0, "status": "scheduled", "targetDate": "Sep 2027" }
+        {
+          "stage": "RERA Approval & Soil Stabilization",
+          "progressPercent": 100,
+          "status": "completed",
+          "dateCompleted": "Jan 2025"
+        },
+        {
+          "stage": "Podium & Basement Structural Works",
+          "progressPercent": 100,
+          "status": "completed",
+          "dateCompleted": "Jun 2025"
+        },
+        {
+          "stage": "Tower A & B RCC Frame (up to 8th floor)",
+          "progressPercent": 70,
+          "status": "in-progress",
+          "targetDate": "Nov 2026"
+        },
+        {
+          "stage": "Tower C & D RCC Superstructure",
+          "progressPercent": 40,
+          "status": "in-progress",
+          "targetDate": "Jan 2027"
+        },
+        {
+          "stage": "Finishing, Club & Landscaping",
+          "progressPercent": 0,
+          "status": "scheduled",
+          "targetDate": "May 2027"
+        },
+        {
+          "stage": "Possession & Community Handover",
+          "progressPercent": 0,
+          "status": "scheduled",
+          "targetDate": "Sep 2027"
+        }
       ],
       "lastUpdated": "August 2026"
     },
@@ -285,10 +417,26 @@
       }
     ],
     "landmarks": [
-      { "name": "Mall De Goa Porvorim", "distance": "3 mins", "type": "dining" },
-      { "name": "Panaji Old Heritage Quarter", "distance": "8 mins", "type": "heritage" },
-      { "name": "Candolim & Calangute Coast", "distance": "14 mins", "type": "beach" },
-      { "name": "Mopa International Airport", "distance": "35 mins", "type": "airport" }
+      {
+        "name": "Mall De Goa Porvorim",
+        "distance": "3 mins",
+        "type": "dining"
+      },
+      {
+        "name": "Panaji Old Heritage Quarter",
+        "distance": "8 mins",
+        "type": "heritage"
+      },
+      {
+        "name": "Candolim & Calangute Coast",
+        "distance": "14 mins",
+        "type": "beach"
+      },
+      {
+        "name": "Mopa International Airport",
+        "distance": "35 mins",
+        "type": "airport"
+      }
     ],
     "featured": true
   },
@@ -319,7 +467,9 @@
     },
     "specs": {
       "bhk": "Bespoke Corporate Suites & High-Street Retail",
-      "bedrooms": [0],
+      "bedrooms": [
+        0
+      ],
       "sqftRange": "950 - 12,000 Sq.Ft",
       "totalUnits": 36,
       "unitsAvailable": 9,
@@ -354,11 +504,36 @@
     "constructionStatus": {
       "overallPercent": 55,
       "milestones": [
-        { "stage": "Approvals & Diaphragm Walls", "progressPercent": 100, "status": "completed", "dateCompleted": "Feb 2025" },
-        { "stage": "Triple Basement RCC Car Park", "progressPercent": 100, "status": "completed", "dateCompleted": "Jul 2025" },
-        { "stage": "Core Structural Framework", "progressPercent": 75, "status": "in-progress", "targetDate": "Oct 2026" },
-        { "stage": "Curtain Wall Glazing & Facade", "progressPercent": 30, "status": "in-progress", "targetDate": "Jan 2027" },
-        { "stage": "MEP Commissioning & Retail Fitout", "progressPercent": 0, "status": "scheduled", "targetDate": "May 2027" }
+        {
+          "stage": "Approvals & Diaphragm Walls",
+          "progressPercent": 100,
+          "status": "completed",
+          "dateCompleted": "Feb 2025"
+        },
+        {
+          "stage": "Triple Basement RCC Car Park",
+          "progressPercent": 100,
+          "status": "completed",
+          "dateCompleted": "Jul 2025"
+        },
+        {
+          "stage": "Core Structural Framework",
+          "progressPercent": 75,
+          "status": "in-progress",
+          "targetDate": "Oct 2026"
+        },
+        {
+          "stage": "Curtain Wall Glazing & Facade",
+          "progressPercent": 30,
+          "status": "in-progress",
+          "targetDate": "Jan 2027"
+        },
+        {
+          "stage": "MEP Commissioning & Retail Fitout",
+          "progressPercent": 0,
+          "status": "scheduled",
+          "targetDate": "May 2027"
+        }
       ],
       "lastUpdated": "August 2026"
     },
@@ -381,10 +556,26 @@
       }
     ],
     "landmarks": [
-      { "name": "Panaji Kadamba Bus Terminal", "distance": "2 mins", "type": "highway" },
-      { "name": "Panaji High Court & Secretariat", "distance": "5 mins", "type": "heritage" },
-      { "name": "Mandovi River Cruise Terminal", "distance": "4 mins", "type": "beach" },
-      { "name": "Dabolim International Airport", "distance": "28 mins", "type": "airport" }
+      {
+        "name": "Panaji Kadamba Bus Terminal",
+        "distance": "2 mins",
+        "type": "highway"
+      },
+      {
+        "name": "Panaji High Court & Secretariat",
+        "distance": "5 mins",
+        "type": "heritage"
+      },
+      {
+        "name": "Mandovi River Cruise Terminal",
+        "distance": "4 mins",
+        "type": "beach"
+      },
+      {
+        "name": "Dabolim International Airport",
+        "distance": "28 mins",
+        "type": "airport"
+      }
     ],
     "featured": false
   },
@@ -416,7 +607,9 @@
     },
     "specs": {
       "bhk": "4 BHK Mediterranean Private Villas",
-      "bedrooms": [4],
+      "bedrooms": [
+        4
+      ],
       "sqftRange": "4,100 - 4,800 Sq.Ft",
       "totalUnits": 16,
       "unitsAvailable": 1,
@@ -459,10 +652,26 @@
       }
     ],
     "landmarks": [
-      { "name": "Candolim Beach Shoreline", "distance": "4 mins walk", "type": "beach" },
-      { "name": "Fort Aguada Heritage Lighthouse", "distance": "7 mins", "type": "heritage" },
-      { "name": "Panaji Capital Promenade", "distance": "18 mins", "type": "dining" },
-      { "name": "Mopa Airport", "distance": "40 mins", "type": "airport" }
+      {
+        "name": "Candolim Beach Shoreline",
+        "distance": "4 mins walk",
+        "type": "beach"
+      },
+      {
+        "name": "Fort Aguada Heritage Lighthouse",
+        "distance": "7 mins",
+        "type": "heritage"
+      },
+      {
+        "name": "Panaji Capital Promenade",
+        "distance": "18 mins",
+        "type": "dining"
+      },
+      {
+        "name": "Mopa Airport",
+        "distance": "40 mins",
+        "type": "airport"
+      }
     ],
     "featured": true
   },
@@ -494,7 +703,10 @@
     },
     "specs": {
       "bhk": "3 & 4 BHK Coastal Residences",
-      "bedrooms": [3, 4],
+      "bedrooms": [
+        3,
+        4
+      ],
       "sqftRange": "2,600 - 4,200 Sq.Ft",
       "totalUnits": 18,
       "unitsAvailable": 0,
@@ -537,10 +749,26 @@
       }
     ],
     "landmarks": [
-      { "name": "Dona Paula Viewpoint", "distance": "2 mins", "type": "beach" },
-      { "name": "Goa Governor's Palace (Raj Bhavan)", "distance": "3 mins", "type": "heritage" },
-      { "name": "Panaji Capital Promenade", "distance": "10 mins", "type": "dining" },
-      { "name": "Manipal Hospital", "distance": "5 mins", "type": "hospital" }
+      {
+        "name": "Dona Paula Viewpoint",
+        "distance": "2 mins",
+        "type": "beach"
+      },
+      {
+        "name": "Goa Governor's Palace (Raj Bhavan)",
+        "distance": "3 mins",
+        "type": "heritage"
+      },
+      {
+        "name": "Panaji Capital Promenade",
+        "distance": "10 mins",
+        "type": "dining"
+      },
+      {
+        "name": "Manipal Hospital",
+        "distance": "5 mins",
+        "type": "hospital"
+      }
     ],
     "featured": true
   },
@@ -572,7 +800,11 @@
     },
     "specs": {
       "bhk": "2, 3 & 4 BHK Lifestyle Residences",
-      "bedrooms": [2, 3, 4],
+      "bedrooms": [
+        2,
+        3,
+        4
+      ],
       "sqftRange": "1,450 - 2,800 Sq.Ft",
       "totalUnits": 32,
       "unitsAvailable": 2,
@@ -613,10 +845,26 @@
       }
     ],
     "landmarks": [
-      { "name": "Colva & Benaulim Beach", "distance": "10 mins", "type": "beach" },
-      { "name": "Margao Railway Junction", "distance": "8 mins", "type": "highway" },
-      { "name": "Dabolim International Airport", "distance": "22 mins", "type": "airport" },
-      { "name": "Fatorda Stadium & Sports Complex", "distance": "4 mins", "type": "dining" }
+      {
+        "name": "Colva & Benaulim Beach",
+        "distance": "10 mins",
+        "type": "beach"
+      },
+      {
+        "name": "Margao Railway Junction",
+        "distance": "8 mins",
+        "type": "highway"
+      },
+      {
+        "name": "Dabolim International Airport",
+        "distance": "22 mins",
+        "type": "airport"
+      },
+      {
+        "name": "Fatorda Stadium & Sports Complex",
+        "distance": "4 mins",
+        "type": "dining"
+      }
     ],
     "featured": false
   },
@@ -647,7 +895,9 @@
     },
     "specs": {
       "bhk": "5 BHK Waterfront Mansions",
-      "bedrooms": [5],
+      "bedrooms": [
+        5
+      ],
       "sqftRange": "5,200 - 7,100 Sq.Ft",
       "totalUnits": 8,
       "unitsAvailable": 8,
@@ -689,10 +939,26 @@
       }
     ],
     "landmarks": [
-      { "name": "Chapora River Boardwalk", "distance": "Direct Access", "type": "beach" },
-      { "name": "Morjim & Ashwem Beaches", "distance": "8 mins", "type": "beach" },
-      { "name": "Mopa International Airport", "distance": "26 mins", "type": "airport" },
-      { "name": "Assagao Culinary Quarter", "distance": "9 mins", "type": "dining" }
+      {
+        "name": "Chapora River Boardwalk",
+        "distance": "Direct Access",
+        "type": "beach"
+      },
+      {
+        "name": "Morjim & Ashwem Beaches",
+        "distance": "8 mins",
+        "type": "beach"
+      },
+      {
+        "name": "Mopa International Airport",
+        "distance": "26 mins",
+        "type": "airport"
+      },
+      {
+        "name": "Assagao Culinary Quarter",
+        "distance": "9 mins",
+        "type": "dining"
+      }
     ],
     "featured": true
   }

@@ -4,9 +4,9 @@ import React, { useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { motion, AnimatePresence } from 'motion/react';
-import { 
-  ArrowLeft, MapPin, Building, Calendar, ShieldCheck, CheckCircle2, 
-  Compass, Download, Share2, Sparkles, Phone, Mail, ChevronRight, 
+import {
+  ArrowLeft, MapPin, Building, Calendar, ShieldCheck, CheckCircle2,
+  Compass, Download, Share2, Sparkles, Phone, Mail, ChevronRight,
   Maximize2, Bed, Bath, Layers, Droplets, Sun, Wind, MessageSquare, ExternalLink
 } from 'lucide-react';
 import confetti from 'canvas-confetti';
@@ -142,9 +142,8 @@ export const PropertyDetailPage: React.FC<PropertyDetailPageProps> = ({
                 <div
                   key={idx}
                   onClick={() => setActiveImageIndex(idx)}
-                  className={`aspect-[4/3] overflow-hidden cursor-pointer border-2 transition-all ${
-                    activeImageIndex === idx ? 'border-[#044F92]' : 'border-transparent opacity-75 hover:opacity-100'
-                  }`}
+                  className={`aspect-[4/3] overflow-hidden cursor-pointer border-2 transition-all ${activeImageIndex === idx ? 'border-[#044F92]' : 'border-transparent opacity-75 hover:opacity-100'
+                    }`}
                 >
                   <img src={img} alt="Thumbnail" className="w-full h-full object-cover" />
                 </div>
@@ -203,41 +202,36 @@ export const PropertyDetailPage: React.FC<PropertyDetailPageProps> = ({
           <div className="flex border-b border-[#e5e1da] overflow-x-auto no-scrollbar gap-8">
             <button
               onClick={() => setActiveTab('overview')}
-              className={`pb-3 text-xs uppercase tracking-widest font-semibold transition-colors shrink-0 ${
-                activeTab === 'overview' ? 'text-[#044F92] border-b-2 border-[#044F92]' : 'text-[#8c857d] hover:text-[#1a1a1a]'
-              }`}
+              className={`pb-3 text-xs uppercase tracking-widest font-semibold transition-colors shrink-0 ${activeTab === 'overview' ? 'text-[#044F92] border-b-2 border-[#044F92]' : 'text-[#8c857d] hover:text-[#1a1a1a]'
+                }`}
             >
               Architectural Overview
             </button>
             <button
               onClick={() => setActiveTab('floorplans')}
-              className={`pb-3 text-xs uppercase tracking-widest font-semibold transition-colors shrink-0 ${
-                activeTab === 'floorplans' ? 'text-[#044F92] border-b-2 border-[#044F92]' : 'text-[#8c857d] hover:text-[#1a1a1a]'
-              }`}
+              className={`pb-3 text-xs uppercase tracking-widest font-semibold transition-colors shrink-0 ${activeTab === 'floorplans' ? 'text-[#044F92] border-b-2 border-[#044F92]' : 'text-[#8c857d] hover:text-[#1a1a1a]'
+                }`}
             >
               Floor Plans & Layouts ({property.floorPlans?.length || 0})
             </button>
             <button
               onClick={() => setActiveTab('amenities')}
-              className={`pb-3 text-xs uppercase tracking-widest font-semibold transition-colors shrink-0 ${
-                activeTab === 'amenities' ? 'text-[#044F92] border-b-2 border-[#044F92]' : 'text-[#8c857d] hover:text-[#1a1a1a]'
-              }`}
+              className={`pb-3 text-xs uppercase tracking-widest font-semibold transition-colors shrink-0 ${activeTab === 'amenities' ? 'text-[#044F92] border-b-2 border-[#044F92]' : 'text-[#8c857d] hover:text-[#1a1a1a]'
+                }`}
             >
               Amenities & Enclave Features
             </button>
             <button
               onClick={() => setActiveTab('specifications')}
-              className={`pb-3 text-xs uppercase tracking-widest font-semibold transition-colors shrink-0 ${
-                activeTab === 'specifications' ? 'text-[#044F92] border-b-2 border-[#044F92]' : 'text-[#8c857d] hover:text-[#1a1a1a]'
-              }`}
+              className={`pb-3 text-xs uppercase tracking-widest font-semibold transition-colors shrink-0 ${activeTab === 'specifications' ? 'text-[#044F92] border-b-2 border-[#044F92]' : 'text-[#8c857d] hover:text-[#1a1a1a]'
+                }`}
             >
               Structural Specs & Materials
             </button>
             <button
               onClick={() => setActiveTab('pricing')}
-              className={`pb-3 text-xs uppercase tracking-widest font-semibold transition-colors shrink-0 ${
-                activeTab === 'pricing' ? 'text-[#044F92] border-b-2 border-[#044F92]' : 'text-[#8c857d] hover:text-[#1a1a1a]'
-              }`}
+              className={`pb-3 text-xs uppercase tracking-widest font-semibold transition-colors shrink-0 ${activeTab === 'pricing' ? 'text-[#044F92] border-b-2 border-[#044F92]' : 'text-[#8c857d] hover:text-[#1a1a1a]'
+                }`}
             >
               Payment Structure & Dossier
             </button>
@@ -294,11 +288,10 @@ export const PropertyDetailPage: React.FC<PropertyDetailPageProps> = ({
                         <button
                           key={idx}
                           onClick={() => setSelectedFloorPlan(idx)}
-                          className={`w-full text-left p-4 border transition-all ${
-                            selectedFloorPlan === idx
-                              ? 'bg-[#f2f7fc] border-[#044F92] text-[#044F92]'
-                              : 'bg-white border-[#e5e1da] text-[#1a1a1a] hover:border-[#044F92]'
-                          }`}
+                          className={`w-full text-left p-4 border transition-all ${selectedFloorPlan === idx
+                            ? 'bg-[#f2f7fc] border-[#044F92] text-[#044F92]'
+                            : 'bg-white border-[#e5e1da] text-[#1a1a1a] hover:border-[#044F92]'
+                            }`}
                         >
                           <p className="font-bold text-sm">{fp.name}</p>
                           <p className="text-xs text-[#8c857d] mt-1">{fp.type} • Carpet: {fp.carpetArea}</p>

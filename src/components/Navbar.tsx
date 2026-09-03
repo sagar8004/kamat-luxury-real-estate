@@ -126,13 +126,13 @@ export const Navbar: React.FC<NavbarProps> = ({
             className={`hidden lg:flex items-center space-x-7 text-xs uppercase tracking-[0.18em] font-medium transition-colors duration-300 ${isTransparent ? 'text-white/90' : 'text-[#4a4540]'
               }`}
           >
-            <Link
+            {/* <Link
               id="nav-link-home"
               href="/"
               className={getLinkClasses('home')}
             >
               Home
-            </Link>
+            </Link> */}
 
             {/* Projects with Dropdown */}
             <div
@@ -145,7 +145,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                 href="/projects"
                 className={getLinkClasses('projects', 'flex items-center gap-1')}
               >
-                <span>Developments</span>
+                <span>Projects</span>
                 <ChevronRight
                   className={`w-3 h-3 transition-transform duration-200 ${projectsDropdown
                     ? `rotate-90 ${isTransparent ? 'text-[#38bdf8]' : 'text-[#044F92]'}`
@@ -205,7 +205,7 @@ export const Navbar: React.FC<NavbarProps> = ({
               )}
             </div>
 
-            <Link
+            {/* <Link
               id="nav-link-ongoing"
               href="/ongoing"
               className={getLinkClasses('ongoing')}
@@ -219,7 +219,7 @@ export const Navbar: React.FC<NavbarProps> = ({
               className={getLinkClasses('completed')}
             >
               Completed
-            </Link>
+            </Link> */}
 
             <Link
               id="nav-link-map"
