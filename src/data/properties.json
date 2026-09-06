@@ -5,7 +5,7 @@
     "title": "Kamat Crest",
     "tagline": "Private Forest-Edge Pool Estates in the Heart of Assagao",
     "status": "ongoing",
-    "category": "villa",
+    "category": "apartment",
     "location": {
       "area": "Porvorim",
       "region": "North Goa",
@@ -25,16 +25,16 @@
       "unitPrice": "₹16,200 / sq.ft"
     },
     "specs": {
-      "bhk": "4 & 5 BHK Private Pool Villas",
+      "bhk": "2 & 3 BHK Premium Apartments",
       "bedrooms": [
-        4,
-        5
+        2,
+        3
       ],
-      "sqftRange": "4,200 - 5,850 Sq.Ft",
+      "sqftRange": "2,200 - 3,850 Sq.Ft",
       "totalUnits": 12,
       "unitsAvailable": 4,
       "possessionDate": "Q1 2027",
-      "reraNumber": "PRGO08231940"
+      "reraNumber": "PRGO09221720"
     },
     "heroImage": "/properties/kamat-crest/hero.webp",
     "gallery": [
@@ -120,6 +120,14 @@
         "superBuiltUp": "4,200 Sq.Ft",
         "image": "https://images.unsplash.com/photo-1600566753376-12c8ab7fb75b?auto=format&fit=crop&w=800&q=80",
         "priceEstimate": "₹6.85 Cr"
+      },
+      {
+        "name": "The Courtyard Villa (Type B)",
+        "type": "4 BHK Villa with Zen Courtyard",
+        "carpetArea": "3,280 Sq.Ft",
+        "superBuiltUp": "4,200 Sq.Ft",
+        "image": "https://images.unsplash.com/photo-1600566753376-12c8ab7fb75b?auto=format&fit=crop&w=800&q=80",
+        "priceEstimate": "₹6.85 Cr"
       }
     ],
     "landmarks": [
@@ -147,15 +155,15 @@
     "featured": true
   },
   {
-    "id": "kamat-ocean-crest-miramar",
-    "slug": "kamat-ocean-crest-miramar",
-    "title": "Kamat Ocean Crest",
+    "id": "kamat-prime-porvorim",
+    "slug": "kamat-prime-porvorim",
+    "title": "Kamat Prime",
     "tagline": "Unrivalled Panoramic Arabian Sea & Mandovi Estuary Residences",
-    "status": "ongoing",
-    "category": "penthouse",
+    "status": "completed",
+    "category": "apartment",
     "location": {
-      "area": "Miramar",
-      "region": "Central Goa",
+      "area": "Porvorim",
+      "region": "North Goa",
       "city": "Panaji",
       "state": "Goa",
       "coordinates": {
@@ -164,10 +172,10 @@
         "xPercent": 42,
         "yPercent": 48
       },
-      "address": "Miramar Beach Boulevard, Miramar, Panaji, Goa 403001"
+      "address": "B.B Borkar Road, opposite Vijaya Bank, Penha de Franca, Porvorim, Aradi Socorro, Goa 403521"
     },
     "price": {
-      "displayPrice": "₹5.40 Cr Onwards",
+      "displayPrice": "₹2.40 Cr Onwards",
       "startingNumeric": 54000000,
       "unitPrice": "₹18,500 / sq.ft"
     },
@@ -184,9 +192,9 @@
       "possessionDate": "Q4 2026",
       "reraNumber": "PRGO04221760"
     },
-    "heroImage": "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?auto=format&fit=crop&w=1600&q=80",
+    "heroImage": "/properties/kamat-prime/hero.webp",
     "gallery": [
-      "https://images.unsplash.com/photo-1512918728675-ed5a9ecdebfd?auto=format&fit=crop&w=1200&q=80",
+      "/properties/kamat-prime/gallery-1.webp",
       "https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&w=1200&q=80",
       "https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&fit=crop&w=1200&q=80",
       "https://images.unsplash.com/photo-1567496898669-ee935f5f647a?auto=format&fit=crop&w=1200&q=80"
@@ -254,20 +262,12 @@
     },
     "floorPlans": [
       {
-        "name": "The Azure Sky Penthouse",
+        "name": "Kamat Prime Apartments",
         "type": "5 BHK Duplex Penthouse with Private Deck",
         "carpetArea": "4,900 Sq.Ft",
         "superBuiltUp": "6,100 Sq.Ft",
-        "image": "https://images.unsplash.com/photo-1600585154526-990dced4db0d?auto=format&fit=crop&w=800&q=80",
-        "priceEstimate": "₹9.90 Cr"
-      },
-      {
-        "name": "The Horizon Suite (Type A)",
-        "type": "4 BHK Sea-Facing Residence",
-        "carpetArea": "3,100 Sq.Ft",
-        "superBuiltUp": "3,950 Sq.Ft",
-        "image": "https://images.unsplash.com/photo-1600566753376-12c8ab7fb75b?auto=format&fit=crop&w=800&q=80",
-        "priceEstimate": "₹6.75 Cr"
+        "image": "/properties/kamat-prime/floor-plan.webp",
+        "priceEstimate": "₹2.90 Cr"
       }
     ],
     "landmarks": [
@@ -295,16 +295,16 @@
     "featured": true
   },
   {
-    "id": "kamat-palm-greens-porvorim",
-    "slug": "kamat-palm-greens-porvorim",
-    "title": "Kamat Palm Greens",
+    "id": "kamat-promenade-miramar",
+    "slug": "kamat-promenade-miramar",
+    "title": "Kamat Promenade",
     "tagline": "Eco-Conscious Gated Sanctuary with Resort-Style Living",
     "status": "ongoing",
     "category": "apartment",
     "location": {
-      "area": "Porvorim",
+      "area": "Miramar",
       "region": "North Goa",
-      "city": "Porvorim",
+      "city": "Panaji",
       "state": "Goa",
       "coordinates": {
         "lat": 15.5342,
@@ -320,18 +320,18 @@
       "unitPrice": "₹12,800 / sq.ft"
     },
     "specs": {
-      "bhk": "3 & 4 BHK Luxury Apartments",
+      "bhk": "2 & 3 BHK Luxury Apartments",
       "bedrooms": [
-        3,
-        4
+        2,
+        3
       ],
-      "sqftRange": "2,200 - 3,450 Sq.Ft",
+      "sqftRange": "1,200 - 2,450 Sq.Ft",
       "totalUnits": 48,
       "unitsAvailable": 14,
       "possessionDate": "Q3 2027",
-      "reraNumber": "PRGO06242105"
+      "reraNumber": "PRGO10242344"
     },
-    "heroImage": "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=1600&q=80",
+    "heroImage": "/properties/kamat-promenade/hero.webp",
     "gallery": [
       "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?auto=format&fit=crop&w=1200&q=80",
       "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1200&q=80",
@@ -441,16 +441,16 @@
     "featured": true
   },
   {
-    "id": "kamat-horizon-business-plaza",
-    "slug": "kamat-horizon-business-plaza",
-    "title": "Kamat Horizon Plaza",
+    "id": "kamat-vista-mapusa",
+    "slug": "kamat-vista-mapusa",
+    "title": "Kamat Vista",
     "tagline": "Grade-A Commercial Landmark & Retail Destination in Panaji",
-    "status": "ongoing",
+    "status": "completed",
     "category": "commercial",
     "location": {
-      "area": "Panaji CBD",
-      "region": "Central Goa",
-      "city": "Panaji",
+      "area": "Mapusa",
+      "region": "North Goa",
+      "city": "Mapusa",
       "state": "Goa",
       "coordinates": {
         "lat": 15.4952,
@@ -474,12 +474,12 @@
       "totalUnits": 36,
       "unitsAvailable": 9,
       "possessionDate": "Q2 2027",
-      "reraNumber": "PRGO11231998"
+      "reraNumber": "PRGO06180507"
     },
-    "heroImage": "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1600&q=80",
+    "heroImage": "/properties/kamat-vista/hero.webp",
     "gallery": [
-      "https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=1200&q=80",
-      "https://images.unsplash.com/photo-1497366811353-6870744d04b2?auto=format&fit=crop&w=1200&q=80",
+      "/properties/kamat-vista/gallery-1.webp",
+      "/properties/kamat-vista/gallery-2.webp",
       "https://images.unsplash.com/photo-1497215728101-856f4ea42174?auto=format&fit=crop&w=1200&q=80"
     ],
     "architecturalStyle": "LEED Gold International Glass Curtain Façade",
@@ -584,7 +584,7 @@
     "slug": "kamat-boulevard-candolim",
     "title": "Kamat Boulevard",
     "tagline": "Mediterranean-Inspired Luxury Gated Villas by Candolim Beach",
-    "status": "completed",
+    "status": "ongoing",
     "category": "villa",
     "completionYear": 2024,
     "location": {
