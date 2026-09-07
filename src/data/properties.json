@@ -347,14 +347,12 @@
       "Zero-traffic vehicle-free podium with lush tropical jogging tracks"
     ],
     "amenities": [
-      "Olympic Lagoon Pool",
-      "Squash & Badminton Courts",
-      "Yoga & Meditation Deck",
-      "Children's Play Enclave",
-      "Solar Powered Common Areas",
-      "Banquet & Multi-Purpose Hall",
-      "Jogging & Cycling Track",
-      "Pet Park"
+      "24/7 security with a watchman's cabin",
+      "CCTV surveillance",
+      "Video door phone facilities",
+      "Two high-speed lifts",
+      "DG backup power for common areas and lifts",
+      "Demarcated EV charging points"
     ],
     "constructionStatus": {
       "overallPercent": 45,
@@ -418,24 +416,44 @@
     ],
     "landmarks": [
       {
-        "name": "Mall De Goa Porvorim",
-        "distance": "3 mins",
+        "name": "Panjim Bus Stand",
+        "distance": "5 Km",
         "type": "dining"
       },
       {
-        "name": "Panaji Old Heritage Quarter",
-        "distance": "8 mins",
-        "type": "heritage"
-      },
-      {
-        "name": "Candolim & Calangute Coast",
-        "distance": "14 mins",
-        "type": "beach"
+        "name": "Mall De Goa Porvorim",
+        "distance": "10 Km",
+        "type": "dining"
       },
       {
         "name": "Mopa International Airport",
-        "distance": "35 mins",
+        "distance": "33 Km",
         "type": "airport"
+      },
+      {
+        "name": "Dabolim Airport",
+        "distance": "29 Km",
+        "type": "airport"
+      },
+      {
+        "name": "Dona Paula Viewpoint",
+        "distance": "4.5 Km",
+        "type": "dining"
+      },
+      {
+        "name": "Miramar Beach",
+        "distance": "1 Km",
+        "type": "beach"
+      },
+      {
+        "name": "Thivim Railway Station",
+        "distance": "26 Km",
+        "type": "highway"
+      },
+      {
+        "name": "GMC Hospital",
+        "distance": "9 Km",
+        "type": "hospital"
       }
     ],
     "featured": true
@@ -580,17 +598,17 @@
     "featured": false
   },
   {
-    "id": "kamat-boulevard-candolim",
-    "slug": "kamat-boulevard-candolim",
-    "title": "Kamat Boulevard",
+    "id": "kamat-avenue-panjim",
+    "slug": "kamat-avenue-panjim",
+    "title": "Kamat Avenue",
     "tagline": "Mediterranean-Inspired Luxury Gated Villas by Candolim Beach",
     "status": "ongoing",
     "category": "villa",
     "completionYear": 2024,
     "location": {
-      "area": "Candolim",
+      "area": "Althino",
       "region": "North Goa",
-      "city": "Candolim, Bardez",
+      "city": "Panaji",
       "state": "Goa",
       "coordinates": {
         "lat": 15.5186,
@@ -601,7 +619,7 @@
       "address": "Aguada-Siolim Road, Candolim, Goa 403515"
     },
     "price": {
-      "displayPrice": "₹7.20 Cr (Resale / Select Units)",
+      "displayPrice": "₹7.20 Cr Onwards",
       "startingNumeric": 72000000,
       "unitPrice": "₹17,000 / sq.ft"
     },
@@ -610,13 +628,13 @@
       "bedrooms": [
         4
       ],
-      "sqftRange": "4,100 - 4,800 Sq.Ft",
+      "sqftRange": "120.75 - 122.71 sq.mtr",
       "totalUnits": 16,
       "unitsAvailable": 1,
       "possessionDate": "Delivered & Inhabited (2024)",
-      "reraNumber": "PRGO02200981"
+      "reraNumber": "PRGO10242313"
     },
-    "heroImage": "https://images.unsplash.com/photo-1613490493576-7fde63acd811?auto=format&fit=crop&w=1600&q=80",
+    "heroImage": "/properties/kamat-avenue/hero.webp",
     "gallery": [
       "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1200&q=80",
       "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=1200&q=80",
@@ -632,14 +650,12 @@
       "Consistently yields 12-14% annual luxury vacation rental returns"
     ],
     "amenities": [
-      "Delivered & Occupied",
-      "Private Saltwater Pool",
-      "Estate Concierge Desk",
-      "Clubhouse & Gym",
-      "Lush Landscaped Avenues",
-      "Solar Power Infrastructure",
-      "24/7 Security & CCTV",
-      "High-Yield Rental Desk"
+      "24/7 security with a watchman's cabin",
+      "CCTV surveillance",
+      "Video door phone facilities",
+      "Two high-speed lifts",
+      "DG backup power for common areas and lifts",
+      "Demarcated EV charging points"
     ],
     "floorPlans": [
       {
@@ -653,24 +669,44 @@
     ],
     "landmarks": [
       {
-        "name": "Candolim Beach Shoreline",
-        "distance": "4 mins walk",
-        "type": "beach"
-      },
-      {
-        "name": "Fort Aguada Heritage Lighthouse",
-        "distance": "7 mins",
-        "type": "heritage"
-      },
-      {
-        "name": "Panaji Capital Promenade",
-        "distance": "18 mins",
+        "name": "Panjim Bus Stand",
+        "distance": "2.5 Km",
         "type": "dining"
       },
       {
-        "name": "Mopa Airport",
-        "distance": "40 mins",
+        "name": "Mall De Goa Porvorim",
+        "distance": "7 Km",
+        "type": "dining"
+      },
+      {
+        "name": "Mopa International Airport",
+        "distance": "33 Km",
         "type": "airport"
+      },
+      {
+        "name": "Dabolim Airport",
+        "distance": "29 Km",
+        "type": "airport"
+      },
+      {
+        "name": "Dona Paula Viewpoint",
+        "distance": "7 Km",
+        "type": "dining"
+      },
+      {
+        "name": "Miramar Beach",
+        "distance": "3.5 Km",
+        "type": "beach"
+      },
+      {
+        "name": "Thivim Railway Station",
+        "distance": "24 Km",
+        "type": "highway"
+      },
+      {
+        "name": "GMC Hospital",
+        "distance": "7.5 Km",
+        "type": "hospital"
       }
     ],
     "featured": true
@@ -685,7 +721,7 @@
     "completionYear": 2023,
     "location": {
       "area": "Dona Paula",
-      "region": "Central Goa",
+      "region": "North Goa",
       "city": "Dona Paula, Panaji",
       "state": "Goa",
       "coordinates": {

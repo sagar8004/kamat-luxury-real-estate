@@ -339,19 +339,19 @@ export const PropertyDetailPage: React.FC<PropertyDetailPageProps> = ({
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6 text-xs">
                   <div className="space-y-3 p-4 bg-[#fdfcfb] border border-[#e5e1da]">
                     <p className="font-bold text-[#044F92] uppercase tracking-wider">Structure & Masonry</p>
-                    <p className="text-[#4a4540]">Earthquake-resistant RCC framed structure with corrosion-resistant Fe550D TMT steel bars and laterite stone thermal insulation.</p>
-                  </div>
-                  <div className="space-y-3 p-4 bg-[#fdfcfb] border border-[#e5e1da]">
-                    <p className="font-bold text-[#044F92] uppercase tracking-wider">Flooring & Finishes</p>
-                    <p className="text-[#4a4540]">Imported Italian Botticino marble in living suites; handcrafted antique Portuguese terracotta in open decks.</p>
+                    <p className="text-[#4a4540]">R.C.C. framed structure with laterite/brick masonry external walls and brick masonry internal walls. O.T.I.S./Mitsubishi/equivalent brand lifts.</p>
                   </div>
                   <div className="space-y-3 p-4 bg-[#fdfcfb] border border-[#e5e1da]">
                     <p className="font-bold text-[#044F92] uppercase tracking-wider">Sanitaryware & Fittings</p>
-                    <p className="text-[#4a4540]">Concealed Grohe/Hansgrohe matte black thermostatic fixtures with Duravit German sanitary ceramics.</p>
+                    <p className="text-[#4a4540]">Jaquar/Kohler sanitaryware with floor/wall mounted E.W.C.s, under-counter/wall-mounted wash basins, chrome-plated fittings, and provision for geysers and exhaust fans.</p>
                   </div>
                   <div className="space-y-3 p-4 bg-[#fdfcfb] border border-[#e5e1da]">
-                    <p className="font-bold text-[#044F92] uppercase tracking-wider">Electrical & Eco Provisions</p>
-                    <p className="text-[#4a4540]">100% DG power backup, Schneider modular automation switches, and dedicated EV charging ports per villa.</p>
+                    <p className="font-bold text-[#044F92] uppercase tracking-wider">Flooring & Finishes</p>
+                    <p className="text-[#4a4540]">Lobby flooring with Kota/granite/natural stone; stilt areas paved with concrete pavers; staircase treads and risers finished with Kota/granite/natural stone. Apartments feature glazed vitrified flooring, glazed ceramic tiles for balconies, and anti-skid ceramic tiles with glazed ceramic tile dado for toilets.</p>
+                  </div>
+                  <div className="space-y-3 p-4 bg-[#fdfcfb] border border-[#e5e1da]">
+                    <p className="font-bold text-[#044F92] uppercase tracking-wider">Doors, Windows & Electrical</p>
+                    <p className="text-[#4a4540]">Main door with T.W. frame and T.W. panelled shutter; internal doors with T.W. frames and flush shutters or equivalent. Balcony doors and windows with powder-coated/anodized aluminium glazed sliding shutters. Concealed wiring with KEI/Anchor cables and Legrand modular switches. Provision for inverter and air-conditioners in the apartment.</p>
                   </div>
                 </div>
               </div>

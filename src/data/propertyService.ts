@@ -9,9 +9,9 @@ export const LOCATIONS_LIST = [
   { area: 'Candolim', region: 'North Goa' },
   { area: 'Porvorim', region: 'North Goa' },
   { area: 'Siolim', region: 'North Goa' },
-  { area: 'Miramar', region: 'Central Goa' },
-  { area: 'Panaji CBD', region: 'Central Goa' },
-  { area: 'Dona Paula', region: 'Central Goa' },
+  { area: 'Miramar', region: 'North Goa' },
+  { area: 'Panaji CBD', region: 'North Goa' },
+  { area: 'Dona Paula', region: 'North Goa' },
   { area: 'Margao', region: 'South Goa' }
 ];
 
