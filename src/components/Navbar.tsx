@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
 import { Phone, Menu, X, ChevronRight } from 'lucide-react';
 import { useTourModal } from '../context/TourModalContext';
+import { PROPERTIES } from '@/data/propertyService';
 
 interface NavbarProps {
   currentPage?: string;
@@ -50,6 +51,15 @@ export const Navbar: React.FC<NavbarProps> = ({
         } else {
           setIsPastHero(window.scrollY > (window.innerHeight * 3));
         }
+      } else if (currentPage === 'redevelopment') {
+        const heroEl = document.getElementById('redevelopment-hero-scroll-section');
+        if (heroEl) {
+          const rect = heroEl.getBoundingClientRect();
+          const past = rect.bottom <= 80;
+          setIsPastHero(past);
+        } else {
+          setIsPastHero(window.scrollY > (window.innerHeight * 3.5));
+        }
       } else {
         setIsPastHero(true);
       }
@@ -72,7 +82,7 @@ export const Navbar: React.FC<NavbarProps> = ({
     }
   };
 
-  const isTransparent = currentPage === 'home' && !isPastHero;
+  const isTransparent = (currentPage === 'home' || currentPage === 'redevelopment') && !isPastHero;
 
   const getLinkClasses = (pageName: string, extra = '') => {
     const isActive = currentPage === pageName;
@@ -92,9 +102,7 @@ export const Navbar: React.FC<NavbarProps> = ({
       <header
         id="main-navbar"
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isTransparent
-          ? scrolled
-            ? 'py-3.5 bg-black/30 backdrop-blur-md border-b border-white/10'
-            : 'py-5 bg-transparent border-b border-transparent'
+          ? 'py-4 bg-transparent border-b border-transparent text-white'
           : scrolled
             ? 'py-3.5 bg-[#fdfcfb]/95 backdrop-blur-md border-b border-[#e5e1da] shadow-sm'
             : 'py-5 bg-[#fdfcfb]/95 backdrop-blur-md border-b border-[#e5e1da]'
@@ -172,7 +180,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                   >
                     <span>All Luxury Properties</span>
                     <span className={`text-[10px] uppercase tracking-widest ${isTransparent ? 'text-blue-200' : 'text-[#8c857d]'}`}>
-                      12 Estates
+                      {PROPERTIES.length} Estates
                     </span>
                   </Link>
                   <Link

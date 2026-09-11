@@ -6,6 +6,7 @@ import { CustomCursor } from '../components/CustomCursor';
 import { PagePreloader } from '../components/PagePreloader';
 import { Navbar } from '../components/Navbar';
 import { Footer } from '../components/Footer';
+import { RedevelopmentFloatingCTA } from '../components/RedevelopmentFloatingCTA';
 
 export const viewport: Viewport = {
   themeColor: '#044F92',
@@ -145,6 +146,7 @@ export default function RootLayout({
           <GlobalTourModal />
           <Navbar />
           <main className="min-h-screen">{children}</main>
+          <RedevelopmentFloatingCTA />
           <Footer />
         </TourModalProvider>
       </body>

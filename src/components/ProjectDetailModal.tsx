@@ -58,7 +58,7 @@ export const ProjectDetailModal: React.FC<ProjectDetailModalProps> = ({
             <div>
               <div className="flex items-center gap-2">
                 <span className="px-2.5 py-0.5 text-[9px] font-semibold uppercase tracking-widest bg-[#1a1a1a] text-white">
-                  {property.status} • {property.category}
+                  {property.status} • {(Array.isArray(property.category) ? property.category : [property.category]).join(' & ')}
                 </span>
                 <span className="text-xs text-[#8c857d] font-mono hidden sm:inline">{property.specs.reraNumber}</span>
               </div>

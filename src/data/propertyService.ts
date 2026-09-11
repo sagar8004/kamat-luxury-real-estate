@@ -17,10 +17,10 @@ export const LOCATIONS_LIST = [
 
 export const CATEGORIES_LIST: { id: PropertyCategory; label: string }[] = [
   { id: 'all', label: 'All Typologies' },
+  { id: 'apartment', label: 'Apartments' },
   { id: 'villa', label: 'Luxury Villas' },
-  { id: 'apartment', label: 'Residences' },
-  { id: 'penthouse', label: 'Sea-View Penthouses' },
-  { id: 'commercial', label: 'Commercial & Retail' }
+  { id: 'commercial', label: 'Commercial' },
+  { id: 'hospitality', label: 'Hospitality' }
 ];
 
 export const STATUS_LIST: { id: ProjectStatus; label: string; count?: number }[] = [
@@ -37,9 +37,12 @@ export function filterProperties(properties: PropertyItem[], filters: PropertyFi
       return false;
     }
 
-    // Category filter
-    if (filters.category !== 'all' && item.category !== filters.category) {
-      return false;
+    // Category filter (supports single category or multi-category array)
+    if (filters.category !== 'all') {
+      const itemCategories = Array.isArray(item.category) ? item.category : [item.category];
+      if (!itemCategories.includes(filters.category as any)) {
+        return false;
+      }
     }
 
     // Area filter

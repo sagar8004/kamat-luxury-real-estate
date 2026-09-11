@@ -91,7 +91,7 @@ export const HomePage: React.FC<HomePageProps> = ({
               <div className="flex items-center gap-3 text-xs text-[#5a554e] font-light">
                 <span className="inline-flex items-center gap-1.5 px-3 py-1 bg-[#eef5fb] text-[#044F92] font-semibold text-[11px] uppercase tracking-wider">
                   <Sparkles className="w-3 h-3 text-[#044F92]" />
-                  12 Exclusive Developments
+                  {PROPERTIES.length} Exclusive Developments
                 </span>
                 <span className="hidden sm:inline">•</span>
                 <span className="hidden sm:inline">RERA Certified Goa</span>
@@ -295,13 +295,13 @@ export const HomePage: React.FC<HomePageProps> = ({
                     <Building className="w-6 h-6" />
                   </div>
                   <p className="font-secondary text-4xl font-normal text-white tracking-tight mb-2">
-                    3.2M+ Sq.Ft
+                    3.2M+ Sq.Mts
                   </p>
                   <h4 className="text-xs uppercase tracking-[0.2em] text-[#38bdf8] font-bold mb-3">
                     Delivered in Goa
                   </h4>
                   <p className="text-xs text-blue-100/70 font-light leading-relaxed">
-                    12+ delivered architectural landmarks spanning oceanfront estates, private villas, and business plazas.
+                    {PROPERTIES.length}+ Delivered architectural landmarks spanning oceanfront estates, private villas, and business plazas.
                   </p>
                 </div>
               </div>
@@ -355,7 +355,7 @@ export const HomePage: React.FC<HomePageProps> = ({
       {/* Section: Ongoing Projects Spotlight (Emerging from behind) */}
       <section className="py-24 sm:py-32 bg-[#fdfcfb]">
         <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-10 space-y-12">
-          
+
           {/* Header Row: Emerges from Left */}
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 border-b border-[#e5e1da] pb-8">
             <div className="space-y-3 max-w-2xl">
@@ -365,13 +365,13 @@ export const HomePage: React.FC<HomePageProps> = ({
                   <span>Active Construction Milestones</span>
                 </div>
               </ScrollReveal>
-              
+
               <ScrollReveal variant="from-left" distance={50} delay={0.1}>
                 <h2 className="font-display text-4xl sm:text-5xl font-normal text-[#1a1a1a] tracking-tight">
                   Ongoing Flagship Estates
                 </h2>
               </ScrollReveal>
-              
+
               <ScrollReveal variant="from-left" distance={40} delay={0.15}>
                 <p className="text-sm sm:text-base text-[#5a554e] font-light leading-relaxed">
                   Real-time engineering progress, RERA compliance tracking, and expected handover milestones across prime North & Central Goa enclaves.
@@ -409,7 +409,7 @@ export const HomePage: React.FC<HomePageProps> = ({
               onClick={() => navigate('projects')}
               className="bg-[#044F92] hover:bg-[#03396c] text-white px-8 py-4 text-xs font-semibold uppercase tracking-[0.2em] transition-all shadow-md hover:shadow-xl inline-flex items-center gap-2 cursor-pointer group"
             >
-              <span>Browse All 12 Goa Estates</span>
+              <span>Browse All {PROPERTIES.length} Goa Estates</span>
               <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
             </button>
           </ScrollReveal>
@@ -420,7 +420,7 @@ export const HomePage: React.FC<HomePageProps> = ({
       <section className="py-24 sm:py-32 bg-[#f2f7fc] border-t border-b border-[#d1e3f3] relative overflow-hidden">
         <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-10">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
-            
+
             {/* Left Content Column */}
             <div className="lg:col-span-6 space-y-6">
               <ScrollReveal variant="from-left" distance={50}>
@@ -498,7 +498,7 @@ export const HomePage: React.FC<HomePageProps> = ({
       {/* Interactive Portals Grid (Cards Sliding in from Left & Behind) */}
       <section className="py-24 bg-white relative">
         <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-10 space-y-14">
-          
+
           <ScrollReveal variant="fade-up">
             <div className="text-center max-w-3xl mx-auto space-y-3">
               <span className="text-[10px] uppercase tracking-[0.25em] text-[#044F92] font-bold">
@@ -605,7 +605,7 @@ export const HomePage: React.FC<HomePageProps> = ({
       {/* Luxury Client Quote Teaser (Emerging from Behind) */}
       <section className="py-20 bg-[#03284f] text-white relative overflow-hidden">
         <div className="absolute inset-0 opacity-10 editorial-grid pointer-events-none" />
-        
+
         <div className="max-w-5xl mx-auto px-6 sm:px-8 text-center relative z-10 space-y-6">
           <ScrollReveal variant="from-behind">
             <Quote className="w-12 h-12 text-[#38bdf8] mx-auto opacity-60 mb-4" />

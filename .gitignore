@@ -10,3 +10,5 @@ coverage/
 !.env.example
 assets/
 *.bak
+*.tsbuildinfo
+.agents/

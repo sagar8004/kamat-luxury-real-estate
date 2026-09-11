@@ -119,3 +119,127 @@
   animation: shimmer-slow 3s infinite linear;
 }
 
+/* Leaflet Custom Luxury Map Styling */
+@import "leaflet/dist/leaflet.css";
+
+.leaflet-container {
+  font-family: 'Instrument Sans', system-ui, sans-serif !important;
+  z-index: 10;
+  width: 100%;
+  height: 100%;
+  background: #e8ecef;
+}
+
+.kamat-custom-marker {
+  background: transparent;
+  border: none;
+}
+
+.kamat-pin-pulse {
+  animation: kamatPulse 2s infinite cubic-bezier(0.4, 0, 0.6, 1);
+}
+
+@keyframes kamatPulse {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 0.9;
+  }
+  50% {
+    transform: scale(1.3);
+    opacity: 0.3;
+  }
+}
+
+.leaflet-popup-content-wrapper {
+  padding: 0 !important;
+  border-radius: 0px !important;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2) !important;
+  border: 1px solid #d6d0c7 !important;
+  background: #ffffff !important;
+}
+
+.leaflet-popup-content {
+  margin: 0 !important;
+  line-height: 1.4 !important;
+}
+
+.leaflet-popup-tip-container {
+  margin-top: -1px !important;
+}
+
+.leaflet-popup-tip {
+  background: #ffffff !important;
+  box-shadow: none !important;
+  border-right: 1px solid #d6d0c7;
+  border-bottom: 1px solid #d6d0c7;
+}
+
+/* Circuit Current Flow Animation */
+@keyframes circuitPulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(4, 79, 146, 0.6);
+  }
+  70% {
+    box-shadow: 0 0 0 14px rgba(4, 79, 146, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(4, 79, 146, 0);
+  }
+}
+
+.circuit-node-pulse {
+  animation: circuitPulse 2.4s infinite cubic-bezier(0.4, 0, 0.6, 1);
+}
+
+@keyframes energyDash {
+  to {
+    stroke-dashoffset: -1000;
+  }
+}
+
+.circuit-energy-flow {
+  stroke-dasharray: 12 18;
+  animation: energyDash 25s linear infinite;
+}
+
+.circuit-grid-pattern {
+  background-image: 
+    linear-gradient(to right, rgba(4, 79, 146, 0.05) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(4, 79, 146, 0.05) 1px, transparent 1px);
+  background-size: 32px 32px;
+}
+
+/* Key Focus Orbital Live Rotation */
+@keyframes orbitRotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes orbitCounterRotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(-360deg);
+  }
+}
+
+.kamat-orbit-wheel {
+  animation: orbitRotate 50s linear infinite;
+  transform-origin: center center;
+}
+
+.kamat-orbit-satellite-content {
+  animation: orbitCounterRotate 50s linear infinite;
+  transform-origin: center center;
+}
+
+.kamat-orbit-container:hover .kamat-orbit-wheel,
+.kamat-orbit-container:hover .kamat-orbit-satellite-content {
+  animation-play-state: paused;
+}
+

@@ -65,11 +65,18 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
           />
 
           {/* Top Badges: Status & Typology */}
-          <div className="absolute top-3 left-3 right-3 flex items-center justify-between pointer-events-none">
+          <div className="absolute top-3 left-3 right-3 flex items-start justify-between gap-2 pointer-events-none">
             {getStatusBadge()}
-            <span className="px-2 py-0.5 text-[9px] font-bold uppercase tracking-widest bg-white text-[#044F92] border border-[#cfe0ee] shadow-sm">
-              {property.category}
-            </span>
+            <div className="flex flex-wrap items-center justify-end gap-1 max-w-[60%]">
+              {(Array.isArray(property.category) ? property.category : [property.category]).map((cat) => (
+                <span
+                  key={cat}
+                  className="px-2 py-0.5 text-[9px] font-bold uppercase tracking-widest bg-white text-[#044F92] border border-[#cfe0ee] shadow-sm"
+                >
+                  {cat}
+                </span>
+              ))}
+            </div>
           </div>
 
           {/* Multi-Image Indicator Dots */}

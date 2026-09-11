@@ -1,5 +1,6 @@
 export type ProjectStatus = 'all' | 'ongoing' | 'completed' | 'upcoming';
-export type PropertyCategory = 'all' | 'villa' | 'apartment' | 'penthouse' | 'commercial';
+export type SingleCategory = 'apartment' | 'villa' | 'commercial' | 'hospitality';
+export type PropertyCategory = 'all' | SingleCategory;
 
 export interface PropertyCoordinates {
   lat: number;
@@ -37,7 +38,7 @@ export interface PropertyItem {
   title: string;
   tagline: string;
   status: 'ongoing' | 'completed' | 'upcoming';
-  category: 'villa' | 'apartment' | 'penthouse' | 'commercial';
+  category: SingleCategory | SingleCategory[];
   location: {
     area: string; // e.g. "Assagao", "Miramar", "Porvorim"
     region: 'North Goa' | 'Central Goa' | 'South Goa';
@@ -49,7 +50,7 @@ export interface PropertyItem {
   price: {
     displayPrice: string; // e.g. "₹4.75 Cr Onwards"
     startingNumeric: number; // for sorting
-    unitPrice?: string; // e.g. "₹14,500 / sq.ft"
+    unitPrice?: string; // e.g. "₹14,500 / sq.mts"
   };
   specs: {
     bhk: string; // e.g. "4 & 5 BHK"

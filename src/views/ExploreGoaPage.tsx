@@ -569,7 +569,7 @@ export const ExploreGoaPage: React.FC<ExploreGoaPageProps> = ({
     return () => {
       window.removeEventListener('scroll', handleScroll);
       if (audioCtxRef.current && audioCtxRef.current.state !== 'closed') {
-        audioCtxRef.current.close().catch(() => {});
+        audioCtxRef.current.close().catch(() => { });
       }
     };
   }, []);
@@ -622,11 +622,10 @@ export const ExploreGoaPage: React.FC<ExploreGoaPageProps> = ({
             <button
               key={chap.id}
               onClick={() => scrollToSection(chap.id)}
-              className={`px-2.5 sm:px-3 py-1 rounded-full text-[11px] font-medium transition-all tracking-wide whitespace-nowrap cursor-pointer ${
-                activeSection === idx
-                  ? 'bg-[#044F92] text-white shadow-md font-semibold border border-[#38bdf8]/50'
-                  : 'text-white/70 hover:text-white hover:bg-white/10'
-              }`}
+              className={`px-2.5 sm:px-3 py-1 rounded-full text-[11px] font-medium transition-all tracking-wide whitespace-nowrap cursor-pointer ${activeSection === idx
+                ? 'bg-[#044F92] text-white shadow-md font-semibold border border-[#38bdf8]/50'
+                : 'text-white/70 hover:text-white hover:bg-white/10'
+                }`}
             >
               {chap.label}
             </button>
@@ -725,11 +724,10 @@ export const ExploreGoaPage: React.FC<ExploreGoaPageProps> = ({
                     <div
                       key={pIdx}
                       onMouseEnter={() => setActivePillar(pIdx)}
-                      className={`p-4 rounded-xl border transition-all cursor-pointer ${
-                        activePillar === pIdx
-                          ? 'bg-white border-[#044F92] shadow-xl -translate-y-1'
-                          : 'bg-white/60 backdrop-blur-md border-[#cfe0ee] hover:bg-white'
-                      }`}
+                      className={`p-4 rounded-xl border transition-all cursor-pointer ${activePillar === pIdx
+                        ? 'bg-white border-[#044F92] shadow-xl -translate-y-1'
+                        : 'bg-white/60 backdrop-blur-md border-[#cfe0ee] hover:bg-white'
+                        }`}
                     >
                       <div className="flex items-center justify-between">
                         <div className={`w-7 h-7 rounded-lg flex items-center justify-center ${activePillar === pIdx ? 'bg-[#044F92] text-white' : 'bg-[#eef5fb] text-[#044F92]'}`}>
@@ -756,21 +754,19 @@ export const ExploreGoaPage: React.FC<ExploreGoaPageProps> = ({
                   <div className="inline-flex p-1 bg-[#f4f1ee] rounded-full text-xs">
                     <button
                       onClick={() => setLifestyleMode('susegad')}
-                      className={`px-3 py-1 rounded-full font-medium transition-all cursor-pointer ${
-                        lifestyleMode === 'susegad'
-                          ? 'bg-[#044F92] text-white shadow-md font-semibold'
-                          : 'text-[#5a554e] hover:text-[#1a1a1a]'
-                      }`}
+                      className={`px-3 py-1 rounded-full font-medium transition-all cursor-pointer ${lifestyleMode === 'susegad'
+                        ? 'bg-[#044F92] text-white shadow-md font-semibold'
+                        : 'text-[#5a554e] hover:text-[#1a1a1a]'
+                        }`}
                     >
                       Goan Susegad
                     </button>
                     <button
                       onClick={() => setLifestyleMode('city')}
-                      className={`px-3 py-1 rounded-full font-medium transition-all cursor-pointer ${
-                        lifestyleMode === 'city'
-                          ? 'bg-[#8c3520] text-white shadow-md font-semibold'
-                          : 'text-[#5a554e] hover:text-[#1a1a1a]'
-                      }`}
+                      className={`px-3 py-1 rounded-full font-medium transition-all cursor-pointer ${lifestyleMode === 'city'
+                        ? 'bg-[#8c3520] text-white shadow-md font-semibold'
+                        : 'text-[#5a554e] hover:text-[#1a1a1a]'
+                        }`}
                     >
                       Metropolitan Grind
                     </button>
@@ -1061,11 +1057,10 @@ export const ExploreGoaPage: React.FC<ExploreGoaPageProps> = ({
                     title="Click to inspect Goan Red Rice"
                   >
                     <span
-                      className={`flex h-8 w-8 items-center justify-center rounded-full font-bold text-xs shadow-2xl transition-all duration-300 ${
-                        activeDish === 0
-                          ? 'bg-[#044F92] text-white ring-4 ring-[#38bdf8]/80 scale-125'
-                          : 'bg-white/95 text-[#044F92] hover:bg-white hover:scale-110'
-                      }`}
+                      className={`flex h-8 w-8 items-center justify-center rounded-full font-bold text-xs shadow-2xl transition-all duration-300 ${activeDish === 0
+                        ? 'bg-[#044F92] text-white ring-4 ring-[#38bdf8]/80 scale-125'
+                        : 'bg-white/95 text-[#044F92] hover:bg-white hover:scale-110'
+                        }`}
                     >
                       1
                     </span>
@@ -1085,11 +1080,10 @@ export const ExploreGoaPage: React.FC<ExploreGoaPageProps> = ({
                     title="Click to inspect Coconut Fish Curry"
                   >
                     <span
-                      className={`flex h-8 w-8 items-center justify-center rounded-full font-bold text-xs shadow-2xl transition-all duration-300 ${
-                        activeDish === 1
-                          ? 'bg-[#044F92] text-white ring-4 ring-[#38bdf8]/80 scale-125'
-                          : 'bg-white/95 text-[#044F92] hover:bg-white hover:scale-110'
-                      }`}
+                      className={`flex h-8 w-8 items-center justify-center rounded-full font-bold text-xs shadow-2xl transition-all duration-300 ${activeDish === 1
+                        ? 'bg-[#044F92] text-white ring-4 ring-[#38bdf8]/80 scale-125'
+                        : 'bg-white/95 text-[#044F92] hover:bg-white hover:scale-110'
+                        }`}
                     >
                       2
                     </span>
@@ -1109,11 +1103,10 @@ export const ExploreGoaPage: React.FC<ExploreGoaPageProps> = ({
                     title="Click to inspect Pomfret Fish Fry"
                   >
                     <span
-                      className={`flex h-8 w-8 items-center justify-center rounded-full font-bold text-xs shadow-2xl transition-all duration-300 ${
-                        activeDish === 2
-                          ? 'bg-[#044F92] text-white ring-4 ring-[#38bdf8]/80 scale-125'
-                          : 'bg-white/95 text-[#044F92] hover:bg-white hover:scale-110'
-                      }`}
+                      className={`flex h-8 w-8 items-center justify-center rounded-full font-bold text-xs shadow-2xl transition-all duration-300 ${activeDish === 2
+                        ? 'bg-[#044F92] text-white ring-4 ring-[#38bdf8]/80 scale-125'
+                        : 'bg-white/95 text-[#044F92] hover:bg-white hover:scale-110'
+                        }`}
                     >
                       3
                     </span>
@@ -1133,11 +1126,10 @@ export const ExploreGoaPage: React.FC<ExploreGoaPageProps> = ({
                     title="Click to inspect Kokum Solkadhi"
                   >
                     <span
-                      className={`flex h-8 w-8 items-center justify-center rounded-full font-bold text-xs shadow-2xl transition-all duration-300 ${
-                        activeDish === 3
-                          ? 'bg-[#044F92] text-white ring-4 ring-[#38bdf8]/80 scale-125'
-                          : 'bg-white/95 text-[#044F92] hover:bg-white hover:scale-110'
-                      }`}
+                      className={`flex h-8 w-8 items-center justify-center rounded-full font-bold text-xs shadow-2xl transition-all duration-300 ${activeDish === 3
+                        ? 'bg-[#044F92] text-white ring-4 ring-[#38bdf8]/80 scale-125'
+                        : 'bg-white/95 text-[#044F92] hover:bg-white hover:scale-110'
+                        }`}
                     >
                       4
                     </span>
@@ -1157,11 +1149,10 @@ export const ExploreGoaPage: React.FC<ExploreGoaPageProps> = ({
                     title="Click to inspect Poee Bread"
                   >
                     <span
-                      className={`flex h-8 w-8 items-center justify-center rounded-full font-bold text-xs shadow-2xl transition-all duration-300 ${
-                        activeDish === 4
-                          ? 'bg-[#044F92] text-white ring-4 ring-[#38bdf8]/80 scale-125'
-                          : 'bg-white/95 text-[#044F92] hover:bg-white hover:scale-110'
-                      }`}
+                      className={`flex h-8 w-8 items-center justify-center rounded-full font-bold text-xs shadow-2xl transition-all duration-300 ${activeDish === 4
+                        ? 'bg-[#044F92] text-white ring-4 ring-[#38bdf8]/80 scale-125'
+                        : 'bg-white/95 text-[#044F92] hover:bg-white hover:scale-110'
+                        }`}
                     >
                       5
                     </span>
@@ -1232,11 +1223,10 @@ export const ExploreGoaPage: React.FC<ExploreGoaPageProps> = ({
                         key={idx}
                         type="button"
                         onClick={() => setActiveDish(idx)}
-                        className={`px-2.5 py-1 text-[11px] font-medium transition-all cursor-pointer rounded ${
-                          activeDish === idx
-                            ? 'bg-[#044F92] text-white shadow-sm font-semibold'
-                            : 'bg-[#f4f1ee] hover:bg-[#eef5fb] text-[#4a4540] hover:text-[#044F92]'
-                        }`}
+                        className={`px-2.5 py-1 text-[11px] font-medium transition-all cursor-pointer rounded ${activeDish === idx
+                          ? 'bg-[#044F92] text-white shadow-sm font-semibold'
+                          : 'bg-[#f4f1ee] hover:bg-[#eef5fb] text-[#4a4540] hover:text-[#044F92]'
+                          }`}
                       >
                         {label}
                       </button>
@@ -1306,11 +1296,10 @@ export const ExploreGoaPage: React.FC<ExploreGoaPageProps> = ({
                   <button
                     key={reg}
                     onClick={() => setBeachRegionFilter(reg)}
-                    className={`px-3.5 py-1.5 rounded-full font-medium transition-all cursor-pointer ${
-                      beachRegionFilter === reg
-                        ? 'bg-[#044F92] text-white shadow font-semibold border border-[#38bdf8]/50'
-                        : 'text-blue-100/70 hover:text-white'
-                    }`}
+                    className={`px-3.5 py-1.5 rounded-full font-medium transition-all cursor-pointer ${beachRegionFilter === reg
+                      ? 'bg-[#044F92] text-white shadow font-semibold border border-[#38bdf8]/50'
+                      : 'text-blue-100/70 hover:text-white'
+                      }`}
                   >
                     {reg}
                   </button>
@@ -1465,11 +1454,10 @@ export const ExploreGoaPage: React.FC<ExploreGoaPageProps> = ({
                 <button
                   key={tab.id}
                   onClick={() => setHeritageCategory(tab.id as 'all' | 'church' | 'temple')}
-                  className={`px-4 py-2 rounded-lg font-medium transition-all cursor-pointer ${
-                    heritageCategory === tab.id
-                      ? 'bg-[#044F92] text-white shadow font-semibold'
-                      : 'text-[#5a554e] hover:text-[#1a1a1a]'
-                  }`}
+                  className={`px-4 py-2 rounded-lg font-medium transition-all cursor-pointer ${heritageCategory === tab.id
+                    ? 'bg-[#044F92] text-white shadow font-semibold'
+                    : 'text-[#5a554e] hover:text-[#1a1a1a]'
+                    }`}
                 >
                   {tab.label}
                 </button>
@@ -1495,9 +1483,8 @@ export const ExploreGoaPage: React.FC<ExploreGoaPageProps> = ({
 
                   <div className="absolute top-3 left-3">
                     <span
-                      className={`px-3 py-1 text-[10px] font-bold uppercase tracking-wider rounded-md text-white shadow ${
-                        item.category === 'church' ? 'bg-[#044F92]' : 'bg-[#c25e38]'
-                      }`}
+                      className={`px-3 py-1 text-[10px] font-bold uppercase tracking-wider rounded-md text-white shadow ${item.category === 'church' ? 'bg-[#044F92]' : 'bg-[#c25e38]'
+                        }`}
                     >
                       {item.category === 'church' ? 'Cathedral & Church' : 'Historic Temple'}
                     </span>
@@ -1825,9 +1812,8 @@ export const ExploreGoaPage: React.FC<ExploreGoaPageProps> = ({
                 </button>
                 <div className="absolute bottom-4 left-6 right-6 text-white">
                   <span
-                    className={`inline-block px-3 py-1 text-[10px] font-bold uppercase tracking-wider rounded-md text-white shadow mb-1 ${
-                      selectedHeritageItem.category === 'church' ? 'bg-[#044F92]' : 'bg-[#c25e38]'
-                    }`}
+                    className={`inline-block px-3 py-1 text-[10px] font-bold uppercase tracking-wider rounded-md text-white shadow mb-1 ${selectedHeritageItem.category === 'church' ? 'bg-[#044F92]' : 'bg-[#c25e38]'
+                      }`}
                   >
                     {selectedHeritageItem.category === 'church' ? 'Cathedral / Church' : 'Revered Temple'}
                   </span>
