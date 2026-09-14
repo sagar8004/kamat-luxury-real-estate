@@ -7,6 +7,8 @@ import {
   CheckCircle2, Compass, Layers, Check, Phone, ArrowRight, Share2, Eye
 } from 'lucide-react';
 import { PropertyItem } from '../types/property';
+import { formatAreaUnit, AreaUnit } from '../utils/areaConverter';
+import { getLandmarkIcon } from '../utils/landmarkIcons';
 
 interface ProjectDetailModalProps {
   property: PropertyItem | null;
@@ -23,6 +25,7 @@ export const ProjectDetailModal: React.FC<ProjectDetailModalProps> = ({
   const [activeImageIndex, setActiveImageIndex] = useState(0);
   const [downloadedBrochure, setDownloadedBrochure] = useState(false);
   const [copiedLink, setCopiedLink] = useState(false);
+  const [areaUnit, setAreaUnit] = useState<AreaUnit>('sqmts');
 
   if (!property) return null;
 
@@ -168,8 +171,32 @@ export const ProjectDetailModal: React.FC<ProjectDetailModalProps> = ({
                         <p className="font-medium text-[#1a1a1a] mt-0.5">{property.specs.bhk}</p>
                       </div>
                       <div>
-                        <p className="text-[#8c857d] text-[9px] uppercase tracking-widest font-semibold">Area Range</p>
-                        <p className="font-medium text-[#1a1a1a] mt-0.5">{property.specs.sqftRange}</p>
+                        <div className="flex items-center justify-between">
+                          <p className="text-[#8c857d] text-[9px] uppercase tracking-widest font-semibold">Area Range</p>
+                          <div className="inline-flex items-center p-0.5 bg-[#eae6df] rounded-full text-[8px] font-semibold border border-[#d8d2c7]">
+                            <button
+                              type="button"
+                              onClick={() => setAreaUnit('sqmts')}
+                              className={`px-1 rounded-full transition-all ${
+                                areaUnit === 'sqmts' ? 'bg-[#044F92] text-white' : 'text-[#666]'
+                              }`}
+                            >
+                              Mts
+                            </button>
+                            <button
+                              type="button"
+                              onClick={() => setAreaUnit('sqft')}
+                              className={`px-1 rounded-full transition-all ${
+                                areaUnit === 'sqft' ? 'bg-[#044F92] text-white' : 'text-[#666]'
+                              }`}
+                            >
+                              Ft
+                            </button>
+                          </div>
+                        </div>
+                        <p className="font-medium text-[#044F92] mt-0.5">
+                          {formatAreaUnit(property.specs.sqftRange, areaUnit)}
+                        </p>
                       </div>
                       <div>
                         <p className="text-[#8c857d] text-[9px] uppercase tracking-widest font-semibold">Possession</p>
@@ -268,11 +295,11 @@ export const ProjectDetailModal: React.FC<ProjectDetailModalProps> = ({
                       <div className="grid grid-cols-2 gap-2 text-xs pt-2 border-t border-[#e5e1da]">
                         <div>
                           <p className="text-[#8c857d] text-[9px] uppercase tracking-widest font-semibold">Carpet Area</p>
-                          <p className="text-[#1a1a1a] font-medium mt-0.5">{plan.carpetArea}</p>
+                          <p className="text-[#1a1a1a] font-medium mt-0.5">{formatAreaUnit(plan.carpetArea, areaUnit)}</p>
                         </div>
                         <div>
                           <p className="text-[#8c857d] text-[9px] uppercase tracking-widest font-semibold">Super Built-Up</p>
-                          <p className="text-[#1a1a1a] font-medium mt-0.5">{plan.superBuiltUp}</p>
+                          <p className="text-[#1a1a1a] font-medium mt-0.5">{formatAreaUnit(plan.superBuiltUp, areaUnit)}</p>
                         </div>
                       </div>
                     </div>
@@ -354,10 +381,15 @@ export const ProjectDetailModal: React.FC<ProjectDetailModalProps> = ({
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-3">
                   {property.landmarks.map((landmark, idx) => (
-                    <div key={idx} className="bg-[#fdfcfb] p-4 border border-[#e5e1da] space-y-1">
-                      <p className="text-xs font-semibold text-[#1a1a1a]">{landmark.name}</p>
-                      <p className="text-sm font-bold text-[#1a1a1a] font-mono">{landmark.distance}</p>
-                      <span className="text-[10px] uppercase tracking-widest text-[#8c857d]">{landmark.type}</span>
+                    <div key={idx} className="bg-[#fdfcfb] p-4 border border-[#e5e1da] flex items-start gap-3">
+                      <div className="w-8 h-8 rounded-md bg-[#044F92]/10 text-[#044F92] flex items-center justify-center shrink-0">
+                        {getLandmarkIcon(landmark.type, { className: 'w-4 h-4 text-[#044F92]' })}
+                      </div>
+                      <div className="min-w-0 flex-1 space-y-0.5">
+                        <p className="text-xs font-semibold text-[#1a1a1a] truncate">{landmark.name}</p>
+                        <p className="text-sm font-bold text-[#044F92] font-mono">{landmark.distance}</p>
+                        <span className="inline-block text-[9px] uppercase tracking-widest text-[#8c857d] font-medium">{landmark.type}</span>
+                      </div>
                     </div>
                   ))}
                 </div>

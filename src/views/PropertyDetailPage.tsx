@@ -13,6 +13,8 @@ import confetti from 'canvas-confetti';
 import { PropertyItem } from '../types/property';
 import { PROPERTIES } from '../data/propertyService';
 import { useTourModal } from '../context/TourModalContext';
+import { formatAreaUnit, AreaUnit } from '../utils/areaConverter';
+import { getLandmarkIcon, getLandmarkLabel } from '../utils/landmarkIcons';
 
 interface PropertyDetailPageProps {
   property: PropertyItem;
@@ -60,6 +62,7 @@ export const PropertyDetailPage: React.FC<PropertyDetailPageProps> = ({
   const [brochureSent, setBrochureSent] = useState(false);
   const [emailInput, setEmailInput] = useState('');
   const [selectedFloorPlan, setSelectedFloorPlan] = useState<number>(0);
+  const [areaUnit, setAreaUnit] = useState<AreaUnit>('sqmts');
 
   const allImages = [property.heroImage, ...(property.gallery || [])];
 
@@ -178,22 +181,64 @@ export const PropertyDetailPage: React.FC<PropertyDetailPageProps> = ({
         </div>
 
         {/* Specs Ribbon */}
-        <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 p-6 bg-white border border-[#e5e1da] shadow-sm text-center">
-          <div className="p-3 border-r border-[#e5e1da] last:border-none">
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 p-6 bg-white border border-[#e5e1da] shadow-sm text-center items-stretch">
+          <div className="p-3 border-r border-[#e5e1da] last:border-none flex flex-col justify-center">
             <p className="text-[10px] uppercase tracking-widest text-[#8c857d] font-semibold">Typology</p>
-            <p className="font-display text-xl text-[#1a1a1a] mt-1">{property.specs.bhk}</p>
+            <p className="font-display text-lg text-[#044F92] font-semibold mt-1">{property.specs.bhk}</p>
           </div>
-          <div className="p-3 border-r border-[#e5e1da] last:border-none">
-            <p className="text-[10px] uppercase tracking-widest text-[#8c857d] font-semibold">Built-Up Area</p>
-            <p className="font-display text-xl text-[#1a1a1a] mt-1">{property.specs.sqftRange}</p>
+          <div className="p-3 border-r border-[#e5e1da] last:border-none flex flex-col justify-between items-center bg-[#fdfcfb]">
+            <div className="w-full flex items-center justify-between gap-1">
+              <p className="text-[10px] uppercase tracking-widest text-[#8c857d] font-semibold">Built-Up Area</p>
+              {/* Unit Toggle Switch */}
+              <div
+                className="inline-flex items-center p-0.5 bg-[#eae6df] rounded-full border border-[#d8d2c7] shadow-inner"
+                role="group"
+                aria-label="Area Unit Switcher"
+              >
+                <button
+                  type="button"
+                  onClick={() => setAreaUnit('sqmts')}
+                  className={`px-2 py-0.5 rounded-full text-[9px] font-semibold tracking-wider transition-all duration-200 cursor-pointer ${areaUnit === 'sqmts'
+                    ? 'bg-[#044F92] text-white shadow-xs'
+                    : 'text-[#5c554e] hover:text-[#1a1a1a]'
+                    }`}
+                  title="Goa Standard (Square Metres)"
+                >
+                  Sq.Mts
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setAreaUnit('sqft')}
+                  className={`px-2 py-0.5 rounded-full text-[9px] font-semibold tracking-wider transition-all duration-200 cursor-pointer ${areaUnit === 'sqft'
+                    ? 'bg-[#044F92] text-white shadow-xs'
+                    : 'text-[#5c554e] hover:text-[#1a1a1a]'
+                    }`}
+                  title="Delhi / Metro Standard (Square Feet)"
+                >
+                  Sq.Ft
+                </button>
+              </div>
+            </div>
+            <motion.p
+              key={areaUnit}
+              initial={{ opacity: 0, scale: 0.96 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.2 }}
+              className="font-display text-lg text-[#044F92] font-semibold mt-1"
+            >
+              {formatAreaUnit(property.specs.sqftRange, areaUnit)}
+            </motion.p>
+            <p className="text-[9px] text-[#8c857d] mt-0.5">
+              {areaUnit === 'sqmts' ? 'Standard (1 Sq.M = 10.76 Sq.Ft)' : '(Converted)'}
+            </p>
           </div>
-          <div className="p-3 border-r border-[#e5e1da] last:border-none">
+          <div className="p-3 border-r border-[#e5e1da] last:border-none flex flex-col justify-center">
             <p className="text-[10px] uppercase tracking-widest text-[#8c857d] font-semibold">Total Units</p>
-            <p className="font-display text-xl text-[#1a1a1a] mt-1">{property.specs.totalUnits} Exclusive Units</p>
+            <p className="font-display text-lg text-[#044F92] font-semibold mt-1">{property.specs.totalUnits} Exclusive Units</p>
           </div>
-          <div className="p-3">
+          <div className="p-3 flex flex-col justify-center">
             <p className="text-[10px] uppercase tracking-widest text-[#8c857d] font-semibold">Architectural Style</p>
-            <p className="font-display text-lg text-[#1a1a1a] mt-1">{property.architecturalStyle}</p>
+            <p className="font-display text-lg text-[#044F92] font-semibold mt-1">{property.architecturalStyle}</p>
           </div>
         </div>
 
@@ -261,15 +306,41 @@ export const PropertyDetailPage: React.FC<PropertyDetailPageProps> = ({
                   </div>
                 )}
 
-                {/* Nearby landmarks */}
+                {/* Nearby landmarks & Transit */}
                 {property.landmarks && property.landmarks.length > 0 && (
-                  <div className="space-y-3 pt-4 border-t border-[#e5e1da]">
-                    <p className="text-xs uppercase tracking-widest text-[#044F92] font-bold">Nearby Landmarks & Transit</p>
-                    <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+                  <div className="space-y-4 pt-4 border-t border-[#e5e1da]">
+                    <div className="flex items-center justify-between">
+                      <p className="text-xs uppercase tracking-widest text-[#044F92] font-bold flex items-center gap-1.5">
+                        <Compass className="w-3.5 h-3.5 text-[#044F92]" />
+                        Nearby Landmarks & Transit
+                      </p>
+                      <span className="text-[10px] text-[#8c857d] font-mono">
+                        {property.landmarks.length} Connected Locations
+                      </span>
+                    </div>
+
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3.5">
                       {property.landmarks.map((l, i) => (
-                        <div key={i} className="p-3 bg-[#f2f7fc] border border-[#cfe0ee] text-xs">
-                          <p className="font-bold text-[#1a1a1a]">{l.name}</p>
-                          <p className="text-[#044F92] font-medium mt-0.5">{l.distance}</p>
+                        <div
+                          key={i}
+                          className="p-3.5 bg-[#f2f7fc] border border-[#cfe0ee] hover:border-[#044F92] transition-colors flex items-start gap-3 rounded-none shadow-xs group"
+                        >
+                          <div className="w-8 h-8 rounded-md bg-white border border-[#cfe0ee] text-[#044F92] flex items-center justify-center shrink-0 group-hover:bg-[#044F92] group-hover:text-white transition-colors">
+                            {getLandmarkIcon(l.type, { className: 'w-4 h-4 transition-colors' })}
+                          </div>
+                          <div className="min-w-0 flex-1">
+                            <p className="font-bold text-xs text-[#1a1a1a] line-clamp-1 group-hover:text-[#044F92] transition-colors">
+                              {l.name}
+                            </p>
+                            <div className="flex items-center justify-between mt-1 gap-1">
+                              <span className="text-xs font-semibold text-[#044F92] font-mono">
+                                {l.distance}
+                              </span>
+                              <span className="text-[9px] uppercase tracking-wider text-[#8c857d] bg-white/80 px-1.5 py-0.5 border border-[#cfe0ee] truncate max-w-[90px]">
+                                {l.type}
+                              </span>
+                            </div>
+                          </div>
                         </div>
                       ))}
                     </div>
@@ -280,7 +351,39 @@ export const PropertyDetailPage: React.FC<PropertyDetailPageProps> = ({
 
             {activeTab === 'floorplans' && (
               <div className="space-y-6">
-                <h3 className="font-display text-2xl text-[#1a1a1a]">Architectural Floor Plans</h3>
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                  <h3 className="font-display text-2xl text-[#1a1a1a]">Architectural Floor Plans</h3>
+                  <div className="flex items-center gap-2">
+                    <span className="text-xs text-[#8c857d]">Area Unit:</span>
+                    <div
+                      className="inline-flex items-center p-0.5 bg-[#eae6df] rounded-full border border-[#d8d2c7]"
+                      role="group"
+                      aria-label="Area Unit Switcher"
+                    >
+                      <button
+                        type="button"
+                        onClick={() => setAreaUnit('sqmts')}
+                        className={`px-2.5 py-1 rounded-full text-[10px] font-semibold tracking-wider transition-all duration-200 cursor-pointer ${areaUnit === 'sqmts'
+                          ? 'bg-[#044F92] text-white shadow-xs'
+                          : 'text-[#5c554e] hover:text-[#1a1a1a]'
+                          }`}
+                      >
+                        Sq.Mts (Goa)
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() => setAreaUnit('sqft')}
+                        className={`px-2.5 py-1 rounded-full text-[10px] font-semibold tracking-wider transition-all duration-200 cursor-pointer ${areaUnit === 'sqft'
+                          ? 'bg-[#044F92] text-white shadow-xs'
+                          : 'text-[#5c554e] hover:text-[#1a1a1a]'
+                          }`}
+                      >
+                        Sq.Ft (Metro)
+                      </button>
+                    </div>
+                  </div>
+                </div>
+
                 {property.floorPlans && property.floorPlans.length > 0 ? (
                   <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
                     <div className="lg:col-span-4 space-y-3">
@@ -294,7 +397,7 @@ export const PropertyDetailPage: React.FC<PropertyDetailPageProps> = ({
                             }`}
                         >
                           <p className="font-bold text-sm">{fp.name}</p>
-                          <p className="text-xs text-[#8c857d] mt-1">{fp.type} • Carpet: {fp.carpetArea}</p>
+                          <p className="text-xs text-[#8c857d] mt-1">{fp.type} • Carpet: {formatAreaUnit(fp.carpetArea, areaUnit)}</p>
                           {fp.priceEstimate && (
                             <p className="text-xs font-semibold text-[#044F92] mt-1">{fp.priceEstimate}</p>
                           )}
@@ -309,7 +412,7 @@ export const PropertyDetailPage: React.FC<PropertyDetailPageProps> = ({
                         className="max-h-[400px] w-auto object-contain"
                       />
                       <p className="text-xs text-[#8c857d] mt-4 font-light">
-                        {property.floorPlans[selectedFloorPlan]?.name} - Super Built-up: {property.floorPlans[selectedFloorPlan]?.superBuiltUp}
+                        {property.floorPlans[selectedFloorPlan]?.name} - Super Built-up: {formatAreaUnit(property.floorPlans[selectedFloorPlan]?.superBuiltUp, areaUnit)}
                       </p>
                     </div>
                   </div>

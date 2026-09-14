@@ -117,7 +117,7 @@ export const Navbar: React.FC<NavbarProps> = ({
           >
             <div
               className={`transition-all duration-300 rounded-lg ${isTransparent
-                ? 'bg-transparent px-3.5 py-1.5'
+                ? 'bg-white/95 px-3 py-1.5 shadow-xl border border-white/40'
                 : 'bg-transparent py-0.5'
                 }`}
             >
@@ -339,7 +339,7 @@ export const Navbar: React.FC<NavbarProps> = ({
             >
               <span>All Developments</span>
               <span className="text-[10px] uppercase tracking-widest text-[#044F92] bg-[#f2f7fc] border border-[#cfe0ee] px-2 py-0.5 font-sans font-semibold">
-                12 Estates
+                {PROPERTIES.length} Estates
               </span>
             </Link>
 

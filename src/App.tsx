@@ -87,7 +87,7 @@ export default function App() {
   return (
     <div className="min-h-screen bg-[#fdfcfb] text-[#1a1a1a] selection:bg-[#044F92] selection:text-white font-sans flex flex-col justify-between">
       {/* Full-Screen Global Initial Page Preloader */}
-      <PagePreloader minDuration={2000} />
+      <PagePreloader minDuration={4000} />
 
       {/* Luxury Brand Cursor */}
       <CustomCursor />

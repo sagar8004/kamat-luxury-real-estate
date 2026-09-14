@@ -9,10 +9,27 @@ export interface PropertyCoordinates {
   yPercent: number; // For SVG/Stylized map rendering (0-100)
 }
 
+export type LandmarkCategory =
+  | 'airport'
+  | 'beach'
+  | 'heritage'
+  | 'hospital'
+  | 'highway'
+  | 'dining'
+  | 'Railway Station'
+  | 'railway station'
+  | 'railway'
+  | 'Bus Stand'
+  | 'bus stand'
+  | 'bus'
+  | 'City'
+  | 'city'
+  | string;
+
 export interface NearbyLandmark {
   name: string;
   distance: string; // e.g. "12 mins", "3.4 km"
-  type: 'airport' | 'beach' | 'heritage' | 'hospital' | 'highway' | 'dining';
+  type: LandmarkCategory;
 }
 
 export interface FloorPlan {

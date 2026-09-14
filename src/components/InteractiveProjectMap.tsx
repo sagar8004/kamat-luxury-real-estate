@@ -9,6 +9,7 @@ import {
 import { PropertyItem, PropertyCategory, SingleCategory } from '../types/property';
 import { CATEGORIES_LIST } from '../data/propertyService';
 import { ScrollReveal } from './ScrollReveal';
+import { getLandmarkIcon } from '../utils/landmarkIcons';
 
 interface InteractiveProjectMapProps {
   properties: PropertyItem[];
@@ -482,9 +483,14 @@ export const InteractiveProjectMap: React.FC<InteractiveProjectMapProps> = ({
                     </p>
                     <div className="grid grid-cols-2 gap-2">
                       {selectedPin.landmarks.slice(0, 4).map((landmark, idx) => (
-                        <div key={idx} className="bg-[#fdfcfb] p-2.5 border border-[#e5e1da] text-xs">
-                          <p className="text-[#1a1a1a] font-medium truncate font-primary">{landmark.name}</p>
-                          <p className="text-[#044F92] text-[10px] font-secondary font-bold mt-0.5">{landmark.distance}</p>
+                        <div key={idx} className="bg-[#fdfcfb] p-2.5 border border-[#e5e1da] text-xs flex items-center gap-2">
+                          <div className="w-6 h-6 rounded-xs bg-[#044F92]/10 text-[#044F92] flex items-center justify-center shrink-0">
+                            {getLandmarkIcon(landmark.type, { className: 'w-3.5 h-3.5 text-[#044F92]' })}
+                          </div>
+                          <div className="min-w-0 flex-1">
+                            <p className="text-[#1a1a1a] font-medium truncate font-primary text-[11px]">{landmark.name}</p>
+                            <p className="text-[#044F92] text-[10px] font-secondary font-bold">{landmark.distance}</p>
+                          </div>
                         </div>
                       ))}
                     </div>

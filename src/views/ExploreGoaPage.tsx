@@ -3,40 +3,31 @@
 import React, { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import { motion, AnimatePresence, useScroll, useSpring, useTransform, useMotionValue } from 'motion/react';
+import { motion, AnimatePresence, useSpring, useTransform, useMotionValue } from 'motion/react';
 import {
   Compass,
   Palmtree,
-  Utensils,
   Sun,
   Waves,
   Building2,
-  TrendingUp,
   Plane,
   ChevronRight,
   ChevronLeft,
   Sparkles,
   MapPin,
   Clock,
-  Volume2,
-  VolumeX,
   ArrowRight,
   ShieldCheck,
-  CheckCircle2,
   Sliders,
-  DollarSign,
-  Maximize2,
   Calendar,
-  Flame,
   Landmark,
-  Church,
-  Info,
   X,
-  Heart,
   Wind,
-  Droplets,
   Activity,
-  Smile
+  Hospital,
+  GraduationCap,
+  Car,
+  Trees
 } from 'lucide-react';
 import { ScrollReveal } from '../components/ScrollReveal';
 import { useTourModal } from '../context/TourModalContext';
@@ -46,9 +37,9 @@ interface ExploreGoaPageProps {
   onOpenTourModal?: () => void;
 }
 
-// ==========================================
-// BEACHES DATA COLLECTION
-// ==========================================
+// =========================================================================
+// 1. BEACHES DATA COLLECTION (PRESERVED)
+// =========================================================================
 interface BeachItem {
   id: string;
   name: string;
@@ -149,9 +140,9 @@ const GOA_BEACHES: BeachItem[] = [
   }
 ];
 
-// ==========================================
-// CULTURE & SACRED HERITAGE DATA COLLECTION
-// ==========================================
+// =========================================================================
+// 2. CULTURE & SACRED HERITAGE DATA COLLECTION (PRESERVED)
+// =========================================================================
 interface SacredHeritageItem {
   id: string;
   name: string;
@@ -240,6 +231,172 @@ const SACRED_HERITAGE_LIST: SacredHeritageItem[] = [
   }
 ];
 
+// =========================================================================
+// 3. COASTAL WIND & MARITIME AIRFLOW PRESETS
+// =========================================================================
+interface WindFlowPreset {
+  id: string;
+  name: string;
+  speedKmh: number;
+  direction: string;
+  aqiRange: string;
+  rotationDuration: number;
+  temp: string;
+  label: string;
+  subtitle: string;
+}
+
+const WIND_PRESETS: WindFlowPreset[] = [
+  {
+    id: 'morning',
+    name: 'Morning Trade Wind',
+    speedKmh: 14,
+    direction: 'WNW • Arabian Sea',
+    aqiRange: 'AQI 28-35',
+    rotationDuration: 5,
+    temp: '26°C',
+    label: 'Morning Breeze',
+    subtitle: 'Crisp maritime trade winds filtering across palm groves'
+  },
+  {
+    id: 'afternoon',
+    name: 'Valley Thermal Flow',
+    speedKmh: 22,
+    direction: 'NW • Assagao Valley',
+    aqiRange: 'AQI 35-55',
+    rotationDuration: 3.2,
+    temp: '29°C',
+    label: 'Valley Flow',
+    subtitle: 'Western Ghats breeze sweeping through lush banyan canopies'
+  },
+  {
+    id: 'sunset',
+    name: 'Sunset Coastal Zephyr',
+    speedKmh: 11,
+    direction: 'SW • Ocean Shallows',
+    aqiRange: 'AQI 28-32',
+    rotationDuration: 7,
+    temp: '27°C',
+    label: 'Sunset Zephyr',
+    subtitle: 'Calming evening sea current refreshing coastal estates'
+  }
+];
+
+// =========================================================================
+// 4. HEALTHCARE DIRECTORY
+// =========================================================================
+interface HospitalItem {
+  id: string;
+  name: string;
+  location: string;
+  category: 'Tertiary Care' | 'Super Speciality' | 'Private Multi-Speciality';
+  beds: string;
+  emergency: string;
+  specialties: string[];
+  distanceFromAssagao: string;
+  distanceFromPanaji: string;
+}
+
+const HEALTHCARE_LIST: HospitalItem[] = [
+  {
+    id: 'gmc',
+    name: 'Goa Medical College & Hospital (GMC)',
+    location: 'Bambolim (Central Goa)',
+    category: 'Tertiary Care',
+    beds: '1,500+ Beds',
+    emergency: '24x7 Level-1 Trauma & Critical Emergency',
+    specialties: ['Cardiac Surgery', 'Neurotrauma', 'Organ Transplant', 'Super-Specialty Oncology'],
+    distanceFromAssagao: '32 mins',
+    distanceFromPanaji: '10 mins'
+  },
+  {
+    id: 'manipal',
+    name: 'Manipal Hospital Goa',
+    location: 'Dona Paula, Panaji',
+    category: 'Super Speciality',
+    beds: '235+ Premium Beds',
+    emergency: '24x7 International Cardiac & Trauma ICU',
+    specialties: ['Interventional Cardiology', 'Orthopaedics & Joint Replacement', 'Robotic Surgery', 'Medical Oncology'],
+    distanceFromAssagao: '35 mins',
+    distanceFromPanaji: '8 mins'
+  },
+  {
+    id: 'healthway',
+    name: 'Healthway Hospitals',
+    location: 'Old Goa & Kadamba Plateau',
+    category: 'Super Speciality',
+    beds: '250+ Beds',
+    emergency: '24x7 Emergency Trauma & Stroke Unit',
+    specialties: ['Gastroenterology', 'Advanced Nephrology', 'Pediatric ICU', 'Minimally Invasive Surgery'],
+    distanceFromAssagao: '28 mins',
+    distanceFromPanaji: '12 mins'
+  },
+  {
+    id: 'victor',
+    name: 'Victor Hospital',
+    location: 'Margao (South Goa)',
+    category: 'Private Multi-Speciality',
+    beds: '150+ Beds',
+    emergency: '24x7 Cardiac Emergency & Cath Lab',
+    specialties: ['Cardiac Catheterization', 'Laparoscopic Surgery', 'Critical Care Medicine', 'Dialysis Centre'],
+    distanceFromAssagao: '60 mins',
+    distanceFromPanaji: '35 mins'
+  }
+];
+
+// =========================================================================
+// 5. SCHOOLS & EDUCATION DIRECTORY
+// =========================================================================
+interface SchoolItem {
+  id: string;
+  name: string;
+  board: 'Cambridge IGCSE' | 'ICSE / ISC' | 'CBSE' | 'Higher Education';
+  location: string;
+  grades: string;
+  highlights: string[];
+  keyFeature: string;
+}
+
+const SCHOOLS_LIST: SchoolItem[] = [
+  {
+    id: 'gera',
+    name: 'The Gera School',
+    board: 'Cambridge IGCSE',
+    location: 'Kadamba Plateau (Near Panaji)',
+    grades: 'Pre-K to Grade 12',
+    highlights: ['Cambridge International Curriculum', 'World-class robotics & maker labs', 'Expansive sporting campus & Olympic swimming'],
+    keyFeature: 'Goa’s top-tier global international school with holistic arts and sports.'
+  },
+  {
+    id: 'sharada',
+    name: 'Sharada Mandir School',
+    board: 'ICSE / ISC',
+    location: 'Miramar, Panaji',
+    grades: 'Kindergarten to Grade 12',
+    highlights: ['55+ Years of academic excellence', 'State-topping ISC results', 'Distinguished alumni across medicine, law & business'],
+    keyFeature: 'Premier traditional institution highly favored by Goan intellectual and business families.'
+  },
+  {
+    id: 'sunshine',
+    name: 'Sunshine Worldwide School',
+    board: 'CBSE',
+    location: 'Old Goa',
+    grades: 'Nursery to Grade 12',
+    highlights: ['Experiential learning methodology', 'Green forested ecological campus', 'Strong focus on entrepreneurship & design thinking'],
+    keyFeature: 'Progressive CBSE curriculum blending academic rigor with outdoor nature-based learning.'
+  },
+  {
+    id: 'bits',
+    name: 'BITS Pilani — K.K. Birla Goa Campus',
+    board: 'Higher Education',
+    location: 'Zuarinagar (Near Airport)',
+    grades: 'B.Tech, M.Tech, PhD',
+    highlights: ['India Top-5 Engineering Institute', '180-acre world-class campus', 'Thriving startup incubator & tech ecosystem'],
+    keyFeature: 'Brings elite academic minds, tech conferences, and innovation talent to the state.'
+  }
+];
+
+
 export const ExploreGoaPage: React.FC<ExploreGoaPageProps> = ({
   onNavigate,
   onOpenTourModal
@@ -263,204 +420,67 @@ export const ExploreGoaPage: React.FC<ExploreGoaPageProps> = ({
     }
   };
 
+  // Section Tracking State
   const [activeSection, setActiveSection] = useState<number>(0);
-  const [soundPlaying, setSoundPlaying] = useState<boolean>(false);
-  const audioCtxRef = useRef<AudioContext | null>(null);
-  const noiseNodeRef = useRef<AudioNode | null>(null);
 
-  // Section 1 State: City vs Susegad Lifestyle Toggle & Philosophy Pillar
-  const [lifestyleMode, setLifestyleMode] = useState<'susegad' | 'city'>('susegad');
-  const [activePillar, setActivePillar] = useState<number>(0);
+  // Interactive Wind & Flow Simulator State
+  const [activeWindPreset, setActiveWindPreset] = useState<string>('morning');
+  const [isGusting, setIsGusting] = useState<boolean>(false);
+  const gustTimeoutRef = useRef<NodeJS.Timeout | null>(null);
 
-  // Section 2 State: Food Thali Hotspot Active Item
-  const [activeDish, setActiveDish] = useState<number>(0);
+  const handleTriggerGust = () => {
+    setIsGusting(true);
+    if (gustTimeoutRef.current) clearTimeout(gustTimeoutRef.current);
+    gustTimeoutRef.current = setTimeout(() => {
+      setIsGusting(false);
+    }, 2800);
+  };
 
-  // Section 3 State: Beaches Carousel & Region Filter
+  const activePreset =
+    WIND_PRESETS.find((p) => p.id === activeWindPreset) || WIND_PRESETS[0];
+
+  // Interactive AQI Slider (Delhi vs Goa Split Screen)
+  const [aqiSliderVal, setAqiSliderVal] = useState<number>(50);
+
+  // Healthcare Category Filter
+  const [healthCategory, setHealthCategory] = useState<string>('All');
+
+  // School Curriculum Filter
+  const [schoolBoardFilter, setSchoolBoardFilter] = useState<string>('All');
+
+  // Beaches Carousel Filter
   const [beachRegionFilter, setBeachRegionFilter] = useState<'All' | 'North Goa' | 'South Goa'>('All');
   const [activeBeachIndex, setActiveBeachIndex] = useState<number>(0);
   const beachScrollRef = useRef<HTMLDivElement>(null);
 
-  // Section 4 State: Culture & Sacred Heritage Category Filter
+  // Sacred Heritage Filter & Detail Modal
   const [heritageCategory, setHeritageCategory] = useState<'all' | 'church' | 'temple'>('all');
   const [selectedHeritageItem, setSelectedHeritageItem] = useState<SacredHeritageItem | null>(null);
-  const [activeArchFeature, setActiveArchFeature] = useState<number>(0);
 
-  // Section 5 State: ROI Calculator Investment Value (in Crores)
-  const [investmentAmount, setInvestmentAmount] = useState<number>(6.5);
-  const [projectedOccupancy, setProjectedOccupancy] = useState<number>(68);
+  // 3-Step Matchmaker Modal State
+  const [showMatchmaker, setShowMatchmaker] = useState<boolean>(false);
+  const [matchStep, setMatchStep] = useState<number>(1);
+  const [matchAnswers, setMatchAnswers] = useState<{
+    vibe?: string;
+    priority?: string;
+    style?: string;
+  }>({});
 
-  // 3D Parallax Mouse Tracking on Floating Assets
+  // 3D Parallax Mouse Tracking on Hero
   const mouseX = useMotionValue(0);
   const mouseY = useMotionValue(0);
   const smoothMouseX = useSpring(mouseX, { stiffness: 90, damping: 20 });
   const smoothMouseY = useSpring(mouseY, { stiffness: 90, damping: 20 });
 
-  const rotateX = useTransform(smoothMouseY, [-300, 300], [12, -12]);
-  const rotateY = useTransform(smoothMouseX, [-300, 300], [-12, 12]);
   const oceanShiftX = useTransform(smoothMouseX, [-300, 300], [-25, 25]);
   const oceanShiftY = useTransform(smoothMouseY, [-300, 300], [-15, 15]);
 
-  // Canvas ref for Interactive Sea Waves
-  const canvasRef = useRef<HTMLCanvasElement | null>(null);
-  const mousePosRef = useRef<{ x: number; y: number; active: boolean }>({ x: 0, y: 0, active: false });
-
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    const { clientX, clientY, currentTarget } = e;
+    const { clientX, clientY } = e;
     const { innerWidth, innerHeight } = window;
     mouseX.set(clientX - innerWidth / 2);
     mouseY.set(clientY - innerHeight / 2);
-
-    const rect = currentTarget.getBoundingClientRect();
-    mousePosRef.current = {
-      x: clientX - rect.left,
-      y: clientY - rect.top,
-      active: true
-    };
   };
-
-  const handleMouseLeave = () => {
-    mousePosRef.current.active = false;
-  };
-
-  // Interactive Canvas Sea Waves Animation Loop
-  useEffect(() => {
-    const canvas = canvasRef.current;
-    if (!canvas) return;
-
-    const ctx = canvas.getContext('2d');
-    if (!ctx) return;
-
-    let animationFrameId: number;
-    let step = 0;
-
-    const resize = () => {
-      if (!canvas) return;
-      canvas.width = canvas.parentElement?.clientWidth || window.innerWidth;
-      canvas.height = canvas.parentElement?.clientHeight || 900;
-    };
-
-    resize();
-    window.addEventListener('resize', resize);
-
-    // Particle foam nodes
-    interface Particle {
-      x: number;
-      y: number;
-      size: number;
-      speedY: number;
-      speedX: number;
-      opacity: number;
-    }
-    const particles: Particle[] = Array.from({ length: 45 }, () => ({
-      x: Math.random() * (canvas.width || 1200),
-      y: Math.random() * (canvas.height || 800),
-      size: Math.random() * 2.5 + 1,
-      speedY: -(Math.random() * 0.4 + 0.2),
-      speedX: (Math.random() - 0.5) * 0.3,
-      opacity: Math.random() * 0.5 + 0.2
-    }));
-
-    const render = () => {
-      step += 0.015;
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-      const w = canvas.width;
-      const h = canvas.height;
-      const mouse = mousePosRef.current;
-
-      // Draw 3 Interactive Wave Layers at base
-      const waveConfigs = [
-        {
-          baseY: h * 0.72,
-          amplitude: 28,
-          frequency: 0.004,
-          speed: 1.2,
-          color: 'rgba(4, 79, 146, 0.22)'
-        },
-        {
-          baseY: h * 0.78,
-          amplitude: 22,
-          frequency: 0.006,
-          speed: -1.5,
-          color: 'rgba(2, 132, 199, 0.18)'
-        },
-        {
-          baseY: h * 0.84,
-          amplitude: 18,
-          frequency: 0.008,
-          speed: 2.0,
-          color: 'rgba(56, 189, 248, 0.14)'
-        }
-      ];
-
-      waveConfigs.forEach((cfg) => {
-        ctx.beginPath();
-        ctx.moveTo(0, h);
-
-        for (let x = 0; x <= w; x += 8) {
-          // Base sinusoidal wave
-          let y =
-            cfg.baseY +
-            Math.sin(x * cfg.frequency + step * cfg.speed) * cfg.amplitude +
-            Math.cos(x * cfg.frequency * 0.5 + step * 0.8) * (cfg.amplitude * 0.4);
-
-          // Mouse wake water displacement
-          if (mouse.active) {
-            const dx = x - mouse.x;
-            const dist = Math.abs(dx);
-            if (dist < 260) {
-              const influence = (1 - dist / 260) * 35 * Math.sin(step * 4);
-              y += influence;
-            }
-          }
-
-          ctx.lineTo(x, y);
-        }
-
-        ctx.lineTo(w, h);
-        ctx.closePath();
-        ctx.fillStyle = cfg.color;
-        ctx.fill();
-      });
-
-      // Floating bio-luminescent foam sparkles
-      particles.forEach((p) => {
-        p.y += p.speedY;
-        p.x += p.speedX;
-
-        if (mouse.active) {
-          const dx = mouse.x - p.x;
-          const dy = mouse.y - p.y;
-          const dist = Math.sqrt(dx * dx + dy * dy);
-          if (dist < 200) {
-            p.x += (dx / dist) * 0.8;
-            p.y += (dy / dist) * 0.8;
-          }
-        }
-
-        if (p.y < 0) p.y = h;
-        if (p.x < 0) p.x = w;
-        if (p.x > w) p.x = 0;
-
-        ctx.beginPath();
-        ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(56, 189, 248, ${p.opacity})`;
-        ctx.shadowBlur = 8;
-        ctx.shadowColor = '#38bdf8';
-        ctx.fill();
-        ctx.shadowBlur = 0;
-      });
-
-      animationFrameId = requestAnimationFrame(render);
-    };
-
-    render();
-
-    return () => {
-      window.removeEventListener('resize', resize);
-      cancelAnimationFrame(animationFrameId);
-    };
-  }, []);
 
   // Filtered lists
   const filteredBeaches = GOA_BEACHES.filter(
@@ -469,6 +489,14 @@ export const ExploreGoaPage: React.FC<ExploreGoaPageProps> = ({
 
   const filteredHeritage = SACRED_HERITAGE_LIST.filter(
     (h) => heritageCategory === 'all' || h.category === heritageCategory
+  );
+
+  const filteredHospitals = HEALTHCARE_LIST.filter(
+    (h) => healthCategory === 'All' || h.category === healthCategory
+  );
+
+  const filteredSchools = SCHOOLS_LIST.filter(
+    (s) => schoolBoardFilter === 'All' || s.board === schoolBoardFilter
   );
 
   // Scroll Beach Carousel Left/Right
@@ -482,82 +510,21 @@ export const ExploreGoaPage: React.FC<ExploreGoaPageProps> = ({
     }
   };
 
-  // Ambient Coastal Audio Synth
-  const toggleAmbientSound = () => {
-    if (soundPlaying) {
-      if (audioCtxRef.current && audioCtxRef.current.state !== 'closed') {
-        audioCtxRef.current.suspend();
-      }
-      setSoundPlaying(false);
-    } else {
-      try {
-        if (!audioCtxRef.current) {
-          const AudioContextClass =
-            window.AudioContext ||
-            (window as unknown as { webkitAudioContext: typeof AudioContext }).webkitAudioContext;
-          const ctx = new AudioContextClass();
-          audioCtxRef.current = ctx;
-
-          const bufferSize = ctx.sampleRate * 2;
-          const noiseBuffer = ctx.createBuffer(1, bufferSize, ctx.sampleRate);
-          const output = noiseBuffer.getChannelData(0);
-          let b0 = 0, b1 = 0, b2 = 0, b3 = 0, b4 = 0, b5 = 0, b6 = 0;
-          for (let i = 0; i < bufferSize; i++) {
-            const white = Math.random() * 2 - 1;
-            b0 = 0.99886 * b0 + white * 0.0555179;
-            b1 = 0.99332 * b1 + white * 0.0750759;
-            b2 = 0.969 * b2 + white * 0.153852;
-            b3 = 0.8665 * b3 + white * 0.3104856;
-            b4 = 0.55 * b4 + white * 0.5329522;
-            b5 = -0.7616 * b5 - white * 0.016898;
-            output[i] = b0 + b1 + b2 + b3 + b4 + b5 + b6 + white * 0.5362;
-            output[i] *= 0.04;
-            b6 = white * 0.115926;
-          }
-
-          const whiteNoise = ctx.createBufferSource();
-          whiteNoise.buffer = noiseBuffer;
-          whiteNoise.loop = true;
-
-          const filter = ctx.createBiquadFilter();
-          filter.type = 'lowpass';
-          filter.frequency.setValueAtTime(450, ctx.currentTime);
-
-          const lfo = ctx.createOscillator();
-          lfo.frequency.setValueAtTime(0.12, ctx.currentTime);
-          const lfoGain = ctx.createGain();
-          lfoGain.gain.setValueAtTime(250, ctx.currentTime);
-          lfo.connect(lfoGain);
-          lfoGain.connect(filter.frequency);
-          lfo.start();
-
-          const masterGain = ctx.createGain();
-          masterGain.gain.setValueAtTime(0.25, ctx.currentTime);
-
-          whiteNoise.connect(filter);
-          filter.connect(masterGain);
-          masterGain.connect(ctx.destination);
-
-          whiteNoise.start(0);
-          noiseNodeRef.current = whiteNoise;
-        } else if (audioCtxRef.current.state === 'suspended') {
-          audioCtxRef.current.resume();
-        }
-        setSoundPlaying(true);
-      } catch (err) {
-        console.error('Audio could not be initialized:', err);
-      }
-    }
-  };
-
   // Section Observer on Scroll
   useEffect(() => {
     const handleScroll = () => {
-      const sections = ['section-hero', 'section-food', 'section-beaches', 'section-heritage', 'section-investment'];
+      const sectionIds = [
+        'section-hero',
+        'section-air',
+        'section-transit',
+        'section-infrastructure',
+        'section-beaches',
+        'section-heritage'
+      ];
       const scrollPos = window.scrollY + window.innerHeight * 0.35;
 
-      for (let i = sections.length - 1; i >= 0; i--) {
-        const el = document.getElementById(sections[i]);
+      for (let i = sectionIds.length - 1; i >= 0; i--) {
+        const el = document.getElementById(sectionIds[i]);
         if (el && el.offsetTop <= scrollPos) {
           setActiveSection(i);
           break;
@@ -568,8 +535,8 @@ export const ExploreGoaPage: React.FC<ExploreGoaPageProps> = ({
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => {
       window.removeEventListener('scroll', handleScroll);
-      if (audioCtxRef.current && audioCtxRef.current.state !== 'closed') {
-        audioCtxRef.current.close().catch(() => { });
+      if (gustTimeoutRef.current) {
+        clearTimeout(gustTimeoutRef.current);
       }
     };
   }, []);
@@ -587,42 +554,34 @@ export const ExploreGoaPage: React.FC<ExploreGoaPageProps> = ({
     }
   };
 
-  // Rental ROI calculations
-  const calculatedRentalYield = (13.4).toFixed(1);
-  const annualRentalIncome = (investmentAmount * 10000000 * 0.134).toLocaleString('en-IN', {
-    maximumFractionDigits: 0
-  });
-  const estimatedNightlyTariff = Math.round(
-    (investmentAmount * 10000000 * 0.134) / (365 * (projectedOccupancy / 100))
-  );
-
   return (
     <div
-      className="min-h-screen bg-[#fdfcfb] text-[#1a1a1a] selection:bg-[#044F92] selection:text-white relative overflow-hidden"
+      className="min-h-screen bg-[#fcfbf9] text-[#1a1a1a] selection:bg-[#044F92] selection:text-white relative overflow-hidden"
       onMouseMove={handleMouseMove}
     >
-      {/* Background Noise Texture */}
-      <div className="fixed inset-0 pointer-events-none opacity-[0.03] z-10 bg-[radial-gradient(#044F92_1px,transparent_1px)] [background-size:20px_20px]" />
+      {/* Background Subtle Luxury Texture Grid */}
+      <div className="fixed inset-0 pointer-events-none opacity-[0.035] z-0 bg-[radial-gradient(#044F92_1px,transparent_1px)] [background-size:24px_24px]" />
 
-      {/* Sticky Chapter Bar */}
-      <div className="fixed bottom-6 left-1/2 -translate-x-1/2 z-40 bg-[#02182c]/90 backdrop-blur-xl border border-white/20 text-white px-4 py-2.5 rounded-full shadow-2xl flex items-center gap-3 sm:gap-6 text-xs transition-all max-w-[95vw] overflow-x-auto scrollbar-none">
-        <div className="flex items-center gap-1.5 shrink-0 border-r border-white/20 pr-3 sm:pr-4">
+      {/* Floating Sticky Chapter Quick-Bar */}
+      <div className="fixed bottom-6 left-1/2 -translate-x-1/2 z-40 bg-[#02182c]/90 backdrop-blur-xl border border-white/20 text-white px-3.5 py-2 rounded-full shadow-2xl flex items-center gap-2 sm:gap-4 text-xs transition-all max-w-[95vw] overflow-x-auto scrollbar-none">
+        <div className="flex items-center gap-1.5 shrink-0 border-r border-white/20 pr-3">
           <span className="w-2 h-2 rounded-full bg-[#38bdf8] animate-pulse" />
-          <span className="font-mono text-[10px] tracking-widest uppercase text-blue-200 hidden sm:inline">Goa Odyssey</span>
+          {/* <span className="font-mono text-[10px] tracking-widest uppercase text-blue-200 hidden md:inline">Goa Living Guide</span> */}
         </div>
 
-        <div className="flex items-center gap-1 sm:gap-2">
+        <div className="flex items-center gap-1 sm:gap-1.5">
           {[
-            { label: '01 Susegad', id: 'section-hero' },
-            { label: '02 Culinary', id: 'section-food' },
-            { label: '03 Beaches', id: 'section-beaches' },
-            { label: '04 Culture & Temples', id: 'section-heritage' },
-            { label: '05 Yield & ROI', id: 'section-investment' }
+            { label: '01 Hero', id: 'section-hero' },
+            { label: '02 Air Quality', id: 'section-air' },
+            { label: '03 Connectivity', id: 'section-transit' },
+            { label: '04 Healthcare & Schools', id: 'section-infrastructure' },
+            { label: '05 Coastline', id: 'section-beaches' },
+            { label: '06 Sacred Culture', id: 'section-heritage' }
           ].map((chap, idx) => (
             <button
               key={chap.id}
               onClick={() => scrollToSection(chap.id)}
-              className={`px-2.5 sm:px-3 py-1 rounded-full text-[11px] font-medium transition-all tracking-wide whitespace-nowrap cursor-pointer ${activeSection === idx
+              className={`px-2.5 py-1 rounded-full text-[11px] font-medium transition-all tracking-wide whitespace-nowrap cursor-pointer ${activeSection === idx
                 ? 'bg-[#044F92] text-white shadow-md font-semibold border border-[#38bdf8]/50'
                 : 'text-white/70 hover:text-white hover:bg-white/10'
                 }`}
@@ -631,624 +590,584 @@ export const ExploreGoaPage: React.FC<ExploreGoaPageProps> = ({
             </button>
           ))}
         </div>
-
-        <button
-          onClick={toggleAmbientSound}
-          title={soundPlaying ? 'Mute Coastal Ambient Sound' : 'Play Soothing Coastal Ambient Sound'}
-          className="shrink-0 flex items-center gap-1.5 pl-2 sm:pl-3 border-l border-white/20 text-blue-200 hover:text-white cursor-pointer transition-colors"
-        >
-          {soundPlaying ? (
-            <>
-              <Volume2 className="w-3.5 h-3.5 text-[#38bdf8] animate-pulse" />
-              <span className="text-[10px] hidden md:inline font-mono">Breeze On</span>
-            </>
-          ) : (
-            <>
-              <VolumeX className="w-3.5 h-3.5 text-white/60" />
-              <span className="text-[10px] hidden md:inline font-mono text-white/60">Sound</span>
-            </>
-          )}
-        </button>
       </div>
 
       {/* =========================================================================
-          CHAPTER 1: FULL HERO - THE ART OF GOAN SUSEGAD (INTERACTIVE SEA WAVES)
+          SECTION 1: EDITORIAL HERO — “GOA, BEYOND THE DESTINATION”
           ========================================================================= */}
       <section
         id="section-hero"
-        onMouseLeave={handleMouseLeave}
-        className="relative min-h-screen pt-32 pb-24 px-6 sm:px-8 lg:px-12 flex flex-col justify-between border-b border-[#cfe0ee] overflow-hidden bg-gradient-to-b from-[#f2f8fc] via-[#fdfcfb] to-[#f0f6fa]"
+        className="relative min-h-[92vh] pt-32 pb-20 px-6 sm:px-8 lg:px-12 flex flex-col justify-center border-b border-[#cfe0ee] overflow-hidden bg-gradient-to-b from-[#f2f8fc] via-[#fcfbf9] to-[#f4f9fd]"
       >
-        {/* INTERACTIVE SEA WAVES CANVAS BACKGROUND */}
-        <canvas
-          ref={canvasRef}
-          className="absolute inset-0 pointer-events-none z-0 opacity-80"
-        />
-
-        {/* Ambient Glowing Sun & Parallax Glow */}
+        {/* Parallax Radial Glows */}
         <motion.div
           style={{ x: oceanShiftX, y: oceanShiftY }}
-          className="absolute -top-16 right-1/4 w-[550px] h-[550px] bg-gradient-to-br from-[#ffd97d]/35 via-[#38bdf8]/20 to-transparent rounded-full blur-[100px] pointer-events-none -z-0"
+          className="absolute -top-20 right-1/4 w-[600px] h-[600px] bg-gradient-to-br from-[#ffd97d]/30 via-[#38bdf8]/20 to-transparent rounded-full blur-[110px] pointer-events-none -z-0"
         />
-        <div className="absolute top-1/3 -left-20 w-96 h-96 bg-[#044F92]/10 rounded-full blur-3xl pointer-events-none" />
+        <div className="absolute top-1/2 -left-24 w-96 h-96 bg-[#044F92]/10 rounded-full blur-3xl pointer-events-none" />
 
-        <div className="max-w-7xl mx-auto w-full grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-14 items-center relative z-10 my-auto">
-          {/* Left Column: Cinematic Typography & Narrative */}
+        <div className="max-w-7xl mx-auto w-full grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-14 items-center relative z-10">
+          {/* Left Column: Headline, Narrative & Direct CTAs */}
           <div className="lg:col-span-7 space-y-7">
             <ScrollReveal variant="from-left" distance={30}>
-              <div className="inline-flex items-center gap-2.5 px-4 py-1.5 bg-white/90 backdrop-blur-md border border-[#044F92]/20 rounded-full text-[#044F92] text-xs font-semibold uppercase tracking-[0.22em] shadow-sm">
+              <div className="inline-flex items-center gap-2.5 px-4 py-1.5 bg-white/95 backdrop-blur-md border border-[#044F92]/25 rounded-full text-[#044F92] text-xs font-semibold uppercase tracking-[0.22em] shadow-sm">
                 <span className="w-2 h-2 rounded-full bg-[#044F92] animate-ping" />
                 <Sparkles className="w-3.5 h-3.5 text-[#044F92]" />
-                <span>The Art of Goan Susegad • Chapter 01</span>
+                <span>Goa, Beyond the Destination • Kamat Living Guide</span>
               </div>
             </ScrollReveal>
 
             <ScrollReveal variant="from-left" distance={40} delay={0.1}>
-              <h1 className="font-display text-4xl sm:text-6xl lg:text-7xl font-normal text-[#1a1a1a] tracking-tight leading-[1.05]">
-                Where Time Dissolves <br />
-                Into The <span className="text-[#044F92] italic font-serif">Arabian Sea</span>
+              <h1 className="font-display text-4xl sm:text-6xl lg:text-[68px] font-normal text-[#1a1a1a] tracking-tight leading-[1.06]">
+                Discover Goa. <br />
+                Discover A <span className="text-[#044F92] italic font-serif">Different Way of Living.</span>
               </h1>
             </ScrollReveal>
 
             <ScrollReveal variant="from-left" distance={40} delay={0.2}>
               <p className="text-base sm:text-lg text-[#5a554e] font-light leading-relaxed max-w-xl">
-                <span className="font-semibold text-[#044F92]">Susegad</span> is not indolence — it is the conscious surrender to unhurried contentment. Awaken to warm sea mist, birdsong in emerald paddy fields, and sunsets that belong entirely to you.
+                Beyond the vacation postcard lies India’s most coveted sanctuary for health, clean maritime air, rich cultural tapestry, and enduring generational wealth. Experience luxury at an unhurried, elevated cadence.
               </p>
             </ScrollReveal>
 
-            {/* THREE INTERACTIVE SUSEGAD PILLARS (Hoverable with Ripple Preview) */}
+            {/* REAL-TIME    */}
             <ScrollReveal variant="from-bottom" distance={30} delay={0.25}>
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-1 max-w-xl">
-                {[
-                  {
-                    title: 'Biophilic Silence',
-                    icon: Wind,
-                    desc: 'Private plunge pools & forest edge verandas.',
-                    stat: '0 Commute'
-                  },
-                  {
-                    title: 'Oceanic Cadence',
-                    icon: Waves,
-                    desc: '300+ golden sunny days by gentle tides.',
-                    stat: '300+ Sun'
-                  },
-                  {
-                    title: 'The Balcão Twilight',
-                    icon: Sun,
-                    desc: 'Verandah conversations over Konkan wine.',
-                    stat: '100% Peace'
-                  }
-                ].map((pillar, pIdx) => {
-                  const Icon = pillar.icon;
-                  return (
-                    <div
-                      key={pIdx}
-                      onMouseEnter={() => setActivePillar(pIdx)}
-                      className={`p-4 rounded-xl border transition-all cursor-pointer ${activePillar === pIdx
-                        ? 'bg-white border-[#044F92] shadow-xl -translate-y-1'
-                        : 'bg-white/60 backdrop-blur-md border-[#cfe0ee] hover:bg-white'
-                        }`}
-                    >
-                      <div className="flex items-center justify-between">
-                        <div className={`w-7 h-7 rounded-lg flex items-center justify-center ${activePillar === pIdx ? 'bg-[#044F92] text-white' : 'bg-[#eef5fb] text-[#044F92]'}`}>
-                          <Icon className="w-3.5 h-3.5" />
-                        </div>
-                        <span className="text-[10px] font-mono font-bold text-[#044F92]">{pillar.stat}</span>
-                      </div>
-                      <h4 className="font-display text-sm font-semibold mt-2.5 text-[#1a1a1a]">{pillar.title}</h4>
-                      <p className="text-[11px] text-[#5a554e] mt-1 leading-snug">{pillar.desc}</p>
-                    </div>
-                  );
-                })}
-              </div>
-            </ScrollReveal>
-
-            {/* INTERACTIVE CONTRAST CONTROLLER: Susegad vs City Matrix */}
-            <ScrollReveal variant="from-bottom" distance={30} delay={0.35}>
-              <div className="p-5 sm:p-6 bg-white/95 backdrop-blur-xl border border-[#cfe0ee] rounded-2xl shadow-xl space-y-4 max-w-xl">
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center gap-2">
-                    <Activity className="w-4 h-4 text-[#044F92]" />
-                    <span className="text-xs uppercase tracking-wider font-bold text-[#1a1a1a]">Lifestyle Contrast Engine</span>
+              <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 pt-1 max-w-2xl">
+                <div className="p-3 bg-white/80 backdrop-blur-md rounded-xl border border-[#cfe0ee] shadow-sm">
+                  <div className="flex items-center justify-between text-[#044F92]">
+                    <Wind className="w-4 h-4" />
+                    <span className="text-[10px] font-mono font-bold bg-emerald-100 text-emerald-800 px-1.5 py-0.5 rounded">Pristine</span>
                   </div>
-                  <div className="inline-flex p-1 bg-[#f4f1ee] rounded-full text-xs">
-                    <button
-                      onClick={() => setLifestyleMode('susegad')}
-                      className={`px-3 py-1 rounded-full font-medium transition-all cursor-pointer ${lifestyleMode === 'susegad'
-                        ? 'bg-[#044F92] text-white shadow-md font-semibold'
-                        : 'text-[#5a554e] hover:text-[#1a1a1a]'
-                        }`}
-                    >
-                      Goan Susegad
-                    </button>
-                    <button
-                      onClick={() => setLifestyleMode('city')}
-                      className={`px-3 py-1 rounded-full font-medium transition-all cursor-pointer ${lifestyleMode === 'city'
-                        ? 'bg-[#8c3520] text-white shadow-md font-semibold'
-                        : 'text-[#5a554e] hover:text-[#1a1a1a]'
-                        }`}
-                    >
-                      Metropolitan Grind
-                    </button>
-                  </div>
+                  <p className="font-mono text-xl font-bold text-[#1a1a1a] mt-1.5">AQI 28-55</p>
+                  <p className="text-[10px] text-[#5a554e] mt-0.5">Maritime Oxygen</p>
                 </div>
 
-                {lifestyleMode === 'susegad' ? (
-                  <div className="grid grid-cols-3 gap-3 pt-2 text-center">
-                    <div className="p-3 bg-[#eef5fb] rounded-xl border border-blue-100">
-                      <p className="font-mono text-xl font-bold text-[#044F92]">18 AQI</p>
-                      <p className="text-[11px] text-[#5a554e] mt-0.5 font-medium">Pure Sea Breeze</p>
-                    </div>
-                    <div className="p-3 bg-[#fef9ee] rounded-xl border border-amber-100">
-                      <p className="font-mono text-xl font-bold text-amber-700">32 dB</p>
-                      <p className="text-[11px] text-[#5a554e] mt-0.5 font-medium">Ocean Waves Sound</p>
-                    </div>
-                    <div className="p-3 bg-[#f2fcf5] rounded-xl border border-emerald-100">
-                      <p className="font-mono text-xl font-bold text-emerald-700">-40%</p>
-                      <p className="text-[11px] text-[#5a554e] mt-0.5 font-medium">Stress & Fatigue</p>
-                    </div>
+                <div className="p-3 bg-white/80 backdrop-blur-md rounded-xl border border-[#cfe0ee] shadow-sm">
+                  <div className="flex items-center justify-between text-[#044F92]">
+                    <Trees className="w-4 h-4" />
+                    <span className="text-[10px] font-mono font-bold text-[#044F92]">Ecological</span>
                   </div>
-                ) : (
-                  <div className="grid grid-cols-3 gap-3 pt-2 text-center opacity-85">
-                    <div className="p-3 bg-red-50 rounded-xl border border-red-100">
-                      <p className="font-mono text-xl font-bold text-red-700">380 AQI</p>
-                      <p className="text-[11px] text-red-900/80 mt-0.5 font-medium">Dense Smog</p>
-                    </div>
-                    <div className="p-3 bg-gray-100 rounded-xl border border-gray-200">
-                      <p className="font-mono text-xl font-bold text-gray-700">88 dB</p>
-                      <p className="text-[11px] text-gray-600 mt-0.5 font-medium">Traffic Horns</p>
-                    </div>
-                    <div className="p-3 bg-amber-50 rounded-xl border border-amber-100">
-                      <p className="font-mono text-xl font-bold text-amber-800">150 Min</p>
-                      <p className="text-[11px] text-amber-900/80 mt-0.5 font-medium">Daily Gridlock</p>
-                    </div>
-                  </div>
-                )}
+                  <p className="font-mono text-xl font-bold text-[#1a1a1a] mt-1.5">60%+</p>
+                  <p className="text-[10px] text-[#5a554e] mt-0.5">Forest Canopy</p>
+                </div>
 
-                <p className="text-xs text-[#8c857d] italic">
-                  {lifestyleMode === 'susegad'
-                    ? '“Step out onto your sunlit deck in Assagao or Siolim. Breathe freely in an environment engineered for timeless longevity.”'
-                    : 'Break free from the rush. Kamat Realty crafts sanctuaries that restore health, joy, and peace of mind.'}
-                </p>
+                <div className="p-3 bg-white/80 backdrop-blur-md rounded-xl border border-[#cfe0ee] shadow-sm">
+                  <div className="flex items-center justify-between text-[#044F92]">
+                    <Plane className="w-4 h-4" />
+                    <span className="text-[10px] font-mono font-bold text-[#044F92]">Global Hub</span>
+                  </div>
+                  <p className="font-mono text-xl font-bold text-[#1a1a1a] mt-1.5">2 Airports</p>
+                  <p className="text-[10px] text-[#5a554e] mt-0.5">MOPA + Dabolim</p>
+                </div>
+
+                <div className="p-3 bg-white/80 backdrop-blur-md rounded-xl border border-[#cfe0ee] shadow-sm">
+                  <div className="flex items-center justify-between text-[#044F92]">
+                    <Sun className="w-4 h-4" />
+                    <span className="text-[10px] font-mono font-bold text-amber-700 bg-amber-100 px-1.5 py-0.5 rounded">Annual</span>
+                  </div>
+                  <p className="font-mono text-xl font-bold text-[#1a1a1a] mt-1.5">300+</p>
+                  <p className="text-[10px] text-[#5a554e] mt-0.5">Sunny Days</p>
+                </div>
               </div>
             </ScrollReveal>
 
             {/* CTAs */}
-            <ScrollReveal variant="from-bottom" distance={30} delay={0.45}>
+            <ScrollReveal variant="from-bottom" distance={30} delay={0.35}>
               <div className="flex flex-wrap items-center gap-4 pt-2">
                 <button
-                  onClick={handleTour}
+                  onClick={() => setShowMatchmaker(true)}
                   className="px-7 py-3.5 bg-[#044F92] hover:bg-[#03396c] text-white text-xs font-semibold uppercase tracking-widest transition-all shadow-xl hover:shadow-2xl hover:-translate-y-0.5 flex items-center gap-2 cursor-pointer"
                 >
-                  <span>Book Susegad Discovery Tour</span>
-                  <ChevronRight className="w-4 h-4" />
+                  <Compass className="w-4 h-4 text-[#38bdf8]" />
+                  <span>Interactive Location Advisor</span>
                 </button>
+
                 <button
-                  onClick={() => scrollToSection('section-food')}
-                  className="px-6 py-3.5 bg-white/80 backdrop-blur-md border border-[#044F92] text-[#044F92] hover:bg-[#eef5fb] text-xs font-semibold uppercase tracking-widest transition-all cursor-pointer shadow-sm"
+                  onClick={handleTour}
+                  className="px-6 py-3.5 bg-white/90 backdrop-blur-md border border-[#044F92] text-[#044F92] hover:bg-[#eef5fb] text-xs font-semibold uppercase tracking-widest transition-all cursor-pointer shadow-sm flex items-center gap-2"
                 >
-                  Experience Culinary Journey ↓
+                  <Calendar className="w-4 h-4" />
+                  <span>Book Goa Lifestyle Tour</span>
                 </button>
               </div>
             </ScrollReveal>
           </div>
 
-          {/* Right Column: 3D Mouse Parallax Floating Estate Preview */}
-          <div className="lg:col-span-5 flex justify-center items-center perspective-1000">
-            <motion.div
-              style={{ rotateX, rotateY }}
-              className="relative w-full max-w-md aspect-[4/5] flex items-center justify-center preserve-3d"
-            >
-              {/* Glassmorphic 3D Card Platform with Sea Gradient */}
-              <div className="absolute inset-0 bg-gradient-to-tr from-[#044F92]/15 via-white/85 to-[#38bdf8]/20 rounded-3xl border border-white/90 shadow-[0_30px_70px_-15px_rgba(4,79,146,0.22)] backdrop-blur-xl -rotate-1 transform transition-transform" />
+          {/* Right Column: Kinetic Coastal Windmill & Flowing Breeze Arena */}
+          <div className="lg:col-span-5 flex justify-center items-center">
+            <div className="relative w-full max-w-md aspect-[4/5] rounded-3xl overflow-hidden border border-white/80 bg-gradient-to-b from-[#02182c] via-[#04335c] to-[#044F92] p-6 shadow-[0_30px_70px_-15px_rgba(4,79,146,0.35)] flex flex-col justify-between text-white select-none">
+              {/* Ambient lighting glows */}
+              <div className="absolute -top-16 -right-16 w-56 h-56 bg-[#38bdf8]/25 rounded-full blur-3xl pointer-events-none" />
+              <div className="absolute -bottom-16 -left-16 w-56 h-56 bg-[#ffd97d]/15 rounded-full blur-3xl pointer-events-none" />
 
-              {/* Background Paddy Field & Pool Terrace Imagery */}
-              <div className="absolute inset-4 rounded-2xl overflow-hidden border border-white/80 shadow-inner group">
-                <img
-                  src="https://images.unsplash.com/photo-1582610116397-edb318620f90?auto=format&fit=crop&w=1000&q=80"
-                  alt="Goan Coastal Villa & Private Sundeck"
-                  className="w-full h-full object-cover brightness-95 transform group-hover:scale-108 transition-transform duration-700"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#02182c]/85 via-transparent to-black/20" />
-                <div className="absolute bottom-4 left-4 right-4 text-white space-y-1.5">
-                  <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 bg-[#044F92] text-[9px] uppercase tracking-widest font-bold rounded">
-                    <Sparkles className="w-2.5 h-2.5 text-[#38bdf8]" />
-                    <span>Assagao Valley Villa</span>
+              {/* Background Flowing Wind Streams SVG Canvas */}
+              <div className="absolute inset-0 overflow-hidden pointer-events-none opacity-80">
+                <svg className="w-full h-full" viewBox="0 0 400 500" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <defs>
+                    <linearGradient id="windGrad1" x1="0%" y1="0%" x2="100%" y2="0%">
+                      <stop offset="0%" stopColor="#38bdf8" stopOpacity="0" />
+                      <stop offset="30%" stopColor="#38bdf8" stopOpacity="0.7" />
+                      <stop offset="70%" stopColor="#ffd97d" stopOpacity="0.8" />
+                      <stop offset="100%" stopColor="#38bdf8" stopOpacity="0" />
+                    </linearGradient>
+                    <linearGradient id="windGrad2" x1="0%" y1="0%" x2="100%" y2="0%">
+                      <stop offset="0%" stopColor="#38bdf8" stopOpacity="0" />
+                      <stop offset="50%" stopColor="#ffffff" stopOpacity="0.75" />
+                      <stop offset="100%" stopColor="#38bdf8" stopOpacity="0" />
+                    </linearGradient>
+                  </defs>
+
+                  {/* Flowing Wave Lines */}
+                  <motion.path
+                    d="M-50 110 C 80 80, 200 140, 450 100"
+                    stroke="url(#windGrad1)"
+                    strokeWidth="2"
+                    strokeDasharray="60 30"
+                    fill="none"
+                    animate={{ strokeDashoffset: [0, -180] }}
+                    transition={{ repeat: Infinity, duration: isGusting ? 1.8 : activePreset.rotationDuration * 0.9, ease: 'linear' }}
+                  />
+                  <motion.path
+                    d="M-50 190 C 100 230, 260 160, 450 200"
+                    stroke="url(#windGrad2)"
+                    strokeWidth="1.5"
+                    strokeDasharray="80 40"
+                    fill="none"
+                    animate={{ strokeDashoffset: [0, -240] }}
+                    transition={{ repeat: Infinity, duration: isGusting ? 1.5 : activePreset.rotationDuration * 0.75, ease: 'linear' }}
+                  />
+                  <motion.path
+                    d="M-50 270 C 90 240, 240 310, 450 260"
+                    stroke="url(#windGrad1)"
+                    strokeWidth="2.5"
+                    strokeDasharray="90 45"
+                    fill="none"
+                    animate={{ strokeDashoffset: [0, -270] }}
+                    transition={{ repeat: Infinity, duration: isGusting ? 1.4 : activePreset.rotationDuration * 0.7, ease: 'linear' }}
+                  />
+                  <motion.path
+                    d="M-50 350 C 110 390, 280 320, 450 360"
+                    stroke="url(#windGrad2)"
+                    strokeWidth="1.5"
+                    strokeDasharray="70 35"
+                    fill="none"
+                    animate={{ strokeDashoffset: [0, -210] }}
+                    transition={{ repeat: Infinity, duration: isGusting ? 1.6 : activePreset.rotationDuration * 0.85, ease: 'linear' }}
+                  />
+                  <motion.path
+                    d="M-50 420 C 70 400, 220 450, 450 410"
+                    stroke="url(#windGrad1)"
+                    strokeWidth="2"
+                    strokeDasharray="50 25"
+                    fill="none"
+                    animate={{ strokeDashoffset: [0, -150] }}
+                    transition={{ repeat: Infinity, duration: isGusting ? 2 : activePreset.rotationDuration * 1, ease: 'linear' }}
+                  />
+                </svg>
+              </div>
+
+              {/* Floating Air Purity Shimmer Particles */}
+              <div className="absolute inset-0 pointer-events-none overflow-hidden">
+                {[
+                  { top: '22%', delay: 0, dur: 4.2 },
+                  { top: '38%', delay: 1.1, dur: 3.8 },
+                  { top: '56%', delay: 0.6, dur: 4.6 },
+                  { top: '68%', delay: 1.8, dur: 3.4 },
+                  { top: '82%', delay: 2.2, dur: 4.0 }
+                ].map((p, idx) => (
+                  <motion.div
+                    key={idx}
+                    className="absolute w-2 h-2 rounded-full bg-white/70 shadow-[0_0_8px_rgba(56,189,248,0.9)]"
+                    style={{ top: p.top, left: '-5%' }}
+                    animate={{
+                      left: ['-5%', '105%'],
+                      y: [-8, 8, -8],
+                      opacity: [0, 0.9, 0.9, 0]
+                    }}
+                    transition={{
+                      repeat: Infinity,
+                      duration: isGusting ? p.dur * 0.4 : p.dur,
+                      delay: p.delay,
+                      ease: 'easeInOut'
+                    }}
+                  />
+                ))}
+              </div>
+
+              {/* Card Header: Real-Time Airflow Header */}
+              <div className="relative z-10 flex items-center justify-between">
+                <div className="inline-flex items-center gap-2 px-3 py-1 bg-white/10 backdrop-blur-md rounded-full border border-white/20 text-xs text-blue-200 shadow-sm">
+                  <Wind className="w-3.5 h-3.5 text-[#38bdf8] animate-pulse" />
+                  <span className="font-mono text-[11px] font-semibold text-white tracking-wider uppercase">
+                    Maritime Sea Breeze
+                  </span>
+                </div>
+
+                <div className="flex items-center gap-1.5 px-3 py-1 bg-emerald-500/20 border border-emerald-400/40 rounded-full text-emerald-300 text-[11px] font-mono font-bold backdrop-blur-md">
+                  <span className="w-2 h-2 rounded-full bg-emerald-400 animate-ping" />
+                  <span>{activePreset.aqiRange}</span>
+                </div>
+              </div>
+
+              {/* Center Scene: Sculptural Animated Windmill & Atmospheric Vectors */}
+              <div className="relative z-10 my-auto flex flex-col items-center justify-center py-2">
+                {/* Secondary Distant Silhouette Windmill on Horizon */}
+                <div className="absolute right-10 top-8 opacity-35 scale-60 pointer-events-none">
+                  <div className="relative w-16 h-28 flex flex-col items-center">
+                    <motion.div
+                      className="w-20 h-20 origin-center"
+                      animate={{ rotate: 360 }}
+                      transition={{
+                        repeat: Infinity,
+                        duration: (isGusting ? 2.5 : activePreset.rotationDuration) * 1.3,
+                        ease: 'linear'
+                      }}
+                    >
+                      <svg viewBox="0 0 100 100" className="w-full h-full fill-white/80">
+                        <circle cx="50" cy="50" r="4" fill="#38bdf8" />
+                        <path d="M50 50 L47 10 C48 6, 52 6, 53 10 Z" />
+                        <path d="M50 50 L85 68 C88 66, 89 62, 85 58 Z" />
+                        <path d="M50 50 L15 68 C12 66, 11 62, 15 58 Z" />
+                      </svg>
+                    </motion.div>
+                    <div className="w-1.5 h-16 bg-gradient-to-b from-white/60 to-transparent rounded-full -mt-10" />
                   </div>
-                  <p className="font-display text-lg">Private Plunge Pools Overlooking Emerald Paddy Fields</p>
-                  <p className="text-[11px] text-blue-200 font-light flex items-center gap-1">
-                    <MapPin className="w-3 h-3 text-[#38bdf8]" />
-                    <span>North Goa • 28 Mins from MOPA Airport</span>
+                </div>
+
+                {/* Main Primary Architectural Windmill Sculpture */}
+                <div className="relative flex flex-col items-center">
+                  {/* Glowing Breeze Halo behind rotor */}
+                  <div className="absolute -top-12 w-48 h-48 bg-[#38bdf8]/15 rounded-full blur-2xl pointer-events-none" />
+
+                  {/* Concentric Ambient Flow Rings */}
+                  <motion.div
+                    className="absolute -top-8 w-40 h-40 rounded-full border border-[#38bdf8]/20"
+                    animate={{ scale: [0.95, 1.08, 0.95], opacity: [0.3, 0.7, 0.3] }}
+                    transition={{ repeat: Infinity, duration: 3.5, ease: 'easeInOut' }}
+                  />
+
+                  {/* Rotating 3-Blade Windmill Rotor */}
+                  <motion.div
+                    className="relative w-44 h-44 z-20 origin-center"
+                    animate={{ rotate: 360 }}
+                    transition={{
+                      repeat: Infinity,
+                      duration: isGusting ? 1.5 : activePreset.rotationDuration,
+                      ease: 'linear'
+                    }}
+                  >
+                    <svg viewBox="0 0 200 200" className="w-full h-full drop-shadow-[0_0_12px_rgba(56,189,248,0.5)]">
+                      {/* Blade 1 (Top) */}
+                      <path
+                        d="M100 100 C96 85, 93 45, 96 15 C98 5, 102 5, 104 15 C107 45, 104 85, 100 100 Z"
+                        fill="url(#bladeGrad)"
+                      />
+                      {/* Blade 2 (Bottom-Right) */}
+                      <path
+                        d="M100 100 C112 110, 148 132, 174 148 C182 153, 180 157, 171 156 C143 149, 112 120, 100 100 Z"
+                        fill="url(#bladeGrad)"
+                      />
+                      {/* Blade 3 (Bottom-Left) */}
+                      <path
+                        d="M100 100 C88 110, 52 132, 26 148 C18 153, 20 157, 29 156 C57 149, 88 120, 100 100 Z"
+                        fill="url(#bladeGrad)"
+                      />
+
+                      {/* Center Hub */}
+                      <circle cx="100" cy="100" r="9" fill="#044F92" stroke="#38bdf8" strokeWidth="2.5" />
+                      <circle cx="100" cy="100" r="4" fill="#ffd97d" />
+
+                      <defs>
+                        <linearGradient id="bladeGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                          <stop offset="0%" stopColor="#ffffff" />
+                          <stop offset="60%" stopColor="#bae6fd" />
+                          <stop offset="100%" stopColor="#38bdf8" />
+                        </linearGradient>
+                      </defs>
+                    </svg>
+                  </motion.div>
+
+                  {/* Windmill Tapered Mast / Tower */}
+                  <div className="relative -mt-20 z-10 flex flex-col items-center">
+                    {/* Mast Nacelle Joint */}
+                    <div className="w-5 h-4 bg-gradient-to-r from-[#e2e8f0] via-[#ffffff] to-[#94a3b8] rounded-t-sm shadow-md" />
+                    {/* Tapered Tower Body */}
+                    <div
+                      className="w-4 h-36 bg-gradient-to-b from-[#e2e8f0] via-[#94a3b8] to-[#044F92]/60 rounded-b-md shadow-2xl relative"
+                      style={{ clipPath: 'polygon(15% 0%, 85% 0%, 100% 100%, 0% 100%)' }}
+                    >
+                      {/* Subtle Tower Light Accent */}
+                      <div className="absolute top-4 left-1/2 -translate-x-1/2 w-1 h-1 bg-[#38bdf8] rounded-full animate-ping" />
+                    </div>
+                    {/* Base Foundation Platform */}
+                    <div className="w-14 h-2.5 bg-white/20 backdrop-blur-md rounded-full -mt-1 border border-white/30" />
+                  </div>
+                </div>
+
+                {/* Dynamic Telemetry Narrative below windmill */}
+                <div className="text-center mt-3 space-y-1">
+                  <div className="inline-flex items-center gap-2">
+                    <span className="font-display text-xl font-normal text-white">{activePreset.name}</span>
+                    <span className="font-mono text-xs text-[#38bdf8] font-bold">({activePreset.speedKmh} km/h)</span>
+                  </div>
+                  <p className="text-xs text-blue-100/80 font-light max-w-xs leading-relaxed">
+                    {activePreset.subtitle}
                   </p>
                 </div>
               </div>
 
-              {/* FLOATING 3D ASSET 1: Floating Ceramic Conch Shell */}
-              <motion.div
-                animate={{
-                  y: [-12, 14, -12],
-                  rotateZ: [-3, 4, -3]
-                }}
-                transition={{
-                  repeat: Infinity,
-                  duration: 6,
-                  ease: 'easeInOut'
-                }}
-                className="absolute -top-6 -right-6 z-30 w-36 h-36 drop-shadow-[0_20px_30px_rgba(4,79,146,0.35)] cursor-pointer"
-                title="Goan Handcrafted Ceramic Shell"
-              >
-                <svg viewBox="0 0 120 120" className="w-full h-full filter drop-shadow-xl">
-                  <defs>
-                    <radialGradient id="shellGlaze" cx="35%" cy="30%" r="70%">
-                      <stop offset="0%" stopColor="#ffffff" />
-                      <stop offset="35%" stopColor="#e2edf7" />
-                      <stop offset="70%" stopColor="#8cb7de" />
-                      <stop offset="100%" stopColor="#044F92" />
-                    </radialGradient>
-                    <linearGradient id="goldRim" x1="0%" y1="0%" x2="100%" y2="100%">
-                      <stop offset="0%" stopColor="#fae19c" />
-                      <stop offset="50%" stopColor="#d4af37" />
-                      <stop offset="100%" stopColor="#997a15" />
-                    </linearGradient>
-                  </defs>
-                  <path
-                    d="M 60 15 C 85 15, 105 35, 105 60 C 105 85, 85 105, 55 105 C 30 105, 15 90, 18 68 C 20 48, 38 35, 55 35 C 72 35, 82 48, 80 62 C 78 74, 68 82, 58 80 C 50 78, 46 72, 48 65 C 50 60, 56 58, 60 62"
-                    fill="url(#shellGlaze)"
-                    stroke="url(#goldRim)"
-                    strokeWidth="3.5"
-                    strokeLinecap="round"
-                  />
-                  <path d="M 60 18 Q 80 40 85 62" stroke="#ffffff" strokeWidth="2" fill="none" opacity="0.8" />
-                  <path d="M 45 28 Q 65 50 70 75" stroke="#ffffff" strokeWidth="1.5" fill="none" opacity="0.6" />
-                </svg>
-              </motion.div>
+              {/* Card Footer: Interactive Preset Switcher & Gust Trigger */}
+              <div className="relative z-10 space-y-3 pt-2 border-t border-white/15">
+                <div className="flex items-center justify-between gap-1.5 bg-white/10 p-1 rounded-xl backdrop-blur-md border border-white/10">
+                  {WIND_PRESETS.map((preset) => (
+                    <button
+                      key={preset.id}
+                      onClick={() => setActiveWindPreset(preset.id)}
+                      className={`flex-1 py-1.5 px-2 rounded-lg text-[11px] font-medium transition-all cursor-pointer whitespace-nowrap text-center ${activeWindPreset === preset.id
+                        ? 'bg-[#044F92] text-white font-semibold shadow-md border border-[#38bdf8]/50'
+                        : 'text-blue-200/80 hover:text-white hover:bg-white/5'
+                        }`}
+                    >
+                      {preset.label}
+                    </button>
+                  ))}
+                </div>
 
-              {/* FLOATING 3D ASSET 2: Luxury 24K Brass Villa Key */}
-              <motion.div
-                animate={{
-                  y: [10, -12, 10],
-                  rotateZ: [5, -4, 5],
-                  rotateY: [-10, 12, -10]
-                }}
-                transition={{
-                  repeat: Infinity,
-                  duration: 5.2,
-                  ease: 'easeInOut',
-                  delay: 0.5
-                }}
-                className="absolute -bottom-7 -left-6 z-30 w-36 h-28 drop-shadow-[0_20px_25px_rgba(0,0,0,0.4)] cursor-pointer"
-                title="Kamat Heirloom Villa Master Key"
-              >
-                <svg viewBox="0 0 140 100" className="w-full h-full">
-                  <defs>
-                    <linearGradient id="brassKey" x1="0%" y1="0%" x2="100%" y2="80%">
-                      <stop offset="0%" stopColor="#fff2c2" />
-                      <stop offset="30%" stopColor="#e5be58" />
-                      <stop offset="70%" stopColor="#b38728" />
-                      <stop offset="100%" stopColor="#664d12" />
-                    </linearGradient>
-                  </defs>
-                  <circle cx="35" cy="45" r="22" fill="none" stroke="url(#brassKey)" strokeWidth="6" />
-                  <circle cx="35" cy="45" r="11" fill="none" stroke="url(#brassKey)" strokeWidth="3" />
-                  <circle cx="35" cy="23" r="5" fill="url(#brassKey)" />
-                  <circle cx="16" cy="45" r="5" fill="url(#brassKey)" />
-                  <circle cx="35" cy="67" r="5" fill="url(#brassKey)" />
-                  <rect x="54" y="42" width="65" height="6" rx="2" fill="url(#brassKey)" />
-                  <path d="M 100 48 L 100 66 L 106 66 L 106 48 L 112 48 L 112 60 L 118 60 L 118 48 Z" fill="url(#brassKey)" />
-                  <text x="35" y="48" fontSize="8" fontWeight="bold" fill="#664d12" textAnchor="middle" fontFamily="sans-serif">
-                    KRW
-                  </text>
-                </svg>
-              </motion.div>
-            </motion.div>
-          </div>
-        </div>
+                <div className="flex items-center justify-between text-xs">
+                  <div className="flex items-center gap-1.5 text-blue-200 font-mono text-[11px]">
+                    <Activity className="w-3.5 h-3.5 text-[#38bdf8]" />
+                    <span>{activePreset.direction}</span>
+                  </div>
 
-        {/* BOTTOM WAVE SCROLL DOWN CUE */}
-        <div className="w-full flex justify-center pb-2 relative z-10">
-          <button
-            onClick={() => scrollToSection('section-food')}
-            className="flex flex-col items-center gap-1.5 text-xs font-mono uppercase tracking-widest text-[#044F92] hover:text-[#03396c] transition-colors cursor-pointer group"
-          >
-            <span className="text-[10px] text-[#8c857d] group-hover:text-[#044F92]">Chapter 02 • Culinary Heritage</span>
-            <div className="w-5 h-8 border-2 border-[#044F92]/40 rounded-full flex justify-center pt-1.5 group-hover:border-[#044F92]">
-              <motion.div
-                animate={{ y: [0, 8, 0] }}
-                transition={{ repeat: Infinity, duration: 1.5 }}
-                className="w-1.5 h-1.5 rounded-full bg-[#044F92]"
-              />
+                  <button
+                    onClick={handleTriggerGust}
+                    className="px-3 py-1 bg-gradient-to-r from-[#38bdf8] to-[#0ea5e9] hover:from-[#7dd3fc] hover:to-[#38bdf8] text-[#02182c] text-[10px] font-bold uppercase tracking-wider rounded-lg shadow transition-all cursor-pointer flex items-center gap-1 active:scale-95"
+                  >
+                    <Wind className="w-3 h-3 text-[#02182c]" />
+                    <span>{isGusting ? 'Gusting...' : 'Simulate Gust'}</span>
+                  </button>
+                </div>
+              </div>
             </div>
-          </button>
+          </div>
         </div>
       </section>
 
       {/* =========================================================================
-          CHAPTER 2: FOOD & CULINARY CULTURE (PRESERVED UNCHANGED)
+          SECTION 2: BREATHE BETTER IN GOA (INTERACTIVE SPLIT-SCREEN SLIDER)
           ========================================================================= */}
       <section
-        id="section-food"
-        className="relative py-28 px-6 sm:px-8 lg:px-12 bg-[#faf7f2] border-b border-[#e5e1da] overflow-hidden"
+        id="section-air"
+        className="py-28 px-6 sm:px-8 lg:px-12 bg-[#faf7f2] border-b border-[#e5e1da] overflow-hidden"
       >
         <div className="max-w-7xl mx-auto space-y-16">
           <div className="max-w-3xl space-y-4">
             <ScrollReveal variant="from-left" distance={30}>
-              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 bg-[#eef5fb] border border-[#cfe0ee] rounded-full text-[#044F92] text-xs font-semibold uppercase tracking-[0.2em]">
-                <Utensils className="w-3.5 h-3.5 text-[#044F92]" />
-                <span>Culinary Heritage</span>
+              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 bg-[#fef3c7] border border-[#fde68a] rounded-full text-[#92400e] text-xs font-semibold uppercase tracking-[0.2em]">
+                <Wind className="w-3.5 h-3.5 text-[#b45309]" />
+                <span>Environmental Longevity & Air Quality</span>
               </div>
             </ScrollReveal>
 
             <ScrollReveal variant="from-left" distance={40} delay={0.1}>
-              <h2 className="font-display text-4xl sm:text-5xl lg:text-6xl font-normal text-[#1a1a1a] tracking-tight">
-                Coastal Flavors & <br />
-                <span className="text-[#c25e38] font-serif italic">World-Class Gastronomy</span>
+              <h2 className="font-display text-4xl sm:text-5xl font-normal text-[#1a1a1a] tracking-tight">
+                Breathe Better in Goa. <br />
+                <span className="text-[#044F92] font-serif italic">Your Lungs Will Thank You.</span>
               </h2>
             </ScrollReveal>
 
             <ScrollReveal variant="from-left" distance={40} delay={0.2}>
               <p className="text-base sm:text-lg text-[#5a554e] font-light leading-relaxed">
-                From authentic Konkani seafood thalis simmered with fresh kokum and grated coconut to Michelin-standard chef tables tucked inside restored Portuguese villas in Assagao.
+                Drag the interactive slider below to witness the undeniable visual and statistical reality of metropolitan air pollution versus Goa's maritime canopy.
               </p>
             </ScrollReveal>
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-            <div className="lg:col-span-6 flex justify-center perspective-1000">
-              <motion.div
-                initial={{ opacity: 0, y: -60, x: 50, rotateZ: 45 }}
-                whileInView={{ opacity: 1, y: 0, x: 0, rotateZ: 35 }}
-                viewport={{ once: true, margin: '-50px' }}
-                transition={{ duration: 1, ease: 'easeOut' }}
-                whileHover={{ rotateZ: 0, scale: 1.04, transition: { duration: 0.4 } }}
-                className="relative w-full max-w-lg aspect-square p-6 flex items-center justify-center cursor-pointer preserve-3d"
-              >
-                <div className="absolute inset-x-8 bottom-4 h-16 bg-black/25 rounded-full filter blur-2xl transform scale-90" />
+          {/* INTERACTIVE SPLIT-SCREEN COMPARISON SLIDER */}
+          <div className="relative w-full max-w-5xl mx-auto rounded-3xl overflow-hidden border border-[#cfe0ee] shadow-2xl bg-black aspect-[16/9] sm:aspect-[21/9]">
+            {/* Left Side: Delhi/Metro Smog Simulation */}
+            <div className="absolute inset-0 bg-[#3a352f] flex items-center justify-start p-8">
+              <img
+                src="https://images.unsplash.com/photo-1587474260584-136574528ed5?auto=format&fit=crop&w=1400&q=80"
+                alt="Dense Metropolitan City Smog"
+                className="absolute inset-0 w-full h-full object-cover filter blur-[1px] brightness-75 contrast-125 saturate-50"
+              />
+              <div className="absolute inset-0 bg-amber-950/40" />
 
-                <div className="absolute -top-12 inset-x-0 h-44 pointer-events-none z-30 flex justify-center gap-6 overflow-hidden">
-                  <motion.div
-                    animate={{
-                      y: [20, -50],
-                      opacity: [0, 0.7, 0],
-                      scaleX: [0.8, 1.4],
-                      x: [-4, 6]
-                    }}
-                    transition={{ repeat: Infinity, duration: 3.2, ease: 'easeOut' }}
-                    className="w-10 h-32 bg-gradient-to-t from-white/60 to-transparent blur-md rounded-full"
-                  />
-                  <motion.div
-                    animate={{
-                      y: [30, -60],
-                      opacity: [0, 0.8, 0],
-                      scaleX: [1, 1.6],
-                      x: [5, -8]
-                    }}
-                    transition={{ repeat: Infinity, duration: 3.8, ease: 'easeOut', delay: 1 }}
-                    className="w-12 h-36 bg-gradient-to-t from-white/70 to-transparent blur-lg rounded-full"
-                  />
-                  <motion.div
-                    animate={{
-                      y: [25, -55],
-                      opacity: [0, 0.6, 0],
-                      scaleX: [0.7, 1.3],
-                      x: [2, 10]
-                    }}
-                    transition={{ repeat: Infinity, duration: 4.2, ease: 'easeOut', delay: 1.8 }}
-                    className="w-8 h-28 bg-gradient-to-t from-white/50 to-transparent blur-md rounded-full"
-                  />
-                </div>
-
-                <div className="relative w-full h-full rounded-full overflow-hidden border-[6px] border-[#d4af37] shadow-[0_30px_70px_rgba(0,0,0,0.45),inset_0_2px_12px_rgba(255,255,255,0.4)] bg-[#1a1208]">
-                  <img
-                    src="/goan-fish-thali.jpg"
-                    alt="Authentic Luxury Goan Fish Curry Thali with Pomfret Fry, Kokum Solkadhi, Red Rice, and Poee"
-                    className="w-full h-full object-cover select-none transform hover:scale-105 transition-transform duration-700"
-                  />
-
-                  <div className="absolute inset-0 rounded-full pointer-events-none shadow-[inset_0_0_40px_rgba(0,0,0,0.5)]" />
-
-                  {/* Hotspot 0: Steamed Goan Red Rice */}
-                  <button
-                    type="button"
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      setActiveDish(0);
-                    }}
-                    className="absolute left-[26%] top-[64%] -translate-x-1/2 -translate-y-1/2 z-40 group cursor-pointer"
-                    title="Click to inspect Goan Red Rice"
-                  >
-                    <span
-                      className={`flex h-8 w-8 items-center justify-center rounded-full font-bold text-xs shadow-2xl transition-all duration-300 ${activeDish === 0
-                        ? 'bg-[#044F92] text-white ring-4 ring-[#38bdf8]/80 scale-125'
-                        : 'bg-white/95 text-[#044F92] hover:bg-white hover:scale-110'
-                        }`}
-                    >
-                      1
-                    </span>
-                    <span className="absolute -bottom-7 left-1/2 -translate-x-1/2 px-2.5 py-0.5 bg-black/85 backdrop-blur-md text-white text-[9px] uppercase tracking-wider rounded font-medium whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none shadow-lg">
-                      Goan Red Rice
-                    </span>
-                  </button>
-
-                  {/* Hotspot 1: Goan Coconut Fish Curry */}
-                  <button
-                    type="button"
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      setActiveDish(1);
-                    }}
-                    className="absolute left-[32%] top-[27%] -translate-x-1/2 -translate-y-1/2 z-40 group cursor-pointer"
-                    title="Click to inspect Coconut Fish Curry"
-                  >
-                    <span
-                      className={`flex h-8 w-8 items-center justify-center rounded-full font-bold text-xs shadow-2xl transition-all duration-300 ${activeDish === 1
-                        ? 'bg-[#044F92] text-white ring-4 ring-[#38bdf8]/80 scale-125'
-                        : 'bg-white/95 text-[#044F92] hover:bg-white hover:scale-110'
-                        }`}
-                    >
-                      2
-                    </span>
-                    <span className="absolute -bottom-7 left-1/2 -translate-x-1/2 px-2.5 py-0.5 bg-black/85 backdrop-blur-md text-white text-[9px] uppercase tracking-wider rounded font-medium whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none shadow-lg">
-                      Kokum Fish Curry
-                    </span>
-                  </button>
-
-                  {/* Hotspot 2: Golden Crispy Pomfret Fish Fry */}
-                  <button
-                    type="button"
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      setActiveDish(2);
-                    }}
-                    className="absolute left-[64%] top-[48%] -translate-x-1/2 -translate-y-1/2 z-40 group cursor-pointer"
-                    title="Click to inspect Pomfret Fish Fry"
-                  >
-                    <span
-                      className={`flex h-8 w-8 items-center justify-center rounded-full font-bold text-xs shadow-2xl transition-all duration-300 ${activeDish === 2
-                        ? 'bg-[#044F92] text-white ring-4 ring-[#38bdf8]/80 scale-125'
-                        : 'bg-white/95 text-[#044F92] hover:bg-white hover:scale-110'
-                        }`}
-                    >
-                      3
-                    </span>
-                    <span className="absolute -bottom-7 left-1/2 -translate-x-1/2 px-2.5 py-0.5 bg-black/85 backdrop-blur-md text-white text-[9px] uppercase tracking-wider rounded font-medium whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none shadow-lg">
-                      Pomfret (Pomplate) Fry
-                    </span>
-                  </button>
-
-                  {/* Hotspot 3: Pink Kokum Solkadhi */}
-                  <button
-                    type="button"
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      setActiveDish(3);
-                    }}
-                    className="absolute left-[48%] top-[78%] -translate-x-1/2 -translate-y-1/2 z-40 group cursor-pointer"
-                    title="Click to inspect Kokum Solkadhi"
-                  >
-                    <span
-                      className={`flex h-8 w-8 items-center justify-center rounded-full font-bold text-xs shadow-2xl transition-all duration-300 ${activeDish === 3
-                        ? 'bg-[#044F92] text-white ring-4 ring-[#38bdf8]/80 scale-125'
-                        : 'bg-white/95 text-[#044F92] hover:bg-white hover:scale-110'
-                        }`}
-                    >
-                      4
-                    </span>
-                    <span className="absolute -bottom-7 left-1/2 -translate-x-1/2 px-2.5 py-0.5 bg-black/85 backdrop-blur-md text-white text-[9px] uppercase tracking-wider rounded font-medium whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none shadow-lg">
-                      Kokum Solkadhi
-                    </span>
-                  </button>
-
-                  {/* Hotspot 4: Wood-Fired Goan Poee */}
-                  <button
-                    type="button"
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      setActiveDish(4);
-                    }}
-                    className="absolute left-[58%] top-[19%] -translate-x-1/2 -translate-y-1/2 z-40 group cursor-pointer"
-                    title="Click to inspect Poee Bread"
-                  >
-                    <span
-                      className={`flex h-8 w-8 items-center justify-center rounded-full font-bold text-xs shadow-2xl transition-all duration-300 ${activeDish === 4
-                        ? 'bg-[#044F92] text-white ring-4 ring-[#38bdf8]/80 scale-125'
-                        : 'bg-white/95 text-[#044F92] hover:bg-white hover:scale-110'
-                        }`}
-                    >
-                      5
-                    </span>
-                    <span className="absolute -bottom-7 left-1/2 -translate-x-1/2 px-2.5 py-0.5 bg-black/85 backdrop-blur-md text-white text-[9px] uppercase tracking-wider rounded font-medium whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none shadow-lg">
-                      Artisanal Poee
-                    </span>
-                  </button>
-                </div>
-
-                <div className="absolute top-4 left-6 bg-[#044F92] text-white text-[10px] font-bold uppercase tracking-widest px-3.5 py-1.5 rounded-full shadow-xl border border-blue-300/30 flex items-center gap-1.5">
-                  <span className="w-2 h-2 rounded-full bg-[#38bdf8] animate-ping" />
-                  <span>Real Goan Thali • Click Hotspot 1-5</span>
-                </div>
-              </motion.div>
+              <div className="relative z-10 space-y-2 max-w-xs text-white">
+                <span className="px-3 py-1 bg-red-600/90 text-white text-[10px] font-bold uppercase tracking-wider rounded">
+                  Major Metros (NCR / Mumbai / BLR)
+                </span>
+                <p className="font-mono text-3xl sm:text-4xl font-bold text-red-300">AQI 280+</p>
+                <p className="text-xs text-red-100/90 leading-snug">Severe PM2.5 particulate haze, 85+ dB traffic sirens, and chronic lung fatigue.</p>
+              </div>
             </div>
 
-            <div className="lg:col-span-6 space-y-6">
-              <div className="p-6 bg-white border border-[#cfe0ee] rounded-2xl shadow-lg space-y-4">
-                <div className="flex items-center justify-between border-b border-[#e5e1da] pb-3">
-                  <span className="text-xs uppercase tracking-widest font-bold text-[#044F92] flex items-center gap-1.5">
-                    <Flame className="w-3.5 h-3.5 text-[#c25e38]" />
-                    <span>Coastal Gastronomy Spotlight</span>
-                  </span>
-                  <span className="text-[11px] font-mono text-[#8c857d]">Item {activeDish + 1} of 5</span>
+            {/* Right Side: Goa Coastal Forest (Clipped by Slider) */}
+            <div
+              className="absolute inset-0 overflow-hidden"
+              style={{ clipPath: `polygon(${aqiSliderVal}% 0, 100% 0, 100% 100%, ${aqiSliderVal}% 100%)` }}
+            >
+              <img
+                src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1400&q=80"
+                alt="Goa Lush Maritime Coast and Green Canopy"
+                className="absolute inset-0 w-full h-full object-cover brightness-105"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#02182c]/80 via-transparent to-transparent" />
+
+              <div className="absolute bottom-8 right-8 z-10 space-y-2 max-w-xs text-right text-white">
+                <span className="px-3 py-1 bg-emerald-600/90 text-white text-[10px] font-bold uppercase tracking-wider rounded">
+                  Goa Coastal Enclave
+                </span>
+                <p className="font-mono text-3xl sm:text-4xl font-bold text-emerald-300">AQI 28 - 55</p>
+                <p className="text-xs text-blue-100/90 leading-snug">Filtered Arabian Sea trade winds, 60% forest canopy, and sub-30 dB silence.</p>
+              </div>
+            </div>
+
+            {/* Slider Divider Bar */}
+            <div
+              className="absolute top-0 bottom-0 w-1 bg-white shadow-[0_0_15px_rgba(255,255,255,0.8)] pointer-events-none z-20 flex items-center justify-center"
+              style={{ left: `${aqiSliderVal}%` }}
+            >
+              <div className="w-10 h-10 rounded-full bg-white text-[#044F92] shadow-2xl flex items-center justify-center border-2 border-[#044F92]">
+                <Sliders className="w-5 h-5" />
+              </div>
+            </div>
+
+            {/* Range Input on Top */}
+            <input
+              type="range"
+              min="10"
+              max="90"
+              value={aqiSliderVal}
+              onChange={(e) => setAqiSliderVal(Number(e.target.value))}
+              className="absolute inset-0 w-full h-full opacity-0 cursor-ew-resize z-30"
+              aria-label="Split comparison slider"
+            />
+          </div>
+        </div>
+      </section>
+
+      {/* =========================================================================
+          SECTION 4: DUAL-AIRPORT & EXPRESSWAY CONNECTIVITY
+          ========================================================================= */}
+      <section
+        id="section-transit"
+        className="py-28 px-6 sm:px-8 lg:px-12 bg-[#02182c] text-white border-b border-[#044F92] overflow-hidden"
+      >
+        <div className="max-w-7xl mx-auto space-y-16">
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
+            <div className="max-w-3xl space-y-4">
+              <ScrollReveal variant="from-left" distance={30}>
+                <div className="inline-flex items-center gap-2 px-3.5 py-1.5 bg-white/10 border border-white/20 rounded-full text-blue-200 text-xs font-semibold uppercase tracking-[0.2em]">
+                  <Plane className="w-3.5 h-3.5 text-[#38bdf8]" />
+                  <span>Strategic Infrastructure & Transit Corridors</span>
                 </div>
+              </ScrollReveal>
 
-                <div className="space-y-3">
-                  <div className="flex items-center justify-between">
-                    <h4 className="font-display text-2xl text-[#1a1a1a]">
-                      {[
-                        'Steamed Goan Red Rice (Ukda Tandool)',
-                        'Kokum Coconut Fish Curry (Xitt Kodi)',
-                        'Crispy Silver Pomfret Fry (Pomplate Rawa Fry)',
-                        'Digestive Kokum Solkadhi',
-                        'Wood-Fired Crusty Poee Bread'
-                      ][activeDish]}
-                    </h4>
-                    <span className="text-[10px] uppercase tracking-wider font-semibold px-2.5 py-1 bg-[#f2f7fc] text-[#044F92] border border-[#cfe0ee]">
-                      {[
-                        'Indigenous Rice',
-                        'Signature Gravy',
-                        'Pomfret Fry',
-                        'Kokum Elixir',
-                        'Heritage Poee'
-                      ][activeDish]}
-                    </span>
-                  </div>
+              <ScrollReveal variant="from-left" distance={40} delay={0.1}>
+                <h2 className="font-display text-4xl sm:text-5xl lg:text-6xl font-normal text-white tracking-tight">
+                  Dual-Airport Gateway & <br />
+                  <span className="text-[#38bdf8] font-serif italic">8-Lane Cable Expressways</span>
+                </h2>
+              </ScrollReveal>
 
-                  <p className="text-sm text-[#5a554e] leading-relaxed">
-                    {[
-                      'Nutrient-dense, unpolished red rice grains gently steamed in coastal clay pots. Delivers an earthy, nutty flavor profile that absorbs rich coconut gravies perfectly.',
-                      'Simmered with fresh coconut milk, dried red kokum (wild mangosteen) for tart balance, stone-ground byadgi chillies, coriander, and fresh catch of the morning.',
-                      'Fresh whole silver pomfret (pomplate) deeply marinated in spicy recheado paste, crusted in coarse semolina (rawa), and pan-fried golden crisp with lemon wedges and red onions.',
-                      'A soothing, bright-pink digestive nectar crafted from fresh coconut milk, sun-dried kokum extract, crushed green chillies, aromatic garlic, and fresh sea salt.',
-                      'Traditional wood-fired whole-wheat pocket bread with a hollow, pillow-soft crumb and crisp bran crust, baked at 5 AM daily by ancestral village bakers.'
-                    ][activeDish]}
-                  </p>
+              <ScrollReveal variant="from-left" distance={40} delay={0.2}>
+                <p className="text-base text-blue-100/80 font-light leading-relaxed">
+                  Goa has undergone an unprecedented infrastructure renaissance — seamlessly linking high-growth northern lifestyle valleys with international flight routes and rapid rail links.
+                </p>
+              </ScrollReveal>
+            </div>
 
-                  <div className="flex flex-wrap gap-2 pt-2 border-t border-[#f0ece5]">
-                    {[
-                      '1. Red Rice',
-                      '2. Fish Curry',
-                      '3. Pomfret Fry',
-                      '4. Kokum Solkadhi',
-                      '5. Poee Bread'
-                    ].map((label, idx) => (
-                      <button
-                        key={idx}
-                        type="button"
-                        onClick={() => setActiveDish(idx)}
-                        className={`px-2.5 py-1 text-[11px] font-medium transition-all cursor-pointer rounded ${activeDish === idx
-                          ? 'bg-[#044F92] text-white shadow-sm font-semibold'
-                          : 'bg-[#f4f1ee] hover:bg-[#eef5fb] text-[#4a4540] hover:text-[#044F92]'
-                          }`}
-                      >
-                        {label}
-                      </button>
-                    ))}
-                  </div>
+            <button
+              onClick={() => navigate('locations')}
+              className="px-6 py-3 bg-[#044F92] hover:bg-[#03396c] text-white text-xs font-semibold uppercase tracking-widest transition-all rounded shadow-md border border-[#38bdf8]/40 whitespace-nowrap cursor-pointer self-start md:self-end"
+            >
+              View Strategic Location Maps →
+            </button>
+          </div>
+
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            {/* Terminal 1: MOPA */}
+            <div className="p-8 bg-white/5 border border-white/15 rounded-3xl backdrop-blur-md space-y-6 hover:border-[#38bdf8]/50 transition-all">
+              <div className="flex items-center justify-between">
+                <span className="px-3 py-1 bg-[#044F92] text-blue-200 text-[10px] uppercase font-bold tracking-widest rounded">
+                  North Goa Gateway
+                </span>
+                <Plane className="w-5 h-5 text-[#38bdf8]" />
+              </div>
+              <h3 className="font-display text-2xl text-white">Manohar International Airport (MOPA)</h3>
+              <p className="text-sm text-blue-100/80 leading-relaxed font-light">
+                Purpose-built international hub in Pernem, designed for 35M+ passengers. Connected by high-speed 6-lane elevated expressway directly into Assagao, Siolim, and Mandrem.
+              </p>
+              <div className="pt-4 border-t border-white/10 space-y-2 text-xs font-mono text-blue-200">
+                <div className="flex justify-between">
+                  <span>To Assagao / Siolim:</span>
+                  <span className="font-bold text-white">25 - 28 Mins</span>
+                </div>
+                <div className="flex justify-between">
+                  <span>To Morjim & Mandrem:</span>
+                  <span className="font-bold text-white">24 Mins</span>
+                </div>
+                <div className="flex justify-between">
+                  <span>Direct Metros Flights:</span>
+                  <span className="font-bold text-emerald-400">65m Mumbai • 70m BLR</span>
                 </div>
               </div>
+            </div>
 
-              <div className="grid grid-cols-2 gap-4">
-                <div className="p-4 bg-white border border-[#cfe0ee] rounded-xl">
-                  <p className="text-[10px] uppercase tracking-widest text-[#044F92] font-bold">Assagao Gourmet Corridor</p>
-                  <p className="font-display text-lg mt-1 text-[#1a1a1a]">Restored Villa Dining</p>
-                  <p className="text-xs text-[#8c857d] mt-1">
-                    Home to Gunpowder, Bawri, Jamun, and Michelin-recognized chefs blending heritage Goan ingredients with global molecular craft.
-                  </p>
+            {/* Terminal 2: Dabolim & South */}
+            <div className="p-8 bg-white/5 border border-white/15 rounded-3xl backdrop-blur-md space-y-6 hover:border-[#38bdf8]/50 transition-all">
+              <div className="flex items-center justify-between">
+                <span className="px-3 py-1 bg-[#044F92] text-blue-200 text-[10px] uppercase font-bold tracking-widest rounded">
+                  Central / South Gateway
+                </span>
+                <Plane className="w-5 h-5 text-[#38bdf8]" />
+              </div>
+              <h3 className="font-display text-2xl text-white">Dabolim International Airport</h3>
+              <p className="text-sm text-blue-100/80 leading-relaxed font-light">
+                The historic international terminal in Vasco, catering effortlessly to South Goa luxury resort strips, Panaji capital residences, and Dona Paula.
+              </p>
+              <div className="pt-4 border-t border-white/10 space-y-2 text-xs font-mono text-blue-200">
+                <div className="flex justify-between">
+                  <span>To Panaji Capital:</span>
+                  <span className="font-bold text-white">28 Mins</span>
                 </div>
-                <div className="p-4 bg-white border border-[#cfe0ee] rounded-xl">
-                  <p className="text-[10px] uppercase tracking-widest text-[#044F92] font-bold">Panaji Latin Quarter</p>
-                  <p className="font-display text-lg mt-1 text-[#1a1a1a]">120-Year Heritage Cafes</p>
-                  <p className="text-xs text-[#8c857d] mt-1">
-                    Boutique pastelerias serving Bebinca, warm cinnamon pasteis de nata, and single-origin South Indian coffee.
-                  </p>
+                <div className="flex justify-between">
+                  <span>To Benaulim & Varca:</span>
+                  <span className="font-bold text-white">35 Mins</span>
+                </div>
+                <div className="flex justify-between">
+                  <span>Charter & Gulf Direct:</span>
+                  <span className="font-bold text-emerald-400">Daily Global Directs</span>
+                </div>
+              </div>
+            </div>
+
+            {/* Expressway Bridges & Rail */}
+            <div className="p-8 bg-white/5 border border-white/15 rounded-3xl backdrop-blur-md space-y-6 hover:border-[#38bdf8]/50 transition-all">
+              <div className="flex items-center justify-between">
+                <span className="px-3 py-1 bg-[#044F92] text-blue-200 text-[10px] uppercase font-bold tracking-widest rounded">
+                  Bridges & Rail
+                </span>
+                <Car className="w-5 h-5 text-[#38bdf8]" />
+              </div>
+              <h3 className="font-display text-2xl text-white">Cable Bridges & Vande Bharat Rail</h3>
+              <p className="text-sm text-blue-100/80 leading-relaxed font-light">
+                The landmark 8-lane Zuari Cable-Stayed Bridge and Atal Setu over Mandovi River eliminate all legacy river choke points. Vande Bharat links Goa to Mumbai in under 7.5 hours.
+              </p>
+              <div className="pt-4 border-t border-white/10 space-y-2 text-xs font-mono text-blue-200">
+                <div className="flex justify-between">
+                  <span>Panaji to Margao:</span>
+                  <span className="font-bold text-white">32 Mins (Zuari Bridge)</span>
+                </div>
+                <div className="flex justify-between">
+                  <span>Mumbai Vande Bharat:</span>
+                  <span className="font-bold text-white">7h 30m Express Rail</span>
+                </div>
+                <div className="flex justify-between">
+                  <span>Bengaluru Vande Bharat:</span>
+                  <span className="font-bold text-emerald-400">Direct Superfast</span>
                 </div>
               </div>
             </div>
@@ -1257,7 +1176,164 @@ export const ExploreGoaPage: React.FC<ExploreGoaPageProps> = ({
       </section>
 
       {/* =========================================================================
-          CHAPTER 3: BEACHES & COASTLINE - INTERACTIVE SCROLLING SHOWCASE
+          SECTION 5: HEALTHCARE & EDUCATION DIRECTORY
+          ========================================================================= */}
+      <section
+        id="section-infrastructure"
+        className="py-28 px-6 sm:px-8 lg:px-12 bg-white border-b border-[#cfe0ee] overflow-hidden"
+      >
+        <div className="max-w-7xl mx-auto space-y-20">
+          {/* Healthcare Subsection */}
+          <div className="space-y-12">
+            <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
+              <div className="max-w-3xl space-y-4">
+                <ScrollReveal variant="from-left" distance={30}>
+                  <div className="inline-flex items-center gap-2 px-3.5 py-1.5 bg-[#eef5fb] border border-[#cfe0ee] rounded-full text-[#044F92] text-xs font-semibold uppercase tracking-[0.2em]">
+                    <Hospital className="w-3.5 h-3.5 text-[#044F92]" />
+                    <span>Medical Infrastructure & Tertiary Care</span>
+                  </div>
+                </ScrollReveal>
+
+                <ScrollReveal variant="from-left" distance={40} delay={0.1}>
+                  <h2 className="font-display text-3xl sm:text-5xl font-normal text-[#1a1a1a] tracking-tight">
+                    World-Class Healthcare & Emergency Access
+                  </h2>
+                </ScrollReveal>
+
+                <ScrollReveal variant="from-left" distance={40} delay={0.2}>
+                  <p className="text-sm sm:text-base text-[#5a554e] font-light leading-relaxed">
+                    Relocating to Goa comes with the peace of mind of renowned multi-specialty hospital networks, 24x7 trauma care centers, and rapid emergency response teams.
+                  </p>
+                </ScrollReveal>
+              </div>
+
+              <div className="flex p-1 bg-[#f4f1ee] rounded-xl border border-[#e5e1da] text-xs">
+                {['All', 'Tertiary Care', 'Super Speciality', 'Private Multi-Speciality'].map((cat) => (
+                  <button
+                    key={cat}
+                    onClick={() => setHealthCategory(cat)}
+                    className={`px-3.5 py-1.5 rounded-lg font-medium transition-all cursor-pointer ${healthCategory === cat
+                      ? 'bg-[#044F92] text-white shadow font-semibold'
+                      : 'text-[#5a554e] hover:text-[#1a1a1a]'
+                      }`}
+                  >
+                    {cat}
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+              {filteredHospitals.map((hosp) => (
+                <div key={hosp.id} className="p-6 bg-white border border-[#cfe0ee] rounded-2xl shadow-sm hover:shadow-lg transition-all space-y-4 flex flex-col justify-between">
+                  <div className="space-y-3">
+                    <span className="px-2.5 py-1 bg-[#eef5fb] text-[#044F92] text-[10px] uppercase font-bold tracking-wider rounded border border-[#cfe0ee]">
+                      {hosp.category}
+                    </span>
+                    <h4 className="font-display text-lg text-[#1a1a1a]">{hosp.name}</h4>
+                    <p className="text-xs text-[#044F92] font-medium flex items-center gap-1">
+                      <MapPin className="w-3.5 h-3.5" />
+                      <span>{hosp.location}</span>
+                    </p>
+                    <p className="text-xs text-emerald-800 font-semibold bg-emerald-50 p-2 rounded border border-emerald-100">
+                      {hosp.emergency}
+                    </p>
+                    <div className="space-y-1">
+                      <p className="text-[10px] uppercase tracking-wider font-bold text-[#8c857d]">Core Specialties:</p>
+                      <ul className="text-xs text-[#5a554e] space-y-0.5">
+                        {hosp.specialties.map((s, i) => (
+                          <li key={i}>• {s}</li>
+                        ))}
+                      </ul>
+                    </div>
+                  </div>
+
+                  <div className="pt-3 border-t border-[#f0ece5] flex justify-between text-[11px] font-mono text-[#8c857d]">
+                    <span>From Assagao: {hosp.distanceFromAssagao}</span>
+                    <span>From Panaji: {hosp.distanceFromPanaji}</span>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Education Subsection */}
+          <div className="space-y-12 pt-8 border-t border-[#cfe0ee]">
+            <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
+              <div className="max-w-3xl space-y-4">
+                <ScrollReveal variant="from-left" distance={30}>
+                  <div className="inline-flex items-center gap-2 px-3.5 py-1.5 bg-[#fef9ee] border border-[#fef3c7] rounded-full text-amber-800 text-xs font-semibold uppercase tracking-[0.2em]">
+                    <GraduationCap className="w-3.5 h-3.5 text-amber-700" />
+                    <span>Education & Relocating Families</span>
+                  </div>
+                </ScrollReveal>
+
+                <ScrollReveal variant="from-left" distance={40} delay={0.1}>
+                  <h2 className="font-display text-3xl sm:text-5xl font-normal text-[#1a1a1a] tracking-tight">
+                    Premier International Curricula & Universities
+                  </h2>
+                </ScrollReveal>
+
+                <ScrollReveal variant="from-left" distance={40} delay={0.2}>
+                  <p className="text-sm sm:text-base text-[#5a554e] font-light leading-relaxed">
+                    Giving children a holistic upbringing surrounded by nature, international Cambridge IGCSE / ICSE academic standards, and top-tier higher education.
+                  </p>
+                </ScrollReveal>
+              </div>
+
+              <div className="flex p-1 bg-[#f4f1ee] rounded-xl border border-[#e5e1da] text-xs">
+                {['All', 'Cambridge IGCSE', 'ICSE / ISC', 'CBSE', 'Higher Education'].map((b) => (
+                  <button
+                    key={b}
+                    onClick={() => setSchoolBoardFilter(b)}
+                    className={`px-3 py-1.5 rounded-lg font-medium transition-all cursor-pointer ${schoolBoardFilter === b
+                      ? 'bg-[#044F92] text-white shadow font-semibold'
+                      : 'text-[#5a554e] hover:text-[#1a1a1a]'
+                      }`}
+                  >
+                    {b}
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+              {filteredSchools.map((school) => (
+                <div key={school.id} className="p-6 bg-[#faf7f2] border border-[#cfe0ee] rounded-2xl shadow-sm hover:shadow-lg transition-all space-y-4 flex flex-col justify-between">
+                  <div className="space-y-3">
+                    <span className="px-2.5 py-1 bg-[#044F92] text-white text-[10px] uppercase font-bold tracking-wider rounded">
+                      {school.board}
+                    </span>
+                    <h4 className="font-display text-lg text-[#1a1a1a]">{school.name}</h4>
+                    <p className="text-xs text-[#044F92] font-medium flex items-center gap-1">
+                      <MapPin className="w-3.5 h-3.5" />
+                      <span>{school.location}</span>
+                    </p>
+                    <p className="text-xs text-[#5a554e] font-light leading-relaxed">
+                      {school.keyFeature}
+                    </p>
+                    <div className="space-y-1">
+                      <p className="text-[10px] uppercase tracking-wider font-bold text-[#8c857d]">Curriculum Highlights:</p>
+                      <ul className="text-xs text-[#5a554e] space-y-0.5">
+                        {school.highlights.map((h, i) => (
+                          <li key={i}>• {h}</li>
+                        ))}
+                      </ul>
+                    </div>
+                  </div>
+
+                  <div className="pt-3 border-t border-[#e5e1da] text-[11px] font-mono text-[#044F92] font-semibold">
+                    <span>Grades: {school.grades}</span>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* =========================================================================
+          SECTION 7: BEACHES & COASTLINE SHOWCASE (PRESERVED & ENHANCED)
           ========================================================================= */}
       <section
         id="section-beaches"
@@ -1272,7 +1348,7 @@ export const ExploreGoaPage: React.FC<ExploreGoaPageProps> = ({
               <ScrollReveal variant="from-left" distance={30}>
                 <div className="inline-flex items-center gap-2 px-3.5 py-1.5 bg-white/10 border border-white/20 rounded-full text-blue-200 text-xs font-semibold uppercase tracking-[0.2em]">
                   <Palmtree className="w-3.5 h-3.5 text-[#38bdf8]" />
-                  <span>Interactive Coastline Showcase</span>
+                  <span>105 KM Coastline Directory</span>
                 </div>
               </ScrollReveal>
 
@@ -1285,7 +1361,7 @@ export const ExploreGoaPage: React.FC<ExploreGoaPageProps> = ({
 
               <ScrollReveal variant="from-left" distance={40} delay={0.2}>
                 <p className="text-base text-blue-100/80 font-light leading-relaxed">
-                  Swipe through the spectrum of Goan beaches — from cliff-top sunset enclaves and buzzing water sport hubs to tranquil turquoise coves and freshwater lagoons.
+                  Swipe through the spectrum of Goan shores — from cliff-top sunset bars and watersport promenades to tranquil turquoise bays and secluded freshwater lagoons.
                 </p>
               </ScrollReveal>
             </div>
@@ -1400,22 +1476,22 @@ export const ExploreGoaPage: React.FC<ExploreGoaPageProps> = ({
                 <Sun className="w-5 h-5" />
               </div>
               <div>
-                <p className="font-display text-lg text-white">Looking for Beach-Facing Luxury Villas?</p>
-                <p className="text-xs text-blue-200 font-light">Explore Kamat Realty’s private estates in Assagao, Candolim, Siolim & Miramar.</p>
+                <p className="font-display text-lg text-white">Seeking Coastal & Beach-Facing Estates?</p>
+                <p className="text-xs text-blue-200 font-light">Explore Kamat Realty’s private developments in Assagao, Siolim, Ribandar & Aldona.</p>
               </div>
             </div>
             <button
               onClick={() => navigate('projects', { filterStatus: 'ongoing' })}
               className="px-6 py-3 bg-[#044F92] hover:bg-[#03396c] text-white text-xs font-semibold uppercase tracking-widest transition-all whitespace-nowrap cursor-pointer border border-[#38bdf8]/40"
             >
-              View Coastal Estates
+              View Ongoing Projects
             </button>
           </div>
         </div>
       </section>
 
       {/* =========================================================================
-          CHAPTER 4: CULTURE & SACRED HERITAGE (FAMOUS TEMPLES & CHURCHES)
+          SECTION 8: SACRED ARCHITECTURE & LIVING HERITAGE (PRESERVED AS IS)
           ========================================================================= */}
       <section
         id="section-heritage"
@@ -1427,7 +1503,7 @@ export const ExploreGoaPage: React.FC<ExploreGoaPageProps> = ({
               <ScrollReveal variant="from-left" distance={30}>
                 <div className="inline-flex items-center gap-2 px-3.5 py-1.5 bg-[#fef3c7] border border-[#fde68a] rounded-full text-[#92400e] text-xs font-semibold uppercase tracking-[0.2em]">
                   <Landmark className="w-3.5 h-3.5 text-[#b45309]" />
-                  <span>Spiritual & Architectural Heritage</span>
+                  <span>450 Years of Syncretic Living Heritage</span>
                 </div>
               </ScrollReveal>
 
@@ -1440,7 +1516,7 @@ export const ExploreGoaPage: React.FC<ExploreGoaPageProps> = ({
 
               <ScrollReveal variant="from-left" distance={40} delay={0.2}>
                 <p className="text-base sm:text-lg text-[#5a554e] font-light leading-relaxed">
-                  Goa's culture is an enchanting harmony of centuries-old Kadamba basalt temples and Portuguese Baroque cathedrals. Discover the timeless spiritual architecture of the sunshine state.
+                  Goa's culture is an enchanting harmony of 12th-century Kadamba basalt temples, baroque Portuguese cathedrals, and festive community harmony (Shigmo, Sao Joao, and Bonderam).
                 </p>
               </ScrollReveal>
             </div>
@@ -1525,269 +1601,12 @@ export const ExploreGoaPage: React.FC<ExploreGoaPageProps> = ({
             ))}
           </div>
 
-          <div className="mt-16 p-8 lg:p-12 bg-gradient-to-br from-[#f8fafc] to-[#eef5fb] rounded-3xl border border-[#cfe0ee] shadow-xl">
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
-              <div className="lg:col-span-5 space-y-4">
-                <div className="inline-flex items-center gap-2 px-3 py-1 bg-[#eef5fb] border border-[#cfe0ee] rounded-full text-[#044F92] text-xs font-semibold uppercase tracking-widest">
-                  <Building2 className="w-3.5 h-3.5 text-[#044F92]" />
-                  <span>Goan Architectural Anatomy</span>
-                </div>
-                <h3 className="font-display text-3xl sm:text-4xl text-[#1a1a1a]">Elements of Classical Goan Estates</h3>
-                <p className="text-sm text-[#5a554e] leading-relaxed font-light">
-                  Every Kamat luxury villa integrates the climate-smart wisdom of Goan master builders — naturally ventilated high roofs, oyster shell window diffusers, and warm masonry balcãos.
-                </p>
-              </div>
-
-              <div className="lg:col-span-7 grid grid-cols-1 sm:grid-cols-2 gap-4">
-                {[
-                  {
-                    title: 'Oyster Shell Carepas Windows',
-                    desc: 'Hand-cut windowpane oyster shells (Placuna placenta) that soften tropical glare into soothing pearlescent ambient light.'
-                  },
-                  {
-                    title: 'The Balcão Verandah',
-                    desc: 'Communal masonry seats outside the front door where families gather at sunset to converse and enjoy the sea breeze.'
-                  },
-                  {
-                    title: 'Vibrant Ochre Mineral Stucco',
-                    desc: 'Natural laterite earth pigments that resist monsoon rain and maintain comfortable interior ambient coolness.'
-                  },
-                  {
-                    title: 'Mangalore Terracotta Tiles',
-                    desc: 'Steeply pitched clay tile roofs channeling heavy monsoons away while insulating double-height ceiling pavilions.'
-                  }
-                ].map((feature, fIdx) => (
-                  <div key={fIdx} className="p-5 bg-white border border-[#cfe0ee] rounded-2xl shadow-sm space-y-2">
-                    <div className="flex items-center gap-2">
-                      <span className="w-2 h-2 rounded-full bg-[#044F92]" />
-                      <h4 className="font-display text-base text-[#1a1a1a]">{feature.title}</h4>
-                    </div>
-                    <p className="text-xs text-[#5a554e] leading-relaxed">{feature.desc}</p>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
         </div>
       </section>
 
       {/* =========================================================================
-          CHAPTER 5: CONNECTIVITY, GROWTH & PRIME INVESTMENT
+          DETAIL MODAL FOR SACRED HERITAGE SITE (PRESERVED)
           ========================================================================= */}
-      <section
-        id="section-investment"
-        className="relative py-28 px-6 sm:px-8 lg:px-12 bg-gradient-to-b from-[#faf7f2] to-[#f2f7fc] border-b border-[#cfe0ee] overflow-hidden"
-      >
-        <div className="max-w-7xl mx-auto space-y-16">
-          <div className="max-w-3xl space-y-4">
-            <ScrollReveal variant="from-left" distance={30}>
-              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 bg-[#eef5fb] border border-[#cfe0ee] rounded-full text-[#044F92] text-xs font-semibold uppercase tracking-[0.2em]">
-                <TrendingUp className="w-3.5 h-3.5 text-[#044F92]" />
-                <span>Infrastructure & High Yields</span>
-              </div>
-            </ScrollReveal>
-
-            <ScrollReveal variant="from-left" distance={40} delay={0.1}>
-              <h2 className="font-display text-4xl sm:text-5xl lg:text-6xl font-normal text-[#1a1a1a] tracking-tight">
-                Strategic Growth & <br />
-                <span className="text-[#044F92] font-serif italic">High Rental ROI</span>
-              </h2>
-            </ScrollReveal>
-
-            <ScrollReveal variant="from-left" distance={40} delay={0.2}>
-              <p className="text-base sm:text-lg text-[#5a554e] font-light leading-relaxed">
-                Fueled by Manohar International Airport (MOPA) and expanded 4-lane expressways, offering 12-15% vacation rental yields — vastly outperforming metropolitan residential markets.
-              </p>
-            </ScrollReveal>
-          </div>
-
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-            <div className="lg:col-span-6 flex justify-center perspective-1000">
-              <motion.div
-                initial={{ opacity: 0, scale: 0.88 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: true }}
-                transition={{ duration: 1, ease: 'easeOut' }}
-                className="relative w-full max-w-lg aspect-square p-6 bg-white rounded-3xl border border-[#cfe0ee] shadow-2xl flex items-center justify-center preserve-3d overflow-hidden"
-              >
-                <div className="absolute inset-0 editorial-grid opacity-30 pointer-events-none" />
-
-                <svg viewBox="0 0 500 500" className="w-full h-full filter drop-shadow-xl">
-                  <defs>
-                    <linearGradient id="highwayGrad" x1="0%" y1="100%" x2="100%" y2="0%">
-                      <stop offset="0%" stopColor="#044F92" />
-                      <stop offset="40%" stopColor="#0284c7" />
-                      <stop offset="80%" stopColor="#38bdf8" />
-                      <stop offset="100%" stopColor="#e0f2fe" />
-                    </linearGradient>
-                    <linearGradient id="jetChrome" x1="0%" y1="0%" x2="100%" y2="100%">
-                      <stop offset="0%" stopColor="#ffffff" />
-                      <stop offset="50%" stopColor="#e2e8f0" />
-                      <stop offset="100%" stopColor="#94a3b8" />
-                    </linearGradient>
-                  </defs>
-
-                  <polygon points="50,380 250,470 450,380 250,290" fill="#f1f5f9" stroke="#cbd5e1" strokeWidth="2" />
-
-                  <path
-                    d="M 60 420 C 180 320, 100 220, 240 180 C 340 150, 360 80, 420 40"
-                    fill="none"
-                    stroke="url(#highwayGrad)"
-                    strokeWidth="38"
-                    strokeLinecap="round"
-                  />
-                  <path
-                    d="M 60 420 C 180 320, 100 220, 240 180 C 340 150, 360 80, 420 40"
-                    fill="none"
-                    stroke="#ffffff"
-                    strokeWidth="3"
-                    strokeDasharray="14 10"
-                    strokeLinecap="round"
-                    className="animate-shimmer"
-                  />
-
-                  <circle cx="420" cy="40" r="18" fill="#044F92" stroke="#ffffff" strokeWidth="3" />
-                  <text x="420" y="44" fill="#ffffff" fontSize="9" fontWeight="bold" textAnchor="middle" fontFamily="sans-serif">
-                    MOPA
-                  </text>
-
-                  <circle cx="240" cy="180" r="14" fill="#0284c7" stroke="#ffffff" strokeWidth="2.5" />
-                  <text x="240" y="210" fill="#044F92" fontSize="11" fontWeight="bold" textAnchor="middle" fontFamily="sans-serif">
-                    Assagao (28 Min)
-                  </text>
-
-                  <circle cx="60" cy="420" r="16" fill="#044F92" stroke="#ffffff" strokeWidth="3" />
-                  <text x="70" y="450" fill="#044F92" fontSize="11" fontWeight="bold" textAnchor="start" fontFamily="sans-serif">
-                    Panaji Capital
-                  </text>
-
-                  <g transform="translate(320, 90) rotate(22)">
-                    <path
-                      d="M 0 -35 C 10 -35, 12 35, 0 45 C -12 35, -10 -35, 0 -35 Z"
-                      fill="url(#jetChrome)"
-                      stroke="#475569"
-                      strokeWidth="2"
-                    />
-                    <polygon points="0,-5 85,25 75,32 0,10 -75,32 -85,25" fill="#cbd5e1" stroke="#475569" strokeWidth="2" />
-                    <polygon points="0,32 30,48 24,52 0,42 -24,52 -30,48" fill="#cbd5e1" stroke="#475569" strokeWidth="1.5" />
-                    <polygon points="0,25 0,46 -4,44 -2,25" fill="#044F92" />
-                    <ellipse cx="28" cy="14" rx="4" ry="10" fill="#334155" />
-                    <ellipse cx="-28" cy="14" rx="4" ry="10" fill="#334155" />
-                    <path d="M -5 -25 Q 0 -30 5 -25 Z" fill="#0284c7" />
-                  </g>
-                </svg>
-
-                <div className="absolute top-4 left-4 bg-[#044F92] text-white px-3 py-1.5 rounded-lg text-[10px] uppercase font-bold tracking-wider shadow-md">
-                  Manohar Int'l Airport (MOPA) Active
-                </div>
-                <div className="absolute bottom-4 right-4 bg-white border border-[#cfe0ee] text-[#1a1a1a] px-3.5 py-1.5 rounded-lg text-[10px] font-bold uppercase tracking-wider shadow-md flex items-center gap-1.5">
-                  <span className="w-2 h-2 rounded-full bg-emerald-500 animate-ping" />
-                  <span>4-Lane Expressway Corridor</span>
-                </div>
-              </motion.div>
-            </div>
-
-            <div className="lg:col-span-6 space-y-6">
-              <div className="p-6 sm:p-8 bg-white border border-[#cfe0ee] rounded-2xl shadow-xl space-y-6">
-                <div className="flex items-center justify-between border-b border-[#e5e1da] pb-4">
-                  <div>
-                    <h3 className="font-display text-2xl text-[#1a1a1a]">Vacation Rental ROI Engine</h3>
-                    <p className="text-xs text-[#8c857d] mt-0.5">Simulate annual yields based on Goa's high-demand tourist influx</p>
-                  </div>
-                  <div className="px-3 py-1 bg-[#eef5fb] text-[#044F92] font-mono text-xs font-bold border border-[#cfe0ee] rounded-full">
-                    12% - 15% ROI
-                  </div>
-                </div>
-
-                <div className="space-y-2">
-                  <div className="flex items-center justify-between text-xs">
-                    <span className="font-semibold text-[#5a554e]">Villa Capital Value</span>
-                    <span className="font-mono text-base font-bold text-[#044F92]">₹{investmentAmount.toFixed(1)} Cr</span>
-                  </div>
-                  <input
-                    type="range"
-                    min="4"
-                    max="18"
-                    step="0.5"
-                    value={investmentAmount}
-                    onChange={(e) => setInvestmentAmount(parseFloat(e.target.value))}
-                    className="w-full h-2 bg-[#cfe0ee] rounded-lg appearance-none cursor-pointer accent-[#044F92]"
-                  />
-                  <div className="flex justify-between text-[10px] text-[#8c857d] font-mono">
-                    <span>₹4.0 Cr (Boutique Villa)</span>
-                    <span>₹18.0 Cr (Ultra-Luxury Estate)</span>
-                  </div>
-                </div>
-
-                <div className="space-y-2">
-                  <div className="flex items-center justify-between text-xs">
-                    <span className="font-semibold text-[#5a554e]">Peak & Mid-Season Occupancy</span>
-                    <span className="font-mono text-base font-bold text-[#044F92]">{projectedOccupancy}%</span>
-                  </div>
-                  <input
-                    type="range"
-                    min="50"
-                    max="85"
-                    step="1"
-                    value={projectedOccupancy}
-                    onChange={(e) => setProjectedOccupancy(parseInt(e.target.value))}
-                    className="w-full h-2 bg-[#cfe0ee] rounded-lg appearance-none cursor-pointer accent-[#044F92]"
-                  />
-                  <div className="flex justify-between text-[10px] text-[#8c857d] font-mono">
-                    <span>50% (Conservative)</span>
-                    <span>85% (Prime Assagao Peak)</span>
-                  </div>
-                </div>
-
-                <div className="grid grid-cols-2 gap-4 p-4 bg-[#f2f7fc] border border-[#cfe0ee] rounded-xl">
-                  <div>
-                    <p className="text-[10px] uppercase font-bold text-[#8c857d]">Est. Annual Rental Payout</p>
-                    <p className="font-mono text-xl sm:text-2xl font-bold text-[#044F92] mt-1">₹{annualRentalIncome}</p>
-                    <p className="text-[10px] text-emerald-700 font-medium mt-0.5">~{calculatedRentalYield}% Net Annual Yield</p>
-                  </div>
-                  <div>
-                    <p className="text-[10px] uppercase font-bold text-[#8c857d]">Avg. Nightly Tariff</p>
-                    <p className="font-mono text-xl sm:text-2xl font-bold text-[#1a1a1a] mt-1">₹{estimatedNightlyTariff.toLocaleString('en-IN')}</p>
-                    <p className="text-[10px] text-[#8c857d] mt-0.5">Managed by Luxury Concierge</p>
-                  </div>
-                </div>
-
-                <div className="grid grid-cols-3 gap-2 text-center text-xs">
-                  <div className="p-2.5 bg-white border border-[#e5e1da] rounded-lg">
-                    <p className="font-mono font-bold text-[#044F92]">3.2x</p>
-                    <p className="text-[10px] text-[#8c857d]">Yield vs Mumbai/Delhi</p>
-                  </div>
-                  <div className="p-2.5 bg-white border border-[#e5e1da] rounded-lg">
-                    <p className="font-mono font-bold text-emerald-700">14%</p>
-                    <p className="text-[10px] text-[#8c857d]">Avg 5-Yr CAGR</p>
-                  </div>
-                  <div className="p-2.5 bg-white border border-[#e5e1da] rounded-lg">
-                    <p className="font-mono font-bold text-[#044F92]">100%</p>
-                    <p className="text-[10px] text-[#8c857d]">Goa RERA Approved</p>
-                  </div>
-                </div>
-
-                <div className="flex flex-col sm:flex-row gap-3 pt-2">
-                  <button
-                    onClick={handleTour}
-                    className="flex-1 py-3.5 bg-[#044F92] hover:bg-[#03396c] text-white text-xs font-semibold uppercase tracking-widest transition-all shadow-md text-center cursor-pointer"
-                  >
-                    Schedule Chauffeured Tour
-                  </button>
-                  <button
-                    onClick={() => navigate('projects', { filterStatus: 'ongoing' })}
-                    className="flex-1 py-3.5 bg-white border border-[#044F92] text-[#044F92] hover:bg-[#eef5fb] text-xs font-semibold uppercase tracking-widest transition-all text-center cursor-pointer"
-                  >
-                    View Ongoing Estates
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* DETAIL MODAL FOR SACRED HERITAGE SITE */}
       <AnimatePresence>
         {selectedHeritageItem && (
           <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 bg-black/75 backdrop-blur-sm">
@@ -1853,34 +1672,161 @@ export const ExploreGoaPage: React.FC<ExploreGoaPageProps> = ({
         )}
       </AnimatePresence>
 
-      {/* VIP Discovery Finale Banner */}
-      <section className="py-20 px-6 sm:px-8 bg-[#044F92] text-white text-center relative overflow-hidden">
-        <div className="max-w-4xl mx-auto space-y-6 relative z-10">
-          <span className="text-[10px] uppercase font-bold tracking-[0.3em] text-blue-200">
-            Curated by Kamat Realty Developers
-          </span>
-          <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl font-normal">
-            Ready to Claim Your Sanctuary in Goa?
-          </h2>
-          <p className="text-sm sm:text-base text-blue-100/90 max-w-xl mx-auto font-light leading-relaxed">
-            Allow our dedicated concierge to arrange an exclusive private preview of our coastal estates, with chauffeured transit from MOPA or Dabolim airport.
-          </p>
-          <div className="pt-4 flex flex-wrap justify-center gap-4">
-            <button
-              onClick={handleTour}
-              className="px-8 py-3.5 bg-white text-[#044F92] hover:bg-blue-50 text-xs font-semibold uppercase tracking-widest transition-all shadow-xl hover:shadow-2xl cursor-pointer"
+      {/* =========================================================================
+          INTERACTIVE 3-STEP LOCATION MATCHMAKER MODAL
+          ========================================================================= */}
+      <AnimatePresence>
+        {showMatchmaker && (
+          <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 bg-black/80 backdrop-blur-md">
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95, y: 20 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.95, y: 20 }}
+              className="relative w-full max-w-xl bg-white rounded-3xl overflow-hidden shadow-2xl border border-[#cfe0ee] p-6 sm:p-8 space-y-6"
             >
-              Book Private Chauffeured Visit
-            </button>
-            <button
-              onClick={() => navigate('contact')}
-              className="px-8 py-3.5 bg-transparent border border-white/60 text-white hover:bg-white/10 text-xs font-semibold uppercase tracking-widest transition-all cursor-pointer"
-            >
-              Contact Goa Headquarters
-            </button>
+              <div className="flex items-center justify-between border-b border-[#e5e1da] pb-4">
+                <div className="flex items-center gap-2">
+                  <Compass className="w-5 h-5 text-[#044F92]" />
+                  <span className="font-display text-xl text-[#1a1a1a]">Goa Location Matchmaker</span>
+                </div>
+                <button
+                  onClick={() => {
+                    setShowMatchmaker(false);
+                    setMatchStep(1);
+                  }}
+                  className="w-8 h-8 rounded-full bg-[#f4f1ee] hover:bg-[#e5e1da] text-[#5a554e] flex items-center justify-center cursor-pointer"
+                >
+                  <X className="w-4 h-4" />
+                </button>
+              </div>
+
+              {/* Step Progress */}
+              <div className="flex items-center gap-2">
+                {[1, 2, 3].map((st) => (
+                  <div
+                    key={st}
+                    className={`flex-1 h-1.5 rounded-full transition-all ${matchStep >= st ? 'bg-[#044F92]' : 'bg-[#cfe0ee]'
+                      }`}
+                  />
+                ))}
+              </div>
+
+              {/* Step 1 */}
+              {matchStep === 1 && (
+                <div className="space-y-4">
+                  <div>
+                    <span className="text-[10px] uppercase font-bold text-[#044F92] tracking-wider">Step 1 of 3</span>
+                    <h3 className="font-display text-xl text-[#1a1a1a]">What is your primary living lifestyle vibe?</h3>
+                  </div>
+
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    {[
+                      { id: 'gourmet', title: 'Gourmet & Creative', desc: 'Boutique cafes, art ateliers & restored villas (Assagao / Siolim)' },
+                      { id: 'waterfront', title: 'Capital Waterfront', desc: 'City conveniences, riverfront promenade & yachting (Panaji / Miramar)' },
+                      { id: 'peaceful', title: 'Serene Hinterland', desc: 'Ancient orchards, backwaters & complete silence (Aldona / Moira)' },
+                      { id: 'coastal', title: 'Tranquil South Coast', desc: 'Uncrowded silver beaches & luxury resort quietude (Benaulim / Varca)' }
+                    ].map((opt) => (
+                      <button
+                        key={opt.id}
+                        onClick={() => {
+                          setMatchAnswers((prev) => ({ ...prev, vibe: opt.id }));
+                          setMatchStep(2);
+                        }}
+                        className={`p-4 rounded-xl border text-left transition-all cursor-pointer ${matchAnswers.vibe === opt.id
+                          ? 'bg-[#eef5fb] border-[#044F92] text-[#044F92]'
+                          : 'bg-[#faf7f2] border-[#cfe0ee] hover:bg-white'
+                          }`}
+                      >
+                        <p className="font-bold text-sm text-[#1a1a1a]">{opt.title}</p>
+                        <p className="text-xs text-[#5a554e] mt-1">{opt.desc}</p>
+                      </button>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              {/* Step 2 */}
+              {matchStep === 2 && (
+                <div className="space-y-4">
+                  <div>
+                    <span className="text-[10px] uppercase font-bold text-[#044F92] tracking-wider">Step 2 of 3</span>
+                    <h3 className="font-display text-xl text-[#1a1a1a]">What is your most critical transit priority?</h3>
+                  </div>
+
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    {[
+                      { id: 'mopa', title: 'Fast MOPA Airport Link', desc: 'Frequent flights to Mumbai/Delhi/Dubai (North Expressway)' },
+                      { id: 'schools', title: 'Top International Schools', desc: 'Proximity to The Gera School & Sharada Mandir' },
+                      { id: 'beach', title: '5-Minute Beach Walk', desc: 'Immediate access to sunset swims and surfing' },
+                      { id: 'hospitals', title: 'Tertiary Medical Hubs', desc: 'Close to Manipal, Healthway, and GMC Bambolim' }
+                    ].map((opt) => (
+                      <button
+                        key={opt.id}
+                        onClick={() => {
+                          setMatchAnswers((prev) => ({ ...prev, priority: opt.id }));
+                          setMatchStep(3);
+                        }}
+                        className={`p-4 rounded-xl border text-left transition-all cursor-pointer ${matchAnswers.priority === opt.id
+                          ? 'bg-[#eef5fb] border-[#044F92] text-[#044F92]'
+                          : 'bg-[#faf7f2] border-[#cfe0ee] hover:bg-white'
+                          }`}
+                      >
+                        <p className="font-bold text-sm text-[#1a1a1a]">{opt.title}</p>
+                        <p className="text-xs text-[#5a554e] mt-1">{opt.desc}</p>
+                      </button>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              {/* Step 3 */}
+              {matchStep === 3 && (
+                <div className="space-y-4">
+                  <div>
+                    <span className="text-[10px] uppercase font-bold text-emerald-700 tracking-wider">Your Match Output</span>
+                    <h3 className="font-display text-2xl text-[#1a1a1a]">
+                      {matchAnswers.vibe === 'gourmet' || matchAnswers.priority === 'mopa'
+                        ? 'Assagao & Siolim Valley'
+                        : matchAnswers.vibe === 'waterfront' || matchAnswers.priority === 'schools'
+                          ? 'Panaji & Ribandar Waterfront'
+                          : 'Aldona Hinterland Orchards'}
+                    </h3>
+                  </div>
+
+                  <div className="p-4 bg-[#f8fafc] border border-[#cfe0ee] rounded-2xl space-y-2">
+                    <p className="text-xs text-[#5a554e] leading-relaxed">
+                      Based on your preferences for{' '}
+                      <span className="font-semibold text-[#044F92]">{matchAnswers.vibe || 'luxury'}</span> living and{' '}
+                      <span className="font-semibold text-[#044F92]">{matchAnswers.priority || 'connectivity'}</span>, Kamat Realty recommends our flagship gated developments with tailored concierge.
+                    </p>
+                  </div>
+
+                  <div className="flex gap-3 pt-2">
+                    <button
+                      onClick={() => {
+                        setShowMatchmaker(false);
+                        handleTour();
+                      }}
+                      className="flex-1 py-3.5 bg-[#044F92] text-white text-xs font-semibold uppercase tracking-widest hover:bg-[#03396c] transition-colors rounded cursor-pointer text-center"
+                    >
+                      Book Chauffeured Site Tour
+                    </button>
+                    <button
+                      onClick={() => {
+                        setShowMatchmaker(false);
+                        navigate('projects');
+                      }}
+                      className="flex-1 py-3.5 bg-white border border-[#044F92] text-[#044F92] text-xs font-semibold uppercase tracking-widest hover:bg-[#eef5fb] transition-colors rounded cursor-pointer text-center"
+                    >
+                      Explore Matched Properties
+                    </button>
+                  </div>
+                </div>
+              )}
+            </motion.div>
           </div>
-        </div>
-      </section>
+        )}
+      </AnimatePresence>
     </div>
   );
 };

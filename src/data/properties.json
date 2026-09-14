@@ -25,7 +25,7 @@
     "price": {
       "displayPrice": "₹6.85 Cr Onwards",
       "startingNumeric": 68500000,
-      "unitPrice": "₹16,200 / sq.mts"
+      "unitPrice": "₹16,200 / Sq.Mts"
     },
     "specs": {
       "bhk": "2 & 3 BHK Premium Apartments",
@@ -33,7 +33,7 @@
         2,
         3
       ],
-      "sqftRange": "2,200 - 3,850 Sq.mtr",
+      "sqftRange": "2,200 - 3,850 Sq.Mts",
       "totalUnits": 12,
       "unitsAvailable": 4,
       "possessionDate": "Q1 2027",
@@ -109,27 +109,19 @@
     },
     "floorPlans": [
       {
-        "name": "The Grand Villa (Type A)",
-        "type": "5 BHK Villa + Servant Quarter",
-        "carpetArea": "4,450 Sq.Ft",
-        "superBuiltUp": "5,850 Sq.Ft",
-        "image": "https://images.unsplash.com/photo-1600585154526-990dced4db0d?auto=format&fit=crop&w=800&q=80",
+        "name": "Typical Floor Plan (2BHK)",
+        "type": "2 BHK apartments spread over two blocks.",
+        "carpetArea": "64.37 Sq.Mts",
+        "superBuiltUp": "110 Sq.Mts",
+        "image": "/properties/kamat-crest/2bhk-floor-plan.webp",
         "priceEstimate": "₹8.40 Cr"
       },
       {
-        "name": "The Courtyard Villa (Type B)",
-        "type": "4 BHK Villa with Zen Courtyard",
-        "carpetArea": "3,280 Sq.Ft",
-        "superBuiltUp": "4,200 Sq.Ft",
-        "image": "https://images.unsplash.com/photo-1600566753376-12c8ab7fb75b?auto=format&fit=crop&w=800&q=80",
-        "priceEstimate": "₹6.85 Cr"
-      },
-      {
-        "name": "The Courtyard Villa (Type B)",
-        "type": "4 BHK Villa with Zen Courtyard",
-        "carpetArea": "3,280 Sq.Ft",
-        "superBuiltUp": "4,200 Sq.Ft",
-        "image": "https://images.unsplash.com/photo-1600566753376-12c8ab7fb75b?auto=format&fit=crop&w=800&q=80",
+        "name": "Typical Floor Plan (3BHK)",
+        "type": "3 BHK apartments spread over two blocks.",
+        "carpetArea": "86.86 Sq.Mts",
+        "superBuiltUp": "140 Sq.Mts",
+        "image": "/properties/kamat-crest/3bhk-floor-plan.webp",
         "priceEstimate": "₹6.85 Cr"
       }
     ],
@@ -150,7 +142,7 @@
         "type": "dining"
       },
       {
-        "name": "Panaji Capital Promenade",
+        "name": "Panaji City",
         "distance": "22 mins",
         "type": "heritage"
       }
@@ -180,7 +172,7 @@
     "price": {
       "displayPrice": "₹2.40 Cr Onwards",
       "startingNumeric": 54000000,
-      "unitPrice": "₹18,500 / sq.mts"
+      "unitPrice": "₹18,500 / Sq.Mts"
     },
     "specs": {
       "bhk": "3, 4 BHK & Sky Penthouses",
@@ -189,7 +181,7 @@
         4,
         5
       ],
-      "sqftRange": "2,900 - 6,100 sq.mts",
+      "sqftRange": "2,900 - 6,100 Sq.Mts",
       "totalUnits": 24,
       "unitsAvailable": 7,
       "possessionDate": "Q4 2026",
@@ -265,12 +257,12 @@
     },
     "floorPlans": [
       {
-        "name": "Kamat Prime Apartments",
-        "type": "5 BHK Duplex Penthouse with Private Deck",
-        "carpetArea": "4,900 Sq.Ft",
-        "superBuiltUp": "6,100 Sq.Ft",
+        "name": "Typical Floor Plan",
+        "type": "2 BHK Duplex Penthouse with Private Deck",
+        "carpetArea": "66.89 Sq.Mts",
+        "superBuiltUp": "1180 Sq.Mts",
         "image": "/properties/kamat-prime/floor-plan.webp",
-        "priceEstimate": "₹2.90 Cr"
+        "priceEstimate": "₹34.48 L"
       }
     ],
     "landmarks": [
@@ -320,7 +312,7 @@
     "price": {
       "displayPrice": "₹2.95 Cr Onwards",
       "startingNumeric": 29500000,
-      "unitPrice": "₹12,800 / sq.mts"
+      "unitPrice": "₹12,800 / Sq.Mts"
     },
     "specs": {
       "bhk": "2 & 3 BHK Luxury Apartments",
@@ -328,7 +320,7 @@
         2,
         3
       ],
-      "sqftRange": "1,200 - 2,450 sq.mts",
+      "sqftRange": "1,200 - 2,450 Sq.Mts",
       "totalUnits": 48,
       "unitsAvailable": 14,
       "possessionDate": "Q3 2027",
@@ -401,19 +393,19 @@
     },
     "floorPlans": [
       {
-        "name": "The Palm Suite 4 BHK",
-        "type": "4 BHK Luxury Apartment",
-        "carpetArea": "2,700 Sq.Ft",
-        "superBuiltUp": "3,450 Sq.Ft",
-        "image": "https://images.unsplash.com/photo-1600585154526-990dced4db0d?auto=format&fit=crop&w=800&q=80",
-        "priceEstimate": "₹4.40 Cr"
+        "name": "Typical Floor Plan (2BHK)",
+        "type": "2 BHK Premium Apartment",
+        "carpetArea": "60.43 Sq.Mts",
+        "superBuiltUp": "11.50 Sq.Mts",
+        "image": "/properties/kamat-promenade/floor-plan.webp",
+        "priceEstimate": "₹2.95 Cr"
       },
       {
-        "name": "The Green Suite 3 BHK",
+        "name": "Typical Floor Plan (3BHK)",
         "type": "3 BHK Premium Residence",
-        "carpetArea": "1,750 Sq.Ft",
-        "superBuiltUp": "2,200 Sq.Ft",
-        "image": "https://images.unsplash.com/photo-1600566753376-12c8ab7fb75b?auto=format&fit=crop&w=800&q=80",
+        "carpetArea": "76.48 Sq.Mts",
+        "superBuiltUp": "140.50 Sq.Mts",
+        "image": "/properties/kamat-promenade/floor-plan.webp",
         "priceEstimate": "₹2.95 Cr"
       }
     ],
@@ -487,14 +479,14 @@
     "price": {
       "displayPrice": "₹1.75 Cr Onwards",
       "startingNumeric": 17500000,
-      "unitPrice": "₹19,000 / sq.mts"
+      "unitPrice": "₹19,000 / Sq.Mts"
     },
     "specs": {
       "bhk": "Bespoke Corporate Suites & High-Street Retail",
       "bedrooms": [
         0
       ],
-      "sqftRange": "950 - 12,000 sq.mts",
+      "sqftRange": "80 - 100.50 Sq.Mts",
       "totalUnits": 36,
       "unitsAvailable": 9,
       "possessionDate": "Q2 2027",
@@ -563,20 +555,20 @@
     },
     "floorPlans": [
       {
-        "name": "Corporate Office Floorplate",
-        "type": "Full Floor Corporate Headquarters",
-        "carpetArea": "6,800 Sq.Ft",
-        "superBuiltUp": "9,200 Sq.Ft",
-        "image": "https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=800&q=80",
+        "name": "Typical Floor Plan (With Balcony)",
+        "type": "Six 2BHK apartment units come with a private balcony.",
+        "carpetArea": "80 Sq.Mts",
+        "superBuiltUp": "109.50 Sq.Mts",
+        "image": "/properties/kamat-vista/floor-plan-balcony.webp",
         "priceEstimate": "₹17.48 Cr"
       },
       {
-        "name": "Executive Business Suite",
-        "type": "Modular Office Unit",
-        "carpetArea": "1,050 Sq.Ft",
-        "superBuiltUp": "1,450 Sq.Ft",
-        "image": "https://images.unsplash.com/photo-1497366811353-6870744d04b2?auto=format&fit=crop&w=800&q=80",
-        "priceEstimate": "₹2.75 Cr"
+        "name": "Typical Floor Plan (Without Balcony)",
+        "type": "Six 2BHK apartment units are without a balcony.",
+        "carpetArea": "80 Sq.Mts",
+        "superBuiltUp": "100.50 Sq.Mts",
+        "image": "/properties/kamat-vista/floor-plan.webp",
+        "priceEstimate": "₹17.48 Cr"
       }
     ],
     "landmarks": [
@@ -627,14 +619,14 @@
     "price": {
       "displayPrice": "₹7.20 Cr Onwards",
       "startingNumeric": 72000000,
-      "unitPrice": "₹17,000 / sq.mts"
+      "unitPrice": "₹17,000 / Sq.Mts"
     },
     "specs": {
       "bhk": "4 BHK Mediterranean Private Villas",
       "bedrooms": [
         4
       ],
-      "sqftRange": "120.75 - 122.71 sq.mtr",
+      "sqftRange": "120.75 - 122.71 Sq.Mts",
       "totalUnits": 16,
       "unitsAvailable": 1,
       "possessionDate": "Delivered & Inhabited (2024)",
@@ -665,12 +657,12 @@
     ],
     "floorPlans": [
       {
-        "name": "Villa Royale",
-        "type": "4 BHK Independent Villa",
-        "carpetArea": "3,400 Sq.Ft",
-        "superBuiltUp": "4,400 Sq.Ft",
-        "image": "https://images.unsplash.com/photo-1600585154526-990dced4db0d?auto=format&fit=crop&w=800&q=80",
-        "priceEstimate": "₹7.20 Cr"
+        "name": "Typical Floor Plan",
+        "type": "4 BHK spacious apartments",
+        "carpetArea": "122.71 Sq.Mts",
+        "superBuiltUp": "215 Sq.Mts",
+        "image": "/properties/kamat-avenue/floor-plan.webp",
+        "priceEstimate": "₹1.20 Cr"
       }
     ],
     "landmarks": [
@@ -741,7 +733,7 @@
     "price": {
       "displayPrice": "₹1.95 Cr Onwards",
       "startingNumeric": 19500000,
-      "unitPrice": "₹17,000 / sq.mts"
+      "unitPrice": "₹17,000 / Sq.Mts"
     },
     "specs": {
       "bhk": "2, 3 & 4 BHK Lifestyle Residences",
@@ -750,7 +742,7 @@
         3,
         4
       ],
-      "sqftRange": "125 - 260 sq.mtrs",
+      "sqftRange": "198 - 260 Sq.Mts",
       "totalUnits": 32,
       "unitsAvailable": 2,
       "possessionDate": "Delivered (2029)",
@@ -782,12 +774,20 @@
     ],
     "floorPlans": [
       {
-        "name": "Serena 3 BHK Residence",
-        "type": "3 BHK Apartment",
-        "carpetArea": "1,650 Sq.Ft",
-        "superBuiltUp": "2,150 Sq.Ft",
-        "image": "https://images.unsplash.com/photo-1600585154526-990dced4db0d?auto=format&fit=crop&w=800&q=80",
-        "priceEstimate": "₹2.25 Cr"
+        "name": "Ground Floor Plan",
+        "type": "4 BHK luxury independent villas",
+        "carpetArea": "180 Sq.Mts",
+        "superBuiltUp": "198 Sq.Mts",
+        "image": "/properties/signature-villa-60/ground-floor-plan.webp",
+        "priceEstimate": "₹1.5 Cr"
+      },
+      {
+        "name": "First Floor Plan",
+        "type": "4 BHK luxury independent villas",
+        "carpetArea": "180 Sq.Mts",
+        "superBuiltUp": "198 Sq.Mts",
+        "image": "/properties/signature-villa-60/first-floor-plan.webp",
+        "priceEstimate": "₹1.5 Cr"
       }
     ],
     "landmarks": [
@@ -837,14 +837,14 @@
     "price": {
       "displayPrice": "₹4.85 Cr Onwards",
       "startingNumeric": 48500000,
-      "unitPrice": "₹17,800 / sq.mts"
+      "unitPrice": "₹17,800 / Sq.Mts"
     },
     "specs": {
       "bhk": "5 BHK Waterfront Mansions",
       "bedrooms": [
         5
       ],
-      "sqftRange": "5,200 - 7,100 sq.mts",
+      "sqftRange": "5,200 - 7,100 Sq.Mts",
       "totalUnits": 8,
       "unitsAvailable": 8,
       "possessionDate": "Launching Q1 2027",
@@ -879,8 +879,8 @@
       {
         "name": "The River Estate (Type Alpha)",
         "type": "5 BHK Riverfront Mansion with Jetty Access",
-        "carpetArea": "5,600 Sq.Ft",
-        "superBuiltUp": "7,100 Sq.Ft",
+        "carpetArea": "5,600 Sq.Mts",
+        "superBuiltUp": "7,100 Sq.Mts",
         "image": "https://images.unsplash.com/photo-1600585154526-990dced4db0d?auto=format&fit=crop&w=800&q=80",
         "priceEstimate": "₹11.20 Cr"
       }
@@ -932,14 +932,14 @@
     "price": {
       "displayPrice": "₹4.85 Cr Onwards",
       "startingNumeric": 48500000,
-      "unitPrice": "₹17,800 / sq.mts"
+      "unitPrice": "₹17,800 / Sq.Mts"
     },
     "specs": {
       "bhk": "5 BHK Waterfront Mansions",
       "bedrooms": [
         5
       ],
-      "sqftRange": "5,200 - 7,100 sq.mts",
+      "sqftRange": "5,200 - 7,100 Sq.Mts",
       "totalUnits": 8,
       "unitsAvailable": 8,
       "possessionDate": "Launching Q1 2027",
@@ -972,11 +972,19 @@
     ],
     "floorPlans": [
       {
-        "name": "The River Estate (Type Alpha)",
-        "type": "5 BHK Riverfront Mansion with Jetty Access",
-        "carpetArea": "5,600 Sq.Ft",
-        "superBuiltUp": "7,100 Sq.Ft",
-        "image": "https://images.unsplash.com/photo-1600585154526-990dced4db0d?auto=format&fit=crop&w=800&q=80",
+        "name": "Ground Floor Plan",
+        "type": "3 BHK premium independent villas",
+        "carpetArea": "180 Sq.Mts",
+        "superBuiltUp": "201 Sq.Mts",
+        "image": "/properties/signature-villa-33/ground-floor-plan.webp",
+        "priceEstimate": "₹11.20 Cr"
+      },
+      {
+        "name": "First Floor Plan",
+        "type": "3 BHK premium independent villas",
+        "carpetArea": "180 Sq.Mts",
+        "superBuiltUp": "201 Sq.Mts",
+        "image": "/properties/signature-villa-33/first-floor-plan.webp",
         "priceEstimate": "₹11.20 Cr"
       }
     ],

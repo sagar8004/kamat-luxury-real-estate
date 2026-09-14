@@ -141,7 +141,7 @@ export default function RootLayout({
       </head>
       <body className="antialiased selection:bg-[#044F92] selection:text-white bg-[#fdfcfb] text-[#1a1a1a]" suppressHydrationWarning>
         <TourModalProvider>
-          <PagePreloader minDuration={1200} />
+          <PagePreloader minDuration={4000} />
           <CustomCursor />
           <GlobalTourModal />
           <Navbar />
