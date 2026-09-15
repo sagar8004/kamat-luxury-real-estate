@@ -30,11 +30,19 @@ export const HomePage: React.FC<HomePageProps> = ({
   const [searchArea, setSearchArea] = useState('All Locations');
   const [searchCategory, setSearchCategory] = useState<PropertyCategory>('all');
 
-  const navigate = (page: string, params?: { propertyId?: string; filterStatus?: string }) => {
+  const navigate = (page: string, params?: { propertyId?: string; filterStatus?: string; queryString?: string }) => {
     if (onNavigate) {
       onNavigate(page, params);
     } else {
-      router.push(page === 'home' ? '/' : `/${page}`);
+      if (page === 'home') {
+        router.push('/');
+      } else if (params?.queryString) {
+        router.push(`/${page}?${params.queryString}`);
+      } else if (page.startsWith('/')) {
+        router.push(page);
+      } else {
+        router.push(`/${page}`);
+      }
     }
   };
 
@@ -56,7 +64,19 @@ export const HomePage: React.FC<HomePageProps> = ({
 
   const handleSearchSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    navigate('projects', { filterStatus: searchCategory !== 'all' ? searchCategory : undefined });
+    const queryParams = new URLSearchParams();
+    if (searchKeyword.trim()) {
+      queryParams.set('q', searchKeyword.trim());
+    }
+    if (searchArea && searchArea !== 'All Locations') {
+      queryParams.set('area', searchArea);
+    }
+    if (searchCategory && searchCategory !== 'all') {
+      queryParams.set('category', searchCategory);
+    }
+
+    const qs = queryParams.toString();
+    navigate('projects', { queryString: qs });
   };
 
   const ongoingSpotlight = PROPERTIES.filter((p) => p.status === 'ongoing').slice(0, 3);
@@ -176,28 +196,28 @@ export const HomePage: React.FC<HomePageProps> = ({
               </span>
               <button
                 type="button"
-                onClick={() => navigate('projects')}
+                onClick={() => navigate('projects', { queryString: 'area=Porvorim&category=villa&q=4+BHK' })}
                 className="px-3 py-1 bg-[#f4f1ee] hover:bg-[#eef5fb] hover:text-[#044F92] text-[11px] font-medium transition-colors cursor-pointer"
               >
                 4 BHK Villas in Porvorim
               </button>
               <button
                 type="button"
-                onClick={() => navigate('projects')}
+                onClick={() => navigate('projects', { queryString: 'area=Miramar&category=apartment' })}
                 className="px-3 py-1 bg-[#f4f1ee] hover:bg-[#eef5fb] hover:text-[#044F92] text-[11px] font-medium transition-colors cursor-pointer"
               >
                 Seafront Apartment Miramar
               </button>
               <button
                 type="button"
-                onClick={() => navigate('ongoing')}
+                onClick={() => navigate('projects', { queryString: 'status=ongoing' })}
                 className="px-3 py-1 bg-[#f4f1ee] hover:bg-[#eef5fb] hover:text-[#044F92] text-[11px] font-medium transition-colors cursor-pointer"
               >
                 Active Construction Milestones
               </button>
               <button
                 type="button"
-                onClick={() => navigate('completed')}
+                onClick={() => navigate('projects', { queryString: 'status=completed' })}
                 className="px-3 py-1 bg-[#f4f1ee] hover:bg-[#eef5fb] hover:text-[#044F92] text-[11px] font-medium transition-colors cursor-pointer"
               >
                 Delivered Landmarks

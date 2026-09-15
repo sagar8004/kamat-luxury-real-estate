@@ -1,7 +1,7 @@
 'use client';
 
-import React, { useState, useMemo } from 'react';
-import { useRouter } from 'next/navigation';
+import React, { useState, useMemo, useEffect } from 'react';
+import { useRouter, useSearchParams } from 'next/navigation';
 import { motion, AnimatePresence } from 'motion/react';
 import { Search, Filter, Grid, List, MapPin, Building, Sparkles, CheckCircle2, ArrowRight } from 'lucide-react';
 import { PropertyItem, PropertyFilterState, ProjectStatus, PropertyCategory } from '../types/property';
@@ -24,6 +24,7 @@ export const ProjectsPage: React.FC<ProjectsPageProps> = ({
   initialStatus = 'all'
 }) => {
   const router = useRouter();
+  const searchParams = useSearchParams();
   const tourModalContext = useTourModal();
 
   const handleSelect = (property: PropertyItem) => {
@@ -41,17 +42,62 @@ export const ProjectsPage: React.FC<ProjectsPageProps> = ({
       tourModalContext.openTourModal(property);
     }
   };
-  const [filters, setFilters] = useState<PropertyFilterState>({
-    status: initialStatus,
-    category: 'all',
-    region: 'All',
-    area: 'All Locations',
-    minPrice: 0,
-    maxPrice: 100000000,
-    bedrooms: 'any',
-    searchQuery: '',
-    viewMode: 'grid'
-  });
+
+  const getInitialFilters = (): PropertyFilterState => {
+    const qParam = searchParams?.get('q') || searchParams?.get('searchQuery') || '';
+    const areaParam = searchParams?.get('area') || 'All Locations';
+    const categoryParam = (searchParams?.get('category') as PropertyCategory) || 'all';
+    const statusParam = (searchParams?.get('status') as ProjectStatus) || (searchParams?.get('filterStatus') as ProjectStatus) || initialStatus || 'all';
+    const regionParam = searchParams?.get('region') || 'All';
+
+    return {
+      status: statusParam,
+      category: categoryParam,
+      region: regionParam,
+      area: areaParam,
+      minPrice: 0,
+      maxPrice: 100000000,
+      bedrooms: 'any',
+      searchQuery: qParam,
+      viewMode: 'grid'
+    };
+  };
+
+  const [filters, setFilters] = useState<PropertyFilterState>(getInitialFilters);
+
+  // Synchronize when searchParams change
+  useEffect(() => {
+    if (!searchParams) return;
+    const qParam = searchParams.get('q') || searchParams.get('searchQuery') || '';
+    const areaParam = searchParams.get('area') || 'All Locations';
+    const categoryParam = (searchParams.get('category') as PropertyCategory) || 'all';
+    const statusParam = (searchParams.get('status') as ProjectStatus) || (searchParams.get('filterStatus') as ProjectStatus) || initialStatus || 'all';
+    const regionParam = searchParams.get('region') || 'All';
+
+    setFilters((prev) => ({
+      ...prev,
+      searchQuery: qParam,
+      area: areaParam,
+      category: categoryParam,
+      status: statusParam,
+      region: regionParam,
+    }));
+  }, [searchParams, initialStatus]);
+
+  const handleResetFilters = () => {
+    setFilters({
+      status: 'all',
+      category: 'all',
+      region: 'All',
+      area: 'All Locations',
+      minPrice: 0,
+      maxPrice: 100000000,
+      bedrooms: 'any',
+      searchQuery: '',
+      viewMode: 'grid'
+    });
+    router.replace('/projects', { scroll: false });
+  };
 
   const filteredProperties = useMemo(() => {
     return filterProperties(PROPERTIES, filters);
@@ -195,20 +241,8 @@ export const ProjectsPage: React.FC<ProjectsPageProps> = ({
 
             {(filters.searchQuery || filters.status !== 'all' || filters.category !== 'all' || filters.region !== 'All' || filters.area !== 'All Locations') && (
               <button
-                onClick={() =>
-                  setFilters({
-                    status: 'all',
-                    category: 'all',
-                    region: 'All',
-                    area: 'All Locations',
-                    minPrice: 0,
-                    maxPrice: 100000000,
-                    bedrooms: 'any',
-                    searchQuery: '',
-                    viewMode: 'grid'
-                  })
-                }
-                className="text-[#044F92] font-semibold hover:underline"
+                onClick={handleResetFilters}
+                className="text-[#044F92] font-semibold hover:underline cursor-pointer"
               >
                 Reset Filters
               </button>
@@ -226,19 +260,7 @@ export const ProjectsPage: React.FC<ProjectsPageProps> = ({
             <h3 className="font-display text-2xl text-[#1a1a1a]">No properties matched your criteria</h3>
             <p className="text-xs text-[#8c857d]">Try adjusting your search filters or browse all our ongoing projects.</p>
             <button
-              onClick={() =>
-                setFilters({
-                  status: 'all',
-                  category: 'all',
-                  region: 'All',
-                  area: 'All Locations',
-                  minPrice: 0,
-                  maxPrice: 100000000,
-                  bedrooms: 'any',
-                  searchQuery: '',
-                  viewMode: 'grid'
-                })
-              }
+              onClick={handleResetFilters}
               className="px-6 py-2.5 bg-[#044F92] text-white text-xs font-semibold uppercase tracking-widest hover:bg-[#03396c] transition-colors cursor-pointer"
             >
               Reset Filters
