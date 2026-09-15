@@ -191,22 +191,7 @@ export const HeroScrollAnimation: React.FC<HeroScrollAnimationProps> = ({
     return () => clearTimeout(timer);
   }, [drawFrame]);
 
-  const scrollToPhase = (targetProgress: number) => {
-    if (!containerRef.current) return;
-    const rect = containerRef.current.getBoundingClientRect();
-    const containerTop = window.scrollY + rect.top;
-    const totalScrollable = containerRef.current.offsetHeight - window.innerHeight;
-    window.scrollTo({
-      top: containerTop + targetProgress * totalScrollable,
-      behavior: 'smooth',
-    });
-  };
-
-  // Determine active phase
-  const activePhase =
-    scrollProgress < 0.25 ? 0 : scrollProgress < 0.52 ? 1 : scrollProgress < 0.78 ? 2 : 3;
-
-  // Helper to compute cinematic 3D transform and opacity for each phase
+  // Helper to compute cinematic 3D transform and opacity
   const getPhaseStyles = (start: number, peakStart: number, peakEnd: number, end: number) => {
     let opacity = 0;
     let scale = 0.8;
@@ -253,10 +238,8 @@ export const HeroScrollAnimation: React.FC<HeroScrollAnimationProps> = ({
     };
   };
 
-  const phase1Style = getPhaseStyles(-0.05, 0.0, 0.18, 0.26);
-  const phase2Style = getPhaseStyles(0.24, 0.32, 0.46, 0.54);
-  const phase3Style = getPhaseStyles(0.52, 0.60, 0.72, 0.80);
-  const phase4Style = getPhaseStyles(0.77, 0.85, 1.05, 1.10);
+  const initialGuideStyle = getPhaseStyles(-0.05, 0.0, 0.12, 0.20);
+  const stage4Style = getPhaseStyles(0.75, 0.84, 1.05, 1.10);
 
   return (
     <div
@@ -287,39 +270,20 @@ export const HeroScrollAnimation: React.FC<HeroScrollAnimationProps> = ({
         )}
 
         {/* ========================================================================= */}
-        {/* CINEMATIC TEXT STAGES (Emerging from Behind with 3D Depth, Blur & Scale) */}
+        {/* OVERLAYS: Initial Scroll Guide & Final Stage 4 Call to Action */}
         {/* ========================================================================= */}
 
         <div className="relative z-20 w-full max-w-7xl mx-auto px-6 sm:px-8 lg:px-10 h-full flex flex-col justify-center items-center pointer-events-none">
 
           {/* ----------------------------------------------------------------------- */}
-          {/* PHASE 1 (0% - 25%): Intro Architectural Masterpieces Reveal */}
+          {/* INITIAL GUIDE: Scroll Down to Experience (at bottom, fades as user scrolls) */}
           {/* ----------------------------------------------------------------------- */}
           <div
-            style={phase1Style}
-            className="absolute inset-0 flex flex-col justify-center items-center text-center max-w-5xl mx-auto px-6 will-change-transform"
+            style={initialGuideStyle}
+            className="absolute inset-0 flex flex-col justify-end pb-20 sm:pb-24 items-center text-center max-w-5xl mx-auto px-6 will-change-transform pointer-events-none"
           >
-            {/* Top Brand Crest Badge */}
-            {/* <div className="inline-flex items-center gap-2.5 px-4 py-1.5 bg-black/40 backdrop-blur-md border border-white/25 rounded-full text-white text-[10px] sm:text-xs uppercase tracking-[0.3em] font-medium shadow-xl mb-6">
-              <Sparkles className="w-3.5 h-3.5 text-[#38bdf8] animate-pulse" />
-              <span>Goa’s Premier Luxury Architecture • Est. 1994</span>
-            </div> */}
-
-            {/* Main Grand Display Headline emerging from behind */}
-            <h1 className="font-secondary text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-normal leading-[1.05] tracking-tight text-white text-shadow-cinematic max-w-5xl drop-shadow-2xl">
-              Built on Trust <br />
-              <span className="italic font-secondary text-[#93c5fd] font-light">
-                Most Trusted Partner
-              </span>
-            </h1>
-
-            <p className="font-primary text-sm sm:text-lg md:text-xl text-blue-100/95 font-light leading-relaxed max-w-2xl mt-6 text-shadow-cinematic drop-shadow-lg">
-              Sculpting private pool villas, cliffside ocean estates, and heritage residences across Goa’s most prestigious enclaves.
-            </p>
-
-            {/* Interactive Scroll Down Pulse prompt */}
-            <div className="mt-10 flex flex-col items-center gap-3">
-              <span className="font-secondary text-[10px] uppercase tracking-[0.3em] text-blue-200/90 drop-shadow">
+            <div className="flex flex-col items-center gap-3">
+              <span className="font-secondary text-[10px] sm:text-[11px] uppercase tracking-[0.3em] text-blue-200/90 drop-shadow">
                 Scroll Down to Experience
               </span>
               <div className="w-5 h-9 rounded-full border-2 border-white/50 flex items-start justify-center p-1 bg-black/30 backdrop-blur-sm shadow-lg">
@@ -333,58 +297,12 @@ export const HeroScrollAnimation: React.FC<HeroScrollAnimationProps> = ({
           </div>
 
           {/* ----------------------------------------------------------------------- */}
-          {/* PHASE 2 (25% - 52%): Timeless Coastal Grandeur & Key Enclaves */}
+          {/* FINAL STAGE 4 (75% - 100%): Grand Final Call to Action at End of Scroll */}
           {/* ----------------------------------------------------------------------- */}
           <div
-            style={phase2Style}
+            style={stage4Style}
             className="absolute inset-0 flex flex-col justify-center items-center text-center max-w-4xl mx-auto px-6 will-change-transform"
           >
-            {/* <div className="inline-flex items-center gap-2 px-3.5 py-1 bg-black/40 backdrop-blur-md border border-white/25 text-[10px] uppercase tracking-[0.25em] text-[#38bdf8] font-bold mb-4 shadow-lg font-secondary">
-              <span>Signature Coastal Enclaves</span>
-            </div> */}
-
-            <h2 className="font-secondary text-4xl sm:text-5xl md:text-7xl font-normal leading-tight text-white text-shadow-cinematic max-w-4xl drop-shadow-2xl">
-              Proven Credibility <br />
-              <span className="italic font-secondary text-[#93c5fd] font-light">A Decades-Long Legacy</span>
-            </h2>
-
-            <p className="font-primary text-sm sm:text-base md:text-lg text-blue-100/95 font-light max-w-2xl mt-5 text-shadow-cinematic drop-shadow-lg leading-relaxed">
-              From the tranquil teak canopies of Assagao to the panoramic Arabian Sea horizons of Miramar and Candolim.
-            </p>
-          </div>
-
-          {/* ----------------------------------------------------------------------- */}
-          {/* PHASE 3 (52% - 78%): 32 Years of Engineering & Heritage Mastery */}
-          {/* ----------------------------------------------------------------------- */}
-          <div
-            style={phase3Style}
-            className="absolute inset-0 flex flex-col justify-center items-center text-center max-w-4xl mx-auto px-6 will-change-transform"
-          >
-            {/* <div className="inline-flex items-center gap-2 px-3.5 py-1 bg-black/40 backdrop-blur-md border border-white/25 text-[10px] uppercase tracking-[0.25em] text-[#38bdf8] font-bold mb-4 shadow-lg font-secondary">
-              <span>Master Builders of Goa</span>
-            </div> */}
-
-            <h2 className="font-secondary text-4xl sm:text-5xl md:text-7xl font-normal leading-tight text-white text-shadow-cinematic max-w-4xl drop-shadow-2xl">
-              Engineered to Endure <br />
-              <span className="italic font-secondary text-[#93c5fd] font-light">for Generations</span>
-            </h2>
-
-            <p className="font-primary text-sm sm:text-base md:text-lg text-blue-100/95 font-light max-w-2xl mt-5 text-shadow-cinematic drop-shadow-lg leading-relaxed">
-              Seismic-proof RCC engineering, marine-grade corrosion-resistant framing, and hand-chiseled laterite thermal masonry.
-            </p>
-          </div>
-
-          {/* ----------------------------------------------------------------------- */}
-          {/* PHASE 4 (78% - 100%): Grand Final Call to Action */}
-          {/* ----------------------------------------------------------------------- */}
-          <div
-            style={phase4Style}
-            className="absolute inset-0 flex flex-col justify-center items-center text-center max-w-4xl mx-auto px-6 will-change-transform"
-          >
-            {/* <div className="inline-flex items-center gap-2 px-3.5 py-1 bg-black/40 backdrop-blur-md border border-white/25 text-[10px] uppercase tracking-[0.25em] text-[#38bdf8] font-bold mb-4 shadow-lg font-secondary">
-              <span>Your Sanctuary Awaits</span>
-            </div> */}
-
             <h2 className="font-secondary text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-normal leading-[1.1] text-white text-shadow-cinematic max-w-4xl drop-shadow-2xl">
               Discover Goa’s Most <br />
               <span className="italic font-secondary text-[#93c5fd] font-light">Prestigious Estates</span>
@@ -424,38 +342,9 @@ export const HeroScrollAnimation: React.FC<HeroScrollAnimationProps> = ({
         </div>
 
         {/* ========================================================================= */}
-        {/* SIDE TIMELINE SCRUBBER & NAVIGATION DOTS */}
-        {/* ========================================================================= */}
-        <div className="absolute right-6 top-1/2 -translate-y-1/2 z-30 hidden md:flex flex-col items-center gap-4 bg-black/50 backdrop-blur-md px-3 py-5 rounded-full border border-white/20 shadow-xl">
-          {[
-            { label: 'Masterpiece', target: 0.05 },
-            { label: 'Enclaves', target: 0.38 },
-            { label: 'Engineering', target: 0.66 },
-            { label: 'Explore', target: 0.95 },
-          ].map((item, idx) => (
-            <button
-              key={idx}
-              onClick={() => scrollToPhase(item.target)}
-              title={item.label}
-              className="group relative flex items-center justify-center p-1 cursor-pointer"
-            >
-              <div
-                className={`w-2.5 h-2.5 rounded-full transition-all duration-300 ${activePhase === idx
-                  ? 'w-3 h-3 bg-[#38bdf8] ring-4 ring-[#38bdf8]/40 scale-110'
-                  : 'bg-white/40 hover:bg-white/80'
-                  }`}
-              />
-              <span className="absolute right-8 px-2 py-1 bg-black/80 backdrop-blur-sm border border-white/20 text-[9px] uppercase tracking-widest text-white whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none rounded">
-                {item.label}
-              </span>
-            </button>
-          ))}
-        </div>
-
-        {/* ========================================================================= */}
         {/* BOTTOM PROGRESS BAR */}
         {/* ========================================================================= */}
-        <div className="relative z-30 w-full px-6 sm:px-10 pb-4 flex items-center justify-between text-[10px] uppercase tracking-widest text-blue-200/90 font-secondary">
+        <div className="relative z-30 w-full px-6 sm:px-10 pb-4 flex items-center justify-between text-[10px] uppercase tracking-widest text-blue-200/90 font-secondary pointer-events-none">
           <div className="flex items-center gap-2">
             <span className="w-2 h-2 rounded-full bg-[#38bdf8] animate-pulse" />
             <span>Interactive Scroll Journey</span>
@@ -469,7 +358,7 @@ export const HeroScrollAnimation: React.FC<HeroScrollAnimationProps> = ({
           </div>
 
           <div>
-            <span>0{activePhase + 1} / 04</span>
+            <span>{Math.round(scrollProgress * 100)}%</span>
           </div>
         </div>
 

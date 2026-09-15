@@ -250,19 +250,19 @@ export const Navbar: React.FC<NavbarProps> = ({
             </Link>
 
             <Link
-              id="nav-link-legacy"
-              href="/about"
-              className={getLinkClasses('about')}
-            >
-              About
-            </Link>
-
-            <Link
               id="nav-link-calculator"
               href="/finance"
               className={getLinkClasses('finance')}
             >
               Mortgage & ROI
+            </Link>
+
+            <Link
+              id="nav-link-legacy"
+              href="/about"
+              className={getLinkClasses('about')}
+            >
+              About
             </Link>
 
             <Link
@@ -389,22 +389,22 @@ export const Navbar: React.FC<NavbarProps> = ({
             </Link>
 
             <Link
-              href="/about"
-              onClick={() => setMobileMenuOpen(false)}
-              className={`w-full text-left py-3 border-b border-[#e5e1da] font-display text-xl flex items-center justify-between ${currentPage === 'about' ? 'text-[#044F92] font-bold' : 'text-[#1a1a1a]'
-                }`}
-            >
-              <span>About & Legacy</span>
-              <ChevronRight className="w-4 h-4 text-[#044F92]" />
-            </Link>
-
-            <Link
               href="/finance"
               onClick={() => setMobileMenuOpen(false)}
               className={`w-full text-left py-3 border-b border-[#e5e1da] font-display text-xl flex items-center justify-between ${currentPage === 'finance' ? 'text-[#044F92] font-bold' : 'text-[#1a1a1a]'
                 }`}
             >
               <span>Mortgage & ROI Calculator</span>
+              <ChevronRight className="w-4 h-4 text-[#044F92]" />
+            </Link>
+
+            <Link
+              href="/about"
+              onClick={() => setMobileMenuOpen(false)}
+              className={`w-full text-left py-3 border-b border-[#e5e1da] font-display text-xl flex items-center justify-between ${currentPage === 'about' ? 'text-[#044F92] font-bold' : 'text-[#1a1a1a]'
+                }`}
+            >
+              <span>About & Legacy</span>
               <ChevronRight className="w-4 h-4 text-[#044F92]" />
             </Link>
 

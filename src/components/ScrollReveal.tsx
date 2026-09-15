@@ -161,8 +161,8 @@ export const ScrollReveal: React.FC<ScrollRevealProps> = ({
   duration,
   className = '',
   distance = 50,
-  once = false,
-  threshold = 0.15,
+  once = true,
+  threshold = 0.05,
 }) => {
   const variants = getVariants(variant, distance);
 
@@ -188,12 +188,12 @@ export const StaggerContainer: React.FC<{
   className?: string;
   staggerDelay?: number;
   once?: boolean;
-}> = ({ children, className = '', staggerDelay = 0.12, once = false }) => {
+}> = ({ children, className = '', staggerDelay = 0.12, once = true }) => {
   return (
     <motion.div
       initial="hidden"
       whileInView="visible"
-      viewport={{ once, amount: 0.15 }}
+      viewport={{ once, amount: 0.05 }}
       variants={{
         hidden: { opacity: 0 },
         visible: {

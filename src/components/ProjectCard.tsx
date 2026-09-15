@@ -47,11 +47,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
   };
 
   return (
-    <motion.article
-      initial={{ opacity: 0, y: 30, filter: 'blur(4px)' }}
-      whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
-      viewport={{ once: true, amount: 0.1 }}
-      transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+    <article
       className="group relative bg-white border border-[#e5e1da] hover:border-[#044F92] shadow-sm hover:shadow-2xl transition-all duration-500 flex flex-col justify-between"
     >
       <div>
@@ -177,7 +173,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
           <span>VIP Tour</span>
         </button>
       </div>
-    </motion.article>
+    </article>
   );
 };
 

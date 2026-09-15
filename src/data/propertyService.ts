@@ -5,13 +5,11 @@ export const PROPERTIES: PropertyItem[] = propertiesRaw as PropertyItem[];
 
 export const LOCATIONS_LIST = [
   { area: 'All Locations', region: 'All' },
-  { area: 'Assagao', region: 'North Goa' },
-  { area: 'Candolim', region: 'North Goa' },
+  { area: 'Mapusa', region: 'North Goa' },
   { area: 'Porvorim', region: 'North Goa' },
-  { area: 'Siolim', region: 'North Goa' },
+  { area: 'Altinho', region: 'North Goa' },
   { area: 'Miramar', region: 'North Goa' },
-  { area: 'Panaji CBD', region: 'North Goa' },
-  { area: 'Dona Paula', region: 'North Goa' },
+  { area: 'Panaji', region: 'North Goa' },
   { area: 'Margao', region: 'South Goa' }
 ];
 

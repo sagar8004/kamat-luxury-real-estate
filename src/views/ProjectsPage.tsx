@@ -2,12 +2,12 @@
 
 import React, { useState, useMemo } from 'react';
 import { useRouter } from 'next/navigation';
-import { motion } from 'motion/react';
+import { motion, AnimatePresence } from 'motion/react';
 import { Search, Filter, Grid, List, MapPin, Building, Sparkles, CheckCircle2, ArrowRight } from 'lucide-react';
 import { PropertyItem, PropertyFilterState, ProjectStatus, PropertyCategory } from '../types/property';
 import { PROPERTIES, filterProperties, LOCATIONS_LIST, CATEGORIES_LIST, STATUS_LIST } from '../data/propertyService';
 import { ProjectCard } from '../components/ProjectCard';
-import { ScrollReveal, StaggerContainer, StaggerItem } from '../components/ScrollReveal';
+import { ScrollReveal } from '../components/ScrollReveal';
 import { useTourModal } from '../context/TourModalContext';
 
 interface ProjectsPageProps {
@@ -218,7 +218,11 @@ export const ProjectsPage: React.FC<ProjectsPageProps> = ({
 
         {/* Results Grid */}
         {filteredProperties.length === 0 ? (
-          <div className="text-center py-20 bg-white border border-[#e5e1da] p-10 space-y-4">
+          <motion.div
+            initial={{ opacity: 0, y: 15 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="text-center py-20 bg-white border border-[#e5e1da] p-10 space-y-4"
+          >
             <h3 className="font-display text-2xl text-[#1a1a1a]">No properties matched your criteria</h3>
             <p className="text-xs text-[#8c857d]">Try adjusting your search filters or browse all our ongoing projects.</p>
             <button
@@ -235,23 +239,32 @@ export const ProjectsPage: React.FC<ProjectsPageProps> = ({
                   viewMode: 'grid'
                 })
               }
-              className="px-6 py-2.5 bg-[#044F92] text-white text-xs font-semibold uppercase tracking-widest hover:bg-[#03396c] transition-colors"
+              className="px-6 py-2.5 bg-[#044F92] text-white text-xs font-semibold uppercase tracking-widest hover:bg-[#03396c] transition-colors cursor-pointer"
             >
               Reset Filters
             </button>
-          </div>
+          </motion.div>
         ) : (
-          <StaggerContainer staggerDelay={0.12} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {filteredProperties.map((property) => (
-              <StaggerItem key={property.id} variant="from-behind">
-                <ProjectCard
-                  property={property}
-                  onSelectProperty={handleSelect}
-                  onQuickBookTour={(p) => handleTour(p)}
-                />
-              </StaggerItem>
-            ))}
-          </StaggerContainer>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <AnimatePresence mode="popLayout">
+              {filteredProperties.map((property) => (
+                <motion.div
+                  key={property.id}
+                  layout
+                  initial={{ opacity: 0, scale: 0.95 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0, scale: 0.95 }}
+                  transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
+                >
+                  <ProjectCard
+                    property={property}
+                    onSelectProperty={handleSelect}
+                    onQuickBookTour={(p) => handleTour(p)}
+                  />
+                </motion.div>
+              ))}
+            </AnimatePresence>
+          </div>
         )}
       </div>
     </div>

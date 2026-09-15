@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import Link from 'next/link';
 import { ShieldCheck, ArrowUp } from 'lucide-react';
 import { useTourModal } from '../context/TourModalContext';
+import { PROPERTIES } from '@/data/propertyService';
 
 interface FooterProps {
   onNavigate?: (page: string, params?: { filterStatus?: string }) => void;
@@ -92,7 +93,7 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, onOpenTourModal }) =
               </li>
               <li>
                 <Link href="/projects" className="hover:text-white transition-colors">
-                  All 12 Developments
+                  All {PROPERTIES.length} Developments
                 </Link>
               </li>
               <li>
@@ -117,9 +118,9 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, onOpenTourModal }) =
           <div>
             <h5 className="font-semibold text-white uppercase tracking-widest text-[10px] mb-4">Prime Locations</h5>
             <ul className="space-y-2.5 text-blue-100/80">
-              <li><Link href="/locations" className="hover:text-white">Assagao & Vagator</Link></li>
+              <li><Link href="/locations" className="hover:text-white">Mapusa Market Town </Link></li>
               <li><Link href="/locations" className="hover:text-white">Miramar & Caranzalem</Link></li>
-              <li><Link href="/locations" className="hover:text-white">Candolim Beach Strip</Link></li>
+              <li><Link href="/locations" className="hover:text-white">Altinho & Panjim City</Link></li>
               <li><Link href="/locations" className="hover:text-white">Porvorim Gated Avenues</Link></li>
               <li><Link href="/locations" className="hover:text-white">Dona Paula Sea Cliffs</Link></li>
             </ul>

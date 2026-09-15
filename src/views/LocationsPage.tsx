@@ -42,40 +42,40 @@ export const LocationsPage: React.FC<LocationsPageProps> = ({
   };
   const enclaves = [
     {
-      name: 'Assagao & Vagator',
-      region: 'North Goa',
-      vibe: 'High-Fashion Dining & Heritage Forest Sylvan Serenity',
-      mopaAirport: '30 mins',
-      dabolimAirport: '60 mins',
-      nearby: ['Gunpowder', 'Subko Coffee', 'Thalassa', 'Vagator Beach'],
-      propertiesCount: PROPERTIES.filter((p) => p.location.area.includes('Assagao') || p.location.area.includes('Vagator')).length
-    },
-    {
-      name: 'Miramar & Panaji Capital',
-      region: 'Central Goa',
-      vibe: 'Promenade Sunsets, Yacht Clubs & High-Court Elite Quarter',
-      mopaAirport: '42 mins',
-      dabolimAirport: '35 mins',
-      nearby: ['Miramar Beach', 'Goa Marriott', 'Fontainhas Latin Quarter', 'Mandovi Marina'],
-      propertiesCount: PROPERTIES.filter((p) => p.location.area.includes('Miramar') || p.location.area.includes('Panaji') || p.location.area.includes('Caranzalem')).length
-    },
-    {
-      name: 'Candolim & Sinquerim Beach Strip',
-      region: 'North Goa',
-      vibe: 'Golden Sand Coastline, 5-Star Beach Resorts & Fine Dining',
-      mopaAirport: '40 mins',
-      dabolimAirport: '50 mins',
-      nearby: ['Taj Fort Aguada', 'Candolim Beach', 'LPK Waterfront', 'Bambolim Yacht'],
-      propertiesCount: PROPERTIES.filter((p) => p.location.area.includes('Candolim')).length
-    },
-    {
       name: 'Porvorim Prime Ridge',
-      region: 'Central Goa',
+      region: 'North Goa',
       vibe: 'Executive Hilltop Connectivity Between North & Central Goa',
-      mopaAirport: '35 mins',
-      dabolimAirport: '45 mins',
+      mopaAirport: '30-35 mins',
+      dabolimAirport: '`40-50 mins',
       nearby: ['Mall De Goa', 'Goa Secretariat', 'Panaji Bridge', 'Chorao Bird Sanctuary'],
       propertiesCount: PROPERTIES.filter((p) => p.location.area.includes('Porvorim')).length
+    },
+    {
+      name: 'Mapusa Commercial Capital',
+      region: 'North Goa',
+      vibe: 'Bustling Friday Market, Trade Hub & Authentic Local Energy',
+      mopaAirport: '25-35 mins',
+      dabolimAirport: '50-60 mins',
+      nearby: ['Friday Market', 'Our Lady of Miracles Church', 'Municipal Market', 'Chapora Fort'],
+      propertiesCount: PROPERTIES.filter((p) => p.location.area.includes('Mapusa')).length
+    },
+    {
+      name: 'Miramar Golden-Sand Shoreline',
+      region: 'North Goa',
+      vibe: 'Promenade Sunsets, Golden Sands & Capital Waterfront Living',
+      mopaAirport: '40-50 mins',
+      dabolimAirport: '30-40 mins',
+      nearby: ['Miramar Beach', 'Goa Marriott', 'Fontainhas Latin Quarter', 'Dona Paula Views'],
+      propertiesCount: PROPERTIES.filter((p) => p.location.area.includes('Miramar') || p.location.area.includes('Panaji')).length
+    },
+    {
+      name: 'Altinho & Panjim City',
+      region: 'North Goa',
+      vibe: 'Hilltop Elite Quarter, Latin Heritage & High-Court Capital Heart',
+      mopaAirport: '40-50 mins',
+      dabolimAirport: '30-40 mins',
+      nearby: ['Mandovi Riverfront', 'Our Lady of the Immaculate Conception', 'Mahalaxmi Temple'],
+      propertiesCount: PROPERTIES.filter((p) => p.location.area.includes('Altinho') || p.location.area.includes('Panaji')).length
     }
   ];
 

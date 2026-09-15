@@ -179,14 +179,14 @@ export const HomePage: React.FC<HomePageProps> = ({
                 onClick={() => navigate('projects')}
                 className="px-3 py-1 bg-[#f4f1ee] hover:bg-[#eef5fb] hover:text-[#044F92] text-[11px] font-medium transition-colors cursor-pointer"
               >
-                4 BHK Pool Villas in Assagao
+                4 BHK Villas in Porvorim
               </button>
               <button
                 type="button"
                 onClick={() => navigate('projects')}
                 className="px-3 py-1 bg-[#f4f1ee] hover:bg-[#eef5fb] hover:text-[#044F92] text-[11px] font-medium transition-colors cursor-pointer"
               >
-                Seafront Penthouses Miramar
+                Seafront Apartment Miramar
               </button>
               <button
                 type="button"
@@ -474,7 +474,7 @@ export const HomePage: React.FC<HomePageProps> = ({
               <ScrollReveal variant="from-behind" distance={30}>
                 <div className="relative aspect-[4/3] bg-white border border-[#cfe0ee] p-2 shadow-2xl overflow-hidden group">
                   <img
-                    src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=1200&q=80"
+                    src="/reception_desk.webp"
                     alt="Kamat Interior Architecture"
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
                   />
