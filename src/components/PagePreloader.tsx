@@ -1,45 +1,53 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 
 interface PagePreloaderProps {
-  /** Minimum duration in milliseconds to show the preloader (defaults to 4000ms / 4s) */
+  /** Minimum duration in milliseconds to show the preloader (defaults to 3500ms) */
   minDuration?: number;
   /** Optional callback fired when preloader finished fading out */
   onComplete?: () => void;
 }
 
 export const PagePreloader: React.FC<PagePreloaderProps> = ({
-  minDuration = 4000,
+  minDuration = 3500,
   onComplete,
 }) => {
   const [mounted, setMounted] = useState(false);
-  const [isVisible, setIsVisible] = useState(false);
+  const [isVisible, setIsVisible] = useState(true);
   const [progress, setProgress] = useState<number>(0);
+  const videoRef = useRef<HTMLVideoElement>(null);
 
   useEffect(() => {
     setMounted(true);
+    // Clear any legacy sessionStorage blocker so preloader loads properly
     try {
-      const hasLoaded = window.sessionStorage.getItem('kamat_preloader_shown');
-      if (hasLoaded === 'true') {
-        setIsVisible(false);
-        if (onComplete) onComplete();
-      } else {
-        setIsVisible(true);
-      }
+      window.sessionStorage.removeItem('kamat_preloader_shown');
     } catch {
-      setIsVisible(true);
+      // ignore
     }
-  }, [onComplete]);
+  }, []);
+
+  // Ensure video autoplays smoothly when mounted
+  useEffect(() => {
+    if (mounted && isVisible && videoRef.current) {
+      const playPromise = videoRef.current.play();
+      if (playPromise !== undefined) {
+        playPromise.catch(() => {
+          // Autoplay fallback handler
+        });
+      }
+    }
+  }, [mounted, isVisible]);
 
   useEffect(() => {
-    if (!isVisible) {
+    if (!mounted || !isVisible) {
       document.body.style.overflow = '';
       return;
     }
 
-    // Disable scroll only while preloader is active
+    // Disable scroll while preloader is active
     document.body.style.overflow = 'hidden';
 
     const startTime = Date.now();
@@ -61,12 +69,6 @@ export const PagePreloader: React.FC<PagePreloaderProps> = ({
 
     const timer = setTimeout(() => {
       setIsVisible(false);
-      try {
-        window.sessionStorage.setItem('kamat_preloader_shown', 'true');
-      } catch (e) {
-        // ignore
-      }
-      document.body.style.overflow = '';
     }, minDuration);
 
     return () => {
@@ -74,9 +76,9 @@ export const PagePreloader: React.FC<PagePreloaderProps> = ({
       cancelAnimationFrame(animationFrameId);
       document.body.style.overflow = '';
     };
-  }, [minDuration, isVisible]);
+  }, [mounted, isVisible, minDuration]);
 
-  if (!mounted || !isVisible) return null;
+  if (!mounted) return null;
 
   return (
     <AnimatePresence
@@ -93,7 +95,7 @@ export const PagePreloader: React.FC<PagePreloaderProps> = ({
             opacity: 0,
             transition: { duration: 0.8, ease: [0.22, 1, 0.36, 1] },
           }}
-          className="fixed inset-0 z-[99999] flex flex-col items-center justify-center bg-[#f2f2f2] text-slate-900 select-none overflow-hidden"
+          className="fixed inset-0 z-[999999] flex flex-col items-center justify-center bg-[#f2f2f2] text-slate-900 select-none overflow-hidden"
           role="status"
           aria-live="polite"
           aria-label="Loading Kamat Realty"
@@ -108,14 +110,21 @@ export const PagePreloader: React.FC<PagePreloaderProps> = ({
           >
             <div className="relative p-4 sm:p-6 flex items-center justify-center">
               <video
+                ref={videoRef}
                 autoPlay
                 loop
                 muted
                 playsInline
                 preload="auto"
+                poster="/kamat-logo.png"
                 className="w-64 sm:w-80 md:w-96 lg:w-[440px] h-auto max-h-[50vh] object-contain select-none pointer-events-none mix-blend-multiply"
               >
                 <source src="/kamat-animated-logo.webm" type="video/webm" />
+                <img
+                  src="/kamat-logo.png"
+                  alt="Kamat Realty"
+                  className="w-64 sm:w-80 md:w-96 lg:w-[440px] object-contain"
+                />
               </video>
             </div>
 
@@ -141,3 +150,5 @@ export const PagePreloader: React.FC<PagePreloaderProps> = ({
 };
 
 export default PagePreloader;
+
+
