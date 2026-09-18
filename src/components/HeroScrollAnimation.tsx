@@ -5,11 +5,11 @@ import { motion } from 'motion/react';
 import { ArrowRight, Compass, ChevronDown } from 'lucide-react';
 import { PropertyCategory } from '../types/property';
 
-const TOTAL_FRAMES = 192;
+const TOTAL_FRAMES = 720;
 
 const getFramePath = (index: number) => {
   const paddedIndex = String(index + 1).padStart(3, '0');
-  return `/drone-frames/frame_${paddedIndex}.webp`;
+  return `/promendence_frames/frame_${paddedIndex}.webp`;
 };
 
 interface HeroScrollAnimationProps {

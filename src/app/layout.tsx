@@ -67,6 +67,13 @@ export const metadata: Metadata = {
       '32 Years of Architectural Excellence in Goa. Discover ultra-luxury villas in Assagao, Anjuna, Candolim, and Panaji.',
     images: ['https://images.unsplash.com/photo-1613977257363-707ba9348227?q=80&w=1600&auto=format&fit=crop'],
   },
+  icons: {
+    icon: [
+      { url: '/favicon.png', sizes: 'any', type: 'image/png' },
+    ],
+    shortcut: '/favicon.png',
+    apple: '/favicon.png',
+  },
   alternates: {
     canonical: 'https://kamatrealty.com',
   },
@@ -128,6 +135,9 @@ export default function RootLayout({
   return (
     <html lang="en" className="scroll-smooth" data-scroll-behavior="smooth" suppressHydrationWarning>
       <head>
+        <link rel="icon" type="image/png" href="/favicon.png" />
+        <link rel="shortcut icon" type="image/png" href="/favicon.png" />
+        <link rel="apple-touch-icon" href="/favicon.png" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link

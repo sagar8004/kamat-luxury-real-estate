@@ -521,7 +521,103 @@ export const PropertyDetailPage: React.FC<PropertyDetailPageProps> = ({
             )}
           </div>
         </div>
+
+        {/* Brand Partners Section */}
+        <section className="pt-10 border-t border-[#e5e1da] space-y-8">
+          <div className="text-center space-y-3 max-w-3xl mx-auto">
+            <div className="inline-flex items-center gap-2 px-3 py-1 bg-[#f2f7fc] border border-[#cfe0ee] text-[#044F92] text-[10px] font-semibold uppercase tracking-widest">
+              <ShieldCheck className="w-3.5 h-3.5" />
+              <span>Trusted Building Collaborators</span>
+            </div>
+            <h2 className="font-display text-2xl sm:text-3xl lg:text-4xl text-[#1a1a1a] tracking-tight font-normal">
+              Strong Partnerships. Exceptional Spaces.
+            </h2>
+            <p className="text-xs sm:text-sm text-[#8c857d] font-light leading-relaxed">
+              Collaborating with trusted experts to create thoughtfully designed developments across Goa.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 sm:gap-6">
+            {[
+              {
+                name: 'Kohler',
+                category: 'Sanitaryware & Bath Fixtures',
+                logo: '/brand-logos/kohler.png',
+              },
+              {
+                name: 'Jaquar',
+                category: 'Premium Bath Fittings',
+                logo: '/brand-logos/jaquar.png',
+              },
+              {
+                name: 'Schindler',
+                category: 'Elevators & Mobility',
+                logo: '/brand-logos/schindler.png',
+              },
+              {
+                name: 'Kajaria',
+                category: 'Vitrified Tiles & Surfaces',
+                logo: '/brand-logos/kajaria.png',
+              },
+              {
+                name: 'Johnson',
+                category: 'Ceramics & Natural Finishes',
+                logo: '/brand-logos/johnson.png',
+              },
+              {
+                name: 'Somany',
+                category: 'Surfaces & Bathware',
+                logo: '/brand-logos/somany.png',
+              },
+              {
+                name: 'Anchor',
+                category: 'Electricals & Modular Switches',
+                logo: '/brand-logos/anchor.webp',
+              },
+              {
+                name: 'KEI',
+                category: 'Cables & Heavy Infrastructure',
+                logo: '/brand-logos/kei.png',
+              },
+            ].map((partner, index) => (
+              <div
+                key={index}
+                className="bg-white border border-[#e5e1da] p-6 flex flex-col items-center justify-between text-center transition-all duration-300 hover:border-[#044F92] hover:shadow-md group min-h-[140px]"
+              >
+                <div className="w-full flex-1 flex items-center justify-center p-2">
+                  <img
+                    src={partner.logo}
+                    alt={`${partner.name} logo`}
+                    className="max-h-12 w-auto object-contain transition-transform duration-300 group-hover:scale-105"
+                    loading="lazy"
+                  />
+                </div>
+                <div className="pt-2 border-t border-[#f4f1ee] w-full">
+                  <p className="text-[11px] font-semibold text-[#1a1a1a] tracking-wide">
+                    {partner.name}
+                  </p>
+                  <p className="text-[9px] text-[#8c857d] uppercase tracking-wider mt-0.5 truncate">
+                    {partner.category}
+                  </p>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          <div className="p-4 bg-[#f2f7fc] border border-[#cfe0ee] flex flex-col sm:flex-row items-center justify-between gap-3 text-center sm:text-left">
+            <div className="flex items-center gap-2.5">
+              <CheckCircle2 className="w-4 h-4 text-[#044F92] shrink-0" />
+              <p className="text-xs text-[#4a4540]">
+                Every Kamat Realty residence is crafted with 100% genuine, OEM-warranty backed materials and fixtures.
+              </p>
+            </div>
+            <span className="text-[10px] font-mono font-semibold uppercase tracking-wider text-[#044F92] shrink-0">
+              Zero Compromise Quality
+            </span>
+          </div>
+        </section>
       </div>
     </div>
   );
 };
+

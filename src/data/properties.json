@@ -6,8 +6,7 @@
     "tagline": "Premium 2 & 3 BHK Apartments, Just 500M from NH-66",
     "status": "ongoing",
     "category": [
-      "apartment",
-      "commercial"
+      "apartment"
     ],
     "location": {
       "area": "Porvorim",
@@ -155,7 +154,10 @@
     "title": "Kamat Prime",
     "tagline": "Premium Living in a Prime Location, Where Comfort Meets Convenience",
     "status": "completed",
-    "category": "apartment",
+    "category": [
+      "apartment",
+      "commercial"
+    ],
     "location": {
       "area": "Porvorim",
       "region": "North Goa",

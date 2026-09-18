@@ -130,7 +130,7 @@ export const HomePage: React.FC<HomePageProps> = ({
                     type="text"
                     value={searchKeyword}
                     onChange={(e) => setSearchKeyword(e.target.value)}
-                    placeholder="Assagao, Ocean Crest..."
+                    placeholder="Mapusa, Kamat Crest..."
                     className="w-full pl-10 pr-4 py-3 bg-[#fdfcfb] border border-[#d6d0c7] text-xs text-[#1a1a1a] placeholder-[#a39c94] focus:outline-none focus:border-[#044F92] focus:ring-1 focus:ring-[#044F92] transition-colors"
                   />
                 </div>
@@ -351,22 +351,27 @@ export const HomePage: React.FC<HomePageProps> = ({
 
       {/* Marquee Enclaves Banner with Smooth Slide-in */}
       <ScrollReveal variant="fade-up" threshold={0.1}>
-        <div className="bg-[#033463] text-white py-4 px-6 border-b border-[#044F92] overflow-hidden shadow-md">
-          <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4 text-xs uppercase tracking-[0.25em]">
-            <span className="text-blue-300 font-semibold flex items-center gap-2">
-              <Sparkles className="w-3.5 h-3.5 text-[#38bdf8] animate-spin" style={{ animationDuration: '6s' }} />
-              Prime Coastal Enclaves:
-            </span>
-            <div className="flex gap-4 sm:gap-8 md:gap-12 overflow-x-auto no-scrollbar font-light text-blue-100 text-[11px] sm:text-xs">
-              <span>Assagao Forest Edge</span>
-              <span>•</span>
-              <span>Miramar Seafront</span>
-              <span>•</span>
-              <span>Candolim Coast</span>
-              <span>•</span>
-              <span>Porvorim Ridge</span>
-              <span>•</span>
-              <span>Dona Paula Promontory</span>
+        <div className="bg-[#033463] text-white py-3.5 sm:py-4 px-4 sm:px-6 border-b border-[#044F92] overflow-hidden shadow-md">
+          <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-start md:items-center justify-between gap-3 md:gap-6 text-xs uppercase tracking-[0.25em]">
+            <div className="shrink-0 flex items-center gap-2 text-blue-300 font-semibold text-[11px] sm:text-xs">
+              <Sparkles className="w-3.5 h-3.5 text-[#38bdf8] animate-spin shrink-0" style={{ animationDuration: '6s' }} />
+              <span className="whitespace-nowrap">Prime Coastal Enclaves:</span>
+            </div>
+            <div className="relative w-full overflow-hidden [mask-image:linear-gradient(to_right,transparent,black_20px,black_calc(100%-20px),transparent)]">
+              <div className="animate-marquee-infinite flex items-center gap-6 sm:gap-10 font-light text-blue-100 text-[11px] sm:text-xs whitespace-nowrap">
+                {['Caranzalem Serene', 'Miramar Shoreline', 'Candolim Coast', 'Porvorim Ridge', 'Dona Paula Promontory'].map((item, idx) => (
+                  <React.Fragment key={`enc-1-${idx}`}>
+                    <span>{item}</span>
+                    <span className="text-[#38bdf8]/60 text-[10px]">•</span>
+                  </React.Fragment>
+                ))}
+                {['Caranzalem Serene', 'Miramar Shoreline', 'Candolim Coast', 'Porvorim Ridge', 'Dona Paula Promontory'].map((item, idx) => (
+                  <React.Fragment key={`enc-2-${idx}`}>
+                    <span>{item}</span>
+                    <span className="text-[#38bdf8]/60 text-[10px]">•</span>
+                  </React.Fragment>
+                ))}
+              </div>
             </div>
           </div>
         </div>
@@ -637,7 +642,7 @@ export const HomePage: React.FC<HomePageProps> = ({
                 Rajiv & Sunita Singhania
               </span>
               <span className="text-[11px] text-blue-200/70 font-light mt-0.5">
-                Homeowners at Kamat Grandeur, Assagao
+                Homeowners at Kamat Prime, Porvorim
               </span>
             </div>
           </ScrollReveal>

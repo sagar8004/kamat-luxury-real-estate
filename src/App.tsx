@@ -17,6 +17,7 @@ import { FinancePage } from './views/FinancePage';
 import { ContactPage } from './views/ContactPage';
 import { PropertyDetailPage } from './views/PropertyDetailPage';
 import { ExploreGoaPage } from './views/ExploreGoaPage';
+import { CommercialPage } from './views/CommercialPage';
 
 // Data & Types
 import { PROPERTIES } from './data/propertyService';
@@ -43,7 +44,7 @@ export default function App() {
         }
       }
 
-      if (['projects', 'ongoing', 'completed', 'locations', 'about', 'finance', 'contact', 'explore-goa'].includes(hash)) {
+      if (['projects', 'ongoing', 'completed', 'locations', 'about', 'finance', 'contact', 'explore-goa', 'commercial'].includes(hash)) {
         setCurrentPage(hash);
       } else {
         setCurrentPage('home');
@@ -175,6 +176,10 @@ export default function App() {
                 onNavigate={handleNavigate}
                 onOpenTourModal={() => handleOpenTourModal()}
               />
+            )}
+
+            {currentPage === 'commercial' && (
+              <CommercialPage />
             )}
 
             {currentPage === 'property-detail' && currentProperty && (
