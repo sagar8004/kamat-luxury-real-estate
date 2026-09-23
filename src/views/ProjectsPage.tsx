@@ -1,9 +1,10 @@
 'use client';
 
 import React, { useState, useMemo, useEffect } from 'react';
+import Link from 'next/link';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { motion, AnimatePresence } from 'motion/react';
-import { Search, Filter, Grid, List, MapPin, Building, Sparkles, CheckCircle2, ArrowRight } from 'lucide-react';
+import { Search, Filter, Grid, List, MapPin, Building, Building2, Sparkles, CheckCircle2, ArrowRight, ChevronRight } from 'lucide-react';
 import { PropertyItem, PropertyFilterState, ProjectStatus, PropertyCategory } from '../types/property';
 import { PROPERTIES, filterProperties, LOCATIONS_LIST, CATEGORIES_LIST, STATUS_LIST } from '../data/propertyService';
 import { ProjectCard } from '../components/ProjectCard';
@@ -248,6 +249,26 @@ export const ProjectsPage: React.FC<ProjectsPageProps> = ({
               </button>
             )}
           </div>
+        </div>
+
+        {/* Commercial Real Estate Dedicated Hub Prompt */}
+        <div className="bg-[#f2f7fc] border border-[#cfe0ee] p-5 sm:p-6 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 shadow-xs">
+          <div className="flex items-center gap-3.5">
+            <div className="w-10 h-10 rounded-none bg-[#044F92] text-white flex items-center justify-center shrink-0 shadow-xs">
+              <Building2 className="w-5 h-5 text-white" />
+            </div>
+            <div>
+              <p className="text-xs font-bold text-[#044F92] uppercase tracking-wider">Commercial Real Estate & Grade-A Offices</p>
+              <p className="text-xs text-[#4a4540] font-light">Explore corporate headquarters, boutique retail showrooms, and F&B spaces with 8–11% rental yield potential.</p>
+            </div>
+          </div>
+          <Link
+            href="/commercial"
+            className="px-5 py-2.5 bg-[#044F92] hover:bg-[#03396c] text-white text-xs font-semibold uppercase tracking-widest transition-colors shrink-0 flex items-center gap-1.5 shadow-2xs group cursor-pointer"
+          >
+            <span>Commercial Hub</span>
+            <ChevronRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-0.5" />
+          </Link>
         </div>
 
         {/* Results Grid */}

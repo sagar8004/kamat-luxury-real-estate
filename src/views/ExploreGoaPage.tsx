@@ -985,17 +985,23 @@ export const ExploreGoaPage: React.FC<ExploreGoaPageProps> = ({
 
           {/* INTERACTIVE SPLIT-SCREEN COMPARISON SLIDER */}
           <div className="relative w-full max-w-5xl mx-auto rounded-3xl overflow-hidden border border-[#cfe0ee] shadow-2xl bg-black aspect-[16/9] sm:aspect-[21/9]">
-            {/* Left Side: Delhi/Metro Smog Simulation */}
-            <div className="absolute inset-0 bg-[#3a352f] flex items-center justify-start p-8">
+            {/* Left Side: Delhi/Metro Smog Simulation (Clipped by Slider) */}
+            <div
+              className="absolute inset-0 overflow-hidden bg-[#3a352f]"
+              style={{ clipPath: `polygon(0 0, ${aqiSliderVal}% 0, ${aqiSliderVal}% 100%, 0 100%)` }}
+            >
               <img
                 src="https://images.unsplash.com/photo-1587474260584-136574528ed5?auto=format&fit=crop&w=1400&q=80"
                 alt="Dense Metropolitan City Smog"
-                className="absolute inset-0 w-full h-full object-cover filter blur-[1px] brightness-75 contrast-125 saturate-50"
+                className="absolute inset-0 w-full h-full object-cover filter blur-[1px] brightness-75 contrast-125 saturate-50 pointer-events-none"
               />
-              <div className="absolute inset-0 bg-amber-950/40" />
+              <div className="absolute inset-0 bg-gradient-to-t from-amber-950/85 via-amber-950/40 to-transparent" />
 
-              <div className="relative z-10 space-y-2 max-w-xs text-white">
-                <span className="px-3 py-1 bg-red-600/90 text-white text-[10px] font-bold uppercase tracking-wider rounded">
+              <div
+                className="absolute bottom-6 sm:bottom-8 left-6 sm:left-8 z-10 space-y-2 max-w-xs text-white transition-opacity duration-150"
+                style={{ opacity: aqiSliderVal < 25 ? Math.max(0, (aqiSliderVal - 10) / 15) : 1 }}
+              >
+                <span className="px-3 py-1 bg-red-600/90 text-white text-[10px] font-bold uppercase tracking-wider rounded shadow-md">
                   Major Metros (NCR / Mumbai / BLR)
                 </span>
                 <p className="font-mono text-3xl sm:text-4xl font-bold text-red-300">AQI 280+</p>
@@ -1011,12 +1017,15 @@ export const ExploreGoaPage: React.FC<ExploreGoaPageProps> = ({
               <img
                 src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1400&q=80"
                 alt="Goa Lush Maritime Coast and Green Canopy"
-                className="absolute inset-0 w-full h-full object-cover brightness-105"
+                className="absolute inset-0 w-full h-full object-cover brightness-105 pointer-events-none"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#02182c]/80 via-transparent to-transparent" />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#02182c]/85 via-transparent to-transparent" />
 
-              <div className="absolute bottom-8 right-8 z-10 space-y-2 max-w-xs text-right text-white">
-                <span className="px-3 py-1 bg-emerald-600/90 text-white text-[10px] font-bold uppercase tracking-wider rounded">
+              <div
+                className="absolute bottom-6 sm:bottom-8 right-6 sm:right-8 z-10 space-y-2 max-w-xs text-right text-white transition-opacity duration-150"
+                style={{ opacity: aqiSliderVal > 75 ? Math.max(0, (90 - aqiSliderVal) / 15) : 1 }}
+              >
+                <span className="px-3 py-1 bg-emerald-600/90 text-white text-[10px] font-bold uppercase tracking-wider rounded shadow-md">
                   Goa Coastal Enclave
                 </span>
                 <p className="font-mono text-3xl sm:text-4xl font-bold text-emerald-300">AQI 28 - 55</p>
@@ -1026,19 +1035,19 @@ export const ExploreGoaPage: React.FC<ExploreGoaPageProps> = ({
 
             {/* Slider Divider Bar */}
             <div
-              className="absolute top-0 bottom-0 w-1 bg-white shadow-[0_0_15px_rgba(255,255,255,0.8)] pointer-events-none z-20 flex items-center justify-center"
+              className="absolute top-0 bottom-0 w-1 bg-white shadow-[0_0_15px_rgba(255,255,255,0.9)] pointer-events-none z-20 flex items-center justify-center -translate-x-1/2"
               style={{ left: `${aqiSliderVal}%` }}
             >
-              <div className="w-10 h-10 rounded-full bg-white text-[#044F92] shadow-2xl flex items-center justify-center border-2 border-[#044F92]">
-                <Sliders className="w-5 h-5" />
+              <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-white text-[#044F92] shadow-2xl flex items-center justify-center border-2 border-[#044F92]">
+                <Sliders className="w-4 h-4 sm:w-5 sm:h-5" />
               </div>
             </div>
 
             {/* Range Input on Top */}
             <input
               type="range"
-              min="10"
-              max="90"
+              min="0"
+              max="100"
               value={aqiSliderVal}
               onChange={(e) => setAqiSliderVal(Number(e.target.value))}
               className="absolute inset-0 w-full h-full opacity-0 cursor-ew-resize z-30"

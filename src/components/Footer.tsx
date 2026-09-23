@@ -107,6 +107,12 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, onOpenTourModal }) =
                 </Link>
               </li>
               <li>
+                <Link href="/commercial" className="hover:text-white transition-colors flex items-center justify-between text-[#38bdf8] font-medium">
+                  <span>Commercial Real Estate</span>
+                  <span className="text-[9px] uppercase px-1.5 py-0.2 bg-[#044F92] text-white border border-[#38bdf8]/40">Grade-A</span>
+                </Link>
+              </li>
+              <li>
                 <Link href="/explore-goa" className="hover:text-white transition-colors text-[#38bdf8] font-semibold flex items-center gap-1.5">
                   <span>Explore Goa Experience</span>
                   <span className="text-[9px] bg-[#044F92] text-white px-1.5 py-0.2 rounded border border-[#38bdf8]/40">3D</span>

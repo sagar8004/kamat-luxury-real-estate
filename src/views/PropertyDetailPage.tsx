@@ -175,6 +175,18 @@ export const PropertyDetailPage: React.FC<PropertyDetailPageProps> = ({
                   <MessageSquare className="w-3.5 h-3.5 text-[#044F92]" />
                   <span>WhatsApp Concierge</span>
                 </a>
+
+                {/* Commercial Hub Link if property is commercial or mixed-use */}
+                {(Array.isArray(property.category) ? property.category.includes('commercial') : property.category === 'commercial') && (
+                  <Link
+                    href="/commercial"
+                    className="w-full py-2.5 bg-white border border-[#044F92]/40 hover:border-[#044F92] text-[#044F92] hover:bg-[#eef5fb] text-xs font-semibold uppercase tracking-widest transition-colors flex items-center justify-center gap-2 shadow-2xs group"
+                  >
+                    <Building className="w-3.5 h-3.5 text-[#044F92]" />
+                    <span>Commercial & Retail Suites</span>
+                    <ChevronRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-0.5" />
+                  </Link>
+                )}
               </div>
             </div>
           </div>
@@ -521,6 +533,34 @@ export const PropertyDetailPage: React.FC<PropertyDetailPageProps> = ({
             )}
           </div>
         </div>
+
+        {/* Commercial Real Estate Spotlight Banner */}
+        <section className="bg-gradient-to-br from-[#02203d] via-[#044F92] to-[#032b50] text-white p-8 sm:p-10 relative overflow-hidden shadow-lg border border-[#044F92]/60">
+          <div className="absolute top-0 right-0 w-96 h-96 bg-white/5 rounded-full blur-3xl pointer-events-none" />
+          <div className="relative z-10 flex flex-col lg:flex-row lg:items-center justify-between gap-8">
+            <div className="space-y-3 max-w-2xl">
+              <div className="inline-flex items-center gap-2 px-3 py-1 bg-white/10 backdrop-blur-md border border-white/20 text-[#38bdf8] text-[10px] font-semibold uppercase tracking-widest">
+                <Building className="w-3.5 h-3.5" />
+                <span>Commercial Real Estate • Grade-A Spaces</span>
+              </div>
+              <h3 className="font-display text-2xl sm:text-3xl text-white font-normal tracking-tight">
+                Explore High-Yield Commercial & Retail Portfolios
+              </h3>
+              <p className="text-xs sm:text-sm text-blue-100/85 font-light leading-relaxed">
+                Looking for corporate office suites, boutique retail showrooms, or prime F&B premises across Panaji, Porvorim & Miramar? Discover our Grade-A developments with 8–11% projected rental yields.
+              </p>
+            </div>
+            <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 shrink-0">
+              <Link
+                href="/commercial"
+                className="px-6 py-3.5 bg-white text-[#044F92] hover:bg-blue-50 text-xs font-semibold uppercase tracking-widest transition-all shadow-md flex items-center justify-center gap-2 group cursor-pointer text-center"
+              >
+                <span>Explore Commercial Portfolios</span>
+                <ChevronRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
+              </Link>
+            </div>
+          </div>
+        </section>
 
         {/* Brand Partners Section */}
         <section className="pt-10 border-t border-[#e5e1da] space-y-8">

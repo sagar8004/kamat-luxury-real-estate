@@ -4,14 +4,14 @@
     "slug": "kamat-crest-porvorim",
     "title": "Kamat Crest",
     "tagline": "Premium 2 & 3 BHK Apartments, Just 500M from NH-66",
-    "status": "ongoing",
+    "status": "completed",
     "category": [
       "apartment"
     ],
     "location": {
       "area": "Porvorim",
       "region": "North Goa",
-      "city": "Porvorim",
+      "city": "Bardez",
       "state": "Goa",
       "coordinates": {
         "lat": 15.538886841723391,
@@ -19,7 +19,7 @@
         "xPercent": 46,
         "yPercent": 36
       },
-      "address": "Ambirna, Succorro, 402521 Porvorim, Alto, Porvorim, Penha de Franc, Goa 403501"
+      "address": "Kamat Crest, Near Devashri Splendor, Porvorim, North Goa"
     },
     "price": {
       "displayPrice": "₹6.85 Cr Onwards",
@@ -33,9 +33,9 @@
         3
       ],
       "sqftRange": "2,200 - 3,850 Sq.Mts",
-      "totalUnits": 12,
-      "unitsAvailable": 4,
-      "possessionDate": "Q1 2027",
+      "totalUnits": 32,
+      "unitsAvailable": 0,
+      "possessionDate": "Q1 2026",
       "reraNumber": "PRGO09221720"
     },
     "heroImage": "/properties/kamat-crest/hero.webp",
@@ -45,27 +45,28 @@
       "/properties/kamat-crest/gallery-3.webp",
       "/properties/kamat-crest/gallery-4.webp"
     ],
-    "architecturalStyle": "Portuguese-Contemporary Tropical Biophilic",
-    "description": "Nestled in the idyllic foliage of Assagao, Kamat Grandeur represents an exclusive enclave of 12 bespoke forest-edge pool villas. Designed with double-height ceiling verandas, laterite stone masonry, floor-to-ceiling glass pavilions, and private infinity plunge pools, it blends the romantic heritage of Goa with ultra-contemporary sustainable luxury.",
+    "architecturalStyle": "Contemporary Architecture Built Around Smart Living",
+    "description": "Kamat Crest is a modern gated residential community spread across two low-rise blocks (3 floors) in Socorro, Porvorim. Built around the concept of Smart Living, the complex integrates 2 & 3 BHK apartments with a central landscaped green zone.The complex offers functional layouts with lifestyle amenities",
     "highlights": [
-      "Private Heated Saltwater Plunge Pool for every villa",
-      "Double-height living lounge with Burmese teakwood ceilings",
-      "Private landscaped courtyard garden with native flora",
-      "100% DG backup, EV fast charging and solar water heating",
-      "Fully serviced gated community with 24/7 concierge & chef-on-call"
+      "Smart Living Design: Low-density 2-tower layout surrounded by a perimeter ring road for uninterrupted walking and jogging.",
+      "Strategic Location: Positioned just 500 meters off the main NH66 Mumbai-Goa Highway.",
+      "Central Community Park: Features a landscaped garden hub designed for children's play and senior relaxation.",
+      "Fast Connectivity: Situated halfway between Panaji city center and North Goa's coastal belt."
     ],
     "amenities": [
-      "Private Swimming Pool",
-      "Clubhouse & Cigar Lounge",
-      "Private Elevator Provision",
-      "24/7 Security with CCTV",
-      "Smart Home Automation",
-      "Organic Herb Garden",
-      "Concierge & Butler Service",
-      "EV Charging Bays"
+      "Stilt Car Parking",
+      "Community Clubhouse",
+      "Fully Equipped Gym",
+      "Landscape Garden",
+      "Pickle Ball Court",
+      "EV Charging Facilities",
+      "24/7 CCTV Surveillance",
+      "Video Door Phone",
+      "Elevator",
+      "24*7 Security with watchman's cabin"
     ],
     "constructionStatus": {
-      "overallPercent": 68,
+      "overallPercent": 100,
       "milestones": [
         {
           "stage": "Land Acquisition & RERA Approvals",
@@ -126,24 +127,29 @@
     ],
     "landmarks": [
       {
-        "name": "Mopa (Manohar) Int'l Airport",
-        "distance": "32 mins",
-        "type": "airport"
+        "name": "NH66 Highway",
+        "distance": "1 mins",
+        "type": "highway"
       },
       {
-        "name": "Vagator & Anjuna Beaches",
-        "distance": "12 mins",
-        "type": "beach"
+        "name": "Mall De Goa",
+        "distance": "5 mins",
+        "type": "shopping"
       },
       {
-        "name": "Assagao Fine Dining Quarter",
+        "name": "Jesus Mary & Joseph Hospital",
         "distance": "3 mins",
-        "type": "dining"
+        "type": "hospital"
       },
       {
-        "name": "Panaji City",
-        "distance": "22 mins",
-        "type": "heritage"
+        "name": "Panaji City Cente",
+        "distance": "10 mins",
+        "type": "city"
+      },
+      {
+        "name": "Calangute / Baga Beach Belt",
+        "distance": "20 mins",
+        "type": "beach"
       }
     ],
     "featured": true
@@ -161,7 +167,7 @@
     "location": {
       "area": "Porvorim",
       "region": "North Goa",
-      "city": "Porvorim",
+      "city": "Bardez",
       "state": "Goa",
       "coordinates": {
         "lat": 15.530927309505483,
@@ -169,7 +175,7 @@
         "xPercent": 42,
         "yPercent": 48
       },
-      "address": "B.B Borkar Road, opposite Vijaya Bank, Penha de Franca, Porvorim, Aradi Socorro, Goa 403521"
+      "address": "Kamat Prime, BB Borkar Road, Porvorim, Penha de Franc, Goa 403521"
     },
     "price": {
       "displayPrice": "₹2.40 Cr Onwards",
@@ -177,17 +183,16 @@
       "unitPrice": "₹18,500 / Sq.Mts"
     },
     "specs": {
-      "bhk": "3, 4 BHK & Sky Penthouses",
+      "bhk": "2BHK Premium Apartments",
       "bedrooms": [
-        3,
-        4,
-        5
+        2,
+        3
       ],
       "sqftRange": "2,900 - 6,100 Sq.Mts",
-      "totalUnits": 24,
-      "unitsAvailable": 7,
-      "possessionDate": "Q4 2026",
-      "reraNumber": "PRGO04221760"
+      "totalUnits": 10,
+      "unitsAvailable": 0,
+      "possessionDate": "Q4 2018",
+      "reraNumber": "PRGO04180406"
     },
     "heroImage": "/properties/kamat-prime/hero.webp",
     "gallery": [
@@ -196,27 +201,22 @@
       "https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&fit=crop&w=1200&q=80",
       "https://images.unsplash.com/photo-1567496898669-ee935f5f647a?auto=format&fit=crop&w=1200&q=80"
     ],
-    "architecturalStyle": "Ultra-Modern Coastal Deck Architecture",
-    "description": "Rising gracefully on Miramar's prestigious shoreline, Kamat Ocean Crest offers uninterrupted 180-degree vistas of the sparkling Arabian Sea and Aguada Bay. Every apartment is engineered with expansive wraparound viewing decks, German acoustic glazing, private plunge jacuzzis in penthouses, and signature five-star lifestyle amenities.",
+    "architecturalStyle": "Functional Design for Urban Living",
+    "description": "Situated on B.B. Borkar Road in Penha de França, Kamat Prime is a boutique, low-density residential building. Offering well-ventilated 2 BHK apartments and Shops.The development focuses on low-maintenance, practical urban living with proximity to essential commercial corridors.",
     "highlights": [
-      "Unobstructed sea and sunset views from every living room and master suite",
-      "Rooftop Infinity Sky Pool overlooking Mandovi River confluence",
-      "Floor-to-ceiling Schuco German soundproof and heat-reflective glass",
-      "Direct private access to Miramar shoreline promenade",
-      "Dedicated 3-car basement parking per unit with private EV chargers"
+      "Boutique Low-Density Living: Compact complex offering high privacy and low long-term maintenance.",
+      "Prime Residential Hub: Located on B.B. Borkar Road, one of Porvorim's most established residential streets.",
+      "Functional Space Design: Well-lit 2 BHK floor plans with private balconies.",
+      "Ready Infrastructure: Fully equipped with covered parking, elevators, and backup power."
     ],
     "amenities": [
-      "Rooftop Sky Pool",
-      "Technogym Fitness Studio",
-      "Steam & Hydrotherapy Spa",
-      "Private Screening Room",
-      "Grand Double Height Lobby",
-      "Residents' Wine & Cigar Bar",
-      "24/7 Security & Concierge",
-      "Infinity Jacuzzi"
+      "Elevator Access",
+      "Covered Stilt Parking",
+      "Generator Power Backup for Common Areas",
+      "24x7 CCTV Surveillance"
     ],
     "constructionStatus": {
-      "overallPercent": 84,
+      "overallPercent": 100,
       "milestones": [
         {
           "stage": "Piling & Basement Retaining Walls",
@@ -232,26 +232,26 @@
         },
         {
           "stage": "Schuco Glazing & Exterior Façade",
-          "progressPercent": 90,
-          "status": "in-progress",
+          "progressPercent": 100,
+          "status": "completed",
           "targetDate": "Sep 2026"
         },
         {
           "stage": "Interior Marble Flooring & False Ceiling",
-          "progressPercent": 75,
-          "status": "in-progress",
+          "progressPercent": 100,
+          "status": "completed",
           "targetDate": "Oct 2026"
         },
         {
           "stage": "Sky Club, Rooftop Deck & Finishes",
-          "progressPercent": 60,
-          "status": "in-progress",
+          "progressPercent": 100,
+          "status": "completed",
           "targetDate": "Nov 2026"
         },
         {
           "stage": "Occupancy Certification & Handover",
-          "progressPercent": 0,
-          "status": "scheduled",
+          "progressPercent": 100,
+          "status": "completed",
           "targetDate": "Dec 2026"
         }
       ],
@@ -269,24 +269,24 @@
     ],
     "landmarks": [
       {
-        "name": "Miramar Beach Promenade",
-        "distance": "1 min",
-        "type": "beach"
+        "name": "Mall De Goa",
+        "distance": "3 mins",
+        "type": "shopping"
       },
       {
-        "name": "Panaji City Center & Fontainhas",
+        "name": "Mandovi Hospital",
         "distance": "5 mins",
-        "type": "heritage"
-      },
-      {
-        "name": "Manipal Hospital Goa",
-        "distance": "6 mins",
         "type": "hospital"
       },
       {
-        "name": "Dabolim Airport",
-        "distance": "35 mins",
-        "type": "airport"
+        "name": "B.B. Borkar Road Market",
+        "distance": "1 min",
+        "type": "market"
+      },
+      {
+        "name": "Panaji Entrance",
+        "distance": "3.5 Km",
+        "type": "heritage"
       }
     ],
     "featured": true
@@ -297,11 +297,14 @@
     "title": "Kamat Promenade",
     "tagline": "Premium 2 & 3 BHK Apartments in the Heart of Miramar",
     "status": "ongoing",
-    "category": "apartment",
+    "category": [
+      "apartment",
+      "commercial"
+    ],
     "location": {
       "area": "Miramar",
       "region": "North Goa",
-      "city": "Panaji",
+      "city": "Tiswadi",
       "state": "Goa",
       "coordinates": {
         "lat": 15.48655026145832,
@@ -309,7 +312,7 @@
         "xPercent": 48,
         "yPercent": 36
       },
-      "address": "Road, Lane 3, Lake View Colony, Miramar, Panaji, Goa 403001"
+      "address": "La Campala Colony, Miramar, Panaji, Goa 403001"
     },
     "price": {
       "displayPrice": "₹2.95 Cr Onwards",
@@ -323,9 +326,9 @@
         3
       ],
       "sqftRange": "1,200 - 2,450 Sq.Mts",
-      "totalUnits": 48,
-      "unitsAvailable": 14,
-      "possessionDate": "Q3 2027",
+      "totalUnits": 30,
+      "unitsAvailable": 0,
+      "possessionDate": "Q3 2028",
       "reraNumber": "PRGO10242344"
     },
     "heroImage": "/properties/kamat-promenade/hero.webp",
@@ -334,14 +337,13 @@
       "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1200&q=80",
       "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=1200&q=80"
     ],
-    "architecturalStyle": "Biophilic Contemporary Green Community",
-    "description": "Spread over 4.5 pristine landscaped acres in Porvorim, Kamat Palm Greens brings serenity to the urban hub of Goa. With IGBC Gold pre-certification, 75% open green spaces, rain mist gardens, solar micro-grid, and an Olympic-length lagoon pool.",
+    "architecturalStyle": "Contemporary modern urban residential architectural style",
+    "description": "Located in La Campala Colony, Miramar, Kamat Promenade It is a boutique mixed-use development combining modern coastal living with everyday urban convenience. The project houses 24 luxury apartments (12 units of 2 BHKs and 12 units of 3 BHK units) alongside 6 ground-floor retail storefronts, offering high-end finishing just moments away from Miramar Beach.",
     "highlights": [
-      "IGBC Gold Pre-Certified Eco Development with 70% open green space",
-      "Olympic-length temperature-controlled lagoon pool and kids pool",
-      "Central air-conditioned multi-level clubhouse with indoor squash & badminton",
-      "Strategic central location connecting North Goa beaches & Panaji in 10 mins",
-      "Zero-traffic vehicle-free podium with lush tropical jogging tracks"
+      "Prime Coastal Location: Situated in La Campala Colony, walking distance from Miramar Beach and iconic cafes.",
+      "Mixed-Use Convenience: Integrated ground-floor commercial shops bring daily essentials directly to your doorstep.",
+      "Optimized Layouts: Wide sliding doors and balconies allow for maximum natural light and coastal sea breezes.",
+      "High-Velocity Connectivity: Easy access to St. Inez and Tonca without navigating main-artery traffic jams."
     ],
     "amenities": [
       "24/7 security with a watchman's cabin",
@@ -413,43 +415,23 @@
     ],
     "landmarks": [
       {
-        "name": "Panjim Bus Stand",
-        "distance": "5 Km",
-        "type": "dining"
-      },
-      {
-        "name": "Mall De Goa Porvorim",
-        "distance": "10 Km",
-        "type": "dining"
-      },
-      {
-        "name": "Mopa International Airport",
-        "distance": "33 Km",
-        "type": "airport"
-      },
-      {
-        "name": "Dabolim Airport",
-        "distance": "29 Km",
-        "type": "airport"
-      },
-      {
-        "name": "Dona Paula Viewpoint",
-        "distance": "4.5 Km",
-        "type": "dining"
-      },
-      {
         "name": "Miramar Beach",
-        "distance": "1 Km",
+        "distance": "2 mins",
         "type": "beach"
       },
       {
-        "name": "Thivim Railway Station",
-        "distance": "26 Km",
-        "type": "highway"
+        "name": "Starbucks & Local Cafes",
+        "distance": "1 min",
+        "type": "dining"
       },
       {
-        "name": "GMC Hospital",
-        "distance": "9 Km",
+        "name": "Club Gaspar Dias",
+        "distance": "2 Km",
+        "type": "dining"
+      },
+      {
+        "name": "Manipal Hospital",
+        "distance": "3.5 Km",
         "type": "hospital"
       }
     ],
@@ -468,7 +450,7 @@
     "location": {
       "area": "Mapusa",
       "region": "North Goa",
-      "city": "Mapusa",
+      "city": "Bardez",
       "state": "Goa",
       "coordinates": {
         "lat": 15.596066692773963,
@@ -476,7 +458,7 @@
         "xPercent": 50,
         "yPercent": 45
       },
-      "address": "Road, Lane 3, Lake View Colony, Miramar, Panaji, Goa 403001"
+      "address": "Near Shree Datta Mandir, Dangui Colony, Dattawadi, Mapusa, Goa 403507"
     },
     "price": {
       "displayPrice": "₹1.75 Cr Onwards",
@@ -489,9 +471,9 @@
         0
       ],
       "sqftRange": "80 - 100.50 Sq.Mts",
-      "totalUnits": 36,
-      "unitsAvailable": 9,
-      "possessionDate": "Q2 2027",
+      "totalUnits": 16,
+      "unitsAvailable": 0,
+      "possessionDate": "Q4 2021",
       "reraNumber": "PRGO06180507"
     },
     "heroImage": "/properties/kamat-vista/hero.webp",
@@ -500,27 +482,23 @@
       "/properties/kamat-vista/gallery-2.webp",
       "https://images.unsplash.com/photo-1497215728101-856f4ea42174?auto=format&fit=crop&w=1200&q=80"
     ],
-    "architecturalStyle": "LEED Gold International Glass Curtain Façade",
-    "description": "Panaji's premier corporate address, Kamat Horizon Plaza sets a new benchmark for Grade-A workspace infrastructure in Goa. Featuring double-glazed heat-resistant curtain walls, central HVAC, high-speed destination elevators, and premium retail high-street showrooms on the ground and mezzanine levels.",
+    "architecturalStyle": "Contemporary urban residential and commercial architectural style",
+    "description": "Situated in the heart of Mapusa city. It is a modern residential and commercial complex. The development features 12 spacious 2 BHK apartments spread across a single 3-story building,alongside 4 double-height ground-floor commercial shops. Designed for urban convenience and low-density privacy, it offers smart floor plans, secure living, and effortless access to North Goa's commercial hubs.enery, secure premises, and quick access to major road arteries.",
     "highlights": [
-      "Prime EDC Patto commercial hub address next to Kadamba central terminus",
-      "LEED Gold certification with energy-efficient smart building management",
-      "100% full power back-up with dedicated dual transformers",
-      "Multi-tier automated basement parking for over 180 cars",
-      "Rooftop executive sky café and networking garden"
+      "Prime Mapusa Address: Centrally located in Mapusa with road accessibility for easy daily commuting.",
+      "Mixed-Use Convenience: Ground-floor commercial spaces provide space for banks, cafes, or supermarkets directly at your doorstep.",
+      "Smart Space Utilization: Efficiently planned 2 BHK floor layouts that optimize light, air, and functional space.",
+      "Boutique Low-Density Build: Just 12 apartments in a single tower, offering maximum quiet and low long-term maintenance."
     ],
     "amenities": [
-      "High-Speed Destination Elevators",
-      "LEED Gold Certified Building",
-      "24/7 Security & Turnstiles",
-      "Multi-Tier Automated Parking",
-      "Central HVAC & Air Filtration",
-      "Rooftop Executive Lounge",
-      "Fiber-Optic Telecom Grid",
-      "Fire Safety & Sprinklers"
+      "Four Ground-Floor Double-Height Commercial Shops",
+      "Elevator Access",
+      "24/7 CCTV Surveillance & Gated Entrance",
+      "Dedicated Covered & Open Parking",
+      "Common Area Power Backup"
     ],
     "constructionStatus": {
-      "overallPercent": 55,
+      "overallPercent": 100,
       "milestones": [
         {
           "stage": "Approvals & Diaphragm Walls",
@@ -575,27 +553,32 @@
     ],
     "landmarks": [
       {
-        "name": "Panaji Kadamba Bus Terminal",
-        "distance": "2 mins",
-        "type": "highway"
+        "name": "St. Xavier's High School / College",
+        "distance": "3 mins",
+        "type": "education"
       },
       {
-        "name": "Panaji High Court & Secretariat",
+        "name": "Mapusa Market & Bus Stand",
         "distance": "5 mins",
-        "type": "heritage"
+        "type": "bus stand"
       },
       {
-        "name": "Mandovi River Cruise Terminal",
-        "distance": "4 mins",
-        "type": "beach"
+        "name": "Galaxy / Vision Hospital",
+        "distance": "5 mins",
+        "type": "hospital"
       },
       {
-        "name": "Dabolim International Airport",
-        "distance": "28 mins",
+        "name": "Panaji City Cente",
+        "distance": "20 mins",
+        "type": "city"
+      },
+      {
+        "name": "Mopa (Manohar) Int'l Airport",
+        "distance": "25 mins",
         "type": "airport"
       }
     ],
-    "featured": false
+    "featured": true
   },
   {
     "id": "kamat-avenue-panjim",
@@ -608,7 +591,7 @@
     "location": {
       "area": "Altinho",
       "region": "North Goa",
-      "city": "Panaji",
+      "city": "Tiswadi",
       "state": "Goa",
       "coordinates": {
         "lat": 15.490627055758832,
@@ -629,9 +612,9 @@
         4
       ],
       "sqftRange": "120.75 - 122.71 Sq.Mts",
-      "totalUnits": 16,
-      "unitsAvailable": 1,
-      "possessionDate": "Delivered & Inhabited (2024)",
+      "totalUnits": 14,
+      "unitsAvailable": 0,
+      "possessionDate": "Delivered & Inhabited (2028)",
       "reraNumber": "PRGO10242313"
     },
     "heroImage": "/properties/kamat-avenue/hero.webp",
@@ -640,14 +623,13 @@
       "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=1200&q=80",
       "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=1200&q=80"
     ],
-    "architecturalStyle": "Mediterranean Goan Colonial Revival",
-    "description": "Successfully handed over on schedule in 2024, Kamat Boulevard represents one of North Goa's most celebrated completed communities. 16 bespoke Mediterranean villas featuring hand-cut Portuguese ceramic tiles, private heated pools, sunken garden seating, and 4-minute walk to Candolim's golden sand coast.",
+    "architecturalStyle": "Contemporary modern residential design",
+    "description": "Situated in the green, elevated neighborhood of Altinho in Panaji, Kamat Avenue is a premium residential development designed for upscale urban living. The project features spacious 4 BHK apartments and full-floor residences crafted with generous balconies, high natural ventilation, and refined specifications, delivering panoramic views of Goa’s capital city.",
     "highlights": [
-      "100% Completed, Handed Over & OC Received (2024)",
-      "4-minute stroll to pristine Candolim Beach & Aguada Fort",
-      "Private saltwater swimming pool and rooftop sun deck on each villa",
-      "Comprehensive estate maintenance managed by Kamat Hospitality Desk",
-      "Consistently yields 12-14% annual luxury vacation rental returns"
+      "Prestigious Hilltop Address: Located in Altinho, one of Panaji’s most exclusive residential zones.",
+      "Low-Density Privacy: Spaciously planned units offer quiet, private living above the city core.",
+      "High-Grade Craftsmanship: Features glazed vitrified flooring, solid teakwood entrance frames, and premium Kohler/Jaquar sanitaryware.",
+      "Smart Infrastructure: Equipped with stretcher-friendly elevators, full power backup, and dedicated EV charging stations."
     ],
     "amenities": [
       "24/7 security with a watchman's cabin",
@@ -669,44 +651,24 @@
     ],
     "landmarks": [
       {
-        "name": "Panjim Bus Stand",
-        "distance": "2.5 Km",
-        "type": "dining"
+        "name": "Sharada Mandir School",
+        "distance": "2 Km",
+        "type": "education"
       },
       {
-        "name": "Mall De Goa Porvorim",
-        "distance": "7 Km",
-        "type": "dining"
-      },
-      {
-        "name": "Mopa International Airport",
-        "distance": "33 Km",
-        "type": "airport"
-      },
-      {
-        "name": "Dabolim Airport",
-        "distance": "29 Km",
-        "type": "airport"
-      },
-      {
-        "name": "Dona Paula Viewpoint",
-        "distance": "7 Km",
-        "type": "dining"
+        "name": "Manipal Hospital / Health Centers",
+        "distance": "4 Km",
+        "type": "hospital"
       },
       {
         "name": "Miramar Beach",
-        "distance": "3.5 Km",
+        "distance": "10 Min",
         "type": "beach"
       },
       {
-        "name": "Thivim Railway Station",
-        "distance": "24 Km",
-        "type": "highway"
-      },
-      {
-        "name": "GMC Hospital",
-        "distance": "7.5 Km",
-        "type": "hospital"
+        "name": "Panaji City Center",
+        "distance": "10 min",
+        "type": "city"
       }
     ],
     "featured": true
@@ -716,13 +678,13 @@
     "slug": "signature-villa-60A-60B-porvorim",
     "title": "Signature Villa 60A & 60B",
     "tagline": "Exclusive villas offering refined living with close proximity to city conveniences and modern infrastructure.",
-    "status": "ongoing",
+    "status": "completed",
     "category": "villa",
-    "completionYear": 2022,
+    "completionYear": 2026,
     "location": {
       "area": "Porvorim",
       "region": "North Goa",
-      "city": "Porvorim",
+      "city": "Bardez",
       "state": "Goa",
       "coordinates": {
         "lat": 15.548206178441044,
@@ -730,7 +692,7 @@
         "xPercent": 65,
         "yPercent": 82
       },
-      "address": "O.S.I.D.C Complex, Alto Porvorim, Porvorim, Sangolda, Goa 403511"
+      "address": "Green Hill Society, Opp. Damian De Goa, Porvorim, Socorro, Goa"
     },
     "price": {
       "displayPrice": "₹1.95 Cr Onwards",
@@ -745,10 +707,10 @@
         4
       ],
       "sqftRange": "198 - 260 Sq.Mts",
-      "totalUnits": 32,
-      "unitsAvailable": 2,
-      "possessionDate": "Delivered (2029)",
-      "reraNumber": "PRGO03180512"
+      "totalUnits": 2,
+      "unitsAvailable": 1,
+      "possessionDate": "Delivered (2024)",
+      "reraNumber": "PRGO09221721"
     },
     "heroImage": "/properties/signature-villa-60/hero.webp",
     "gallery": [
@@ -756,23 +718,22 @@
       "/properties/signature-villa-60/gallery-2.webp",
       "/properties/signature-villa-60/gallery-3.webp"
     ],
-    "architecturalStyle": "Contemporary Indo-Portuguese Classical",
-    "description": "Kamat Serena redefines luxury residential living in Margao, South Goa's cultural capital. Set amidst serene coconut groves with quick connectivity to Colva and Benaulim beaches, this completed community features generous balconies, landscaped courtyards, and a vibrant residents' association.",
+    "architecturalStyle": "Contemporary Design for Comfort & Privacy.",
+    "description": "Signature Villa (60B) is a private luxury residence nestled in the serene, green neighborhood of Socorro. Designed for modern, high-end living, this independent villa seamlessly incorporates modern architectural lines, floor-to-ceiling glass, a private swimming pool, and landscaped gardens.",
     "highlights": [
-      "Delivered on time in 2022 with 100% occupancy",
-      "Located in the serene green enclave of Borda, Margao",
-      "10-minute drive to Colva & Benaulim white sand beaches",
-      "Solar powered common areas and rainwater harvesting",
-      "High appreciation value since project launch"
+      "Total Private Luxury: Independent plot featuring a private pool, sun deck, and personal garden space.",
+      "Susegad Atmosphere: Surrounded by orchards and open fields in a quiet, low-density neighborhood.",
+      "Bespoke Finishing: Fitted with Italian Marble & Vertified Flooring Kohler sanitaryware, teakwood doors, and Legrand modular fittings.",
+      "Estate Security: Gated compound with full power backup and 24/7 CCTV monitoring."
     ],
     "amenities": [
-      "Delivered & Occupied",
-      "Swimming Pool & Jacuzzi",
-      "Children's Play Area",
+      "Private Swimming Pool & Deck",
+      "Landscaped Private Lawn & Courtyard",
+      "Independent Covered Parking Bays",
       "Health Club & Gymnasium",
-      "Gated Community with CCTV",
-      "Landscaped Gardens",
-      "Power Backup for All Units"
+      "24/7 Security & CCTV Coverage",
+      "Power Backup Facilities",
+      "High-End Fittings & Designer Lighting Provisions"
     ],
     "floorPlans": [
       {
@@ -794,27 +755,27 @@
     ],
     "landmarks": [
       {
-        "name": "Colva & Benaulim Beach",
-        "distance": "10 mins",
-        "type": "beach"
+        "name": "Mall De Goa",
+        "distance": "6 mins",
+        "type": "shopping"
       },
       {
-        "name": "Margao Railway Junction",
-        "distance": "8 mins",
-        "type": "highway"
+        "name": "Chodankar / Manoshri Hospitals",
+        "distance": "5 mins",
+        "type": "hospital"
       },
       {
-        "name": "Dabolim International Airport",
+        "name": "Panaji City Center",
+        "distance": "12 mins",
+        "type": "city"
+      },
+      {
+        "name": "Anjuna / Vagator Beach",
         "distance": "22 mins",
-        "type": "airport"
-      },
-      {
-        "name": "Fatorda Stadium & Sports Complex",
-        "distance": "4 mins",
-        "type": "dining"
+        "type": "beach"
       }
     ],
-    "featured": false
+    "featured": true
   },
   {
     "id": "signature-villa-55A-5B-porvorim",

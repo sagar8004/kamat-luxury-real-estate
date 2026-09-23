@@ -214,7 +214,7 @@ export const CommercialPage: React.FC = () => {
                   </a>
 
                   <a
-                    href="#investor-enquiry"
+                    href="#calculate-roi"
                     className="px-8 py-4 bg-white/10 hover:bg-white/20 text-white border border-white/30 text-xs uppercase tracking-[0.2em] font-bold transition-all flex items-center gap-2 cursor-pointer shadow-lg backdrop-blur-sm"
                   >
                     <Calculator className="w-4 h-4 text-[#38bdf8]" />
@@ -380,161 +380,244 @@ export const CommercialPage: React.FC = () => {
           </div>
 
           {/* Featured Commercial Cards */}
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
 
             {/* Card 1: Kamat Prime Commercial - Porvorim */}
-            <div className="bg-white border border-[#e5e1da] shadow-md hover:shadow-2xl transition-all flex flex-col justify-between group overflow-hidden">
-              <div>
-                <div className="relative aspect-[16/9] overflow-hidden bg-[#02182c]">
-                  <img
-                    src="/properties/kamat-prime/hero.webp"
-                    alt="Kamat Prime Porvorim Commercial Units"
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
-                  />
-                  <div className="absolute top-4 left-4 bg-[#044F92] text-white px-3 py-1 text-[9px] uppercase tracking-widest font-bold shadow-md">
-                    Ongoing • Possession Q1 2027
-                  </div>
-                  <div className="absolute top-4 right-4 bg-black/60 backdrop-blur-md text-[#38bdf8] border border-white/20 px-3 py-1 text-[9px] uppercase tracking-widest font-semibold">
-                    NH-66 Porvorim Corridor
-                  </div>
-                </div>
-
-                <div className="p-8 space-y-6">
-                  <div>
-                    <div className="flex items-center gap-2 text-xs text-[#044F92] font-semibold uppercase tracking-wider mb-1">
-                      <MapPin className="w-3.5 h-3.5" />
-                      <span>Porvorim, North Goa (500m from NH-66)</span>
-                    </div>
-                    <h3 className="font-display text-2xl text-[#1a1a1a] font-normal">
-                      Kamat Prime — Ground-Floor High-Street Retail
-                    </h3>
-                    <p className="text-xs text-[#5a554e] font-light mt-2 leading-relaxed">
-                      Strategically located on the thriving Succorro-Porvorim link road just off NH-66. Designed with double-height glass frontage, demarcated customer parking, and high captive footfall from 12+ upper luxury residences.
-                    </p>
-                  </div>
-
-                  <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 pt-4 border-t border-[#f0ece5] text-xs">
-                    <div className="p-3 bg-[#fdfcfb] border border-[#e5e1da]">
-                      <p className="text-[#8c857d] text-[10px] uppercase tracking-wider">Unit Sizes</p>
-                      <p className="font-semibold text-[#1a1a1a] mt-0.5">450 - 1,850 Sq.Ft</p>
-                    </div>
-                    <div className="p-3 bg-[#fdfcfb] border border-[#e5e1da]">
-                      <p className="text-[#8c857d] text-[10px] uppercase tracking-wider">Clear Height</p>
-                      <p className="font-semibold text-[#1a1a1a] mt-0.5">3.8 Meters</p>
-                    </div>
-                    <div className="p-3 bg-[#fdfcfb] border border-[#e5e1da]">
-                      <p className="text-[#8c857d] text-[10px] uppercase tracking-wider">Ideal For</p>
-                      <p className="font-semibold text-[#044F92] mt-0.5">Retail, Pharmacy, Cafe</p>
-                    </div>
-                  </div>
-
-                  <div className="space-y-2 pt-2 text-xs text-[#4a4540]">
-                    <div className="flex items-center gap-2">
-                      <CheckCircle2 className="w-4 h-4 text-[#044F92]" />
-                      <span>100% DG power backup for critical refrigeration and retail POS</span>
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <CheckCircle2 className="w-4 h-4 text-[#044F92]" />
-                      <span>Wide 30ft clear road frontage with dedicated visitor parking bays</span>
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <CheckCircle2 className="w-4 h-4 text-[#044F92]" />
-                      <span>RERA Registered: PRGO04221760 • Approved by all major banks</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <div className="p-8 pt-0 flex items-center justify-between border-t border-[#f0ece5] mt-6">
+            {(selectedUnitCategory === 'all' || selectedUnitCategory === 'retail') && (
+              <div className="bg-white border border-[#e5e1da] shadow-md hover:shadow-2xl transition-all flex flex-col justify-between group overflow-hidden h-full">
                 <div>
-                  <p className="text-[10px] uppercase tracking-widest text-[#8c857d]">Investment Starting</p>
-                  <p className="text-2xl font-display font-semibold text-[#044F92]">₹85 Lakhs*</p>
+                  <div className="relative aspect-[16/10] overflow-hidden bg-[#02182c]">
+                    <img
+                      src="/properties/kamat-prime/hero.webp"
+                      alt="Kamat Prime Porvorim Commercial Units"
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                    />
+                    <div className="absolute top-3 left-3 bg-emerald-700 text-white px-2.5 py-1 text-[9px] uppercase tracking-widest font-bold shadow-md">
+                      Delivered Landmark
+                    </div>
+                    <div className="absolute top-3 right-3 bg-black/60 backdrop-blur-md text-[#38bdf8] border border-white/20 px-2.5 py-1 text-[9px] uppercase tracking-widest font-semibold">
+                      NH-66 Porvorim Corridor
+                    </div>
+                  </div>
+
+                  <div className="p-6 sm:p-7 space-y-5">
+                    <div>
+                      <div className="flex items-center gap-1.5 text-xs text-[#044F92] font-semibold uppercase tracking-wider mb-1.5">
+                        <MapPin className="w-3.5 h-3.5 shrink-0" />
+                        <span className="truncate">Porvorim, North Goa</span>
+                      </div>
+                      <h3 className="font-display text-xl sm:text-2xl text-[#1a1a1a] font-normal leading-snug">
+                        Kamat Prime — High-Street Retail & Showrooms
+                      </h3>
+                      <p className="text-xs text-[#5a554e] font-light mt-2 leading-relaxed line-clamp-3">
+                        Strategically located on the thriving Succorro-Porvorim link road just off NH-66. Designed with double-height glass frontage, demarcated customer parking, and high captive footfall from upper residences.
+                      </p>
+                    </div>
+
+                    <div className="grid grid-cols-3 gap-2 pt-3 border-t border-[#f0ece5] text-xs">
+                      <div className="p-2.5 bg-[#fdfcfb] border border-[#e5e1da]">
+                        <p className="text-[#8c857d] text-[9px] uppercase tracking-wider">Unit Sizes</p>
+                        <p className="font-semibold text-[#1a1a1a] text-xs mt-0.5">450 - 1,850 Sq.Ft</p>
+                      </div>
+                      <div className="p-2.5 bg-[#fdfcfb] border border-[#e5e1da]">
+                        <p className="text-[#8c857d] text-[9px] uppercase tracking-wider">Clear Height</p>
+                        <p className="font-semibold text-[#1a1a1a] text-xs mt-0.5">3.8 Meters</p>
+                      </div>
+                      <div className="p-2.5 bg-[#fdfcfb] border border-[#e5e1da]">
+                        <p className="text-[#8c857d] text-[9px] uppercase tracking-wider">Ideal For</p>
+                        <p className="font-semibold text-[#044F92] text-xs mt-0.5 truncate">Retail, Pharmacy</p>
+                      </div>
+                    </div>
+
+                    <div className="space-y-2 pt-1 text-xs text-[#4a4540]">
+                      <div className="flex items-start gap-2">
+                        <CheckCircle2 className="w-3.5 h-3.5 text-[#044F92] shrink-0 mt-0.5" />
+                        <span className="leading-tight">100% DG backup for critical refrigeration & retail POS</span>
+                      </div>
+                      <div className="flex items-start gap-2">
+                        <CheckCircle2 className="w-3.5 h-3.5 text-[#044F92] shrink-0 mt-0.5" />
+                        <span className="leading-tight">Wide 30ft clear road frontage with visitor parking</span>
+                      </div>
+                      <div className="flex items-start gap-2">
+                        <CheckCircle2 className="w-3.5 h-3.5 text-[#044F92] shrink-0 mt-0.5" />
+                        <span className="leading-tight">RERA Registered: PRGO04221760 • Title Cleared</span>
+                      </div>
+                    </div>
+                  </div>
                 </div>
-                <a
-                  href="#investor-enquiry"
-                  className="px-6 py-3 bg-[#044F92] hover:bg-[#03396c] text-white text-xs uppercase tracking-wider font-bold transition-all shadow-md cursor-pointer"
-                >
-                  Request Unit Floor Plan
-                </a>
+
+                <div className="p-6 sm:p-7 pt-0 flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-t border-[#f0ece5] mt-4">
+                  <div>
+                    <p className="text-[9px] uppercase tracking-widest text-[#8c857d]">Investment Starting</p>
+                    <p className="text-xl font-display font-semibold text-[#044F92]">Sold Out</p>
+                  </div>
+                  <a
+                    href="#investor-enquiry"
+                    className="w-full sm:w-auto text-center px-4 py-2.5 bg-[#044F92] hover:bg-[#03396c] text-white text-[11px] uppercase tracking-wider font-bold transition-all shadow-md cursor-pointer"
+                  >
+                    Check Future Openings
+                  </a>
+                </div>
               </div>
-            </div>
+            )}
 
             {/* Card 2: Kamat Vista Commercial - Mapusa */}
-            <div className="bg-white border border-[#e5e1da] shadow-md hover:shadow-2xl transition-all flex flex-col justify-between group overflow-hidden">
-              <div>
-                <div className="relative aspect-[16/9] overflow-hidden bg-[#02182c]">
-                  <img
-                    src="/properties/kamat-vista/hero.webp"
-                    alt="Kamat Vista Mapusa Commercial Suites"
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
-                  />
-                  <div className="absolute top-4 left-4 bg-emerald-700 text-white px-3 py-1 text-[9px] uppercase tracking-widest font-bold shadow-md">
-                    Delivered Landmark • Ready Fitout
-                  </div>
-                  <div className="absolute top-4 right-4 bg-black/60 backdrop-blur-md text-[#38bdf8] border border-white/20 px-3 py-1 text-[9px] uppercase tracking-widest font-semibold">
-                    Mapusa Commercial Hub
-                  </div>
-                </div>
-
-                <div className="p-8 space-y-6">
-                  <div>
-                    <div className="flex items-center gap-2 text-xs text-[#044F92] font-semibold uppercase tracking-wider mb-1">
-                      <MapPin className="w-3.5 h-3.5" />
-                      <span>Mapusa Central Business District, North Goa</span>
-                    </div>
-                    <h3 className="font-display text-2xl text-[#1a1a1a] font-normal">
-                      Kamat Vista — Bespoke Corporate Suites & Retail
-                    </h3>
-                    <p className="text-xs text-[#5a554e] font-light mt-2 leading-relaxed">
-                      Situated in the bustling heart of Mapusa market town. Outstanding accessibility for corporate law firms, financial institutions, chartered accountants, diagnostic centers, and luxury retail brands.
-                    </p>
-                  </div>
-
-                  <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 pt-4 border-t border-[#f0ece5] text-xs">
-                    <div className="p-3 bg-[#fdfcfb] border border-[#e5e1da]">
-                      <p className="text-[#8c857d] text-[10px] uppercase tracking-wider">Unit Sizes</p>
-                      <p className="font-semibold text-[#1a1a1a] mt-0.5">80 - 100.5 Sq.Mts</p>
-                    </div>
-                    <div className="p-3 bg-[#fdfcfb] border border-[#e5e1da]">
-                      <p className="text-[#8c857d] text-[10px] uppercase tracking-wider">Occupancy</p>
-                      <p className="font-semibold text-emerald-700 mt-0.5">Ready to Occupy</p>
-                    </div>
-                    <div className="p-3 bg-[#fdfcfb] border border-[#e5e1da]">
-                      <p className="text-[#8c857d] text-[10px] uppercase tracking-wider">Ideal For</p>
-                      <p className="font-semibold text-[#044F92] mt-0.5">Offices, Labs, Clinics</p>
-                    </div>
-                  </div>
-
-                  <div className="space-y-2 pt-2 text-xs text-[#4a4540]">
-                    <div className="flex items-center gap-2">
-                      <CheckCircle2 className="w-4 h-4 text-[#044F92]" />
-                      <span>Ready high-speed lift access and modern glass curtain facade</span>
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <CheckCircle2 className="w-4 h-4 text-[#044F92]" />
-                      <span>Walkable to Mapusa Municipal Market and Kadamba transport station</span>
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <CheckCircle2 className="w-4 h-4 text-[#044F92]" />
-                      <span>RERA Registered: PRGO06180507 • 100% legal title clearance</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <div className="p-8 pt-0 flex items-center justify-between border-t border-[#f0ece5] mt-6">
+            {(selectedUnitCategory === 'all' || selectedUnitCategory === 'office') && (
+              <div className="bg-white border border-[#e5e1da] shadow-md hover:shadow-2xl transition-all flex flex-col justify-between group overflow-hidden h-full">
                 <div>
-                  <p className="text-[10px] uppercase tracking-widest text-[#8c857d]">Investment Starting</p>
-                  <p className="text-2xl font-display font-semibold text-[#044F92]">₹1.20 Cr*</p>
+                  <div className="relative aspect-[16/10] overflow-hidden bg-[#02182c]">
+                    <img
+                      src="/properties/kamat-vista/hero.webp"
+                      alt="Kamat Vista Mapusa Commercial Suites"
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                    />
+                    <div className="absolute top-3 left-3 bg-emerald-700 text-white px-2.5 py-1 text-[9px] uppercase tracking-widest font-bold shadow-md">
+                      Delivered Landmark
+                    </div>
+                    <div className="absolute top-3 right-3 bg-black/60 backdrop-blur-md text-[#38bdf8] border border-white/20 px-2.5 py-1 text-[9px] uppercase tracking-widest font-semibold">
+                      Mapusa Commercial Hub
+                    </div>
+                  </div>
+
+                  <div className="p-6 sm:p-7 space-y-5">
+                    <div>
+                      <div className="flex items-center gap-1.5 text-xs text-[#044F92] font-semibold uppercase tracking-wider mb-1.5">
+                        <MapPin className="w-3.5 h-3.5 shrink-0" />
+                        <span className="truncate">Mapusa , North Goa</span>
+                      </div>
+                      <h3 className="font-display text-xl sm:text-2xl text-[#1a1a1a] font-normal leading-snug">
+                        Kamat Vista — Corporate Suites & Retail
+                      </h3>
+                      <p className="text-xs text-[#5a554e] font-light mt-2 leading-relaxed line-clamp-3">
+                        Situated in the bustling heart of Mapusa market town. Outstanding accessibility for corporate law firms, financial institutions, chartered accountants, diagnostic centers, and luxury retail.
+                      </p>
+                    </div>
+
+                    <div className="grid grid-cols-3 gap-2 pt-3 border-t border-[#f0ece5] text-xs">
+                      <div className="p-2.5 bg-[#fdfcfb] border border-[#e5e1da]">
+                        <p className="text-[#8c857d] text-[9px] uppercase tracking-wider">Unit Sizes</p>
+                        <p className="font-semibold text-[#1a1a1a] text-xs mt-0.5">80 - 100.5 Sq.Mts</p>
+                      </div>
+                      <div className="p-2.5 bg-[#fdfcfb] border border-[#e5e1da]">
+                        <p className="text-[#8c857d] text-[9px] uppercase tracking-wider">Occupancy</p>
+                        <p className="font-semibold text-emerald-700 text-xs mt-0.5">Ready to Occupy</p>
+                      </div>
+                      <div className="p-2.5 bg-[#fdfcfb] border border-[#e5e1da]">
+                        <p className="text-[#8c857d] text-[9px] uppercase tracking-wider">Ideal For</p>
+                        <p className="font-semibold text-[#044F92] text-xs mt-0.5 truncate">Offices, Clinics</p>
+                      </div>
+                    </div>
+
+                    <div className="space-y-2 pt-1 text-xs text-[#4a4540]">
+                      <div className="flex items-start gap-2">
+                        <CheckCircle2 className="w-3.5 h-3.5 text-[#044F92] shrink-0 mt-0.5" />
+                        <span className="leading-tight">Ready high-speed lift & modern glass curtain facade</span>
+                      </div>
+                      <div className="flex items-start gap-2">
+                        <CheckCircle2 className="w-3.5 h-3.5 text-[#044F92] shrink-0 mt-0.5" />
+                        <span className="leading-tight">Walkable to Mapusa Municipal Market & Bus Terminal</span>
+                      </div>
+                      <div className="flex items-start gap-2">
+                        <CheckCircle2 className="w-3.5 h-3.5 text-[#044F92] shrink-0 mt-0.5" />
+                        <span className="leading-tight">RERA Registered: PRGO06180507 • 100% Legal Title</span>
+                      </div>
+                    </div>
+                  </div>
                 </div>
-                <a
-                  href="#investor-enquiry"
-                  className="px-6 py-3 bg-[#044F92] hover:bg-[#03396c] text-white text-xs uppercase tracking-wider font-bold transition-all shadow-md cursor-pointer"
-                >
-                  Schedule Site Walkthrough
-                </a>
+
+                <div className="p-6 sm:p-7 pt-0 flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-t border-[#f0ece5] mt-4">
+                  <div>
+                    <p className="text-[9px] uppercase tracking-widest text-[#8c857d]">Investment Starting</p>
+                    <p className="text-xl font-display font-semibold text-[#044F92]">Sold Out</p>
+                  </div>
+                  <a
+                    href="#investor-enquiry"
+                    className="w-full sm:w-auto text-center px-4 py-2.5 bg-[#044F92] hover:bg-[#03396c] text-white text-[11px] uppercase tracking-wider font-bold transition-all shadow-md cursor-pointer"
+                  >
+                    Check Future Openings
+                  </a>
+                </div>
               </div>
-            </div>
+            )}
+
+            {/* Card 3: Kamat Promenade Commercial - Miramar */}
+            {(selectedUnitCategory === 'all' || selectedUnitCategory === 'retail') && (
+              <div className="bg-white border border-[#e5e1da] shadow-md hover:shadow-2xl transition-all flex flex-col justify-between group overflow-hidden h-full">
+                <div>
+                  <div className="relative aspect-[16/10] overflow-hidden bg-[#02182c]">
+                    <img
+                      src="/properties/kamat-promenade/hero.webp"
+                      alt="Kamat Promenade Miramar Commercial Storefronts"
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                    />
+                    <div className="absolute top-3 left-3 bg-[#044F92] text-white px-2.5 py-1 text-[9px] uppercase tracking-widest font-bold shadow-md">
+                      Ongoing • Possession Q3 2028
+                    </div>
+                    <div className="absolute top-3 right-3 bg-black/60 backdrop-blur-md text-[#38bdf8] border border-white/20 px-2.5 py-1 text-[9px] uppercase tracking-widest font-semibold">
+                      Miramar Coastal Hub
+                    </div>
+                  </div>
+
+                  <div className="p-6 sm:p-7 space-y-5">
+                    <div>
+                      <div className="flex items-center gap-1.5 text-xs text-[#044F92] font-semibold uppercase tracking-wider mb-1.5">
+                        <MapPin className="w-3.5 h-3.5 shrink-0" />
+                        <span className="truncate">Miramar, Panaji</span>
+                      </div>
+                      <h3 className="font-display text-xl sm:text-2xl text-[#1a1a1a] font-normal leading-snug">
+                        Kamat Promenade — Luxury Retail Storefronts
+                      </h3>
+                      <p className="text-xs text-[#5a554e] font-light mt-2 leading-relaxed line-clamp-3">
+                        Located in the prestigious La Campala Colony of Miramar, moments from the beach. Features 6 exclusive ground-floor retail storefronts offering high visibility, wide pedestrian frontage, and captive elite clientele.
+                      </p>
+                    </div>
+
+                    <div className="grid grid-cols-3 gap-2 pt-3 border-t border-[#f0ece5] text-xs">
+                      <div className="p-2.5 bg-[#fdfcfb] border border-[#e5e1da]">
+                        <p className="text-[#8c857d] text-[9px] uppercase tracking-wider">Unit Sizes</p>
+                        <p className="font-semibold text-[#1a1a1a] text-xs mt-0.5">350 - 1,200 Sq.Ft</p>
+                      </div>
+                      <div className="p-2.5 bg-[#fdfcfb] border border-[#e5e1da]">
+                        <p className="text-[#8c857d] text-[9px] uppercase tracking-wider">Frontage</p>
+                        <p className="font-semibold text-[#1a1a1a] text-xs mt-0.5">Wide Glazed</p>
+                      </div>
+                      <div className="p-2.5 bg-[#fdfcfb] border border-[#e5e1da]">
+                        <p className="text-[#8c857d] text-[9px] uppercase tracking-wider">Ideal For</p>
+                        <p className="font-semibold text-[#044F92] text-xs mt-0.5 truncate">Boutiques, Cafes</p>
+                      </div>
+                    </div>
+
+                    <div className="space-y-2 pt-1 text-xs text-[#4a4540]">
+                      <div className="flex items-start gap-2">
+                        <CheckCircle2 className="w-3.5 h-3.5 text-[#044F92] shrink-0 mt-0.5" />
+                        <span className="leading-tight">Prime coastal footfall in affluent Miramar residential belt</span>
+                      </div>
+                      <div className="flex items-start gap-2">
+                        <CheckCircle2 className="w-3.5 h-3.5 text-[#044F92] shrink-0 mt-0.5" />
+                        <span className="leading-tight">Dedicated customer parking with smooth vehicle access</span>
+                      </div>
+                      <div className="flex items-start gap-2">
+                        <CheckCircle2 className="w-3.5 h-3.5 text-[#044F92] shrink-0 mt-0.5" />
+                        <span className="leading-tight">RERA Registered: PRGO10242344 • 100% Legal Title</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="p-6 sm:p-7 pt-0 flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-t border-[#f0ece5] mt-4">
+                  <div>
+                    <p className="text-[9px] uppercase tracking-widest text-[#8c857d]">Investment Starting</p>
+                    <p className="text-xl font-display font-semibold text-[#044F92]">Sold Out</p>
+                  </div>
+                  <a
+                    href="#investor-enquiry"
+                    className="w-full sm:w-auto text-center px-4 py-2.5 bg-[#044F92] hover:bg-[#03396c] text-white text-[11px] uppercase tracking-wider font-bold transition-all shadow-md cursor-pointer"
+                  >
+                    Check Future Openings
+                  </a>
+                </div>
+              </div>
+            )}
 
           </div>
         </div>
@@ -589,7 +672,7 @@ export const CommercialPage: React.FC = () => {
       {/* ========================================================================= */}
       {/* 5. INTERACTIVE COMMERCIAL ROI & YIELD CALCULATOR */}
       {/* ========================================================================= */}
-      <section className="py-20 bg-[#02182c] text-white border-y border-[#03396c]">
+      <section id="calculate-roi" className="py-20 bg-[#02182c] text-white border-y border-[#03396c]">
         <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-10">
 
           <div className="text-center max-w-3xl mx-auto mb-16 space-y-3">

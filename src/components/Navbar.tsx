@@ -1,8 +1,9 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
+import { motion, AnimatePresence } from 'motion/react';
 import { Phone, Menu, X, ChevronRight } from 'lucide-react';
 import { useTourModal } from '../context/TourModalContext';
 import { PROPERTIES } from '@/data/propertyService';
@@ -26,6 +27,32 @@ export const Navbar: React.FC<NavbarProps> = ({
   const [isPastHero, setIsPastHero] = useState(pathname !== '/');
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [projectsDropdown, setProjectsDropdown] = useState(false);
+  const dropdownTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+
+  const handleDropdownMouseEnter = () => {
+    if (dropdownTimeoutRef.current) {
+      clearTimeout(dropdownTimeoutRef.current);
+      dropdownTimeoutRef.current = null;
+    }
+    setProjectsDropdown(true);
+  };
+
+  const handleDropdownMouseLeave = () => {
+    if (dropdownTimeoutRef.current) {
+      clearTimeout(dropdownTimeoutRef.current);
+    }
+    dropdownTimeoutRef.current = setTimeout(() => {
+      setProjectsDropdown(false);
+    }, 200);
+  };
+
+  useEffect(() => {
+    return () => {
+      if (dropdownTimeoutRef.current) {
+        clearTimeout(dropdownTimeoutRef.current);
+      }
+    };
+  }, []);
 
   // Derive active page from pathname if not explicitly passed
   const getActivePage = (): string => {
@@ -144,14 +171,14 @@ export const Navbar: React.FC<NavbarProps> = ({
 
             {/* Projects with Dropdown */}
             <div
-              className="relative"
-              onMouseEnter={() => setProjectsDropdown(true)}
-              onMouseLeave={() => setProjectsDropdown(false)}
+              className="relative py-2 -my-2"
+              onMouseEnter={handleDropdownMouseEnter}
+              onMouseLeave={handleDropdownMouseLeave}
             >
               <Link
                 id="nav-link-projects"
                 href="/projects"
-                className={getLinkClasses('projects', 'flex items-center gap-1')}
+                className={getLinkClasses('projects', 'flex items-center gap-1.5')}
               >
                 <span>Projects</span>
                 <ChevronRight
@@ -162,55 +189,78 @@ export const Navbar: React.FC<NavbarProps> = ({
                 />
               </Link>
 
-              {/* Dropdown Menu */}
-              {projectsDropdown && (
-                <div
-                  className={`absolute top-full left-0 mt-2 w-64 shadow-2xl p-2 z-50 transition-all ${isTransparent
-                    ? 'bg-[#02182c]/95 backdrop-blur-xl border border-white/20 text-white'
-                    : 'bg-white border border-[#cfe0ee] text-[#1a1a1a]'
-                    }`}
-                >
-                  <Link
-                    href="/projects"
-                    onClick={() => setProjectsDropdown(false)}
-                    className={`w-full text-left px-3 py-2.5 text-xs flex items-center justify-between transition-colors tracking-normal normal-case font-medium ${isTransparent
-                      ? 'hover:bg-white/15 text-white hover:text-[#38bdf8]'
-                      : 'hover:bg-[#f2f7fc] text-[#1a1a1a] hover:text-[#044F92]'
-                      }`}
+              {/* Dropdown Menu with Gapless Hover Bridge */}
+              <AnimatePresence>
+                {projectsDropdown && (
+                  <motion.div
+                    initial={{ opacity: 0, y: 6, scale: 0.98 }}
+                    animate={{ opacity: 1, y: 0, scale: 1 }}
+                    exit={{ opacity: 0, y: 4, scale: 0.98 }}
+                    transition={{ duration: 0.18, ease: 'easeOut' }}
+                    className="absolute top-full left-0 pt-2.5 w-64 z-50"
                   >
-                    <span>All Luxury Properties</span>
-                    <span className={`text-[10px] uppercase tracking-widest ${isTransparent ? 'text-blue-200' : 'text-[#8c857d]'}`}>
-                      {PROPERTIES.length} Estates
-                    </span>
-                  </Link>
-                  <Link
-                    href="/ongoing"
-                    onClick={() => setProjectsDropdown(false)}
-                    className={`w-full text-left px-3 py-2.5 text-xs flex items-center justify-between transition-colors tracking-normal normal-case font-medium ${isTransparent
-                      ? 'hover:bg-white/15 text-white hover:text-[#38bdf8]'
-                      : 'hover:bg-[#f2f7fc] text-[#1a1a1a] hover:text-[#044F92]'
-                      }`}
-                  >
-                    <span>Ongoing Construction</span>
-                    <span className="text-[10px] uppercase tracking-widest text-[#044F92] font-semibold">
-                      Live
-                    </span>
-                  </Link>
-                  <Link
-                    href="/completed"
-                    onClick={() => setProjectsDropdown(false)}
-                    className={`w-full text-left px-3 py-2.5 text-xs flex items-center justify-between transition-colors tracking-normal normal-case font-medium ${isTransparent
-                      ? 'hover:bg-white/15 text-white hover:text-[#38bdf8]'
-                      : 'hover:bg-[#f2f7fc] text-[#1a1a1a] hover:text-[#044F92]'
-                      }`}
-                  >
-                    <span>Completed Landmarks</span>
-                    <span className={`text-[10px] uppercase tracking-widest ${isTransparent ? 'text-blue-200' : 'text-[#8c857d]'}`}>
-                      Delivered
-                    </span>
-                  </Link>
-                </div>
-              )}
+                    <div
+                      className={`shadow-2xl p-2 transition-all border ${isTransparent
+                        ? 'bg-[#02182c]/95 backdrop-blur-xl border-white/20 text-white'
+                        : 'bg-white border-[#cfe0ee] text-[#1a1a1a]'
+                        }`}
+                    >
+                      <Link
+                        href="/projects"
+                        onClick={() => setProjectsDropdown(false)}
+                        className={`w-full text-left px-3 py-2.5 text-xs flex items-center justify-between transition-colors tracking-normal normal-case font-medium ${isTransparent
+                          ? 'hover:bg-white/15 text-white hover:text-[#38bdf8]'
+                          : 'hover:bg-[#f2f7fc] text-[#1a1a1a] hover:text-[#044F92]'
+                          }`}
+                      >
+                        <span>All Luxury Properties</span>
+                        <span className={`text-[10px] uppercase tracking-widest ${isTransparent ? 'text-blue-200' : 'text-[#8c857d]'}`}>
+                          {PROPERTIES.length} Estates
+                        </span>
+                      </Link>
+                      <Link
+                        href="/ongoing"
+                        onClick={() => setProjectsDropdown(false)}
+                        className={`w-full text-left px-3 py-2.5 text-xs flex items-center justify-between transition-colors tracking-normal normal-case font-medium ${isTransparent
+                          ? 'hover:bg-white/15 text-white hover:text-[#38bdf8]'
+                          : 'hover:bg-[#f2f7fc] text-[#1a1a1a] hover:text-[#044F92]'
+                          }`}
+                      >
+                        <span>Ongoing Construction</span>
+                        <span className="text-[10px] uppercase tracking-widest text-[#044F92] bg-[#f2f7fc] px-1.5 py-0.5 font-semibold">
+                          Live
+                        </span>
+                      </Link>
+                      <Link
+                        href="/completed"
+                        onClick={() => setProjectsDropdown(false)}
+                        className={`w-full text-left px-3 py-2.5 text-xs flex items-center justify-between transition-colors tracking-normal normal-case font-medium ${isTransparent
+                          ? 'hover:bg-white/15 text-white hover:text-[#38bdf8]'
+                          : 'hover:bg-[#f2f7fc] text-[#1a1a1a] hover:text-[#044F92]'
+                          }`}
+                      >
+                        <span>Completed Landmarks</span>
+                        <span className={`text-[10px] uppercase tracking-widest ${isTransparent ? 'text-blue-200' : 'text-[#8c857d]'}`}>
+                          Delivered
+                        </span>
+                      </Link>
+                      <Link
+                        href="/commercial"
+                        onClick={() => setProjectsDropdown(false)}
+                        className={`w-full text-left px-3 py-2.5 text-xs flex items-center justify-between transition-colors tracking-normal normal-case font-medium border-t ${isTransparent
+                          ? 'border-white/10 hover:bg-white/15 text-[#38bdf8]'
+                          : 'border-[#e5e1da] hover:bg-[#f2f7fc] text-[#044F92]'
+                          }`}
+                      >
+                        <span>Commercial Real Estate</span>
+                        <span className="text-[10px] uppercase tracking-widest px-1.5 py-0.5 bg-[#044F92] text-white font-semibold">
+                          Grade-A
+                        </span>
+                      </Link>
+                    </div>
+                  </motion.div>
+                )}
+              </AnimatePresence>
             </div>
 
             {/* <Link
@@ -360,6 +410,21 @@ export const Navbar: React.FC<NavbarProps> = ({
                 }`}
             >
               <span>Completed Landmarks</span>
+              <ChevronRight className="w-4 h-4 text-[#044F92]" />
+            </Link>
+
+            <Link
+              href="/commercial"
+              onClick={() => setMobileMenuOpen(false)}
+              className={`w-full text-left py-3 border-b border-[#e5e1da] font-display text-xl flex items-center justify-between ${currentPage === 'commercial' ? 'text-[#044F92] font-bold' : 'text-[#1a1a1a]'
+                }`}
+            >
+              <span className="flex items-center gap-2">
+                <span>Commercial Real Estate</span>
+                <span className="text-[9px] uppercase tracking-widest text-white bg-[#044F92] px-2 py-0.5 font-sans font-semibold">
+                  Grade-A
+                </span>
+              </span>
               <ChevronRight className="w-4 h-4 text-[#044F92]" />
             </Link>
 

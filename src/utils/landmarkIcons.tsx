@@ -9,6 +9,11 @@ import {
   Train,
   Bus,
   Building2,
+  GraduationCap,
+  School,
+  ShoppingBag,
+  Store,
+  ShoppingCart,
   MapPin,
   LucideProps,
 } from 'lucide-react';
@@ -20,6 +25,22 @@ export type LandmarkCategory =
   | 'hospital'
   | 'highway'
   | 'dining'
+  | 'school'
+  | 'School'
+  | 'education'
+  | 'Education'
+  | 'college'
+  | 'university'
+  | 'market'
+  | 'Market'
+  | 'shopping'
+  | 'Shopping'
+  | 'mall'
+  | 'Mall'
+  | 'store'
+  | 'supermarket'
+  | 'grocery'
+  | 'retail'
   | 'Railway Station'
   | 'railway station'
   | 'railway'
@@ -71,6 +92,25 @@ export function getLandmarkIcon(type?: string, props: LucideProps = { className:
     case 'food':
       return <UtensilsCrossed {...props} />;
 
+    case 'school':
+    case 'education':
+    case 'college':
+    case 'university':
+    case 'academy':
+    case 'institute':
+      return <GraduationCap {...props} />;
+
+    case 'market':
+    case 'shopping':
+    case 'mall':
+    case 'supermarket':
+    case 'grocery':
+    case 'retail':
+    case 'bazaar':
+    case 'store':
+    case 'shop':
+      return <ShoppingBag {...props} />;
+
     case 'railway station':
     case 'railway':
     case 'train':
@@ -113,6 +153,23 @@ export function getLandmarkLabel(type?: string): string {
       return 'Highway & Express Connectivity';
     case 'dining':
       return 'Fine Dining & Leisure';
+    case 'school':
+    case 'education':
+    case 'college':
+    case 'university':
+    case 'academy':
+    case 'institute':
+      return 'School & Education';
+    case 'market':
+    case 'shopping':
+    case 'mall':
+    case 'supermarket':
+    case 'grocery':
+    case 'retail':
+    case 'bazaar':
+    case 'store':
+    case 'shop':
+      return 'Shopping & Market';
     case 'railway station':
     case 'railway':
     case 'train':

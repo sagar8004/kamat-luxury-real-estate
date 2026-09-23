@@ -53,7 +53,7 @@ export const metadata: Metadata = {
       '32 Years of Architectural Excellence in Goa. Discover ultra-luxury villas and coastal estates with high vacation rental yields and timeless Portuguese architecture.',
     images: [
       {
-        url: 'https://images.unsplash.com/photo-1613977257363-707ba9348227?q=80&w=1600&auto=format&fit=crop',
+        url: 'https://kamatrealty.com/_next/image?url=%2Fproperties%2Fvilla-paradisio%2Fhero-1.webp&w=3840&q=75',
         width: 1600,
         height: 900,
         alt: 'Kamat Realty Ultra-Luxury Estate in Goa',
