@@ -1,11 +1,9 @@
 'use client';
 
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { motion, AnimatePresence } from 'motion/react';
-import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { 
   Building2, ShieldCheck, TrendingUp, Sparkles, ArrowRight, CheckCircle2, 
   Layers, Clock, Award, Users, Scale, FileText, Check, Phone, Mail, 
@@ -16,10 +14,6 @@ import confetti from 'canvas-confetti';
 import { RedevelopmentHeroScroll } from '../components/RedevelopmentHeroScroll';
 import { ScrollReveal, StaggerContainer, StaggerItem } from '../components/ScrollReveal';
 import { useTourModal } from '../context/TourModalContext';
-
-if (typeof window !== 'undefined') {
-  gsap.registerPlugin(ScrollTrigger);
-}
 
 interface RedevelopmentPageProps {
   onNavigate?: (page: string) => void;
@@ -48,31 +42,6 @@ export const RedevelopmentPage: React.FC<RedevelopmentPageProps> = ({
   const [sliderPosition, setSliderPosition] = useState(50);
   const [activeStoryStage, setActiveStoryStage] = useState(0);
   const [activeFaq, setActiveFaq] = useState<number | null>(null);
-
-  // GSAP Animation Effects on Mount
-  useEffect(() => {
-    const ctx = gsap.context(() => {
-      // Glow pulse on hero badge
-      gsap.to('.hero-glow-element', {
-        opacity: 0.8,
-        scale: 1.05,
-        duration: 3,
-        repeat: -1,
-        yoyo: true,
-        ease: 'sine.inOut'
-      });
-
-      // Flowing indicator line in the transformation pipeline
-      gsap.to('.transformation-laser-line', {
-        strokeDashoffset: -200,
-        duration: 12,
-        repeat: -1,
-        ease: 'none'
-      });
-    });
-
-    return () => ctx.revert();
-  }, []);
 
   const handleFormSubmit = (e: React.FormEvent) => {
     e.preventDefault();
